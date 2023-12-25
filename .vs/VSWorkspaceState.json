@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dotNet5784_0841_9224"
+    "\\dotNet5784_0841_9224",
+    "\\dotNet5784_0841_9224\\Stage0"
   ],
-  "SelectedNode": "\\dotNet5784_0841_9224\\dotNet5784_0841_9224.sln",
+  "SelectedNode": "\\dotNet5784_0841_9224\\Stage0\\Program9224.cs",
   "PreviewInSolutionExplorer": false
 }
