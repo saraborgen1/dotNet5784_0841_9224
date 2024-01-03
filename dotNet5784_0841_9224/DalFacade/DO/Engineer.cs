@@ -1,5 +1,12 @@
 ﻿namespace DO;
-
+/// <summary>
+/// Engineer entity represents an engineer with all its characteristics - its identifying details
+/// </summary>
+/// <param name="Id">Personal unique ID of the Engineer (as in national id card)</param>
+/// <param name="Name">Private Name of the Engineer </param>
+/// <param name="Email">Engineer's personal email address</param>
+/// <param name="Level">The level of the engineer in the project</param>
+/// <param name="Cost">The cost of the engineer for an hour of work</param>
 public record Engineer
 (
     int Id,
@@ -9,14 +16,5 @@ public record Engineer
     double? Cost = null
 )
 {
-
-    //public Engineer(int _Id, string _Email, string _Name,  EngineerExperience _Level, double _Cost)
-    //{
-    //   this.Id = _Id;
-    //   this.Name = _Name;
-    //   this.Email = _Email;
-    //   this.Level = _Level;
-    //   this.Cost = _Cost;
-    //}
     public Engineer() : this(0) { } //empty ctor for stage 3
 }
