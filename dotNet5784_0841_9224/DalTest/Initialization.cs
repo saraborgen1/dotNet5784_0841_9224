@@ -45,16 +45,6 @@ public static class Initialization
 
     }
 
-
-
-
-
-
-
-
-    f
-
-        f
     private static void createEngineers()
     {
         string[] EngineerNames =
