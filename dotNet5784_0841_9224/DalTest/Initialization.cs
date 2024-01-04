@@ -5,6 +5,8 @@ public static class Initialization
 {
    
     private static ITask? s_dalTask; //stage 1
+    private static IDependency? s_dalDependency; //stage 1
+    private static IEngineer? s_dalEngineer; //stage 1
     /// <summary>
     /// Generating random numbers while filling in the object values
     /// </summary>
@@ -12,5 +14,13 @@ public static class Initialization
 
     private static createTasks
 
+
+
+
+
+
+
+
+        f
 
 }

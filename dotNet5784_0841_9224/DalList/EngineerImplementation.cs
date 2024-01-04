@@ -13,12 +13,9 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
-        foreach (Engineer temp in DataSource.Engineers)
+        if (DataSource.Dependencys.Find(d => d.Id ==item.Id) == null)
         {
-            if (item.Id == temp.Id)
-            {
-                throw new NotImplementedException($"Student with ID={item.Id} already exist");
-            }
+            throw new NotImplementedException($"Engineer with ID={item.Id} already exist");
         }
         DataSource.Engineers.Add(item);
         return item.Id;
@@ -30,15 +27,11 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
-        foreach (Engineer temp in DataSource.Engineers)
+        if (DataSource.Dependencys.Find(d => d.Id == id) == null)
         {
-            if (temp.Id==id)
-            {
-                DataSource.Engineers.Remove(temp);
-                return;
-            }
+            throw new NotImplementedException($"Engineer with ID={id} does Not exist");
         }
-        throw new NotImplementedException($"An object of type Engineer with such an ID={id} does not exist");
+        DataSource.Engineers.Remove(DataSource.Engineers.Find(d => d.Id == id)!);
     }
     /// <summary>
     /// Returning a reference to a single object of type Engineer with a certain ID
@@ -47,11 +40,7 @@ public class EngineerImplementation : IEngineer
     /// <returns>If the object exists, the method will return a reference to the existing object. Otherwise, the method will return null.</returns>
     public Engineer? Read(int id)
     {
-        foreach (Engineer item in DataSource.Engineers)
-        {
-            if (item.Id == id) return item;
-        }
-        return null;
+        return DataSource.Engineers.FirstOrDefault(d => d.Id == id);
     }
     /// <summary>
     /// Returning a copy of the list of references to all objects of type Engineer
@@ -68,17 +57,15 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
     public void Update(Engineer item)
     {
-        foreach (Engineer engineer in DataSource.Engineers)
+        if (DataSource.Engineers.Find(d => d == item) == null)
         {
-            if (engineer.Id == item.Id)
-            {
-                Engineer temp = engineer;
-                DataSource.Engineers.Remove(temp);
-                DataSource.Engineers.Add(item);
-                return;
-            }
+            throw new NotImplementedException($"Engineer with ID={item.Id} does Not exist");
         }
-        throw new NotImplementedException($"An object of type Engineer with such an ID={item.Id} does not exist");
-       
+        Engineer engineer = DataSource.Engineers.Find(d => d == item)!;
+        Engineer temp = engineer;
+        DataSource.Engineers.Remove(temp);
+        DataSource.Engineers.Add(item);
+        return;
     }
+}
 }
