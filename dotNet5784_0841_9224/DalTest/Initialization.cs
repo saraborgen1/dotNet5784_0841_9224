@@ -34,7 +34,7 @@ public static class Initialization
         {
             DateTime start = new DateTime(1995, 1, 1);
             int range = (DateTime.Today - start).Days;
-            DateTime = start.AddDays(s_rand.Next(range));
+            DateTime _createdAtDate = start.AddDays(s_rand.Next(range));
             Task newTask = new();
 
             s_dalTask!.Create(newTask);
