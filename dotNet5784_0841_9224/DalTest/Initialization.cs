@@ -1,8 +1,6 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
-using System.Diagnostics.Metrics;
-using System.Xml.Linq;
 
 public static class Initialization
 {
@@ -17,44 +15,89 @@ public static class Initialization
 
     private static void createTasks()
     {
-        string[] taskAlies =
-        {
-            "RequirementAnalysis","Design","Implementation","Testing","Deployment","CodeReview",
-            "Documentation","MeetingWithStakeholders"
-        };
         string[] TaskDescriptions =
-         {
-        "Analyzing project requirements",
-        "Planning the project and graphical interface",
-        "Writing code and building the interface",
-        "Testing and performing experiments",
-        "Launching the system",
-        "Code review and corrections",
-        "Creating technical documents and guides",
-        "Meetings with other stakeholders"
-         };
-        for (int i = 0; i < taskAlies.Length; i++) 
+    {
+        "Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.",
+        "Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.",
+        "Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.",
+        "Plumbing installation involves setting up the plumbing system, including pipes, fixtures, and ensuring efficient water distribution.",
+        "HVAC Systems Setup focuses on installing heating, ventilation, and air conditioning systems to maintain a comfortable and controlled indoor environment.",
+        "Drywall installation is the process of fixing gypsum boards to create interior walls, providing a smooth and finished surface.",
+        "Flooring installation involves laying various types of flooring materials, enhancing the aesthetics and functionality of different spaces.",
+        "Roofing installation includes constructing the roof structure and covering, protecting the building from weather elements.",
+        "Exterior painting is the application of protective coatings and decorative finishes to the exterior surfaces, enhancing the building's appearance.",
+        "Interior painting involves applying paint or finishes to interior walls, ceilings, and other surfaces, providing a desired aesthetic.",
+        "Window installation focuses on placing windows, allowing natural light, ventilation, and enhancing the overall design of the building.",
+        "Door installation involves fixing doors, providing security, access, and contributing to the building's architectural style.",
+        "Cabinet installation is the process of placing storage cabinets in various rooms, optimizing space and organization.",
+        "Appliance setup includes installing and configuring household appliances, ensuring they function correctly and efficiently.",
+        "Landscaping design involves planning and creating an outdoor environment, incorporating greenery and aesthetic elements around the building.",
+        "Fence installation encompasses erecting boundaries around the property, enhancing security and privacy.",
+        "Driveway paving focuses on creating a paved surface for vehicles, enhancing accessibility and aesthetics.",
+        "Home security system setup involves installing and configuring security systems to protect the building and its occupants.",
+        "Smart home integration includes incorporating advanced technologies to enhance automation and connectivity within the building.",
+        "Final inspection is the last step, involving a thorough examination of the completed building to ensure quality, safety, and adherence to standards."
+    };
+
+        string[] taskAliases =
+    {
+        "Layout",
+        "Frame",
+        "Wire",
+        "Plumb",
+        "Cool",
+        "Drywall",
+        "Floor",
+        "Roof",
+        "Paint",
+        "Decorate",
+        "Window",
+        "Door",
+        "Cabinet",
+        "Appliances",
+        "Garden",
+        "Fence",
+        "Pave",
+        "Secure",
+        "Automate",
+        "Inspect"
+    };
+        string[] TaskDeliverables =
+            {
+        "Architectural Planning",
+        "Structural Framing",
+        "Electrical Wiring",
+        "Plumbing Installation",
+        "HVAC Systems Setup",
+        "Drywall Installation",
+        "Flooring Installation",
+        "Roofing Installation",
+        "Exterior Painting",
+        "Interior Painting",
+        "Window Installation",
+        "Door Installation",
+        "Cabinet Installation",
+        "Appliance Setup",
+        "Landscaping Design",
+        "Fence Installation",
+        "Driveway Paving",
+        "Home Security System Setup",
+        "Smart Home Integration",
+        "Final Inspection"
+    };
+        for (int i = 0; i < 20; i++) 
         {
-            DateTime start = new DateTime(1995, 1, 1);
+            DateTime start = new DateTime(2021, 10, 1);
             int range = (DateTime.Today - start).Days;
             DateTime _createdAtDate = start.AddDays(s_rand.Next(range));
-            Task newTask = new();
-
+            TimeSpan _requiredEffortTime = .;
+            int _numforenum = s_rand.Next(0, 5);
+            EngineerExperience _engineerld = (EngineerExperience)_numforenum;
+            Task newTask = new(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
             s_dalTask!.Create(newTask);
         }
-
     }
 
-
-
-
-
-
-
-
-    f
-
-        f
     private static void createEngineers()
     {
         string[] EngineerNames =
