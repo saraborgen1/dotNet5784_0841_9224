@@ -1,6 +1,9 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.Diagnostics.Metrics;
+using System.Xml.Linq;
+
 public static class Initialization
 {
 
@@ -51,4 +54,44 @@ public static class Initialization
 
     f
 
+        f
+    private static void createEngineers()
+    {
+        string[] EngineerNames =
+        {
+        "Sara Borgen", "Naama Leah Radonsky","Ester Dray",
+        "Ariela Levin", "Dina Klein", "Shira Israelof","Dani Levi"
+        };
+        string[] EngineerEmails =
+        {
+            "sara.borgen@emailgame.com",
+            "naama.radonsky@emailgame.com",
+            "ester.dray@emailgame.com",
+            "ariela.levin@emailgame.com",
+            "dina.klein@emailgame.com",
+            "shira.israelof@emailgame.com",
+            "dani.levi@emailgame.com"
+        };
+        for (int i = 0; i < EngineerNames.Length; i++)
+        {
+            int _id;
+            do
+                _id = s_rand.Next(200000000, 400000001);
+            while (s_dalEngineer!.Read(_id) != null);
+            int _numforenum = s_rand.Next(0, 5);
+            EngineerExperience _level = (EngineerExperience)_numforenum;
+            int _cost;
+            _cost = s_rand.Next(70, 301);
+
+            Engineer newEngineer = new(_id, EngineerNames[i], EngineerEmails[i], _level, _cost);
+            s_dalEngineer!.Create(newEngineer);
+
+        }
+    }
+
+}
+
+private static void createDependencys()
+{
+    
 }
