@@ -1,6 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.Security.Cryptography;
 
 public static class Initialization
 {
@@ -90,7 +91,7 @@ public static class Initialization
             DateTime start = new DateTime(2021, 10, 1);
             int range = (DateTime.Today - start).Days;
             DateTime _createdAtDate = start.AddDays(s_rand.Next(range));
-            TimeSpan _requiredEffortTime = .;
+            TimeSpan _requiredEffortTime = 5;
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _engineerld = (EngineerExperience)_numforenum;
             Task newTask = new(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
@@ -130,11 +131,32 @@ public static class Initialization
             s_dalEngineer!.Create(newEngineer);
 
         }
+
+        Engineer newEngineer1 = new(123456789, "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
+        s_dalEngineer!.Create(newEngineer1);
+        Engineer newEngineer2 = new(987654321, "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
+        s_dalEngineer!.Create(newEngineer2);
+        Engineer newEngineer3 = new(654567898, "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
+        s_dalEngineer!.Create(newEngineer3);
     }
 
-}
 
 private static void createDependencys()
 {
-    
+    for (int i=2; i < 20; i++)
+    {
+        Dependency newDependency = new(0,i,i-1);
+        s_dalDependency!.Create(newDependency);
+    }
+    for (int i = 4; i < 20; i++)
+    {
+        Dependency newDependency = new(0, i, 2);
+        s_dalDependency!.Create(newDependency);
+    }
+    for (int i = 3; i < 20; i++)
+    {
+        Dependency newDependency = new(0, i, 2);
+        s_dalDependency!.Create(newDependency);
+    }
+}
 }
