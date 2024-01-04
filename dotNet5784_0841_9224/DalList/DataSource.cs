@@ -6,13 +6,13 @@ internal static class DataSource
         /// <summary>
         /// A running ID number for the tasks
         /// </summary>
-        internal const int startTaskId = 0;
+        internal const int startTaskId = 1;
         private static int nextTaskId = startTaskId;
         internal static int NextTaskId { get => nextTaskId++; }
         /// <summary>
         /// A running ID number for the dependency
         /// </summary>
-        internal const int startDependencyId = 0;
+        internal const int startDependencyId = 1;
         private static int nextDependencyId = startTaskId;
         internal static int NextDependencyId { get => nextDependencyId++; }
     }
