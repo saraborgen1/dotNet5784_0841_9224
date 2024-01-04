@@ -24,10 +24,10 @@ public class EngineerImplementation : IEngineer
         return item.Id;
     }
     /// <summary>
-    /// 
+    /// Deletion of an existing object with a certain ID, from the list of Engineer type objects.
     /// </summary>
-    /// <param name="id"></param>
-    /// <exception cref="NotImplementedException"></exception>
+    /// <param name="id">ID number of an object</param>
+    /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
         foreach (Engineer temp in DataSource.Engineers)
