@@ -21,6 +21,7 @@ public record Task
     string? Ailas=null,
     string? Description=null,
     bool IsMilestone = false,
+    DateTime? CreatedAtDate=null,
     DateTime? StartDate = null,
     DateTime? ScheduledDate = null,
     DateTime? DeadlineDate = null,
@@ -33,5 +34,4 @@ public record Task
 )
 {
     public Task() : this(0) { } //empty ctor for stage 3
-    public DateTime CreatedAtDate=>DateTime.Now;
 }
