@@ -16,5 +16,10 @@ public record Engineer
     double? Cost = null
 )
 {
-    public Engineer() : this(0) { } //empty ctor for stage 3
+    //No parameter constructor was defined as it is autosettly defined
+
+    /// <summary>
+    /// empty ctor ctor for stage 3
+    /// </summary>
+    public Engineer() : this(0) { } 
 }

@@ -6,22 +6,17 @@ public record Task
     string? Ailas=null,
     string? Description=null,
     bool IsMilestone = false,
-    DateTime? CreatedAtDate=null,
     DateTime? StartDate = null,
     DateTime? ScheduledDate = null,
     DateTime? DeadlineDate = null,
     DateTime? CompleteDate = null,
-    TimeSpan RequiredEffortTime,
+    TimeSpan? RequiredEffortTime =null,
     string? Deliverables=null,
     string? Remarks = null,
     int? Engineerld=null,
     EngineerExperience? Copmlexity= EngineerExperience.Beginner
 )
 {
+    public Task() : this(0) { } //empty ctor for stage 3
     public DateTime CreatedAtDate=>DateTime.Now;
-    public DateTime StartDate => DateTime.Now;
-    public DateTime ScheduledDate => DateTime.Now;
-    public DateTime DeadlineDate => DateTime.Now;
-    public DateTime CompleteDate => DateTime.Now;
-    public TimeSpan RequiredEffortTime=>RequiredEffortTime;
 }

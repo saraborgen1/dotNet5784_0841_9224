@@ -13,5 +13,8 @@ public record Dependency
 )
 //No parameter constructor was defined as it is autosettly defined
 {
-    public Dependency() : this(0) { } //empty ctor for stage 3
+    /// <summary>
+    /// empty ctor for stage 3
+    /// </summary>
+    public Dependency() : this(0) { } 
 }
