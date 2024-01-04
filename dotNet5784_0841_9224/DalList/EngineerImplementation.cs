@@ -20,7 +20,15 @@ public class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        foreach (Engineer temp in DataSource.Engineers)
+        {
+            if (temp.Id==id)
+            {
+                DataSource.Engineers.Remove(temp);
+                return;
+            }
+        }
+        throw new NotImplementedException($"An object of type Engineer with such an ID={id} does not exist");
     }
 
     public Engineer? Read(int id)
@@ -49,7 +57,7 @@ public class EngineerImplementation : IEngineer
                 return;
             }
         }
-        throw new NotImplementedException($"An object of type Task with such an ID={item.Id} does not exist");
+        throw new NotImplementedException($"An object of type Engineer with such an ID={item.Id} does not exist");
        
     }
 }
