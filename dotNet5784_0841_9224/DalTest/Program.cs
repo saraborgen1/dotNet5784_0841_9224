@@ -24,6 +24,87 @@ namespace DalTest
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
             return  (SubMenue)Console.Read();
         }
+        private static void taskCase()
+        {
+            SubMenue subMenue = subMenueM();
+            if (subMenue != 0)
+            {
+                switch (subMenue)
+                {
+                    case SubMenue.Create:
+                        createTaskCase();
+                        break;
+                    case SubMenue.Read:
+                        readTaskCase();
+                        break;
+                    case SubMenue.ReadAll:
+                        readAllTaskCase();
+                        break;
+                    case SubMenue.Update:
+                        updateTaskCase();
+                        break;
+                    case SubMenue.Delete:
+                        deleteTaskCase();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private static void dependencyCase()
+        {
+            SubMenue subMenue = subMenueM();
+            if (subMenue != 0)
+            {
+                switch (subMenue)
+                {
+                    case SubMenue.Create:
+                        createDependencyCase();
+                        break;
+                    case SubMenue.Read:
+                        readDependencyCase();
+                        break;
+                    case SubMenue.ReadAll:
+                        readAllDependencyCase();
+                        break;
+                    case SubMenue.Update:
+                        updateDependencyCase();
+                        break;
+                    case SubMenue.Delete:
+                        deleteDependencyCase();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private static void engineerCase()
+        {
+            SubMenue subMenue = subMenueM();
+            if (subMenue != 0)
+            {
+                switch (subMenue)
+                {
+                    case SubMenue.Create:
+                        createEngineerCase();
+                        break;
+                    case SubMenue.Read:
+                        readEngineerCase();
+                        break;
+                    case SubMenue.ReadAll:
+                        readAllEngineerCase();
+                        break;
+                    case SubMenue.Update:
+                        updateEngineerCase();
+                        break;
+                    case SubMenue.Delete:
+                        deleteEngineerCase();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         private static void createTaskCase ()
         {
             Console.WriteLine("Enter alies");
@@ -134,88 +215,18 @@ namespace DalTest
             try
             {
                 Menue menue = menueM();
-                SubMenue subMenue;
                 while (menue!=0)
                 {
                     switch (menue)
                     {
                         case Menue.Task:
-                            subMenue= subMenueM();
-                            if (subMenue != 0)
-                            {
-                                switch (subMenue)
-                                {
-                                    case SubMenue.Create:
-                                        createTaskCase();
-                                        break;
-                                    case SubMenue.Read:
-                                        readTaskCase();
-                                        break;
-                                    case SubMenue.ReadAll:
-                                        readAllTaskCase();
-                                        break;
-                                    case SubMenue.Update:
-                                        updateTaskCase();
-                                        break;
-                                    case SubMenue.Delete:
-                                            deleteTaskCase();
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
+                            taskCase();
                             break;
                         case Menue.Dependency:
-                                subMenue = subMenueM();
-                                if (subMenue != 0)
-                                {
-                                    switch (subMenue)
-                                    {
-                                        case SubMenue.Create:
-                                            createDependencyCase();
-                                            break;
-                                        case SubMenue.Read:
-                                            readDependencyCase();
-                                            break;
-                                        case SubMenue.ReadAll:
-                                            readAllDependencyCase();
-                                            break;
-                                        case SubMenue.Update:
-                                            updateDependencyCase();
-                                            break;
-                                        case SubMenue.Delete:
-                                            deleteDependencyCase();
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
+                            dependencyCase();
                                 break;
                         case Menue.Engineer:
-                                subMenue = subMenueM();
-                                if (subMenue != 0)
-                                {
-                                    switch (subMenue)
-                                    {
-                                        case SubMenue.Create:
-                                            createEngineerCase();
-                                            break;
-                                        case SubMenue.Read:
-                                            readEngineerCase();
-                                            break;
-                                        case SubMenue.ReadAll:
-                                            readAllEngineerCase();
-                                            break;
-                                        case SubMenue.Update:
-                                            updateEngineerCase();
-                                            break;
-                                        case SubMenue.Delete:
-                                            deleteEngineerCase();
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
+                            engineerCase();
                                 break;
                         default:
                             break;
