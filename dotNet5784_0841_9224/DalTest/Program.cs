@@ -27,7 +27,6 @@ namespace DalTest
                     switch (menue)
                     {
                         case Menue.Task:
-                            {
                                 Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
                                 subMenue = (SubMenue)Console.Read();
                                 if (subMenue != 0)
@@ -83,9 +82,7 @@ namespace DalTest
                                     }
                                 }
                                 break;
-                            }
                         case Menue.Dependency:
-                            {
                                 Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
                                 subMenue = (SubMenue)Console.Read();
                                 if (subMenue != 0)
@@ -110,13 +107,11 @@ namespace DalTest
                                         default:
                                             break;
                                     }
-                                    break;
-                                }
-
-                            }
+                                  
+                                 }
+                            break;
 
                         case Menue.Engineer:
-                            {
                                 Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
                                 subMenue = (SubMenue)Console.Read();
                                 if (subMenue != 0)
@@ -146,13 +141,10 @@ namespace DalTest
                                         case SubMenue.Delete:
                                             break;
                                         default:
-                                            break;
-                                            break;
-                                        default:
-                                            break;
+                                        break;
                                     }
                                 }
-                            }
+                            break;
                         default:
                             break;
                     }
