@@ -90,7 +90,8 @@ namespace DalTest
                                             Console.WriteLine("Enter a pending task ID number");
                                             int dependentOnTask = int.Parse(Console.ReadLine());
                                             Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
-                                            break;
+                                            DependencyImplementation.Create(dependency);
+                                        break;
                                         case SubMenue.Read:
                                             break;
                                         case SubMenue.ReadAll:
@@ -125,7 +126,8 @@ namespace DalTest
                                             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
                                             Console.WriteLine("Enter an hourly cost");
                                             int cost = int.Parse(Console.ReadLine());
-
+                                            Engineer engineer=new Engineer(id, name, email, difficulty, cost);
+                                            EngineerImplementation.Create(engineer);
                                             break;
                                         case SubMenue.Read:
                                             break;
