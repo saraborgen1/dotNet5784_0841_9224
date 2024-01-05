@@ -1,6 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
+using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Threading.Tasks;
 
@@ -147,6 +148,10 @@ namespace DalTest
         private static void readAllTaskCase()
         {
             List<Task> tasks = s_dalTask.ReadAll();
+            foreach (Task item in tasks)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
         private static void updateTaskCase()
         {
@@ -157,7 +162,9 @@ namespace DalTest
         }
         private static void deleteTaskCase()
         {
-
+            Console.WriteLine("Enter id");
+            int id = int.Parse(Console.ReadLine());
+            s_dalTask.Delete(id);
         }
         private static void createDependencyCase()
         {
@@ -178,7 +185,11 @@ namespace DalTest
         }
         private static void readAllDependencyCase()
         {
-
+            List<Dependency> dependencys = s_dalDependency.ReadAll();
+            foreach (Dependency item in dependencys)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
         private static void updateDependencyCase()
         {
@@ -201,7 +212,9 @@ namespace DalTest
         }
         private static void deleteDependencyCase()
         {
-
+            Console.WriteLine("Enter id");
+            int id = int.Parse(Console.ReadLine());
+            s_dalDependency.Delete(id);
         }
         private static void createEngineerCase()
         {
@@ -228,7 +241,11 @@ namespace DalTest
         }
         private static void readAllEngineerCase()
         {
-
+            List<Engineer> engineers = s_dalEngineer.ReadAll();
+            foreach (Engineer item in engineers)
+            {
+                Console.WriteLine(item.ToString());
+            }
         }
         private static void updateEngineerCase()
         {
@@ -256,7 +273,9 @@ namespace DalTest
     
         private static void deleteEngineerCase()
         {
-
+            Console.WriteLine("Enter id");
+            int id =int.Parse(Console.ReadLine());
+            s_dalEngineer.Delete(id);
         }
 
         static void Main(string[] args)
