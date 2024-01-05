@@ -6,9 +6,21 @@ using System.Security.Cryptography;
 public static class Initialization
 {
 
+
+
     private static ITask? s_dalTask; //stage 1
     private static IDependency? s_dalDependency; //stage 1
     private static IEngineer? s_dalEngineer; //stage 1
+    public static void Do(ITask? dalTask, IDependency? dalDependency, IEngineer? dalEngineer)
+    {
+
+        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        createTasks();
+        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
+        createDependencys();
+        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        createEngineers();
+    }
     /// <summary>
     /// Generating random numbers while filling in the object values
     /// </summary>
@@ -88,14 +100,23 @@ public static class Initialization
     };
         for (int i = 0; i < 20; i++) 
         {
-            DateTime start = new DateTime(2021, 10, 1);
+            DateTime start = new DateTime(2024, 1, 1);
             int range = (DateTime.Today - start).Days;
             DateTime _createdAtDate = start.AddDays(s_rand.Next(range));
-            TimeSpan _requiredEffortTime = 5;
+
+            TimeSpan _requiredEffortTime = start - _createdAtDate;
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _engineerld = (EngineerExperience)_numforenum;
             Task newTask = new(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
             s_dalTask!.Create(newTask);
+
+
+//            DateTime _CreatedAtDate = null,
+//DateTime _StartDate = null,
+//    DateTime _ScheduledDate = null,
+//    DateTime _DeadlineDate = null,
+//    DateTime  _CompleteDate = null,
+//    TimeSpan _RequiredEffortTime = null,
         }
     }
 
