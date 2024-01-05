@@ -150,6 +150,9 @@ namespace DalTest
         }
         private static void updateTaskCase()
         {
+            Console.WriteLine("Enter Id");
+            int id = int.Parse(Console.ReadLine());
+            Task task = s_dalTask.Read(id);
 
         }
         private static void deleteTaskCase()
@@ -169,7 +172,8 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Task task = s_dalTask.Read(id);
+            Dependency dependency = s_dalDependency.Read(id);
+            Console.WriteLine(dependency.ToString());
         }
         private static void readAllDependencyCase()
         {
@@ -203,7 +207,8 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Task task = s_dalTask.Read(id);
+            Engineer engineer = s_dalEngineer.Read(id);
+            Console.WriteLine(engineer.ToString());
         }
         private static void readAllEngineerCase()
         {
@@ -211,7 +216,23 @@ namespace DalTest
         }
         private static void updateEngineerCase()
         {
-
+            Console.WriteLine("Enter Id");
+            int id = int.Parse(Console.ReadLine());
+            Engineer engineer = s_dalEngineer.Read(id);
+            Console.WriteLine(engineer.ToString());
+            Console.WriteLine("Enter a unique ID number");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the name of the engineer (full name)");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter an email address");
+            string email = Console.ReadLine();
+            Console.WriteLine("Enter the level of the engineer");
+            int difficultyNumber = int.Parse(Console.ReadLine());
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            Console.WriteLine("Enter an hourly cost");
+            double cost = double.Parse(Console.ReadLine());
+            Engineer engineer = new Engineer(id, name, email, difficulty, cost);
+            s_dalEngineer.Create(engineer);
         }
         private static void deleteEngineerCase()
         {
