@@ -11,8 +11,8 @@ namespace DalTest
         private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
         private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
 
-        enum Menue { Exit, Task, Dependency, Engineer }
-        enum SubMenue { Exit, Create, Read, ReadAll, Update, Delete }
+        enum Menue {Exit, Task, Dependency,Engineer}
+        enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete}
         static void Main(string[] args)
         {
             try
@@ -22,7 +22,7 @@ namespace DalTest
                 Menue menue;
                 menue = (Menue)Console.Read();
                 SubMenue subMenue;
-                while (menue != 0)
+                while (menue!=0)
                 {
                     switch (menue)
                     {
@@ -78,74 +78,80 @@ namespace DalTest
                             }
                             break;
                         case Menue.Dependency:
-
-                            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
-                            subMenue = (SubMenue)Console.Read();
-                            if (subMenue != 0)
                             {
-                                switch (subMenue)
+                                Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
+                                subMenue = (SubMenue)Console.Read();
+                                if (subMenue != 0)
                                 {
-                                    case SubMenue.Create:
-                                        Console.WriteLine("Enter an ID number of a previous task");
-                                        int dependentTask = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter a pending task ID number");
-                                        int dependentOnTask = int.Parse(Console.ReadLine());
-                                        Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
-                                        break;
-                                    case SubMenue.Read:
-                                        break;
-                                    case SubMenue.ReadAll:
-                                        break;
-                                    case SubMenue.Update:
-                                        break;
-                                    case SubMenue.Delete:
-                                        break;
-                                    default:
-                                        break;
+                                    switch (subMenue)
+                                    {
+                                        case SubMenue.Create:
+                                            Console.WriteLine("Enter an ID number of a previous task");
+                                            int dependentTask = int.Parse(Console.ReadLine());
+                                            Console.WriteLine("Enter a pending task ID number");
+                                            int dependentOnTask = int.Parse(Console.ReadLine());
+                                            Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
+                                            break;
+                                        case SubMenue.Read:
+                                            break;
+                                        case SubMenue.ReadAll:
+                                            break;
+                                        case SubMenue.Update:
+                                            break;
+                                        case SubMenue.Delete:
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                    break;
                                 }
+
                             }
-                            break;
+
                         case Menue.Engineer:
-
-                            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
-                            subMenue = (SubMenue)Console.Read();
-                            if (subMenue != 0)
                             {
-                                switch (subMenue)
+                                Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
+                                subMenue = (SubMenue)Console.Read();
+                                if (subMenue != 0)
                                 {
-                                    case SubMenue.Create:
-                                        Console.WriteLine("Enter a unique ID number");
-                                        int id = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter the name of the engineer (full name)");
-                                        string name = Console.ReadLine();
-                                        Console.WriteLine("Enter an email address");
-                                        string email = Console.ReadLine();
-                                        Console.WriteLine("Enter the level of the engineer");
-                                        int difficultyNumber = int.Parse(Console.ReadLine());
-                                        EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-                                        Console.WriteLine("Enter an hourly cost");
-                                        int cost = int.Parse(Console.ReadLine());
+                                    switch (subMenue)
+                                    {
+                                        case SubMenue.Create:
+                                            Console.WriteLine("Enter a unique ID number");
+                                            int id = int.Parse(Console.ReadLine());
+                                            Console.WriteLine("Enter the name of the engineer (full name)");
+                                            string name = Console.ReadLine();
+                                            Console.WriteLine("Enter an email address");
+                                            string email = Console.ReadLine();
+                                            Console.WriteLine("Enter the level of the engineer");
+                                            int difficultyNumber = int.Parse(Console.ReadLine());
+                                            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+                                            Console.WriteLine("Enter an hourly cost");
+                                            int cost = int.Parse(Console.ReadLine());
 
-                                        break;
-                                    case SubMenue.Read:
-                                        break;
-                                    case SubMenue.ReadAll:
-                                        break;
-                                    case SubMenue.Update:
-                                        break;
-                                    case SubMenue.Delete:
-                                        break;
-                                    default:
-                                        break;
+                                            break;
+                                        case SubMenue.Read:
+                                            break;
+                                        case SubMenue.ReadAll:
+                                            break;
+                                        case SubMenue.Update:
+                                            break;
+                                        case SubMenue.Delete:
+                                            break;
+                                        default:
+                                            break;
+                                            break;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
-                            break;
                         default:
                             break;
                     }
                 }
-            }
-            catch (Exception ex)
+            }        
+            catch(Exception ex) 
             {
                 Console.WriteLine(ex.ToString());
             }
