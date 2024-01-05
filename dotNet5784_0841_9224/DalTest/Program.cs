@@ -163,7 +163,7 @@ namespace DalTest
             Console.WriteLine("Enter a pending task ID number");
             int dependentOnTask = int.Parse(Console.ReadLine());
             Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
-           // DependencyImplementation.Create(dependency);
+            s_dalDependency.Create(dependency);
         }
         private static void readDependencyCase()
         {
@@ -195,8 +195,9 @@ namespace DalTest
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             Console.WriteLine("Enter an hourly cost");
-            int cost = int.Parse(Console.ReadLine());
-            //לסיים את המתודה ולהכניס לרשימה 
+            double cost = double.Parse(Console.ReadLine());
+            Engineer engineer = new Engineer(id,name,email, difficulty, cost);
+            s_dalEngineer.Create(engineer);
         }
         private static void readEngineerCase()
         {
