@@ -198,7 +198,12 @@ namespace DalTest
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
-            s_dalTask.Create(task);
+            try
+            {
+                s_dalTask.Update(task);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+           
 
         }
         private static void deleteTaskCase()
@@ -249,7 +254,11 @@ namespace DalTest
             if(dependentTask == 0) { dependentTask = dependency.DependentTask; }
             if(dependentOnTask == 0) { dependentOnTask = dependency.DependentOnTask; }
             Dependency dependency2 = new Dependency(0, dependentTask, dependentOnTask);
-            s_dalDependency.Create(dependency2);
+            try 
+            {
+                s_dalDependency.Update(dependency2);
+            }
+            catch (Exception ex) { }
         }
         private static void deleteDependencyCase()
         {
@@ -309,7 +318,12 @@ namespace DalTest
             if (difficulty==null) { difficulty = engineer.Level; }
             if (cost == null) {cost=engineer.Cost; }
             Engineer engineer2 = new Engineer(id, name, email, difficulty, cost);
-            s_dalEngineer.Create(engineer2);
+            try
+            {
+                s_dalEngineer.Update(engineer2);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+          
         }
     
         private static void deleteEngineerCase()
