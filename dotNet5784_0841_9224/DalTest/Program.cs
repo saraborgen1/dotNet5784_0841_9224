@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Diagnostics.Metrics;
+using System.Threading.Tasks;
 
 namespace DalTest
 {
@@ -13,135 +14,220 @@ namespace DalTest
 
         enum Menue {Exit, Task, Dependency,Engineer}
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete}
+        private static Menue menueM()
+        {
+            Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor dependencies press 2\r\nFor the engineer press 3\r\nTo exit the main program press 0");
+            return (Menue)Console.Read(); 
+        }
+        private static SubMenue subMenueM()
+        {
+            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
+            return  (SubMenue)Console.Read();
+        }
+        private static void taskCase()
+        {
+            SubMenue subMenue = subMenueM();
+            if (subMenue != 0)
+            {
+                switch (subMenue)
+                {
+                    case SubMenue.Create:
+                        createTaskCase();
+                        break;
+                    case SubMenue.Read:
+                        readTaskCase();
+                        break;
+                    case SubMenue.ReadAll:
+                        readAllTaskCase();
+                        break;
+                    case SubMenue.Update:
+                        updateTaskCase();
+                        break;
+                    case SubMenue.Delete:
+                        deleteTaskCase();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private static void dependencyCase()
+        {
+            SubMenue subMenue = subMenueM();
+            if (subMenue != 0)
+            {
+                switch (subMenue)
+                {
+                    case SubMenue.Create:
+                        createDependencyCase();
+                        break;
+                    case SubMenue.Read:
+                        readDependencyCase();
+                        break;
+                    case SubMenue.ReadAll:
+                        readAllDependencyCase();
+                        break;
+                    case SubMenue.Update:
+                        updateDependencyCase();
+                        break;
+                    case SubMenue.Delete:
+                        deleteDependencyCase();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private static void engineerCase()
+        {
+            SubMenue subMenue = subMenueM();
+            if (subMenue != 0)
+            {
+                switch (subMenue)
+                {
+                    case SubMenue.Create:
+                        createEngineerCase();
+                        break;
+                    case SubMenue.Read:
+                        readEngineerCase();
+                        break;
+                    case SubMenue.ReadAll:
+                        readAllEngineerCase();
+                        break;
+                    case SubMenue.Update:
+                        updateEngineerCase();
+                        break;
+                    case SubMenue.Delete:
+                        deleteEngineerCase();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        private static void createTaskCase ()
+        {
+            Console.WriteLine("Enter alies");
+            string alies = Console.ReadLine();
+            Console.WriteLine("Enter description");
+            string description = Console.ReadLine();
+            Console.WriteLine("Enter milestone");
+            string tempMilesone = Console.ReadLine();
+            bool mileston = (tempMilesone == "true") ? true : false;
+            Console.WriteLine("Enter task creation date");
+            DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter planned date for the start of work");
+            DateTime? startDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter date of commencement of work on the assignment");
+            DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter deadline");
+            DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter actual end date");
+            DateTime? completeDate = DateTime.Parse(Console.ReadLine());
+            TimeSpan? requiredEffortTime = deadlineDate - startDate;
+            Console.WriteLine("Enter product");
+            string product = Console.ReadLine();
+            Console.WriteLine("Enter remarks");
+            string remarks = Console.ReadLine();
+            Console.WriteLine("Enter the engineer ID assigned to the task");
+            int engineerID = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter numer of the difficulty level of the task");
+            int difficultyNumber = int.Parse(Console.ReadLine());
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            TaskImplementation.Create(task);
+        }
+        private static void readTaskCase()
+        {
+
+        }
+        private static void readAllTaskCase()
+        {
+
+        }
+        private static void updateTaskCase()
+        {
+
+        }
+        private static void deleteTaskCase()
+        {
+
+        }
+        private static void createDependencyCase()
+        {
+            Console.WriteLine("Enter an ID number of a previous task");
+            int dependentTask = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter a pending task ID number");
+            int dependentOnTask = int.Parse(Console.ReadLine());
+            Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
+            //DependencyImplementation.Create(dependency);
+        }
+        private static void readDependencyCase()
+        {
+
+        }
+        private static void readAllDependencyCase()
+        {
+
+        }
+        private static void updateDependencyCase()
+        {
+
+        }
+        private static void deleteDependencyCase()
+        {
+
+        }
+        private static void createEngineerCase()
+        {
+            Console.WriteLine("Enter a unique ID number");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the name of the engineer (full name)");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter an email address");
+            string email = Console.ReadLine();
+            Console.WriteLine("Enter the level of the engineer");
+            int difficultyNumber = int.Parse(Console.ReadLine());
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            Console.WriteLine("Enter an hourly cost");
+            int cost = int.Parse(Console.ReadLine());
+            //לסיים את המתודה ולהכניס לרשימה 
+        }
+        private static void readEngineerCase()
+        {
+
+        }
+        private static void readAllEngineerCase()
+        {
+
+        }
+        private static void updateEngineerCase()
+        {
+
+        }
+        private static void deleteEngineerCase()
+        {
+
+        }
+
         static void Main(string[] args)
         {
             try
             {
-                Initialization.Do(s_dalTask, s_dalDependency, s_dalEngineer);
-                Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor dependencies press 2\r\nFor the engineer press 3\r\nTo exit the main program press 0");
-                Menue menue;
-                menue = (Menue)Console.Read();
-                SubMenue subMenue;
+                Menue menue = menueM();
                 while (menue!=0)
                 {
                     switch (menue)
                     {
                         case Menue.Task:
-                            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
-                            subMenue = (SubMenue)Console.Read();
-                            if (subMenue != 0)
-                            {
-                                switch (subMenue)
-                                {
-                                    case SubMenue.Create:
-                                        Console.WriteLine("Enter alies");
-                                        string alies = Console.ReadLine();
-                                        Console.WriteLine("Enter description");
-                                        string description = Console.ReadLine();
-                                        Console.WriteLine("Enter milestone");
-                                        string tempMilesone = Console.ReadLine();
-                                        bool mileston = (tempMilesone == "true") ? true : false;
-                                        Console.WriteLine("Enter task creation date");
-                                        DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter planned date for the start of work");
-                                        DateTime? startDate = DateTime.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter date of commencement of work on the assignment");
-                                        DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter deadline");
-                                        DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter actual end date");
-                                        DateTime? completeDate = DateTime.Parse(Console.ReadLine());
-                                        TimeSpan? requiredEffortTime = deadlineDate - startDate;
-                                        Console.WriteLine("Enter product");
-                                        string product = Console.ReadLine();
-                                        Console.WriteLine("Enter remarks");
-                                        string remarks = Console.ReadLine();
-                                        Console.WriteLine("Enter the engineer ID assigned to the task");
-                                        int engineerID = int.Parse(Console.ReadLine());
-                                        Console.WriteLine("Enter numer of the difficulty level of the task");
-                                        int difficultyNumber = int.Parse(Console.ReadLine());
-                                        EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-                                        Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
-                                        TaskImplementation.Create(task);
-                                        break;
-                                    case SubMenue.Read:
-                                        break;
-                                    case SubMenue.ReadAll:
-                                        break;
-                                    case SubMenue.Update:
-                                        break;
-                                    case SubMenue.Delete:
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
+                            taskCase();
                             break;
                         case Menue.Dependency:
-                                Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
-                                subMenue = (SubMenue)Console.Read();
-                                if (subMenue != 0)
-                                {
-                                    switch (subMenue)
-                                    {
-                                        case SubMenue.Create:
-                                            Console.WriteLine("Enter an ID number of a previous task");
-                                            int dependentTask = int.Parse(Console.ReadLine());
-                                            Console.WriteLine("Enter a pending task ID number");
-                                            int dependentOnTask = int.Parse(Console.ReadLine());
-                                            Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
-                                            DependencyImplementation.Create(dependency);
-                                        break;
-                                        case SubMenue.Read:
-                                            break;
-                                        case SubMenue.ReadAll:
-                                            break;
-                                        case SubMenue.Update:
-                                            break;
-                                        case SubMenue.Delete:
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                  
-                                 }
-                            break;
-
+                            dependencyCase();
+                                break;
                         case Menue.Engineer:
-                                Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
-                                subMenue = (SubMenue)Console.Read();
-                                if (subMenue != 0)
-                                {
-                                    switch (subMenue)
-                                    {
-                                        case SubMenue.Create:
-                                            Console.WriteLine("Enter a unique ID number");
-                                            int id = int.Parse(Console.ReadLine());
-                                            Console.WriteLine("Enter the name of the engineer (full name)");
-                                            string name = Console.ReadLine();
-                                            Console.WriteLine("Enter an email address");
-                                            string email = Console.ReadLine();
-                                            Console.WriteLine("Enter the level of the engineer");
-                                            int difficultyNumber = int.Parse(Console.ReadLine());
-                                            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-                                            Console.WriteLine("Enter an hourly cost");
-                                            int cost = int.Parse(Console.ReadLine());
-                                            Engineer engineer=new Engineer(id, name, email, difficulty, cost);
-                                            EngineerImplementation.Create(engineer);
-                                            break;
-                                        case SubMenue.Read:
-                                            break;
-                                        case SubMenue.ReadAll:
-                                            break;
-                                        case SubMenue.Update:
-                                            break;
-                                        case SubMenue.Delete:
-                                            break;
-                                        default:
-                                        break;
-                                    }
-                                }
-                            break;
+                            engineerCase();
+                                break;
                         default:
                             break;
                     }
