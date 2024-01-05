@@ -231,6 +231,7 @@ namespace DalTest
                         default:
                             break;
                     }
+                    menue = menueM();
                 }
             }        
             catch(Exception ex) 
