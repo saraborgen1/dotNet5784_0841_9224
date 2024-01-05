@@ -11,7 +11,7 @@ namespace DalTest
         private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
         private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
 
-        enum Menue {Exit, Task, Dependency,IEngineer}
+        enum Menue {Exit, Task, Dependency,Engineer}
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete}
         static void Main(string[] args)
         {
@@ -96,7 +96,7 @@ namespace DalTest
                                         break;
                                 }
                            break;
-                                case Menue.IEngineer:
+                                case Menue.Engineer:
                                     Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
                                     subMenue = (SubMenue)Console.Read();
                                     if (subMenue != 0)
@@ -114,7 +114,8 @@ namespace DalTest
                                                 int difficultyNumber = int.Parse(Console.ReadLine());
                                                 EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
                                                 Console.WriteLine("Enter an hourly cost");
-                                                int cost = int.Parse(Console.ReadLine()); 
+                                                int cost = int.Parse(Console.ReadLine());
+                                                
                                                 break;
                                             case SubMenue.Read:
                                                 break;
