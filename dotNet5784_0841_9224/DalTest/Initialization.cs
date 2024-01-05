@@ -29,7 +29,7 @@ public static class Initialization
     private static void createTasks()
     {
         string[] TaskDescriptions =
-    {
+         {
         "Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.",
         "Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.",
         "Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.",
@@ -50,10 +50,11 @@ public static class Initialization
         "Home security system setup involves installing and configuring security systems to protect the building and its occupants.",
         "Smart home integration includes incorporating advanced technologies to enhance automation and connectivity within the building.",
         "Final inspection is the last step, involving a thorough examination of the completed building to ensure quality, safety, and adherence to standards."
-    };
+
+        };
 
         string[] taskAliases =
-    {
+        {
         "Layout",
         "Frame",
         "Wire",
@@ -74,9 +75,9 @@ public static class Initialization
         "Secure",
         "Automate",
         "Inspect"
-    };
+        };
         string[] TaskDeliverables =
-            {
+         {
         "Architectural Planning",
         "Structural Framing",
         "Electrical Wiring",
@@ -97,7 +98,7 @@ public static class Initialization
         "Home Security System Setup",
         "Smart Home Integration",
         "Final Inspection"
-    };
+         };
         for (int i = 0; i < 20; i++) 
         {
             DateTime start = new DateTime(2024, 1, 1);
@@ -107,7 +108,7 @@ public static class Initialization
             TimeSpan _requiredEffortTime = start - _createdAtDate;
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _engineerld = (EngineerExperience)_numforenum;
-            Task newTask = new(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
+            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
             s_dalTask!.Create(newTask);
 
 
@@ -148,7 +149,7 @@ public static class Initialization
             int _cost;
             _cost = s_rand.Next(70, 301);
 
-            Engineer newEngineer = new(_id, EngineerNames[i], EngineerEmails[i], _level, _cost);
+            Engineer newEngineer = new Engineer(_id, EngineerNames[i], EngineerEmails[i], _level, _cost);
             s_dalEngineer!.Create(newEngineer);
 
         }
@@ -166,17 +167,17 @@ private static void createDependencys()
 {
     for (int i=2; i < 20; i++)
     {
-        Dependency newDependency = new(0,i,i-1);
+        Dependency newDependency = new Dependency(0,i,i-1);
         s_dalDependency!.Create(newDependency);
     }
     for (int i = 4; i < 20; i++)
     {
-        Dependency newDependency = new(0, i, 2);
+        Dependency newDependency = new Dependency(0, i, 2);
         s_dalDependency!.Create(newDependency);
     }
     for (int i = 3; i < 20; i++)
     {
-        Dependency newDependency = new(0, i, 2);
+        Dependency newDependency = new Dependency(0, i, 2);
         s_dalDependency!.Create(newDependency);
     }
 }

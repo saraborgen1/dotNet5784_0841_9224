@@ -1,9 +1,6 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Threading.Tasks;
 
 namespace DalTest
 {
@@ -170,19 +167,19 @@ namespace DalTest
             if (tempMilesone == null) { tempMilesone = task.tempMilesone; }
             bool mileston = (tempMilesone == "true") ? true : false;
             Console.WriteLine("Enter task creation date");
-            if () ;
+          //  if () ;
             DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Enter planned date for the start of work");
-            if () ;
+         //   if () ;
             DateTime? startDate = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Enter date of commencement of work on the assignment");
-            if () ;
+          //  if () ;
             DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Enter deadline");
-            if () ;
+          //  if () ;
             DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
             Console.WriteLine("Enter actual end date");
-            if () ;
+         //   if () ;
             DateTime? completeDate = DateTime.Parse(Console.ReadLine());
             TimeSpan? requiredEffortTime = deadlineDate - startDate;
             Console.WriteLine("Enter product");
