@@ -142,11 +142,11 @@ namespace DalTest
             Console.WriteLine("Enter Id");
             int id=int.Parse(Console.ReadLine());
             Task task = s_dalTask.Read(id);
-
+            Console.WriteLine(task.ToString());
         }
         private static void readAllTaskCase()
         {
-
+            List<Task> tasks = s_dalTask.ReadAll();
         }
         private static void updateTaskCase()
         {
