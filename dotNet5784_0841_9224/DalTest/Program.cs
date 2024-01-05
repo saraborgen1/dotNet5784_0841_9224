@@ -135,10 +135,13 @@ namespace DalTest
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
-            TaskImplementation.Create(task);
+            s_dalTask.Create(task);
         }
         private static void readTaskCase()
         {
+            Console.WriteLine("Enter Id");
+            int id=int.Parse(Console.ReadLine());
+            Task task = s_dalTask.Read(id);
 
         }
         private static void readAllTaskCase()
@@ -160,11 +163,13 @@ namespace DalTest
             Console.WriteLine("Enter a pending task ID number");
             int dependentOnTask = int.Parse(Console.ReadLine());
             Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
-            //DependencyImplementation.Create(dependency);
+           // DependencyImplementation.Create(dependency);
         }
         private static void readDependencyCase()
         {
-
+            Console.WriteLine("Enter Id");
+            int id = int.Parse(Console.ReadLine());
+            Task task = s_dalTask.Read(id);
         }
         private static void readAllDependencyCase()
         {
@@ -195,7 +200,9 @@ namespace DalTest
         }
         private static void readEngineerCase()
         {
-
+            Console.WriteLine("Enter Id");
+            int id = int.Parse(Console.ReadLine());
+            Task task = s_dalTask.Read(id);
         }
         private static void readAllEngineerCase()
         {
