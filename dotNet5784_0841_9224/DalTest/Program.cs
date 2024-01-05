@@ -62,12 +62,7 @@ namespace DalTest
                                         int difficultyNumber = int.Parse(Console.ReadLine());
                                         EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
                                         Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
-
-                                        Console.WriteLine("Enter");
-                                        Console.WriteLine("Enter");
-                                        Console.WriteLine("Enter");
-                                        Console.WriteLine("Enter");
-                                        Console.WriteLine("Enter");
+                                        
                                         break;
                                     case SubMenue.Read:
                                         break;
