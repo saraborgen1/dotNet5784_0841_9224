@@ -205,7 +205,11 @@ namespace DalTest
         {
             Console.WriteLine("Enter id");
             int id = int.Parse(Console.ReadLine());
-            s_dalTask.Delete(id);
+            try
+            {
+                s_dalTask.Delete(id);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }  
         }
         private static void createDependencyCase()
         {
@@ -255,7 +259,11 @@ namespace DalTest
         {
             Console.WriteLine("Enter id");
             int id = int.Parse(Console.ReadLine());
-            s_dalDependency.Delete(id);
+            try
+            {
+                s_dalDependency.Delete(id);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
         private static void createEngineerCase()
         {
@@ -316,7 +324,11 @@ namespace DalTest
         {
             Console.WriteLine("Enter id");
             int id =int.Parse(Console.ReadLine());
-            s_dalEngineer.Delete(id);
+            try
+            {
+                s_dalEngineer.Delete(id);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); } 
         }
 
         static void Main(string[] args)
