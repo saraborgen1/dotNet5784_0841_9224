@@ -154,6 +154,47 @@ namespace DalTest
             int id = int.Parse(Console.ReadLine());
             Task task = s_dalTask.Read(id);
 
+            Console.WriteLine("Enter alies");
+            string alies = Console.ReadLine();
+            if( alies == null) { alies = task.alies; }
+            Console.WriteLine("Enter description");
+            string description = Console.ReadLine();
+            if (description == null) {  description = task.description; }
+            Console.WriteLine("Enter milestone");
+            string tempMilesone = Console.ReadLine();
+            if (tempMilesone == null) { tempMilesone = task.tempMilesone; }
+            bool mileston = (tempMilesone == "true") ? true : false;
+            Console.WriteLine("Enter task creation date");
+            if () ;
+            DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter planned date for the start of work");
+            if () ;
+            DateTime? startDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter date of commencement of work on the assignment");
+            if () ;
+            DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter deadline");
+            if () ;
+            DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter actual end date");
+            if () ;
+            DateTime? completeDate = DateTime.Parse(Console.ReadLine());
+            TimeSpan? requiredEffortTime = deadlineDate - startDate;
+            Console.WriteLine("Enter product");
+            string product = Console.ReadLine();
+            if(product==null) { product = task.product; }
+            Console.WriteLine("Enter remarks");
+            string remarks = Console.ReadLine();
+            if (remarks == null) {  remarks = task.remarks; }
+            Console.WriteLine("Enter the engineer ID assigned to the task");
+            int engineerID = int.Parse(Console.ReadLine());
+            if (engineerID == 0) { engineerID = task.engineerID; }
+            Console.WriteLine("Enter numer of the difficulty level of the task");
+            int difficultyNumber = int.Parse(Console.ReadLine());
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            s_dalTask.Create(task);
+
         }
         private static void deleteTaskCase()
         {
