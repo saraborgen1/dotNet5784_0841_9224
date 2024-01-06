@@ -61,13 +61,12 @@ public class DependencyImplementation : IDependency
     /// <exception cref="NotImplementedException">In case there is no object with the received id</exception>
     public void Update(Dependency item)
     {
-        if (DataSource.Dependencys.Find(d => d == item) == null) 
+        if (DataSource.Dependencys.Find(d => d.Id == item.Id) == null) 
         {
             throw new NotImplementedException($"Dependency with ID={item.Id} does Not exist");
         }
-        Dependency dependency = DataSource.Dependencys.Find(d => d == item)!;
-        Dependency temp = dependency;
-        DataSource.Dependencys.Remove(temp);
+
+        Delete((DataSource.Dependencys.Find(d => d == item)).Id);
         DataSource.Dependencys.Add(item);
         return;
     }

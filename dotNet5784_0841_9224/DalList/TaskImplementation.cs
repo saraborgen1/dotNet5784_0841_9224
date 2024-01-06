@@ -58,13 +58,12 @@ public class TaskImplementation : ITask
     /// <exception cref="NotImplementedException">In case there is no object with the received id</exception>
     public void Update(Task item)
     {
-        if (DataSource.Tasks.Find(d => d == item) == null)
+        if (DataSource.Tasks.Find(d => d.Id == item.Id) == null)
         {
             throw new NotImplementedException($"Task with ID={item.Id} does Not exist");
         }
-        Task task = DataSource.Tasks.Find(d => d == item)!;
-        Task temp = task;
-        DataSource.Tasks.Remove(temp);
+       
+        Delete((DataSource.Tasks.Find(d => d.Id == item.Id)).Id);
         DataSource.Tasks.Add(item);
         return;
     }

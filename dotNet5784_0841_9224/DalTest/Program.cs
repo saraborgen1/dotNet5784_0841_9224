@@ -251,10 +251,8 @@ namespace DalTest
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
             Dependency dependency = s_dalDependency.Read(id);
-            if (dependency != null)
-            {
-                Console.WriteLine(dependency.ToString());
-            }
+            Console.WriteLine(dependency.ToString());
+            
 
             Console.WriteLine("Enter an ID number of a previous task");
             int? dependentTask = int.Parse(Console.ReadLine());

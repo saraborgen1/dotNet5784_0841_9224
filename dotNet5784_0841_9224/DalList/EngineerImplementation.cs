@@ -61,9 +61,7 @@ public class EngineerImplementation : IEngineer
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} does Not exist");
         }
-        Engineer engineer;
         Delete((DataSource.Engineers.Find(d => d.Id == item.Id)).Id);
-        //DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(item);
         return;
     }
