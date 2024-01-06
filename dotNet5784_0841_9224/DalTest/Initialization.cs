@@ -98,23 +98,18 @@ public static class Initialization
          };
         for (int i = 0; i < 20; i++) 
         {
-            DateTime start = new DateTime(2024, 1, 1);
+            DateTime start = new DateTime(2023, 1, i);
             int range = (DateTime.Today - start).Days;
-            DateTime _createdAtDate = start.AddDays(s_rand.Next(range));
-
-            TimeSpan _requiredEffortTime = start - _createdAtDate;
+            DateTime _createdAtDate = start.AddDays(i*10);
+            DateTime _StartDate= _createdAtDate.AddDays(i*10 );
+            DateTime _ScheduledDate = _createdAtDate.AddDays(i*10);
+            DateTime _DeadlineDate = _ScheduledDate.AddDays(i + 50);
+            DateTime _CompleteDate = _ScheduledDate.AddDays(2);
+            TimeSpan _requiredEffortTime = _CompleteDate - _StartDate;
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _engineerld = (EngineerExperience)_numforenum;
             Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
             s_dalTask!.Create(newTask);
-
-
-//            DateTime _CreatedAtDate = null,
-//DateTime _StartDate = null,
-//    DateTime _ScheduledDate = null,
-//    DateTime _DeadlineDate = null,
-//    DateTime  _CompleteDate = null,
-//    TimeSpan _RequiredEffortTime = null,
         }
     }
 
