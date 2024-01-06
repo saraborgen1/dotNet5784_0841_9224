@@ -27,7 +27,7 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
-        if (DataSource.Dependencys.Find(d => d.Id == id) == null)
+        if (DataSource.Engineers.Find(d => d.Id == id) == null)
         {
             throw new NotImplementedException($"Engineer with ID={id} does Not exist");
         }
@@ -57,12 +57,13 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
     public void Update(Engineer item)
     {
-        if (DataSource.Engineers.Find(d => d == item) != null)
+        if (DataSource.Engineers.Find(d => d.Id == item.Id) == null)
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} does Not exist");
         }
-        Engineer engineer = DataSource.Engineers.Find(d => d == item)!;
-        DataSource.Engineers.Remove(engineer);
+        Engineer engineer;
+        Delete((DataSource.Engineers.Find(d => d.Id == item.Id)).Id);
+        //DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(item);
         return;
     }

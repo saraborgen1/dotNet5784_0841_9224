@@ -330,10 +330,10 @@ namespace DalTest
             if(email==null) { email=engineer.Email; }
             if (difficulty==null) { difficulty = engineer.Level; }
             if (cost == null) {cost=engineer.Cost; }
-            Engineer engineer2 = new Engineer(id, name, email, difficulty, cost);
+            engineer = new Engineer(id, name, email, difficulty, cost);
             try
             {
-                s_dalEngineer.Update(engineer2);
+                s_dalEngineer.Update(engineer);
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
