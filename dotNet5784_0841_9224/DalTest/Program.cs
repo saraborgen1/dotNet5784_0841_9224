@@ -336,7 +336,7 @@ namespace DalTest
                 s_dalEngineer.Update(engineer2);
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-          
+            return;
         }
     
         private static void deleteEngineerCase()

@@ -57,13 +57,12 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
     public void Update(Engineer item)
     {
-        if (DataSource.Engineers.Find(d => d == item) == null)
+        if (DataSource.Engineers.Find(d => d == item) != null)
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} does Not exist");
         }
         Engineer engineer = DataSource.Engineers.Find(d => d == item)!;
-        Engineer temp = engineer;
-        DataSource.Engineers.Remove(temp);
+        DataSource.Engineers.Remove(engineer);
         DataSource.Engineers.Add(item);
         return;
     }
