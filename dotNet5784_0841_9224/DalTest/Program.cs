@@ -1,7 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-using System;
+
 
 namespace DalTest
 {
@@ -174,20 +174,20 @@ namespace DalTest
             bool mileston = (tempMilesone == "true") ? true : false;
             if (tempMilesone == null) { mileston = task.IsMilestone; }
             Console.WriteLine("Enter task creation date");
-          //  if () ;
             DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
+            if (createdAtDate == null) { createdAtDate = task.CreatedAtDate; } 
             Console.WriteLine("Enter planned date for the start of work");
-         //   if () ;
             DateTime? startDate = DateTime.Parse(Console.ReadLine());
+            if (startDate == null) { startDate = task.StartDate; }
             Console.WriteLine("Enter date of commencement of work on the assignment");
-          //  if () ;
             DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
+            if (scheduledDate == null) { scheduledDate = task.ScheduledDate; }
             Console.WriteLine("Enter deadline");
-          //  if () ;
             DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
+           if (deadlineDate == null) { deadlineDate = task.DeadlineDate; }
             Console.WriteLine("Enter actual end date");
-         //   if () ;
             DateTime? completeDate = DateTime.Parse(Console.ReadLine());
+            if (completeDate == null) { completeDate = task.CompleteDate; }
             TimeSpan? requiredEffortTime = deadlineDate - startDate;
             Console.WriteLine("Enter product");
             string product = Console.ReadLine();
@@ -201,7 +201,7 @@ namespace DalTest
             Console.WriteLine("Enter numer of the difficulty level of the task");
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-            //if()
+            if (difficulty == null) { difficulty = task.Copmlexity.Value; }
             DO.Task task1 = new(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             try
             {
@@ -374,7 +374,7 @@ namespace DalTest
                             break;
                     }
                     menueM();
-                    menue = (Menue)Console.Read();
+                    userInput = Console.ReadLine();
                 }
             }        
             catch(Exception ex) 
