@@ -1,6 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
+using System;
 
 namespace DalTest
 {
@@ -10,22 +11,24 @@ namespace DalTest
         private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
         private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
 
-        enum Menue {Exit, Task, Dependency,Engineer}
-        enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete}
-        private static Menue menueM()
+        enum Menue {Exit, Task, Dependency,Engineer};
+        enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
+        private static void menueM()
         {
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor dependencies press 2\r\nFor the engineer press 3\r\nTo exit the main program press 0");
-            return (Menue)Console.Read(); 
+            return;  
         }
-        private static SubMenue subMenueM()
+        private static void subMenueM()
         {
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
-            return  (SubMenue)Console.Read();
+            return;
         }
         private static void taskCase()
         {
-            SubMenue subMenue = subMenueM();
-            if (subMenue != 0)
+            SubMenue subMenue;
+            subMenueM();
+            string temp = Console.ReadLine();
+            if (Enum.TryParse(temp, out subMenue) && subMenue != SubMenue.Exit)
             {
                 switch (subMenue)
                 {
@@ -51,8 +54,10 @@ namespace DalTest
         }
         private static void dependencyCase()
         {
-            SubMenue subMenue = subMenueM();
-            if (subMenue != 0)
+            SubMenue subMenue;
+            subMenueM();
+            string temp = Console.ReadLine();
+            if (Enum.TryParse(temp, out subMenue) && subMenue != SubMenue.Exit)
             {
                 switch (subMenue)
                 {
@@ -78,8 +83,10 @@ namespace DalTest
         }
         private static void engineerCase()
         {
-            SubMenue subMenue = subMenueM();
-            if (subMenue != 0)
+            SubMenue subMenue;
+            subMenueM();
+            string temp = Console.ReadLine();
+            if (Enum.TryParse(temp, out subMenue) && subMenue != SubMenue.Exit)
             {
                 switch (subMenue)
                 {
@@ -132,20 +139,20 @@ namespace DalTest
             Console.WriteLine("Enter numer of the difficulty level of the task");
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-            Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            DO.Task task = new(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             s_dalTask.Create(task);
         }
         private static void readTaskCase()
         {
             Console.WriteLine("Enter Id");
             int id=int.Parse(Console.ReadLine());
-            Task task = s_dalTask.Read(id);
+            DO.Task task = s_dalTask.Read(id);
             Console.WriteLine(task.ToString());
         }
         private static void readAllTaskCase()
         {
-            List<Task> tasks = s_dalTask.ReadAll();
-            foreach (Task item in tasks)
+            List<DO.Task> tasks = s_dalTask.ReadAll();
+            foreach (DO.Task item in tasks)
             {
                 Console.WriteLine(item.ToString());
             }
@@ -154,18 +161,18 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Task task = s_dalTask.Read(id);
+            DO.Task task = s_dalTask.Read(id);
 
             Console.WriteLine("Enter alies");
             string alies = Console.ReadLine();
-            if( alies == null) { alies = task.alies; }
+            if( alies == null) { alies = task.Ailas; }
             Console.WriteLine("Enter description");
             string description = Console.ReadLine();
-            if (description == null) {  description = task.description; }
+            if (description == null) {  description = task.Description; }
             Console.WriteLine("Enter milestone");
             string tempMilesone = Console.ReadLine();
-            if (tempMilesone == null) { tempMilesone = task.tempMilesone; }
             bool mileston = (tempMilesone == "true") ? true : false;
+            if (tempMilesone == null) { mileston = task.IsMilestone; }
             Console.WriteLine("Enter task creation date");
           //  if () ;
             DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
@@ -184,20 +191,21 @@ namespace DalTest
             TimeSpan? requiredEffortTime = deadlineDate - startDate;
             Console.WriteLine("Enter product");
             string product = Console.ReadLine();
-            if(product==null) { product = task.product; }
+            if(product==null) { product = task.Deliverables; }
             Console.WriteLine("Enter remarks");
             string remarks = Console.ReadLine();
-            if (remarks == null) {  remarks = task.remarks; }
+            if (remarks == null) {  remarks = task.Remarks; }
             Console.WriteLine("Enter the engineer ID assigned to the task");
-            int engineerID = int.Parse(Console.ReadLine());
-            if (engineerID == 0) { engineerID = task.engineerID; }
+            int? engineerID = int.Parse(Console.ReadLine());
+            if (engineerID == 0) { engineerID = task.Engineerld; }
             Console.WriteLine("Enter numer of the difficulty level of the task");
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-            Task task = new Task(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            //if()
+            DO.Task task1 = new(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             try
             {
-                s_dalTask.Update(task);
+                s_dalTask.Update(task1);
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
            
@@ -249,10 +257,10 @@ namespace DalTest
             }
 
             Console.WriteLine("Enter an ID number of a previous task");
-            int dependentTask = int.Parse(Console.ReadLine());
+            int? dependentTask = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter a pending task ID number");
-            int dependentOnTask = int.Parse(Console.ReadLine());
-            if(dependentTask == 0) { dependentTask = dependency.DependentTask; }
+            int? dependentOnTask = int.Parse(Console.ReadLine());
+            if(dependentTask == 0) { dependentTask =dependency.DependentTask; }
             if(dependentOnTask == 0) { dependentOnTask = dependency.DependentOnTask; }
             Dependency dependency2 = new Dependency(0, dependentTask, dependentOnTask);
             try 
@@ -315,9 +323,9 @@ namespace DalTest
             string email = Console.ReadLine();
             Console.WriteLine("Enter the level of the engineer");
             int difficultyNumber = int.Parse(Console.ReadLine());
-            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            EngineerExperience? difficulty = (EngineerExperience)difficultyNumber;
             Console.WriteLine("Enter an hourly cost");
-            double cost = double.Parse(Console.ReadLine());
+            double? cost = double.Parse(Console.ReadLine());
             if(name==null) { name=engineer.Name; }
             if(email==null) { email=engineer.Email; }
             if (difficulty==null) { difficulty = engineer.Level; }
@@ -346,8 +354,10 @@ namespace DalTest
         {
             try
             {
-                Menue menue = menueM();
-                while (menue!=0)
+                Menue menue;
+                menueM();
+                string userInput = Console.ReadLine();
+                while (Enum.TryParse(userInput, out menue) && menue != Menue.Exit)    
                 {
                     switch (menue)
                     {
@@ -363,7 +373,8 @@ namespace DalTest
                         default:
                             break;
                     }
-                    menue = menueM();
+                    menueM();
+                    menue = (Menue)Console.Read();
                 }
             }        
             catch(Exception ex) 

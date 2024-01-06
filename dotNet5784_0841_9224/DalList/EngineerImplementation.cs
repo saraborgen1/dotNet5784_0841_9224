@@ -13,7 +13,7 @@ public class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
-        if (DataSource.Dependencys.Find(d => d.Id ==item.Id) == null)
+        if (DataSource.Dependencys.Find(d => d.Id ==item.Id) != null)
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} already exist");
         }
@@ -68,4 +68,4 @@ public class EngineerImplementation : IEngineer
         return;
     }
 }
-}
+
