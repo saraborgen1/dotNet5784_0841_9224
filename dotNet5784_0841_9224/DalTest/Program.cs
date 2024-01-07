@@ -131,7 +131,7 @@ namespace DalTest
             }
         }
         /// <summary>
-        /// Creating a new task entity that includes receiving the variables and saving them
+        /// Creating a  new task entity that includes receiving the variables and saving them
         /// </summary>
         private static void createTaskCase ()
         {
