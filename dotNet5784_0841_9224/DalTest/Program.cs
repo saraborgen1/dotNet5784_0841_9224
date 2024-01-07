@@ -202,7 +202,7 @@ namespace DalTest
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             if (difficulty == null) { difficulty = task.Copmlexity.Value; }
-            DO.Task task1 = new(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            DO.Task task1 = new(id, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             try
             {
                 s_dalTask.Update(task1);
