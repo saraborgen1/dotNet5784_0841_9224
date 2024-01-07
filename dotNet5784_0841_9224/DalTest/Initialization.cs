@@ -4,9 +4,17 @@ using DO;
 using System.Security.Cryptography;
 
 public static class Initialization
-{
+{/// <summary>
+/// variable access to a task entity
+/// </summary>
     private static ITask? s_dalTask; //stage 1
+    /// <summary>
+    /// access variable dependency entity
+    /// </summary>
     private static IDependency? s_dalDependency; //stage 1
+    /// <summary>
+    /// access variable to engineer entity
+    /// </summary>
     private static IEngineer? s_dalEngineer; //stage 1
     public static void Do(ITask? dalTask, IDependency? dalDependency, IEngineer? dalEngineer)
     {
@@ -22,7 +30,9 @@ public static class Initialization
     /// Generating random numbers while filling in the object values
     /// </summary>
     private static readonly Random s_rand = new();
-
+    /// <summary>
+    /// An operation that initializes Task type entities with data
+    /// </summary>
     private static void createTasks()
     {
         string[] TaskDescriptions =
@@ -112,7 +122,9 @@ public static class Initialization
             s_dalTask!.Create(newTask);
         }
     }
-
+    /// <summary>
+    /// An operation that initializes entities of type Engineer with data
+    /// </summary>
     private static void createEngineers()
     {
         string[] EngineerNames =
@@ -154,8 +166,10 @@ public static class Initialization
         s_dalEngineer!.Create(newEngineer3);
     }
 
-
-private static void createDependencys()
+    /// <summary>
+    /// An operation that initializes entities of type dependency with data
+    /// </summary>
+    private static void createDependencys()
 {
     for (int i=2; i < 20; i++)
     {
