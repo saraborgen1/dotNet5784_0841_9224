@@ -15,7 +15,7 @@ namespace DalTest
         /// </summary>
         enum Menue {Exit, Task, Dependency,Engineer};
         /// <summary>
-        /// A function that displays a submenu for the entities and captures the user's selection
+        /// A function that displays a submenu for the entities and captures the user's selection.
         /// </summary>
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
         /// <summary>
