@@ -290,6 +290,9 @@ namespace DalTest
                 Console.WriteLine(item.ToString());
             }
         }
+        /// <summary>
+        /// A function that calls a function by an ID number of the dependency to update details in the dependency.
+        /// </summary>
         private static void updateDependencyCase()
         {
             Console.WriteLine("Enter Id");
@@ -311,6 +314,9 @@ namespace DalTest
             }
             catch (Exception ex) { }
         }
+        /// <summary>
+        /// A function that calls a delete function for an existing dependency
+        /// </summary>
         private static void deleteDependencyCase()
         {
             Console.WriteLine("Enter id");
@@ -321,6 +327,9 @@ namespace DalTest
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
+        /// <summary>
+        /// A function that calls an initialization function for a new engineer with all his details
+        /// </summary>
         private static void createEngineerCase()
         {
             Console.WriteLine("Enter a unique ID number");
@@ -337,6 +346,9 @@ namespace DalTest
             Engineer engineer = new Engineer(id,name,email, difficulty, cost);
             s_dalEngineer.Create(engineer);
         }
+        /// <summary>
+        /// A function that orders a print function for a specific engineer - according to his thesis
+        /// </summary>
         private static void readEngineerCase()
         {
             Console.WriteLine("Enter Id");
@@ -344,6 +356,9 @@ namespace DalTest
             Engineer engineer = s_dalEngineer.Read(id);
             Console.WriteLine(engineer.ToString());
         }
+        /// <summary>
+        /// A function that calls a print function for a list of existing engineers with all the data in it
+        /// </summary>
         private static void readAllEngineerCase()
         {
             List<Engineer> engineers = s_dalEngineer.ReadAll();
@@ -352,6 +367,9 @@ namespace DalTest
                 Console.WriteLine(item.ToString());
             }
         }
+        /// <summary>
+        /// A function that calls a function to update data for an existing engineer. If the user entered a null variable the function will leave the previous value of the engineer
+        /// </summary>
         private static void updateEngineerCase()
         {
             Console.WriteLine("Enter Id");
@@ -380,7 +398,9 @@ namespace DalTest
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
         }
-    
+        /// <summary>
+        /// A function that activates delete that deletes an engineer from the list of engineers according to a desired Id
+        /// </summary>
         private static void deleteEngineerCase()
         {
             Console.WriteLine("Enter id");
@@ -391,7 +411,10 @@ namespace DalTest
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); } 
         }
-
+        /// <summary>
+        /// A main program that checks the integrity of the program and the entities that exist in it
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             try
