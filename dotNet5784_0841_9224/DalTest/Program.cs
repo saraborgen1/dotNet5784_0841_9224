@@ -11,20 +11,32 @@ namespace DalTest
         private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
         private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
         /// <summary>
-        /// 
+        /// A function that displays a main menu and captures the selection of the variable
         /// </summary>
         enum Menue {Exit, Task, Dependency,Engineer};
+        /// <summary>
+        /// A function that displays a submenu for the entities and captures the user's selection
+        /// </summary>
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
+        /// <summary>
+        /// Print main menu
+        /// </summary>
         private static void menueM()
         {
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor dependencies press 2\r\nFor the engineer press 3\r\nTo exit the main program press 0");
             return;  
         }
+        /// <summary>
+        /// Print submenu
+        /// </summary>
         private static void subMenueM()
         {
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
             return;
         }
+        /// <summary>
+        /// Submenu activation for a task entity
+        /// </summary>
         private static void taskCase()
         {
             SubMenue subMenue;
@@ -54,6 +66,9 @@ namespace DalTest
                 }
             }
         }
+        /// <summary>
+        /// Submenu activation for a dependency entity
+        /// </summary>
         private static void dependencyCase()
         {
             SubMenue subMenue;
@@ -83,6 +98,9 @@ namespace DalTest
                 }
             }
         }
+        /// <summary>
+        /// Submenu activation for a engineer entity
+        /// </summary>
         private static void engineerCase()
         {
             SubMenue subMenue;
@@ -112,6 +130,9 @@ namespace DalTest
                 }
             }
         }
+        /// <summary>
+        /// Creating a new task entity that includes receiving the variables and saving them
+        /// </summary>
         private static void createTaskCase ()
         {
             Console.WriteLine("Enter alies");
@@ -144,6 +165,9 @@ namespace DalTest
             DO.Task task = new(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             s_dalTask.Create(task);
         }
+        /// <summary>
+        /// Displaying the details of a certain task according to a certain id
+        /// </summary>
         private static void readTaskCase()
         {
             Console.WriteLine("Enter Id");
@@ -151,6 +175,9 @@ namespace DalTest
             DO.Task task = s_dalTask.Read(id);
             Console.WriteLine(task.ToString());
         }
+        /// <summary>
+        /// Displaying all the details of all the tasks that exist in the database
+        /// </summary>
         private static void readAllTaskCase()
         {
             List<DO.Task> tasks = s_dalTask.ReadAll();
@@ -159,6 +186,9 @@ namespace DalTest
                 Console.WriteLine(item.ToString());
             }
         }
+        /// <summary>
+        /// Updating the details of a certain task according to the received id, which includes the reception of new details
+        /// </summary>
         private static void updateTaskCase()
         {
             Console.WriteLine("Enter Id");
@@ -213,6 +243,9 @@ namespace DalTest
            
 
         }
+        /// <summary>
+        /// Deleting a task entity according to the received id
+        /// </summary>
         private static void deleteTaskCase()
         {
             Console.WriteLine("Enter id");
@@ -223,6 +256,9 @@ namespace DalTest
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }  
         }
+        /// <summary>
+        /// Creating a new dependency entity that includes receiving the variables and saving them
+        /// </summary>
         private static void createDependencyCase()
         {
             Console.WriteLine("Enter an ID number of a previous task");
@@ -232,6 +268,9 @@ namespace DalTest
             Dependency dependency = new Dependency(0, dependentTask, dependentOnTask);
             s_dalDependency.Create(dependency);
         }
+        /// <summary>
+        /// Displaying the details of a certain dependency according to a certain id
+        /// </summary>
         private static void readDependencyCase()
         {
             Console.WriteLine("Enter Id");
@@ -240,6 +279,9 @@ namespace DalTest
             Console.WriteLine(dependency.ToString());
 
         }
+        /// <summary>
+        /// Displaying all the details of all the dependencys that exist in the database
+        /// </summary>
         private static void readAllDependencyCase()
         {
             List<Dependency> dependencys = s_dalDependency.ReadAll();
