@@ -10,7 +10,9 @@ namespace DalTest
         private static ITask? s_dalTask = new TaskImplementation(); //stage 1
         private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
         private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
-
+        /// <summary>
+        /// 
+        /// </summary>
         enum Menue {Exit, Task, Dependency,Engineer};
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
         private static void menueM()
