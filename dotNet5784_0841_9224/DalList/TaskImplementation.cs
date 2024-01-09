@@ -27,7 +27,7 @@ internal class TaskImplementation : ITask
     {
         if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
             throw new NotImplementedException($"Task with ID={id} does Not exist");
-        DataSource.Tasks.Remove(DataSource.Tasks.Find(d => d.Id == id)!);
+        DataSource.Tasks.Remove(DataSource.Tasks.FirstOrDefault(item => item.Id == id));
     }
     /// <summary>
     /// Returning a reference to a single object of type Task with a certain ID, if it exists in

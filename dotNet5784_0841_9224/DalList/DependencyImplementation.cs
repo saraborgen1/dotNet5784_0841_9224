@@ -26,11 +26,11 @@ internal class DependencyImplementation : IDependency
     /// <exception cref="NotImplementedException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
-        if (DataSource.Dependencys.Find(d => d.Id == id) == null)
+        if (DataSource.Dependencys.FirstOrDefault(item => item.Id == id) == null)
         {
             throw new NotImplementedException($"Dependency with ID={id} does Not exist");
         }
-        DataSource.Dependencys.Remove(DataSource.Dependencys.Find(d => d.Id == id)!);
+        DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item => item.Id == id));
 
     }
     /// <summary>
@@ -62,11 +62,8 @@ internal class DependencyImplementation : IDependency
     public void Update(Dependency item)
     {
         if (DataSource.Dependencys.Find(d => d.Id == item.Id) == null) 
-        {
             throw new NotImplementedException($"Dependency with ID={item.Id} does Not exist");
-        }
-
-        Delete((DataSource.Dependencys.Find(d => d == item)).Id);
+        Delete((DataSource.Dependencys.FirstOrDefault(dependency => dependency.Id == item.Id)).Id);
         DataSource.Dependencys.Add(item);
         return;
     }
