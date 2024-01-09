@@ -41,12 +41,20 @@ internal class TaskImplementation : ITask
         return DataSource.Tasks.FirstOrDefault(d => d.Id == id);
     }
     /// <summary>
-    /// Return a copy of the list of references to all objects of type Task
+    /// Returns a collection of entities that meet the condition
     /// </summary>
-    /// <returns>The method returns a new list that is a copy of the existing list of all objects of type Task.</returns>
-    public List<Task> ReadAll()
+    /// <param name="filter">some condition</param>
+    /// <returns>A collection of entities that meet the condition</returns>
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null) //stage 2
     {
-        return new List<Task>(DataSource.Tasks);
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
     /// <summary>
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with 
