@@ -7,7 +7,7 @@ namespace DalTest
 {
     internal class Program
     {
-        static readonly IDal s_dal = new DalList(); //stage 2
+        static readonly IDal s_dal = new Dal.DalList(); //stage 2
         /// <summary>
         /// A function that displays a main menu and captures the selection of the variable
         /// </summary>
