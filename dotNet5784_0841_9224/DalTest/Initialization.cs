@@ -4,26 +4,16 @@ using DO;
 using System.Security.Cryptography;
 
 public static class Initialization
-{/// <summary>
-/// variable access to a task entity
-/// </summary>
-    private static ITask? s_dalTask; //stage 1
+{
     /// <summary>
-    /// access variable dependency entity
+    /// access variable to  entitys
     /// </summary>
-    private static IDependency? s_dalDependency; //stage 1
-    /// <summary>
-    /// access variable to engineer entity
-    /// </summary>
-    private static IEngineer? s_dalEngineer; //stage 1
-    public static void Do(ITask? dalTask, IDependency? dalDependency, IEngineer? dalEngineer)
+    private static IDal? s_dal;
+    public static void Do(IDal dal)
     {
-
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         createTasks();
-        s_dalDependency = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
         createDependencys();
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
         createEngineers();
     }
     /// <summary>
@@ -119,7 +109,7 @@ public static class Initialization
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _engineerld = (EngineerExperience)_numforenum;
             Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
-            s_dalTask!.Create(newTask);
+            s_dal!.Task.Create(newTask); //stage 2
         }
     }
     /// <summary>
@@ -147,23 +137,23 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(200000000, 400000001);
-            while (s_dalEngineer!.Read(_id) != null);
+            while (s_dal!.Engineer.Read(_id) != null);
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _level = (EngineerExperience)_numforenum;
             int _cost;
             _cost = s_rand.Next(70, 301);
 
             Engineer newEngineer = new Engineer(_id, EngineerNames[i], EngineerEmails[i], _level, _cost);
-            s_dalEngineer!.Create(newEngineer);
+            s_dal!.Engineer.Create(newEngineer);
 
         }
 
         Engineer newEngineer1 = new(123456789, "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
-        s_dalEngineer!.Create(newEngineer1);
+        s_dal!.Engineer.Create(newEngineer1);
         Engineer newEngineer2 = new(987654321, "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
-        s_dalEngineer!.Create(newEngineer2);
+        s_dal!.Engineer!.Create(newEngineer2);
         Engineer newEngineer3 = new(654567898, "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
-        s_dalEngineer!.Create(newEngineer3);
+        s_dal!.Engineer.Create(newEngineer3);
     }
 
     /// <summary>
@@ -174,17 +164,17 @@ public static class Initialization
     for (int i=2; i < 20; i++)
     {
         Dependency newDependency = new Dependency(0,i,i-1);
-        s_dalDependency!.Create(newDependency);
+            s_dal!.Dependency.Create(newDependency);
     }
     for (int i = 4; i < 20; i++)
     {
         Dependency newDependency = new Dependency(0, i, 2);
-        s_dalDependency!.Create(newDependency);
+            s_dal!.Dependency.Create(newDependency);
     }
     for (int i = 3; i < 20; i++)
     {
         Dependency newDependency = new Dependency(0, i, 2);
-        s_dalDependency!.Create(newDependency);
+            s_dal!.Dependency.Create(newDependency);
     }
 }
 }
