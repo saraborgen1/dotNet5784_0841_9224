@@ -34,16 +34,13 @@ internal class DependencyImplementation : IDependency
 
     }
     /// <summary>
-    /// Returning a reference to a single object of type Dependency with a certain ID, if it exists in 
-    ///a database (in a list of data of type Dependency), or null if the object does not exist.
+    /// Returns an entity from the list that meets the condition
     /// </summary>
-    /// <param name="id">ID number of an object</param>
-    /// <returns>If there is an object in the database with the received ID number, the method
-    /// will return a reference to the existing object.Otherwise, the method will return null.</returns>
-
-    public Dependency? Read(int id)
+    /// <param name="filter">condition</param>
+    /// <returns>Returns an entity from the list that meets the condition</returns>
+    public Dependency? Read(Func<Dependency, bool> filter)
     {
-        return DataSource.Dependencys.FirstOrDefault(d => d.Id == id);
+        return DataSource.Dependencys.FirstOrDefault(filter);
     }
     /// <summary>
     /// Returns a collection of entities that meet the condition

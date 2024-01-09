@@ -30,15 +30,13 @@ internal class TaskImplementation : ITask
         DataSource.Tasks.Remove(DataSource.Tasks.FirstOrDefault(item => item.Id == id));
     }
     /// <summary>
-    /// Returning a reference to a single object of type Task with a certain ID, if it exists in
-    /// a database (in a list of data of type Task), or null if the object does not exist.
+    /// Returns an entity from the list that meets the condition
     /// </summary>
-    /// <param name="id">ID number of an object</param>
-    /// <returns>If there is an object in the database with the received ID number, the method
-    /// will return a reference to the existing object.Otherwise, the method will return null.</returns>
-    public Task? Read(int id)
+    /// <param name="filter">condition</param>
+    /// <returns>Returns an entity from the list that meets the condition</returns>
+    public Task? Read(Func<Task, bool> filter)
     {
-        return DataSource.Tasks.FirstOrDefault(d => d.Id == id);
+        return DataSource.Tasks.FirstOrDefault(filter);
     }
     /// <summary>
     /// Returns a collection of entities that meet the condition
