@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
     /// <summary>
     /// Adding a new object of type Engineer to a database, (to the list of objects of type Engineer).
@@ -11,7 +11,7 @@ public class EngineerImplementation : IEngineer
     /// <param name="item">A reference to an existing object of the Engineer type. The object was created in an upper layer and its fields are already filled with normal values.</param>
     /// <returns>The method will return the running number of the newly created object in the list.</returns>
     /// <exception cref="NotImplementedException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
-    internal int Create(Engineer item)
+    public int Create(Engineer item)
     {
         if (DataSource.Dependencys.Find(d => d.Id ==item.Id) != null)
         {
