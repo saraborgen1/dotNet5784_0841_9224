@@ -44,18 +44,30 @@ internal class EngineerImplementation : IEngineer
         return DataSource.Engineers.FirstOrDefault(d => d.Id == id);
     }
     /// <summary>
-    /// Returning a copy of the list of references to all objects of type Engineer
+    /// Returns a collection of entities that meet the condition
     /// </summary>
-    /// <returns>The method returns a new list that is a copy of the existing list of all objects of type Engineer.</returns>
-    public List<Engineer> ReadAll()
+    /// <param name="filter">some condition</param>
+    /// <returns>A collection of entities that meet the condition</returns>
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
-        return new List<Engineer>(DataSource.Engineers);
+        if (filter != null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Engineers
+               select item;
     }
+}
     /// <summary>
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with a new object with the same ID number and updated fields.
     /// </summary>
     /// <param name="item">A reference to an updated existing object of type Engineer.</param>
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
+    
+ 
+      
     public void Update(Engineer item)
     {
         if (DataSource.Engineers.Find(d => d.Id == item.Id) == null)
