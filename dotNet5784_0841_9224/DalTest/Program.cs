@@ -417,7 +417,7 @@ namespace DalTest
         {
             try
             {
-                Initialization.Do(s_dal); //stage 2
+               Initialization.Do(s_dal); //stage 2
                 Menue menue;
                 menueM();
                 string userInput = Console.ReadLine();
