@@ -13,7 +13,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
-        
+
         if (DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id) != null)
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} already exist");
@@ -35,13 +35,13 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item => item.Id == id)!);
     }
     /// <summary>
-    /// Returning a reference to a single object of type Engineer with a certain ID
+    /// 
     /// </summary>
-    /// <param name="id">ID number of an object</param>
-    /// <returns>If the object exists, the method will return a reference to the existing object. Otherwise, the method will return null.</returns>
-    public Engineer? Read(int id)
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    public Engineer? Read(Func<Engineer, bool> filter)
     {
-        return DataSource.Engineers.FirstOrDefault(d => d.Id == id);
+        return DataSource.Engineers.FirstOrDefault(filter);
     }
     /// <summary>
     /// Returns a collection of entities that meet the condition
@@ -65,9 +65,9 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item">A reference to an updated existing object of type Engineer.</param>
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
-    
- 
-      
+
+
+
     public void Update(Engineer item)
     {
         if (DataSource.Engineers.Find(d => d.Id == item.Id) == null)
