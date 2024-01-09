@@ -27,6 +27,7 @@ public static class Initialization
     {
         string[] TaskDescriptions =
          {
+            "nothing",
         "Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.",
         "Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.",
         "Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.",
@@ -52,6 +53,7 @@ public static class Initialization
 
         string[] taskAliases =
         {
+         "nothing",
         "Layout",
         "Frame",
         "Wire",
@@ -75,6 +77,7 @@ public static class Initialization
         };
         string[] TaskDeliverables =
          {
+        "nothing",
         "Architectural Planning",
         "Structural Framing",
         "Electrical Wiring",
@@ -96,9 +99,9 @@ public static class Initialization
         "Smart Home Integration",
         "Final Inspection"
          };
-        for (int i = 0; i < 20; i++) 
+        for (int i = 1; i < 21; i++) 
         {
-            DateTime start = new DateTime(2023, 1, i+1);
+            DateTime start = new DateTime(2023, 1, i);
             int range = (DateTime.Today - start).Days;
             DateTime _createdAtDate = start.AddDays(i*10);
             DateTime _StartDate= _createdAtDate.AddDays(i*10 );
