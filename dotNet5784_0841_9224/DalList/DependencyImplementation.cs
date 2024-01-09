@@ -46,13 +46,24 @@ internal class DependencyImplementation : IDependency
         return DataSource.Dependencys.FirstOrDefault(d => d.Id == id);
     }
     /// <summary>
-    /// Return a copy of the list of references to all objects of type Dependency
+    /// Returns a collection of entities that meet the condition
     /// </summary>
-    /// <returns>The method returns a new list that is a copy of the existing list of all objects of type Dependency.</returns>
-    public List<Dependency> ReadAll()
+    /// <param name="filter">some condition</param>
+    /// <returns>A collection of entities that meet the condition</returns>
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
     {
-        return new List<Dependency>(DataSource.Dependencys);
+        if (filter != null)
+        {
+            return from item in DataSource.Dependencys
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Dependencys
+               select item;
     }
+ 
+
+
     /// <summary>
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with 
     /// a new object with the same ID number and updated fields.
