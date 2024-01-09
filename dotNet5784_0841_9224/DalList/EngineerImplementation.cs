@@ -44,10 +44,10 @@ internal class EngineerImplementation : IEngineer
         return DataSource.Engineers.FirstOrDefault(filter);
     }
     /// <summary>
-    /// Returns a collection of entities that meet the condition
+    /// Returns an entity from the list that meets the condition
     /// </summary>
-    /// <param name="filter">some condition</param>
-    /// <returns>A collection of entities that meet the condition</returns>
+    /// <param name="filter">condition</param>
+    /// <returns>Returns an entity from the list that meets the condition</returns>
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
         if (filter != null)
