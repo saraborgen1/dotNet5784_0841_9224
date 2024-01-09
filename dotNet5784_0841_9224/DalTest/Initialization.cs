@@ -27,7 +27,7 @@ public static class Initialization
     {
         string[] TaskDescriptions =
          {
-            "nothing",
+         "nothing",
         "Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.",
         "Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.",
         "Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.",
