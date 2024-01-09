@@ -252,7 +252,7 @@ namespace DalTest
             {
                 s_dal.Task.Delete(id);
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }  
+             catch (Exception ex) { Console.WriteLine(ex.ToString()); }  
         }
         /// <summary>
         /// Creating a new dependency entity that includes receiving the variables and saving them

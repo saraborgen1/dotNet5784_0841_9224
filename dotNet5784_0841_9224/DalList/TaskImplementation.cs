@@ -25,10 +25,8 @@ internal class TaskImplementation : ITask
     /// <exception cref="NotImplementedException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
-        if (DataSource.Tasks.Find(d => d.Id == id) == null)
-        {
+        if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
             throw new NotImplementedException($"Task with ID={id} does Not exist");
-        }
         DataSource.Tasks.Remove(DataSource.Tasks.Find(d => d.Id == id)!);
     }
     /// <summary>
@@ -58,12 +56,9 @@ internal class TaskImplementation : ITask
     /// <exception cref="NotImplementedException">In case there is no object with the received id</exception>
     public void Update(Task item)
     {
-        if (DataSource.Tasks.Find(d => d.Id == item.Id) == null)
-        {
+        if (DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id) == null)
             throw new NotImplementedException($"Task with ID={item.Id} does Not exist");
-        }
-       
-        Delete((DataSource.Tasks.Find(d => d.Id == item.Id)).Id);
+        Delete((DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id)).Id);
         DataSource.Tasks.Add(item);
         return;
     }
