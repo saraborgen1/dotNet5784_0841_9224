@@ -178,7 +178,7 @@ namespace DalTest
         /// </summary>
         private static void readAllTaskCase()
         {
-            List<DO.Task> tasks = s_dal.Task.ReadAll();
+            IEnumerable<DO.Task?> tasks = s_dal.Task.ReadAll();
             foreach (DO.Task item in tasks)
             {
                 Console.WriteLine(item.ToString());
@@ -282,7 +282,7 @@ namespace DalTest
         /// </summary>
         private static void readAllDependencyCase()
         {
-            List<Dependency> dependencys = s_dal.Dependency.ReadAll();
+            IEnumerable<Dependency?> dependencys = s_dal.Dependency.ReadAll();
             foreach (Dependency item in dependencys)
             {
                 Console.WriteLine(item.ToString());
@@ -359,7 +359,7 @@ namespace DalTest
         /// </summary>
         private static void readAllEngineerCase()
         {
-            List<Engineer> engineers = s_dal.Engineer.ReadAll();
+            IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAll();
             foreach (Engineer item in engineers)
             {
                 Console.WriteLine(item.ToString());

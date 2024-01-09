@@ -59,7 +59,7 @@ internal class EngineerImplementation : IEngineer
         return from item in DataSource.Engineers
                select item;
     }
-}
+
     /// <summary>
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with a new object with the same ID number and updated fields.
     /// </summary>
