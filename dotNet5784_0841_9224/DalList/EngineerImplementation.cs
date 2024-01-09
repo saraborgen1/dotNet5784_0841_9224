@@ -13,7 +13,8 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
-        if (DataSource.Dependencys.Find(d => d.Id ==item.Id) != null)
+        
+        if (DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id) != null)
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} already exist");
         }
@@ -27,11 +28,11 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
-        if (DataSource.Engineers.Find(d => d.Id == id) == null)
+        if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
         {
             throw new NotImplementedException($"Engineer with ID={id} does Not exist");
         }
-        DataSource.Engineers.Remove(DataSource.Engineers.Find(d => d.Id == id)!);
+        DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item => item.Id == id)!);
     }
     /// <summary>
     /// Returning a reference to a single object of type Engineer with a certain ID
@@ -61,7 +62,7 @@ internal class EngineerImplementation : IEngineer
         {
             throw new NotImplementedException($"Engineer with ID={item.Id} does Not exist");
         }
-        Delete((DataSource.Engineers.Find(d => d.Id == item.Id)).Id);
+        Delete(DataSource.Engineers.FirstOrDefault(engineers => engineers.Id == item.Id).Id);
         DataSource.Engineers.Add(item);
         return;
     }
