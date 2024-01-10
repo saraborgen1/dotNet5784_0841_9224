@@ -6,7 +6,7 @@ using System.Collections.Generic;
 internal class EngineerImplementation : IEngineer
 {
     /// <summary>
-    /// Adding a new object of type Engineer to a database, (to the list of objects of type Engineer).
+    /// Adding a new object  of type Engineer to a database, (to the list of objects of type Engineer).
     /// </summary>
     /// <param name="item">A reference to an existing object of the Engineer type. The object was created in an upper layer and its fields are already filled with normal values.</param>
     /// <returns>The method will return the running number of the newly created object in the list.</returns>
