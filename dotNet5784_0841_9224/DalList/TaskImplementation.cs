@@ -34,10 +34,10 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="filter">condition</param>
     /// <returns>Returns an entity from the list that meets the condition</returns>
-    public Task? Read(Func<Task, bool> filter)
-    {
-        return DataSource.Tasks.FirstOrDefault(filter);
-    }
+        public Task? Read(Func<Task, bool> filter)
+        {
+            return DataSource.Tasks.FirstOrDefault(filter);
+        }
     /// <summary>
     /// Returns a collection of entities that meet the condition
     /// </summary>

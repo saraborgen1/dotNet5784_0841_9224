@@ -23,6 +23,7 @@ public static class Initialization
     /// <summary>
     /// An operation that initializes Task type entities with data
     /// </summary>
+   
     private static void createTasks()
     {
         string[] TaskDescriptions =
@@ -135,11 +136,12 @@ public static class Initialization
             "shira.israelof@emailgame.com",
             "dani.levi@emailgame.com"
         };
+
         for (int i = 0; i < EngineerNames.Length; i++)
         {
             int _id;
             do
-                _id = s_rand.Next(200000000, 400000001);
+            _id = s_rand.Next(200000000, 400000001);
             while (s_dal!.Engineer.Read(_id) != null);
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _level = (EngineerExperience)_numforenum;
