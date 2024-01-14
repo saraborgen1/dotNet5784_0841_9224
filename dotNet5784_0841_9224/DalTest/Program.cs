@@ -170,7 +170,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id=int.Parse(Console.ReadLine());
-            DO.Task task = s_dal.Task.Read(id);
+            DO.Task task = s_dal.Task.Read(item => item.Id == id);
             Console.WriteLine(task.ToString());
         }
         /// <summary>
@@ -191,7 +191,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            DO.Task task = s_dal.Task.Read(id);
+            DO.Task task = s_dal.Task.Read(item => item.Id == id);
 
             Console.WriteLine("Enter alies");
             string alies = Console.ReadLine();
@@ -273,7 +273,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Dependency dependency = s_dal.Dependency.Read(id);
+            Dependency dependency = s_dal.Dependency.Read(item => item.Id == id);
             Console.WriteLine(dependency.ToString());
 
         }
@@ -295,7 +295,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Dependency dependency = s_dal.Dependency.Read(id);
+            Dependency dependency = s_dal.Dependency.Read(item => item.Id == id);
             Console.WriteLine(dependency.ToString());
             
 
@@ -351,7 +351,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Engineer engineer = s_dal.Engineer.Read(id);
+            Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
             Console.WriteLine(engineer.ToString());
         }
         /// <summary>
@@ -372,7 +372,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
-            Engineer engineer = s_dal.Engineer.Read(id);
+            Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
             Console.WriteLine(engineer.ToString());
             
             Console.WriteLine("Enter the name of the engineer (full name)");
