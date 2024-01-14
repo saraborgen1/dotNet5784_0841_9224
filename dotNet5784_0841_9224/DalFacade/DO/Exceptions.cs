@@ -15,4 +15,12 @@ public class DalAlreadyExistException : Exception
 {
     public DalAlreadyExistException(string? message) : base(message) { }
 }
+/// <summary>
+/// File exception
+/// </summary>
+[Serializable]
+public class DalXMLFileLoadCreateException : Exception
+{
+    public DalXMLFileLoadCreateException(string? message) : base(message) { }
+}
 
