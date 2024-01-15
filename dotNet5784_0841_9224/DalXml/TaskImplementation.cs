@@ -32,15 +32,14 @@ internal class TaskImplementation:ITask
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        var taskList=LoadListFromXMLSerializer()
+        var taskList = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
         if (filter != null)
         {
-            return from item in DataSource.Tasks
+            return from item in taskList
                    where filter(item)
                    select item;
         }
-        return from item in DataSource.Tasks
-               select item;
+        return taskList.ToList();
     }
 
     public void Update(Task item)
