@@ -3,6 +3,9 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using System.Threading.Tasks;
 
 internal class TaskImplementation:ITask
 {
@@ -10,7 +13,11 @@ internal class TaskImplementation:ITask
 
     public int Create(Task item)
     {
-        throw new NotImplementedException();
+        int newId = DataSource.Config.NextTaskId;
+        Task newTask = item with { Id = newId };
+        DataSource.Tasks.Add(newTask);
+        return newId;
+
     }
 
     public void Delete(int id)
@@ -20,12 +27,20 @@ internal class TaskImplementation:ITask
 
     public Task? Read(Func<Task, bool> filter)
     {
-        throw new NotImplementedException();
+        
     }
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        var taskList=LoadListFromXMLSerializer()
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
 
     public void Update(Task item)
