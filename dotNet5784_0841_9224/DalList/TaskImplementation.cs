@@ -22,7 +22,7 @@ internal class TaskImplementation : ITask
     /// Deletion of an existing object with a certain ID, from the list of objects of type Task
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="NotImplementedException">An attempt to delete an object that does not exist</exception>
+    /// <exception cref="DalDoesNotExistException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
         if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
@@ -59,11 +59,8 @@ internal class TaskImplementation : ITask
     /// a new object with the same ID number and updated fields.
     /// </summary>
     /// <param name="item">A reference to an updated existing object of type Dependency</param>
-    /// <exception cref="NotImplementedException">In case there is no object with the received id</exception>
     public void Update(Task item)
     {
-        if (DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id) == null)
-            throw new DalDoesNotExistException($"Task with ID={item.Id} does Not exist");
         Delete((DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id)).Id);
         DataSource.Tasks.Add(item);
         return;
