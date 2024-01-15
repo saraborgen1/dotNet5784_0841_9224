@@ -28,17 +28,17 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
-        if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
+        if (DataSource.Engineers.FirstOrDefault(item => item.Id == id) == null)
         {
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
         }
         DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item => item.Id == id)!);
     }
     /// <summary>
-    /// 
+    /// Returns an entity from the list that meets the condition
     /// </summary>
-    /// <param name="filter"></param>
-    /// <returns></returns>
+    /// <param name="filter">condition</param>
+    /// <returns>Returns an entity from the list that meets the condition</returns>
     public Engineer? Read(Func<Engineer, bool> filter)
     {
         return DataSource.Engineers.FirstOrDefault(filter);
@@ -70,10 +70,6 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        if (DataSource.Engineers.Find(d => d.Id == item.Id) == null)
-        {
-            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
-        }
         Delete(DataSource.Engineers.FirstOrDefault(engineers => engineers.Id == item.Id).Id);
         DataSource.Engineers.Add(item);
         return;
