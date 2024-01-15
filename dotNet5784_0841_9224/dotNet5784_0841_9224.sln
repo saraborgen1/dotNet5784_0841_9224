@@ -16,14 +16,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{42612FFE-5AF4-4477-A2AD-1F2D422ED4DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{2012996B-E282-48AF-97D6-3E5DB27586D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{2012996B-E282-48AF-97D6-3E5DB27586D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{15AAA96A-3C98-48FF-AD51-C3CD79F0DAC2}"
 	ProjectSection(SolutionItems) = preProject
-		xml\data-config.xml.txt = xml\data-config.xml.txt
-		xml\dependency.xml.txt = xml\dependency.xml.txt
-		xml\engineers.xml.txt = xml\engineers.xml.txt
-		xml\task.xml.txt = xml\task.xml.txt
+		xml\data-config.xml = xml\data-config.xml
+		xml\dependencys.xml = xml\dependencys.xml
+		xml\engineers.xml = xml\engineers.xml
+		xml\tasks.xml = xml\tasks.xml
 	EndProjectSection
 EndProject
 Global
@@ -55,6 +55,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EAE6214F-19D6-4F64-8803-3B96916A26FF} = {15AAA96A-3C98-48FF-AD51-C3CD79F0DAC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7386B6DB-CEE9-4EB1-866B-30B7553C566D}
