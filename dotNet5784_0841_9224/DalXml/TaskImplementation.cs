@@ -72,6 +72,7 @@ internal class TaskImplementation : ITask
         var taskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         Delete(item.Id);
         taskList.Add(item);
+        XMLTools.SaveListToXMLSerializer(taskList, s_tasks_xml);
     }
 
 }

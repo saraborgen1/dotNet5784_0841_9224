@@ -70,7 +70,7 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        Delete(DataSource.Engineers.FirstOrDefault(engineers => engineers.Id == item.Id).Id);
+        Delete(item.Id);
         DataSource.Engineers.Add(item);
         return;
     }

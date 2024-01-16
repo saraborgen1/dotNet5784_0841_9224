@@ -71,7 +71,7 @@ internal class DependencyImplementation : IDependency
     {
         if (DataSource.Dependencys.Find(d => d.Id == item.Id) == null) 
             throw new DalDoesNotExistException($"Dependency with ID={item.Id} does Not exist");
-        Delete((DataSource.Dependencys.FirstOrDefault(dependency => dependency.Id == item.Id)).Id);
+        Delete(item.Id);
         DataSource.Dependencys.Add(item);
         return;
     }

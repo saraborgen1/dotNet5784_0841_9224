@@ -61,7 +61,7 @@ internal class TaskImplementation : ITask
     /// <param name="item">A reference to an updated existing object of type Dependency</param>
     public void Update(Task item)
     {
-        Delete((DataSource.Tasks.FirstOrDefault(task => task.Id == item.Id)).Id);
+        Delete(item.Id);
         DataSource.Tasks.Add(item);
         return;
     }
