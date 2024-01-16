@@ -1,10 +1,10 @@
-﻿
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Xml.Linq;
+using static XMLTools;
 
 internal class DependencyImplementation : IDependency
 {
@@ -17,30 +17,33 @@ internal class DependencyImplementation : IDependency
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        var dependency = LoadListFromXMLElement(s_dependencys_xml).Descendants()
+ .FirstOrDefault(e => int.Parse(e.Element(nameof(Dependency.Id))!.Value) == id);
     }
+
+    public Dependency? Read(int id)
+   => Read(dependency => dependency.Id == id);
 
     public Dependency? Read(Func<Dependency, bool> filter)
-    {
-        throw new NotImplementedException();
-    }
+    => xelementToItem<Dependency>(LoadListFromXMLElement(s_dependencys_xml)); 
 
-    public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
-    {
+    //private Dependency getDependencyFromXElement(XElement element)
+    //    => new Dependency(int.Parse(element.Element("Id")!.Value), int.Parse(element.Element("DependentTask")!.Value), int.Parse(element.Element("DependentOnTask")!.Value));
 
-        return filter is null ?
-            XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements().Select(d => d)
-        : XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements().Where(filter);
-        //        : XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements().Select(d => d).Where(filter);
-        //students = (from p in studentRoot.Elements()
-        //            select new Student()
-        //            {
-        //                Id = Convert.ToInt32(p.Element("id").Value),
-        //                FirstName = p.Element("name").Element("firstName").Value,
-        //                LastName = p.Element("name").Element("lastName").Value
-        //            }
+    //public IEnumerable<Dependency> ReadAll(Func<Dependency, bool> filter = null)
+    //{
+    //    var elements = XMLTools.LoadListFromXMLElement(s_dependencys_xml).Elements();
 
-        public void Update(Dependency item)
+    //    return from element in elements
+    //           let dependency = getDependencyFromXElement(element)
+    //           where filter is null ? true : filter(dependency)
+    //           select dependency;
+    //}
+
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool> filter = null)
+        => xelementToItems<Dependency>(LoadListFromXMLElement(s_dependencys_xml));
+
+    public void Update(Dependency item)
     {
         throw new NotImplementedException();
     }

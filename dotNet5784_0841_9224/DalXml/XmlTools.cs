@@ -1,12 +1,65 @@
 ﻿namespace Dal;
 
 using DO;
+using System.ComponentModel;
+using System.Globalization;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
 static class XMLTools
 {
+    #region xmlConvertor
+
+    internal static XElement itemToXelement<Item>(Item item, string name) where Item : new()
+    {
+        IEnumerable<PropertyInfo> items = item!.GetType().GetProperties();
+
+        IEnumerable<XElement> xElements = from propInfo in items
+                                          select new XElement(propInfo.Name, propInfo.GetValue(item)!.ToString());
+       
+        return new XElement(name, xElements);
+    }
+
+    internal static Item xelementToItem<Item>(XElement xElement) where Item : new()
+    {
+        Item newItem = new Item();
+
+        IEnumerable<XElement> elements = xElement.Elements();
+
+        Dictionary<string, PropertyInfo> items = newItem.GetType().GetProperties().ToDictionary(k => k.Name, v => v);
+
+        foreach (var temp in elements)
+        { 
+            if (items.TryGetValue(temp.Name.LocalName, out var value))
+            {
+                value.SetValue(Convert.ChangeType(temp.Value, value.PropertyType),temp.Value);
+            }
+        }
+
+        return newItem;
+    }
+
+    internal static IEnumerable<Item> xelementToItems<Item>(XElement xElement) where Item : new()
+    =>    from element in xElement.Elements()
+               select xelementToItem<Item>(element);
+    #endregion
+
+
+    static IEnumerable<string> GetEnumDescriptions<TEnum>() where TEnum : struct, Enum
+    {
+        var enumType = typeof(TEnum);
+
+        IEnumerable<TEnum> enumValues = Enum.GetValues(enumType).Cast<TEnum>();
+
+        IEnumerable<string> descriptions = from enumValue in enumValues
+                                           let fieldInfo = enumType.GetField(enumValue.ToString())
+                                           let attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute)) as DescriptionAttribute
+                                           select attribute?.Description ?? enumValue.ToString();
+
+        return descriptions;
+    }
     const string s_xml_dir = @"..\xml\";
     static XMLTools()
     {
