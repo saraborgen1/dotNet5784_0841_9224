@@ -8,7 +8,8 @@ namespace DalTest
 {
     internal class Program
     {
-        static readonly IDal s_dal = new DalXml(); //stage 3
+        //static readonly IDal s_dal = new DalList(); //stage 2
+      static readonly IDal s_dal = new DalXml(); //stage 3
         /// <summary>
         /// A function that displays a main menu and captures the selection of the variable
         /// </summary>
@@ -17,11 +18,36 @@ namespace DalTest
         /// A function that displays a submenu for the entities and captures the user's selection.
         /// </summary>
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
+        private static void reset() 
+        {
+            IEnumerable<DO.Task?> tasks = s_dal.Task.ReadAll();
+            foreach (DO.Task item in tasks)
+            {
+                s_dal.Task.Delete(item.Id);
+            }
+            IEnumerable<DO.Dependency?> dependencys = s_dal.Dependency.ReadAll();
+            foreach (Dependency item in dependencys)
+            {
+                s_dal.Dependency.Delete(item.Id);
+            }
+            IEnumerable<DO.Engineer?> engineers = s_dal.Engineer.ReadAll();
+            foreach (Engineer item in engineers)
+            {
+                s_dal.Engineer.Delete(item.Id);
+            }
+        }
         /// <summary>
         /// Print main menu
         /// </summary>
         private static void menueM()
         {
+            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+            if (ans == "Y") //stage 3
+            {
+                reset();
+                Initialization.Do(s_dal); //stage 2
+            }
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor dependencies press 2\r\nFor the engineer press 3\r\nTo exit the main program press 0");
             return;  
         }
@@ -323,7 +349,7 @@ namespace DalTest
             try
             {
                 s_dal.Dependency.Delete(id);
-            }
+            }   
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
         /// <summary>
@@ -418,7 +444,7 @@ namespace DalTest
         {
             try
             {
-               Initialization.Do(s_dal); //stage 2
+             //  Initialization.Do(s_dal); //stage 2
                 Menue menue;
                 menueM();
                 string userInput = Console.ReadLine();

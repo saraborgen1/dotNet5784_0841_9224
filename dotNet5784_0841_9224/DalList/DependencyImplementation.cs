@@ -30,7 +30,7 @@ internal class DependencyImplementation : IDependency
         {
             throw new DalDoesNotExistException($"Dependency with ID={id} does Not exist");
         }
-        DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item => item.Id == id));
+        DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item => item.Id == id)!);
 
     }
     /// <summary>
