@@ -27,6 +27,7 @@ internal class TaskImplementation : ITask
     {
         if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
             throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
+
         DataSource.Tasks.Remove(DataSource.Tasks.FirstOrDefault(item => item.Id == id));
     }
     /// <summary>

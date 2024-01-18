@@ -1,7 +1,6 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
-using System.Security.Cryptography;
 
 public static class Initialization
 {

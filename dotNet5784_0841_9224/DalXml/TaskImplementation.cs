@@ -1,11 +1,5 @@
 ﻿namespace Dal;
-using DalApi;
-using DO;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 internal class TaskImplementation : ITask
 {
@@ -19,9 +13,9 @@ internal class TaskImplementation : ITask
     {
         int newId = Config.NextTaskId;
         DO.Task newTask = item with { Id = newId };
-        var taskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         taskList.Add(newTask);
-        XMLTools.SaveListToXMLSerializer(taskList, s_tasks_xml);
+       SaveListToXMLSerializer(taskList, s_tasks_xml);
         return newId;
     }
     /// <summary>
@@ -31,10 +25,10 @@ internal class TaskImplementation : ITask
     /// <exception cref="DalDoesNotExistException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
-        var taskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        var taskList =LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         if (taskList.RemoveAll(item => item.Id == id) == 0)
             throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
-        XMLTools.SaveListToXMLSerializer(taskList, s_tasks_xml);
+       SaveListToXMLSerializer(taskList, s_tasks_xml);
     }
     /// <summary>
     /// Returns an entity from the list that meets the condition
@@ -43,7 +37,7 @@ internal class TaskImplementation : ITask
     /// <returns>Returns an entity from the list that meets the condition</returns>
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
-        var taskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        var taskList =LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         return taskList.FirstOrDefault(filter);
     }
     /// <summary>
@@ -53,7 +47,7 @@ internal class TaskImplementation : ITask
     /// <returns>A collection of entities that meet the condition</returns>
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
     {
-        var taskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        var taskList =LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         if (filter != null)
         {
             return from item in taskList
@@ -69,10 +63,10 @@ internal class TaskImplementation : ITask
     /// <param name="item">A reference to an updated existing object of type Dependency</param>
     public void Update(DO.Task item)
     {
-        var taskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
+        var taskList =LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         Delete(item.Id);
         taskList.Add(item);
-        XMLTools.SaveListToXMLSerializer(taskList, s_tasks_xml);
+       SaveListToXMLSerializer(taskList, s_tasks_xml);
     }
 
 }

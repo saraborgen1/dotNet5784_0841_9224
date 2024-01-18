@@ -3,9 +3,7 @@
 using DO;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Reflection;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -29,11 +27,14 @@ static class XMLTools
 
         IEnumerable<XElement> elements = xElement.Elements().ToList();
         Dictionary<string, PropertyInfo> items = newItem.GetType().GetProperties().ToDictionary(k => k.Name, v => v);
-        foreach (var temp in elements)
+        foreach (var element in elements)
         { 
-            if (items.TryGetValue(temp.Name.LocalName, out var value))
+            if (items.TryGetValue(element.Name.LocalName, out var propertyInfo))
             {
-                value.SetValue(newItem,Convert.ChangeType(temp.Value, value.PropertyType));
+                var propertyType = propertyInfo.PropertyType;
+                var underlyingType = Nullable.GetUnderlyingType(propertyType);
+
+                propertyInfo.SetValue(newItem,Convert.ChangeType(element.Value, underlyingType ?? propertyType));
             }
         }
 
@@ -84,10 +85,10 @@ static class XMLTools
     #region XmlConfig
     public static int GetAndIncreaseNextId(string data_config_xml, string elemName)
     {
-        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        XElement root =LoadListFromXMLElement(data_config_xml);
         int nextId = root.ToIntNullable(elemName) ?? throw new FormatException($"can't convert id.  {data_config_xml}, {elemName}");
         root.Element(elemName)?.SetValue((nextId + 1).ToString());
-        XMLTools.SaveListToXMLElement(root, data_config_xml);
+       SaveListToXMLElement(root, data_config_xml);
         return nextId;
     }
 
