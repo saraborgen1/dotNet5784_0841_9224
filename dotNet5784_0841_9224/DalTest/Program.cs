@@ -1,8 +1,6 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-using System.Xml.Linq;
-using System.Xml.Serialization;
 
 
 namespace DalTest
