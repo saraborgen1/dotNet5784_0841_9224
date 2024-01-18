@@ -20,17 +20,17 @@ namespace DalTest
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
         private static void reset() 
         {
-            IEnumerable<DO.Task?> tasks = s_dal.Task.ReadAll();
+            IEnumerable<DO.Task> tasks = s_dal.Task.ReadAll();
             foreach (DO.Task item in tasks)
             {
                 s_dal.Task.Delete(item.Id);
             }
-            IEnumerable<DO.Dependency?> dependencys = s_dal.Dependency.ReadAll();
+            IEnumerable<DO.Dependency> dependencys = s_dal.Dependency.ReadAll();
             foreach (Dependency item in dependencys)
             {
                 s_dal.Dependency.Delete(item.Id);
             }
-            IEnumerable<DO.Engineer?> engineers = s_dal.Engineer.ReadAll();
+            IEnumerable<DO.Engineer> engineers = s_dal.Engineer.ReadAll();
             foreach (Engineer item in engineers)
             {
                 s_dal.Engineer.Delete(item.Id);

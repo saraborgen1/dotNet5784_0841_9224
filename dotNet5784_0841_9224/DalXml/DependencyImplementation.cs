@@ -51,7 +51,7 @@ internal class DependencyImplementation : IDependency
     //}
     public IEnumerable<Dependency> ReadAll(Func<Dependency, bool> filter = null)
     {
-       var listDependency= xelementToItems<Dependency>(LoadListFromXMLElement(s_dependencys_xml));
+       var listDependency= xelementToItems<Dependency>(LoadListFromXMLElement(s_dependencys_xml)).ToList();
         return from element in listDependency
                where filter is null ? true : filter(element)
                select element;

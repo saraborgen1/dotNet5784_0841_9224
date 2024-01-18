@@ -1,6 +1,7 @@
 ﻿namespace Dal;
 
 using DO;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
@@ -26,15 +27,13 @@ static class XMLTools
     {
         Item newItem = new Item();
 
-        IEnumerable<XElement> elements = xElement.Elements();
-
+        IEnumerable<XElement> elements = xElement.Elements().ToList();
         Dictionary<string, PropertyInfo> items = newItem.GetType().GetProperties().ToDictionary(k => k.Name, v => v);
-
         foreach (var temp in elements)
         { 
             if (items.TryGetValue(temp.Name.LocalName, out var value))
             {
-                value.SetValue(Convert.ChangeType(temp.Value, value.PropertyType),temp.Value);
+               value.SetValue(Convert.ChangeType(temp.Value, value.PropertyType),temp.Value);
             }
         }
 
