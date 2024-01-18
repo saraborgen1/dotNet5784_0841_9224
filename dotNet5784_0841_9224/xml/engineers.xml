@@ -1,3 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfEngineer>
+<ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Engineer>
+    <Id>339060209</Id>
+    <Name>Sara Borgen</Name>
+    <Email>sara.borgen@emailgame.com</Email>
+    <Level>Intermediate</Level>
+    <Cost>100</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>310712472</Id>
+    <Name>Naama Leah Radonsky</Name>
+    <Email>naama.radonsky@emailgame.com</Email>
+    <Level>Intermediate</Level>
+    <Cost>226</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>375532915</Id>
+    <Name>Ester Dray</Name>
+    <Email>ester.dray@emailgame.com</Email>
+    <Level>Advanced</Level>
+    <Cost>284</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>290922843</Id>
+    <Name>Ariela Levin</Name>
+    <Email>ariela.levin@emailgame.com</Email>
+    <Level>Expert</Level>
+    <Cost>74</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>305862838</Id>
+    <Name>Dina Klein</Name>
+    <Email>dina.klein@emailgame.com</Email>
+    <Level>Beginner</Level>
+    <Cost>209</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>208570343</Id>
+    <Name>Shira Israelof</Name>
+    <Email>shira.israelof@emailgame.com</Email>
+    <Level>Intermediate</Level>
+    <Cost>257</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>378285154</Id>
+    <Name>Dani Levi</Name>
+    <Email>dani.levi@emailgame.com</Email>
+    <Level>Intermediate</Level>
+    <Cost>121</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>123456789</Id>
+    <Name>Eliezer El</Name>
+    <Email>Eliezer@gmail.com</Email>
+    <Level>Intermediate</Level>
+    <Cost>300</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>987654321</Id>
+    <Name>Shira Kehalani</Name>
+    <Email>shira.ka017@gmail.com</Email>
+    <Level>Advanced</Level>
+    <Cost>301</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>654567898</Id>
+    <Name>Tamar Chayat</Name>
+    <Email>TAMARHAYAT1@gmail.com</Email>
+    <Level>Advanced</Level>
+    <Cost>301</Cost>
+  </Engineer>
 </ArrayOfEngineer>
