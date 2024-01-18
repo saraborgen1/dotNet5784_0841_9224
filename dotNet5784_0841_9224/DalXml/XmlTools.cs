@@ -33,7 +33,7 @@ static class XMLTools
         { 
             if (items.TryGetValue(temp.Name.LocalName, out var value))
             {
-               value.SetValue(newItem,Convert.ChangeType(temp.Value, value.PropertyType));
+                value.SetValue(newItem,Convert.ChangeType(temp.Value, value.PropertyType));
             }
         }
 
