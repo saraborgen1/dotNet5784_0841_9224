@@ -1,6 +1,7 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.Runtime.CompilerServices;
 
 public static class Initialization
 {
