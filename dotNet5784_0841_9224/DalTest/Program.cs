@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 
 namespace DalTest
@@ -35,7 +36,6 @@ namespace DalTest
 
             foreach (Engineer item in engineers)
                 s_dal.Engineer.Delete(item.Id);
-
         }
         /// <summary>
         /// Print main menu
