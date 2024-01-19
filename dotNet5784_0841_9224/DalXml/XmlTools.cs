@@ -4,14 +4,19 @@ using DO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
 public static class XMLTools
 {
     #region xmlConvertor
-
+    /// <summary>
+    /// Converts item to xelement
+    /// </summary>
+    /// <typeparam name="Item">the type item that will be converted</typeparam>
+    /// <param name="item">the item that will be converted<</param>
+    /// <param name="name">The name of the item type</param>
+    /// <returns>xelement of the item</returns>
     internal static XElement itemToXelement<Item>(Item item, string name) where Item : new()
     {
         IEnumerable<PropertyInfo> items = item!.GetType().GetProperties();
@@ -22,6 +27,12 @@ public static class XMLTools
         return new XElement(name, xElements);
     }
 
+    /// <summary>
+    /// Converts xelement to item
+    /// </summary>
+    /// <typeparam name="Item">The type of the item</typeparam>
+    /// <param name="xElement">the xelement that will be converted </param>
+    /// <returns>converted xelement in item type</returns>
     internal static Item xelementToItem<Item>(XElement xElement) where Item : new()
     {
         Item newItem = new Item();
@@ -42,6 +53,12 @@ public static class XMLTools
         return newItem;
     }
 
+    /// <summary>
+    /// converts  xelemnt to a collection of items
+    /// </summary>
+    /// <typeparam name="Item">the generic type</typeparam>
+    /// <param name="xElement">the xelement that will be converted</param>
+    /// <returns>a collection of the converted elements of the xelement in item type</returns>
     internal static IEnumerable<Item> xelementToItems<Item>(XElement xElement) where Item : new()
     =>    from element in xElement.Elements()
                select xelementToItem<Item>(element);

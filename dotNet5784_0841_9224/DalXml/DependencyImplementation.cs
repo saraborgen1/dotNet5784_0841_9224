@@ -25,6 +25,7 @@ internal class DependencyImplementation : IDependency
 
         return newId;
     }
+
     /// <summary>
     /// Deletion of an existing object with a certain ID, from the list of objects of type dependency
     /// </summary>
@@ -41,6 +42,7 @@ internal class DependencyImplementation : IDependency
       
         SaveListToXMLElement(dependencysRootElem, s_dependencys_xml);
     }
+
     /// <summary>
     /// Since it is very useful, it always receives an id and returns a suitable object
     /// </summary>
@@ -48,6 +50,7 @@ internal class DependencyImplementation : IDependency
     /// <returns>suitable object</returns>
     public Dependency? Read(int id)
    => Read(dependency => dependency.Id == id);
+
     /// <summary>
     /// Accepts a condition and returns an object that meets the condition
     /// </summary>
@@ -55,6 +58,7 @@ internal class DependencyImplementation : IDependency
     /// <returns>suitable object</returns>
     public Dependency? Read(Func<Dependency, bool> filter)
      => xelementToItems<Dependency>(LoadListFromXMLElement(s_dependencys_xml)).FirstOrDefault(filter);
+
     /// <summary>
     /// Accepts a condition and returns a collection of objectt that meet the condition
     /// </summary>
@@ -67,6 +71,7 @@ internal class DependencyImplementation : IDependency
                where filter is null ? true : filter(element)
                select element;
     }
+
     /// <summary>
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with 
     /// a new object with the same ID number and updated fields.

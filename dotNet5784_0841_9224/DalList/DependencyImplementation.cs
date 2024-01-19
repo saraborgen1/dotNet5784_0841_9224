@@ -19,6 +19,7 @@ internal class DependencyImplementation : IDependency
 
         return newId;
     }
+
     /// <summary>
     /// Deletion of an existing object with a certain ID, from the list of objects of type Dependency
     /// </summary>
