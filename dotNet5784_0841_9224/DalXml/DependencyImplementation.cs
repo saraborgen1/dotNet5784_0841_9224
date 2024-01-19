@@ -7,13 +7,12 @@ internal class DependencyImplementation : IDependency
     readonly string s_dependencys_xml = "dependencys";
 
     private const string _entityName = nameof(Dependency);
-
     public int Create(Dependency item)
     {
         int newId = Config.NextDependencyId;
         Dependency newDependency = item with { Id = newId };
 
-        XElement dependencysRootElem =LoadListFromXMLElement(s_dependencys_xml);
+        XElement dependencysRootElem = LoadListFromXMLElement(s_dependencys_xml);
 
         XElement dependency = itemToXelement(newDependency, _entityName);
         dependencysRootElem.Add( dependency);
