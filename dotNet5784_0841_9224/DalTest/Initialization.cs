@@ -1,8 +1,6 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
-using System.Runtime.CompilerServices;
-
 public static class Initialization
 {
     /// <summary>
@@ -16,19 +14,20 @@ public static class Initialization
         createDependencys();
         createEngineers();
     }
+
     /// <summary>
     /// Generating random numbers while filling in the object values
     /// </summary>
     private static readonly Random s_rand = new();
+
     /// <summary>
     /// An operation that initializes Task type entities with data
     /// </summary>
-   
     private static void createTasks()
     {
         string[] TaskDescriptions =
-         {
-         "nothing",
+        {
+        "nothing",
         "Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.",
         "Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.",
         "Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.",
@@ -49,12 +48,11 @@ public static class Initialization
         "Home security system setup involves installing and configuring security systems to protect the building and its occupants.",
         "Smart home integration includes incorporating advanced technologies to enhance automation and connectivity within the building.",
         "Final inspection is the last step, involving a thorough examination of the completed building to ensure quality, safety, and adherence to standards."
-
         };
 
         string[] taskAliases =
         {
-         "nothing",
+        "nothing",
         "Layout",
         "Frame",
         "Wire",
@@ -76,8 +74,9 @@ public static class Initialization
         "Automate",
         "Inspect"
         };
+
         string[] TaskDeliverables =
-         {
+        {
         "nothing",
         "Architectural Planning",
         "Structural Framing",
@@ -99,23 +98,25 @@ public static class Initialization
         "Home Security System Setup",
         "Smart Home Integration",
         "Final Inspection"
-         };
-        for (int i = 1; i < 21; i++) 
+        };
+
+        for (int i = 1; i < 21; i++)
         {
             DateTime start = new DateTime(2023, 1, i);
             int range = (DateTime.Today - start).Days;
-            DateTime _createdAtDate = start.AddDays(i*10);
-            DateTime _StartDate= _createdAtDate.AddDays(i*10 );
-            DateTime _ScheduledDate = _createdAtDate.AddDays(i*10);
+            DateTime _createdAtDate = start.AddDays(i * 10);
+            DateTime _StartDate = _createdAtDate.AddDays(i * 10);
+            DateTime _ScheduledDate = _createdAtDate.AddDays(i * 10);
             DateTime _DeadlineDate = _ScheduledDate.AddDays(i + 50);
             DateTime _CompleteDate = _ScheduledDate.AddDays(2);
             TimeSpan _requiredEffortTime = _CompleteDate - _StartDate;
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _engineerld = (EngineerExperience)_numforenum;
-            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i],false,_createdAtDate,null,null,null,null, _requiredEffortTime, TaskDeliverables[i],null,null, _engineerld);
+            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i], false, _createdAtDate, null, null, null, null, _requiredEffortTime, TaskDeliverables[i], null, null, _engineerld);
             s_dal!.Task.Create(newTask); //stage 2
         }
     }
+
     /// <summary>
     /// An operation that initializes entities of type Engineer with data
     /// </summary>
@@ -126,6 +127,7 @@ public static class Initialization
         "Sara Borgen", "Naama Leah Radonsky","Ester Dray",
         "Ariela Levin", "Dina Klein", "Shira Israelof","Dani Levi"
         };
+
         string[] EngineerEmails =
         {
             "sara.borgen@emailgame.com",
@@ -141,8 +143,8 @@ public static class Initialization
         {
             int _id;
             do
-            _id = s_rand.Next(200000000, 400000001);
-            while (s_dal!.Engineer.Read(item => item.Id == _id)!= null);
+                _id = s_rand.Next(200000000, 400000001);
+            while (s_dal!.Engineer.Read(item => item.Id == _id) != null);
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _level = (EngineerExperience)_numforenum;
             int _cost;
@@ -165,21 +167,23 @@ public static class Initialization
     /// An operation that initializes entities of type dependency with data
     /// </summary>
     private static void createDependencys()
-{
-    for (int i=2; i < 20; i++)
     {
-        Dependency newDependency = new Dependency(0,i,i-1);
+        for (int i = 2; i < 20; i++)
+        {
+            Dependency newDependency = new Dependency(0, i, i - 1);
             s_dal!.Dependency.Create(newDependency);
-    }
-    for (int i = 4; i < 20; i++)
-    {
-        Dependency newDependency = new Dependency(0, i, 2);
+        }
+
+        for (int i = 4; i < 20; i++)
+        {
+            Dependency newDependency = new Dependency(0, i, 2);
             s_dal!.Dependency.Create(newDependency);
-    }
-    for (int i = 3; i < 20; i++)
-    {
-        Dependency newDependency = new Dependency(0, i, 2);
+        }
+
+        for (int i = 3; i < 20; i++)
+        {
+            Dependency newDependency = new Dependency(0, i, 2);
             s_dal!.Dependency.Create(newDependency);
+        }
     }
-}
 }

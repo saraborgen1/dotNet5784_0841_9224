@@ -1,14 +1,13 @@
 ﻿namespace Dal;
-
 internal class EngineerImplementation : IEngineer
 {
     readonly string s_engineers_xml = "engineers";
-   
+
     /// <summary>
     /// Adding a new object  of type Engineer to a database, (to the list of objects of type Engineer).
     /// </summary>
     /// <param name="item">A reference to an existing object of the Engineer type. The object was created in an upper layer and its fields are already filled with normal values.</param>
-    /// <returns></returns>
+    /// <returns>Returns the id of the newly added object</returns>
     /// <exception cref="DalAlreadyExistException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
@@ -47,8 +46,8 @@ internal class EngineerImplementation : IEngineer
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
         return listEngineer.FirstOrDefault(filter);
-
     }
+    
     /// <summary>
     /// Returns an entity from the list that meets the condition
     /// </summary>
@@ -59,11 +58,10 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
         if (filter != null)
-        {
             return from item in listEngineer
                    where filter(item)
                    select item;
-        }
+       
 
         return listEngineer.ToList();
     }
