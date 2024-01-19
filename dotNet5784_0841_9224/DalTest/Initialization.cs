@@ -7,6 +7,11 @@ public static class Initialization
     /// access variable to  entitys
     /// </summary>
     private static IDal? s_dal;
+    /// <summary>
+    /// initial data
+    /// </summary>
+    /// <param name="dal">variable according to which we will realize the entities</param>
+    /// <exception cref="NullReferenceException"></exception>
     public static void Do(IDal dal)
     {
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
