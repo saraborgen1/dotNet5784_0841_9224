@@ -83,7 +83,7 @@ public static class XMLTools
 
     #endregion
 
-    #region XmlConfi
+    #region XmlConfig
     public static int GetAndIncreaseNextId(string data_config_xml, string elemName)
     {
         XElement root = LoadListFromXMLElement(data_config_xml);
