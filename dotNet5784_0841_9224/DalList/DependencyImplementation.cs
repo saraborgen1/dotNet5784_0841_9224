@@ -16,6 +16,7 @@ internal class DependencyImplementation : IDependency
         int newId = DataSource.Config.NextDependencyId;
         Dependency newDependency = item with { Id = newId };
         DataSource.Dependencys.Add(newDependency);
+
         return newId;
     }
     /// <summary>
@@ -26,11 +27,9 @@ internal class DependencyImplementation : IDependency
     public void Delete(int id)
     {
         if (DataSource.Dependencys.FirstOrDefault(item => item.Id == id) == null)
-        {
             throw new DalDoesNotExistException($"Dependency with ID={id} does Not exist");
-        }
-        DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item => item.Id == id)!);
 
+        DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item => item.Id == id)!);
     }
     /// <summary>
     /// Returns an entity from the list that meets the condition
@@ -49,16 +48,13 @@ internal class DependencyImplementation : IDependency
     public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
     {
         if (filter != null)
-        {
             return from item in DataSource.Dependencys
                    where filter(item)
                    select item;
-        }
+
         return from item in DataSource.Dependencys
                select item;
     }
- 
-
 
     /// <summary>
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with 
@@ -70,8 +66,8 @@ internal class DependencyImplementation : IDependency
     {
         if (DataSource.Dependencys.Find(d => d.Id == item.Id) == null) 
             throw new DalDoesNotExistException($"Dependency with ID={item.Id} does Not exist");
+
         Delete(item.Id);
         DataSource.Dependencys.Add(item);
-        return;
     }
 }

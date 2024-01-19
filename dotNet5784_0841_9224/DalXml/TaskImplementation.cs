@@ -60,7 +60,7 @@ internal class TaskImplementation : ITask
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with 
     /// a new object with the same ID number and updated fields.
     /// </summary>
-    /// <param name="item">A reference to an updated existing object of type Dependency</param>
+    /// <param name="item">A reference to an updated existing object of type Task</param>
     public void Update(DO.Task item)
     {
         var taskList =LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);

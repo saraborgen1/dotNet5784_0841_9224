@@ -15,10 +15,10 @@ internal class EngineerImplementation : IEngineer
     {
 
         if (DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id) != null)
-        {
             throw new DalAlreadyExistException($"Engineer with ID={item.Id} already exist");
-        }
+
         DataSource.Engineers.Add(item);
+
         return item.Id;
     }
     /// <summary>
@@ -29,9 +29,8 @@ internal class EngineerImplementation : IEngineer
     public void Delete(int id)
     {
         if (DataSource.Engineers.FirstOrDefault(item => item.Id == id) == null)
-        {
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
-        }
+
         DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item => item.Id == id)!);
     }
     /// <summary>
@@ -40,9 +39,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="filter">condition</param>
     /// <returns>Returns an entity from the list that meets the condition</returns>
     public Engineer? Read(Func<Engineer, bool> filter)
-    {
-        return DataSource.Engineers.FirstOrDefault(filter);
-    }
+        => DataSource.Engineers.FirstOrDefault(filter);
     /// <summary>
     /// Returns an entity from the list that meets the condition
     /// </summary>
@@ -51,11 +48,10 @@ internal class EngineerImplementation : IEngineer
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
         if (filter != null)
-        {
             return from item in DataSource.Engineers
                    where filter(item)
                    select item;
-        }
+
         return from item in DataSource.Engineers
                select item;
     }
@@ -65,14 +61,10 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item">A reference to an updated existing object of type Engineer.</param>
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
-
-
-
     public void Update(Engineer item)
     {
         Delete(item.Id);
         DataSource.Engineers.Add(item);
-        return;
     }
 }
 
