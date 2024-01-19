@@ -1,7 +1,8 @@
 ﻿using Dal;
 using DalApi;
 using DO;
-
+using System.Xml.Linq;
+using static Dal.XMLTools;
 
 namespace DalTest
 {
@@ -17,6 +18,13 @@ namespace DalTest
         /// A function that displays a submenu for the entities and captures the user's selection.
         /// </summary>
         enum SubMenue { Exit,Create,Read,ReadAll,Update,Delete};
+
+        private static void getAndIncreaseNextId(string elemName)
+        {
+            XElement root = LoadListFromXMLElement("data-config");
+            root.Element(elemName)?.SetValue(1);
+            SaveListToXMLElement(root, "data-config");
+        }
 
         private static void reset() 
         {
@@ -34,6 +42,9 @@ namespace DalTest
 
             foreach (Engineer item in engineers)
                 s_dal.Engineer.Delete(item.Id);
+
+            getAndIncreaseNextId("NextTaskId");
+            getAndIncreaseNextId("NextDependencyId");
         }
         /// <summary>
         /// Print main menu
@@ -90,6 +101,10 @@ namespace DalTest
                 }
             }
         }
+
+        private void printList<Item>(IEnumerable<Item> items)
+            => Console.WriteLine(string.Join(Environment.NewLine, items));
+
         /// <summary>
         /// Submenu activation for a dependency entity
         /// </summary>
@@ -207,7 +222,7 @@ namespace DalTest
             IEnumerable<DO.Task?> tasks = s_dal.Task.ReadAll();
             foreach (DO.Task item in tasks)
             {
-                Console.WriteLine(item.ToString());
+                Console.WriteLine(item);
             }
         }
         /// <summary>
@@ -398,6 +413,7 @@ namespace DalTest
         {
             Console.WriteLine("Enter Id");
             int id = int.Parse(Console.ReadLine());
+
             Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
             Console.WriteLine(engineer.ToString());
             

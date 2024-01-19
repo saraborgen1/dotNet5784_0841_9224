@@ -4,10 +4,11 @@ using DO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-static class XMLTools
+public static class XMLTools
 {
     #region xmlConvertor
 
@@ -82,13 +83,13 @@ static class XMLTools
 
     #endregion
 
-    #region XmlConfig
+    #region XmlConfi
     public static int GetAndIncreaseNextId(string data_config_xml, string elemName)
     {
-        XElement root =LoadListFromXMLElement(data_config_xml);
+        XElement root = LoadListFromXMLElement(data_config_xml);
         int nextId = root.ToIntNullable(elemName) ?? throw new FormatException($"can't convert id.  {data_config_xml}, {elemName}");
         root.Element(elemName)?.SetValue((nextId + 1).ToString());
-       SaveListToXMLElement(root, data_config_xml);
+        SaveListToXMLElement(root, data_config_xml);
         return nextId;
     }
 
