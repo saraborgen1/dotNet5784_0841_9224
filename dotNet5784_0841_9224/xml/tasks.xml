@@ -28,7 +28,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Structural Framing</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>3</Id>
@@ -43,7 +43,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Electrical Wiring</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>4</Id>
@@ -58,7 +58,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Plumbing Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>5</Id>
@@ -73,7 +73,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>HVAC Systems Setup</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>6</Id>
@@ -88,7 +88,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Drywall Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>7</Id>
@@ -103,7 +103,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Flooring Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>8</Id>
@@ -118,7 +118,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Roofing Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>9</Id>
@@ -148,7 +148,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Interior Painting</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>11</Id>
@@ -163,7 +163,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Window Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>12</Id>
@@ -178,7 +178,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Door Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>13</Id>
@@ -193,7 +193,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Cabinet Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>14</Id>
@@ -208,7 +208,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Appliance Setup</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>15</Id>
@@ -223,7 +223,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Landscaping Design</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>16</Id>
@@ -238,7 +238,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Fence Installation</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>17</Id>
@@ -268,7 +268,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Home Security System Setup</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>19</Id>
@@ -283,7 +283,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Smart Home Integration</Deliverables>
     <Engineerld xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>20</Id>
