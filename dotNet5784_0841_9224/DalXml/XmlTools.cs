@@ -1,5 +1,4 @@
 ﻿namespace Dal;
-
 using DO;
 using System.Collections.Generic;
 using System.ComponentModel;
