@@ -53,7 +53,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="filter">condition</param>
     /// <returns>Returns an entity from the list that meets the condition</returns>
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool> filter = null!)
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 

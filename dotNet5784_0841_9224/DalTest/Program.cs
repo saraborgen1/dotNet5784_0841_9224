@@ -8,7 +8,7 @@ namespace DalTest
 {
     internal class Program
     {
-        //static readonly IDal s_dal = new DalList(); //stage 2
+       // static readonly IDal s_dal = new DalList(); //stage 2
         static readonly IDal s_dal = new DalXml(); //stage 3
 
         /// <summary>
@@ -37,17 +37,17 @@ namespace DalTest
         /// </summary>
         private static void reset()
         {
-            IEnumerable<DO.Task> tasks = s_dal.Task.ReadAll();
+            IEnumerable<DO.Task> tasks = s_dal.Task.ReadAll().ToList();
 
             foreach (DO.Task item in tasks)
                 s_dal.Task.Delete(item.Id);
 
-            IEnumerable<DO.Dependency> dependencys = s_dal.Dependency.ReadAll();
+            IEnumerable<DO.Dependency> dependencys = s_dal.Dependency.ReadAll().ToList();
 
             foreach (Dependency item in dependencys)
                 s_dal.Dependency.Delete(item.Id);
 
-            IEnumerable<DO.Engineer> engineers = s_dal.Engineer.ReadAll();
+            IEnumerable<DO.Engineer> engineers = s_dal.Engineer.ReadAll().ToList();
 
             foreach (Engineer item in engineers)
                 s_dal.Engineer.Delete(item.Id);
@@ -114,7 +114,7 @@ namespace DalTest
             }
         }
 
-        
+
         //private void printList<Item>(IEnumerable<Item> items)
         //    => Console.WriteLine(string.Join(Environment.NewLine, items));
 
@@ -271,19 +271,19 @@ namespace DalTest
 
             Console.WriteLine("Enter alies");
             string alies = Console.ReadLine();
-            if (alies == null) 
-                alies = task.Ailas; 
+            if (alies == null)
+                alies = task.Ailas;
 
             Console.WriteLine("Enter description");
             string description = Console.ReadLine();
-             if (description == null)
-                description = task.Description; 
+            if (description == null)
+                description = task.Description;
 
             Console.WriteLine("Enter milestone");
             string tempMilesone = Console.ReadLine();
             bool mileston = (tempMilesone == "true") ? true : false;
-            if (tempMilesone == null) 
-                mileston = task.IsMilestone; 
+            if (tempMilesone == null)
+                mileston = task.IsMilestone;
 
             Console.WriteLine("Enter task creation date");
             DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
@@ -387,7 +387,7 @@ namespace DalTest
             int? dependentOnTask = int.Parse(Console.ReadLine());
             if (dependentTask == 0) { dependentTask = dependency.DependentTask; }
             if (dependentOnTask == 0) { dependentOnTask = dependency.DependentOnTask; }
-            Dependency dependency2 = new Dependency(0, dependentTask, dependentOnTask);
+            Dependency dependency2 = new Dependency(id, dependentTask, dependentOnTask);
             try
             {
                 s_dal.Dependency.Update(dependency2);

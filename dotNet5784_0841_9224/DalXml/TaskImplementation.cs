@@ -51,7 +51,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="filter">some condition</param>
     /// <returns>A collection of entities that meet the condition</returns>
-    public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null)
+    public IEnumerable<DO.Task> ReadAll(Func<DO.Task, bool> filter = null!)
     {
         var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
