@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-internal class Enums
+public class Enums
 {
     public enum EngineerExperience
     {

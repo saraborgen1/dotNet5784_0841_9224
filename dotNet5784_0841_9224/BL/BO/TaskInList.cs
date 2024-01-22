@@ -10,5 +10,5 @@ public class TaskInList
     public int Id { get; init; }
     public string? Alias { get; set; }
     public string? Description { get; set; }
-    public BO.Status Status { get; set; }
+    public BO.Enums.Status Status { get; set; }
 }
