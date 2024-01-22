@@ -15,7 +15,8 @@ internal class EngineerImplementation : IEngineer
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
-        if (listEngineer.Exists(lec => lec?.Id == item.Id))
+
+        if (listEngineer.Exists(lec => lec?.Id == item.Id && lec.Active))
             throw new DalAlreadyExistException($"Engineer with ID={item.Id} already exist");
 
         listEngineer.Add(item);
@@ -88,5 +89,17 @@ internal class EngineerImplementation : IEngineer
         if (listEngineer.RemoveAll(p => p.Id == item.Id) == 0)
             throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         Create(item);
+    }
+    /// <summary>
+    /// print all deleted engineer
+    /// </summary>
+    /// <returns> deleted engineer collection</returns>
+    public IEnumerable<Engineer> ReadAllDelete()
+    {
+        var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
+
+        return from item in listEngineer
+               where !item.Active
+               select item;
     }
 }

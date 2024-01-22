@@ -28,7 +28,7 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
-        if (DataSource.Engineers.FirstOrDefault(item => item.Id == id) == null)
+        if (DataSource.Engineers.FirstOrDefault(item => item.Id == id && item.Active) == null)
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
 
         DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item => item.Id == id)!);
@@ -39,7 +39,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="filter">condition</param>
     /// <returns>Returns an entity from the list that meets the condition</returns>
     public Engineer? Read(Func<Engineer, bool> filter)
-        =>  (ReadAll(item=>item.Active==true)).FirstOrDefault(filter);
+        => (ReadAll(item => item.Active == true)).FirstOrDefault(filter);
     /// <summary>
     /// Returns an entity from the list that meets the condition
     /// </summary>
@@ -63,9 +63,19 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
     public void Update(Engineer item)
     {
-        if (DataSource.Engineers.RemoveAll(p => p.Id ==item.Id) == 0)
+        if (DataSource.Engineers.RemoveAll(p => p.Id == item.Id) == 0)
             throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         DataSource.Engineers.Add(item);
+    }
+    /// <summary>
+    /// print all deleted engineer
+    /// </summary>
+    /// <returns> deleted engineer collection</returns>
+    public IEnumerable<Engineer> ReadAllDelete()
+    {
+        return from item in DataSource.Engineers
+               where !item.Active
+               select item;
     }
 }
 

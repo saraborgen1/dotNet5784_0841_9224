@@ -19,7 +19,7 @@ namespace DalTest
         /// <summary>
         /// A function that displays a submenu for the entities and captures the user's selection.
         /// </summary>
-        enum SubMenue { Exit, Create, Read, ReadAll, Update, Delete };
+        enum SubMenue { Exit, Create, Read, ReadAll, Update, Delete,ReadDeleted };
 
         /// <summary>
         /// Reset the running number
@@ -79,6 +79,10 @@ namespace DalTest
         private static void subMenueM()
         {
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo delete an existing object from the list, press 5");
+        }
+        private static void subMenueMEngineer()
+        {
+            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo update the data of an existing object, press 4\r\nTo display the list of all the deletd objects of the entity type press 5\r\nTo delete an existing object from the list, press 6");
         }
 
         /// <summary>
@@ -157,7 +161,7 @@ namespace DalTest
         private static void engineerCase()
         {
             SubMenue subMenue;
-            subMenueM();
+            subMenueMEngineer();
             string temp = Console.ReadLine();
 
             if (Enum.TryParse(temp, out subMenue) && subMenue != SubMenue.Exit)
@@ -178,6 +182,9 @@ namespace DalTest
                         break;
                     case SubMenue.Delete:
                         deleteEngineerCase();
+                        break;
+                    case SubMenue.ReadDeleted:
+                        readAllDeletedEngineerCase();
                         break;
                     default:
                         break;
@@ -447,6 +454,18 @@ namespace DalTest
                 Console.WriteLine(item.ToString());
             }
         }
+        /// <summary>
+        /// A function that calls a print function for a list of existing engineers with all the data in it
+        /// </summary>
+        private static void readAllDeletedEngineerCase()
+        {
+            IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAllDelete();
+            foreach (Engineer item in engineers)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
         /// <summary>
         /// A function that calls a function to update data for an existing engineer. If the user entered a null variable the function will leave the previous value of the engineer
         /// </summary>
