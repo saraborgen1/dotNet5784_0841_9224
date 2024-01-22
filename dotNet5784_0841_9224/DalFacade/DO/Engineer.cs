@@ -7,16 +7,18 @@
 /// <param name="Email">Engineer's personal email address</param>
 /// <param name="Level">The level of the engineer in the project</param>
 /// <param name="Cost">The cost of the engineer for an hour of work</param>
+/// <param name="Active">If the engeneer is active</param>
 public record Engineer
 (
     int Id,
     string? Name = null,
     string? Email = null,
     EngineerExperience? Level= EngineerExperience.Beginner,
-    double? Cost = null,
-    bool active=true
+    double? Cost = null
+
 )
 {
+    public bool Active { get; set; } = true;
     //No parameter constructor was defined as it is autosettly defined
 
     /// <summary>

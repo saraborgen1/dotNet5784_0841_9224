@@ -1,4 +1,6 @@
-﻿namespace Dal;
+﻿using System.Diagnostics;
+
+namespace Dal;
 internal class EngineerImplementation : IEngineer
 {
     readonly string s_engineers_xml = "engineers";
@@ -34,9 +36,17 @@ internal class EngineerImplementation : IEngineer
         if ((listEngineer.FirstOrDefault(p => p.Id == id))==null)
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
 
-        var newListEngineer = listEngineer.Select(engineer => engineer.Id == id?
-        Engineer(engineer) with { active = false } : engineer) .ToList();
-        SaveListToXMLSerializer(listEngineer, s_engineers_xml);
+        var newListEngineer = listEngineer.Select(item =>
+        {
+            if (item.Id == id)
+            {
+                item.Active = false;
+                return item;
+            }
+            else
+                return item;
+        }) .ToList();
+        SaveListToXMLSerializer(newListEngineer, s_engineers_xml);
     }
 
     /// <summary>
@@ -47,7 +57,7 @@ internal class EngineerImplementation : IEngineer
     public Engineer? Read(Func<Engineer, bool> filter)
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
-        return (ReadAll(item=>item.active==true)).FirstOrDefault(filter);
+        return (ReadAll(item=>item.Active==true)).FirstOrDefault(filter);
     }
     
     /// <summary>
@@ -61,7 +71,7 @@ internal class EngineerImplementation : IEngineer
 
         if (filter != null)
             return from item in listEngineer
-                   where filter(item) && item.active
+                   where filter(item) && item.Active
                    select item;
        
         return listEngineer.ToList();
@@ -73,7 +83,10 @@ internal class EngineerImplementation : IEngineer
     /// <param name="item">A reference to an updated existing object of type Engineer</param>
     public void Update(Engineer item)
     {
-        Delete(item.Id);
+        var listEngineer = LoadListFromXMLSerializer<DO.Task>(s_engineers_xml);
+
+        if (listEngineer.RemoveAll(p => p.Id == item.Id) == 0)
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         Create(item);
     }
 }

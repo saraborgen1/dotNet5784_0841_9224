@@ -39,7 +39,7 @@ internal class EngineerImplementation : IEngineer
     /// <param name="filter">condition</param>
     /// <returns>Returns an entity from the list that meets the condition</returns>
     public Engineer? Read(Func<Engineer, bool> filter)
-        => DataSource.Engineers.FirstOrDefault(filter);
+        =>  (ReadAll(item=>item.Active==true)).FirstOrDefault(filter);
     /// <summary>
     /// Returns an entity from the list that meets the condition
     /// </summary>
@@ -49,7 +49,7 @@ internal class EngineerImplementation : IEngineer
     {
         if (filter != null)
             return from item in DataSource.Engineers
-                   where filter(item)
+                   where filter(item) && item.Active
                    select item;
 
         return from item in DataSource.Engineers
@@ -63,7 +63,8 @@ internal class EngineerImplementation : IEngineer
     /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
     public void Update(Engineer item)
     {
-        Delete(item.Id);
+        if (DataSource.Engineers.RemoveAll(p => p.Id ==item.Id) == 0)
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
         DataSource.Engineers.Add(item);
     }
 }
