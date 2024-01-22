@@ -72,7 +72,7 @@ internal class EngineerImplementation : IEngineer
 
         if (filter != null)
             return from item in listEngineer
-                   where filter(item) && item.Active
+                   where (item.Active == true) && filter(item) 
                    select item;
        
         return listEngineer.ToList();
