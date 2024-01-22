@@ -606,7 +606,7 @@
     <Email>naama.radonsky@emailgame.com</Email>
     <Level>Advanced</Level>
     <Cost>194</Cost>
-    <Active>true</Active>
+    <Active>false</Active>
   </Engineer>
   <Engineer>
     <Id>303077152</Id>
