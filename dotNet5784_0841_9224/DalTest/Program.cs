@@ -225,10 +225,10 @@ namespace DalTest
             string remarks = Console.ReadLine();
 
             Console.WriteLine("Enter the engineer ID assigned to the task");
-            int engineerID = int.Parse(Console.ReadLine());
+            int.TryParse(Console.ReadLine(),out int engineerID );
 
             Console.WriteLine("Enter numer of the difficulty level of the task");
-            int difficultyNumber = int.Parse(Console.ReadLine());
+            int.TryParse(Console.ReadLine(),out int difficultyNumber );
 
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
 

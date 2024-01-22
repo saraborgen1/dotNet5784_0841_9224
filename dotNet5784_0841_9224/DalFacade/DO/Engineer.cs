@@ -13,7 +13,8 @@ public record Engineer
     string? Name = null,
     string? Email = null,
     EngineerExperience? Level= EngineerExperience.Beginner,
-    double? Cost = null
+    double? Cost = null,
+    bool active=true
 )
 {
     //No parameter constructor was defined as it is autosettly defined

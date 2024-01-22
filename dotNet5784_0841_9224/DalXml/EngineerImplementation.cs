@@ -31,9 +31,10 @@ internal class EngineerImplementation : IEngineer
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
-        if (listEngineer.RemoveAll(p => p?.Id == id) == 0)
+        if ((listEngineer.FirstOrDefault(p => p.Id == id))==null)
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
 
+        var newListEngineer = listEngineer.Select({if(item=>) });
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
     }
 
@@ -45,7 +46,7 @@ internal class EngineerImplementation : IEngineer
     public Engineer? Read(Func<Engineer, bool> filter)
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
-        return listEngineer.FirstOrDefault(filter);
+        return (ReadAll(item=>item.active==true)).FirstOrDefault(filter);
     }
     
     /// <summary>
@@ -59,10 +60,9 @@ internal class EngineerImplementation : IEngineer
 
         if (filter != null)
             return from item in listEngineer
-                   where filter(item)
+                   where filter(item) && item.active
                    select item;
        
-
         return listEngineer.ToList();
     }
 
