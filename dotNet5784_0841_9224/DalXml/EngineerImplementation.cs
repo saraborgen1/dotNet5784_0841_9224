@@ -35,7 +35,7 @@ internal class EngineerImplementation : IEngineer
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
 
         var newListEngineer = listEngineer.Select(engineer => engineer.Id == id?
-        new Engineer(engineer) with { active = false } : engineer) .ToList();
+        Engineer(engineer) with { active = false } : engineer) .ToList();
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
     }
 
