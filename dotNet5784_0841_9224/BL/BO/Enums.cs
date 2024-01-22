@@ -10,4 +10,12 @@ internal class Enums
         Advanced,
         Expert
     }
+    public enum Status
+    {
+        Unscheduled, 
+        Scheduled, 
+        OnTrack, 
+        InJeopardy, 
+        Done
+    }
 }
