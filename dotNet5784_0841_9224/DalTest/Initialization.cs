@@ -12,9 +12,12 @@ public static class Initialization
     /// </summary>
     /// <param name="dal">variable according to which we will realize the entities</param>
     /// <exception cref="NullReferenceException"></exception>
-    public static void Do(IDal dal)
+    /// 
+    //public static void Do(IDal dal) //stage 2
+    public static void Do() //stage 4
     {
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = Factory.Get; //stage 4
         createTasks();
         createDependencys();
         createEngineers();
