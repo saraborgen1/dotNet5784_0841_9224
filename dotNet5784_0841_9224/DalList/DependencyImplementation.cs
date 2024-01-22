@@ -49,12 +49,12 @@ internal class DependencyImplementation : IDependency
     public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
     {
         if (filter != null)
-            return from item in DataSource.Dependencys
+            return (from item in DataSource.Dependencys
                    where filter(item)
-                   select item;
+                   select item).ToList();
 
-        return from item in DataSource.Dependencys
-               select item;
+        return (from item in DataSource.Dependencys
+               select item).ToList();
     }
 
     /// <summary>

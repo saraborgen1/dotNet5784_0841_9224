@@ -56,9 +56,9 @@ internal class TaskImplementation : ITask
         var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
         if (filter != null)
-            return from item in taskList
+            return (from item in taskList
                    where filter(item)
-                   select item;
+                   select item).ToList();
 
         return taskList.ToList();
     }

@@ -71,11 +71,13 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
         if (filter != null)
-            return from item in listEngineer
-                   where (item.Active == true) && filter(item) 
-                   select item;
-       
-        return listEngineer.ToList();
+            return (from item in listEngineer
+                   where (item.Active) && filter(item)
+                   select item).ToList();
+
+            return (from item in listEngineer
+                    where (item.Active) 
+                    select item).ToList();
     }
 
     /// <summary>

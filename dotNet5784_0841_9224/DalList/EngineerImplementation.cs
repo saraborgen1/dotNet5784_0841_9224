@@ -48,12 +48,13 @@ internal class EngineerImplementation : IEngineer
     public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
         if (filter != null)
-            return from item in DataSource.Engineers
+            return (from item in DataSource.Engineers
                    where filter(item) && item.Active
-                   select item;
+                   select item).ToList();
 
-        return from item in DataSource.Engineers
-               select item;
+        return( from item in DataSource.Engineers
+               where item.Active == true
+               select item).ToList();
     }
 
     /// <summary>
@@ -73,9 +74,9 @@ internal class EngineerImplementation : IEngineer
     /// <returns> deleted engineer collection</returns>
     public IEnumerable<Engineer> ReadAllDelete()
     {
-        return from item in DataSource.Engineers
+        return (from item in DataSource.Engineers
                where !item.Active
-               select item;
+               select item).ToList();
     }
 }
 
