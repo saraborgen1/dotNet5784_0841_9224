@@ -30,13 +30,13 @@ internal class DependencyImplementation : IDependency
     /// Deletion of an existing object with a certain ID, from the list of objects of type dependency
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="DalDoesNotExistException">An attempt to delete an object that does not exist</exception>
+    /// <exception cref="DalDoesNotExistsException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
         XElement dependencysRootElem =LoadListFromXMLElement(s_dependencys_xml);
 
         if (dependencysRootElem.Elements().FirstOrDefault(st => (int?)st.Element("Id") == id) == null)
-            throw new DalDoesNotExistException($"_entityName with ID={id} does Not exist");
+            throw new DalDoesNotExistsException($"_entityName with ID={id} does Not exist");
 
         dependencysRootElem.Elements().FirstOrDefault(st => (int?)st.Element("Id") == id)!.Remove();
       

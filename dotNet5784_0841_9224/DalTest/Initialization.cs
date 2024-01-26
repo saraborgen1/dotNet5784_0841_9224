@@ -119,8 +119,8 @@ public static class Initialization
             DateTime _CompleteDate = _ScheduledDate.AddDays(2);
             TimeSpan _requiredEffortTime = _CompleteDate - _StartDate;
             int _numforenum = s_rand.Next(0, 5);
-            EngineerExperience _engineerld = (EngineerExperience)_numforenum;
-            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i], false, _createdAtDate, null, null, null, null, _requiredEffortTime, TaskDeliverables[i], null, null, _engineerld);
+            EngineerExperience _EngineerId = (EngineerExperience)_numforenum;
+            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i], false, _createdAtDate, null, null, null, null, _requiredEffortTime, TaskDeliverables[i], null, null, _EngineerId);
             s_dal!.Task.Create(newTask); //stage 2
         }
     }

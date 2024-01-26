@@ -24,13 +24,13 @@ internal class TaskImplementation : ITask
     /// Deletion of an existing object with a certain ID, from the list of objects of type Task
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="DalDoesNotExistException">An attempt to delete an object that does not exist</exception>
+    /// <exception cref="DalDoesNotExistsException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
         var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
         if (taskList.RemoveAll(item => item.Id == id) == 0)
-            throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
+            throw new DalDoesNotExistsException($"Task with ID={id} does Not exist");
 
         SaveListToXMLSerializer(taskList, s_tasks_xml);
     }

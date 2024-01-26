@@ -22,11 +22,11 @@ internal class TaskImplementation : ITask
     /// Deletion of an existing object with a certain ID, from the list of objects of type Task
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="DalDoesNotExistException">An attempt to delete an object that does not exist</exception>
+    /// <exception cref="DalDoesNotExistsException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
         if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
-            throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
+            throw new DalDoesNotExistsException($"Task with ID={id} does Not exist");
 
         DataSource.Tasks.Remove(DataSource.Tasks.FirstOrDefault(item => item.Id == id)!);
     }

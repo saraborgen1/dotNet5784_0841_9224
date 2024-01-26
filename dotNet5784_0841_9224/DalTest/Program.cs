@@ -318,7 +318,7 @@ namespace DalTest
             if (remarks == null) { remarks = task.Remarks; }
             Console.WriteLine("Enter the engineer ID assigned to the task");
             int? engineerID = int.Parse(Console.ReadLine());
-            if (engineerID == 0) { engineerID = task.Engineerld; }
+            if (engineerID == 0) { engineerID = task.EngineerId; }
             Console.WriteLine("Enter numer of the difficulty level of the task");
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;

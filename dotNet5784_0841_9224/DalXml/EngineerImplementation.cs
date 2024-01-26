@@ -10,14 +10,14 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item">A reference to an existing object of the Engineer type. The object was created in an upper layer and its fields are already filled with normal values.</param>
     /// <returns>Returns the id of the newly added object</returns>
-    /// <exception cref="DalAlreadyExistException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
+    /// <exception cref="DalAlreadyExistsException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
 
         if (listEngineer.Exists(lec => lec?.Id == item.Id && lec.Active))
-            throw new DalAlreadyExistException($"Engineer with ID={item.Id} already exist");
+            throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exist");
 
         listEngineer.Add(item);
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
@@ -29,13 +29,13 @@ internal class EngineerImplementation : IEngineer
     /// Deletion of an existing object with a certain ID, from the list of Engineer type objects.
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="DalDoesNotExistException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
+    /// <exception cref="DalDoesNotExistsException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
         if ((listEngineer.FirstOrDefault(p => p.Id == id))==null)
-            throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
+            throw new DalDoesNotExistsException($"Engineer with ID={id} does Not exist");
 
         var newListEngineer = listEngineer.Select(item =>
         {
@@ -89,7 +89,7 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<DO.Task>(s_engineers_xml);
 
         if (listEngineer.RemoveAll(p => p.Id == item.Id) == 0)
-            throw new DalDoesNotExistException($"Engineer with ID={item.Id} does Not exist");
+            throw new DalDoesNotExistsException($"Engineer with ID={item.Id} does Not exist");
         Create(item);
     }
     /// <summary>
