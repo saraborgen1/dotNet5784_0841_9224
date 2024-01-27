@@ -43,9 +43,8 @@ internal class EngineerImplementation : IEngineer
             _dal.Engineer.Delete(id);
             return;
         }
-        new BO.BlCannotBeDeletedException($"Engineer with ID={item.Id} already exists", ex);
+        throw new BO.BlCannotBeDeletedException($"Engineer with ID={id} cannot be deleted ", ex);
     }
-}
 
     public BO.Engineer? Read(int id)
     {
@@ -96,8 +95,35 @@ internal class EngineerImplementation : IEngineer
         return doEngineerList;
     }
 
-    public void Update(Engineer item)
+    public void Update(BO.Engineer item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var doEngeenir = _dal.Engineer.Read(p => p.Id == item.Id);
+
+        if (item.Name == null) throw new ArgumentException();
+        if (item.Cost <= 0) throw new ArgumentException();
+        if (item.Email != null)
+        {
+            if (!item.Email.Contains("@")) throw new ArgumentException();
+            if (!item.Email.Contains(".")) throw new ArgumentException();
+        }
+        if((doEngeenir!.Level!=null)&&(doEngeenir.Level>item.Level) )throw new ArgumentException();
+        }
+        catch (Exception ex) { ndjks}
+        DO.Engineer updatedEngeenir=new DO.Engineer(item.Id,item.Name,item.Email,item.Level,item.Cost);
+        _dal.Engineer.Update(updatedEngeenir);
+        if (item.Task != null)
+        {
+            try
+            {
+                var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
+                DO.Task updatedTask = doTask with { EngineerId =item.Task.Id };
+                _dal.Task.Update(updatedTask);
+
+            }
+            catch { ex}
+        }
+
     }
 }
