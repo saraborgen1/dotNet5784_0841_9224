@@ -11,9 +11,22 @@ internal class TaskImplementation : ITask
     {
         if (item.Id <= 0) throw new ArgumentException();
         if (item.Alias == " ") throw new ArgumentException();
+
+        DO.Task doTask = new DO.Task
+      (item.Id, item.Alias, item.Description, false, item.CreatedAtDate, item.StartDate
+      , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
+      item.Deliverables, item.Remarks, item.Engineer.Id, item.Copmlexity);
+
+        try
+        {
+            int idTask = _dal.Task.Create(doTask);
+        }
+        catch (DO.DalAlreadyExistsException ex)
+        {
+            throw new BO.BlAlreadyExistsException($"Engineer with ID={item.Id} already exists", ex);
+        }
+
     }
-
-
 
     public void Delete(int id)
     {
@@ -84,7 +97,7 @@ internal class TaskImplementation : ITask
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+       
     }
 
     public void UpdateDate(int id, DateTime date)
