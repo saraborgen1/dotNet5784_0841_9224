@@ -38,6 +38,7 @@ internal class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
+
         throw new NotImplementedException();
     }
 
@@ -64,7 +65,7 @@ internal class EngineerImplementation : IEngineer
         };
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool> filter = null!
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool> filter = null!)
     {
         var doEngineerList=(from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
             select new BO.Engineer()
