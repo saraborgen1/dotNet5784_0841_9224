@@ -8,7 +8,6 @@ public class Task
     public DateTime? CreatedAtDate { get; set; }
     public BO.Enums.Status Status { get; set; }
     public List<BO.TaskInList>? Dependencies {  get; set; }
-    public BO.MilestoneInTask? Milestone { get; set; }
     public TimeSpan? RequiredEffortTime { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? ScheduledDate { get; set; }

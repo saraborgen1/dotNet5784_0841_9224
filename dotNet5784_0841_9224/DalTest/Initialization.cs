@@ -120,7 +120,7 @@ public static class Initialization
             TimeSpan _requiredEffortTime = _CompleteDate - _StartDate;
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _EngineerId = (EngineerExperience)_numforenum;
-            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i], false, _createdAtDate, null, null, null, null, _requiredEffortTime, TaskDeliverables[i], null, null, _EngineerId);
+            Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i], _createdAtDate, null, null, null, null, _requiredEffortTime, TaskDeliverables[i], null, null, _EngineerId);
             s_dal!.Task.Create(newTask); //stage 2
         }
     }

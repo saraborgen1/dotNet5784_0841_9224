@@ -47,7 +47,6 @@ internal class TaskImplementation : ITask
             CreatedAtDate = doTask.CreatedAtDate,
             //Status
             //Dependencies= doTask.
-            //Milestone
             RequiredEffortTime = doTask.RequiredEffortTime,
             StartDate = doTask.StartDate,
             ScheduledDate = doTask.ScheduledDate,
@@ -73,7 +72,6 @@ internal class TaskImplementation : ITask
                               CreatedAtDate = doTask.CreatedAtDate,
                               //Status
                               //Dependencies= doTask.
-                              //Milestone
                               RequiredEffortTime = doTask.RequiredEffortTime,
                               StartDate = doTask.StartDate,
                               ScheduledDate = doTask.ScheduledDate,

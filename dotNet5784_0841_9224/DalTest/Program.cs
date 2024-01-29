@@ -205,11 +205,6 @@ namespace DalTest
             Console.WriteLine("Enter description");
             string description = Console.ReadLine();
 
-            Console.WriteLine("Enter milestone");
-            string tempMilesone = Console.ReadLine();
-
-            bool mileston = (tempMilesone == "true") ? true : false;
-
             Console.WriteLine("Enter task creation date");
             DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
 
@@ -241,7 +236,7 @@ namespace DalTest
 
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
 
-            DO.Task task = new(0, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            DO.Task task = new(0, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             s_dal.Task.Create(task);
         }
 
@@ -288,12 +283,6 @@ namespace DalTest
             if (description == null)
                 description = task.Description;
 
-            Console.WriteLine("Enter milestone");
-            string tempMilesone = Console.ReadLine();
-            bool mileston = (tempMilesone == "true") ? true : false;
-            if (tempMilesone == null)
-                mileston = task.IsMilestone;
-
             Console.WriteLine("Enter task creation date");
             DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
             if (createdAtDate == null) { createdAtDate = task.CreatedAtDate; }
@@ -323,7 +312,7 @@ namespace DalTest
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             if (difficulty == null) { difficulty = task.Copmlexity.Value; }
-            DO.Task task1 = new(id, alies, description, mileston, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            DO.Task task1 = new(id, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             try
             {
                 s_dal.Task.Update(task1);
