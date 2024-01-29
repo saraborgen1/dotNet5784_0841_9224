@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
+
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
@@ -55,11 +56,10 @@ internal class TaskImplementation : ITask
                                               select new BO.TaskInList()
                                               {
                                                   Id = item.Value,
-                                                  Alias = (_dal.Task.Read(p => p.Id == item)?.Ailas ?? " ",
-                                                  Description=
-                                                  //Description = (_dal.Task.Read(p => p.Id == item).Description,
-                                                  //Status = BO.Enums.Status.Unscheduled   //Status
-                                            }).ToList();
+                                                  Alias = " ",/*(_dal.Task.Read(p => p.Id == item)?.Ailas ?? " ",*/
+                                                  Description = (_dal.Task.Read(p => p.Id == item)?.Description??" ",
+                                                  Status = BO.Enums.Status.Unscheduled 
+                                               }).ToList();
 
        
         DateTime? forecastDate = null;
