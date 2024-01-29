@@ -1,23 +1,25 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using DalApi;
+using BO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 
-internal class TaskImplementation : ITask
+internal class TaskImplementation : BlApi.ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    private const string _entityName = nameof(BO.Task);
     public void Create(Task item)
     {
         if (item.Id <= 0) throw new ArgumentException();
         if (item.Alias == " ") throw new ArgumentException();
 
         DO.Task doTask = new DO.Task
-      (item.Id, item.Alias, item.Description, false, item.CreatedAtDate, item.StartDate
+      (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
       , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
-      item.Deliverables, item.Remarks, item.Engineer.Id, item.Copmlexity);
+      item.Deliverables, item.Remarks, item.Engineer?.Id ?? 0, (DO.EngineerExperience)item.Copmlexity);
 
         try
         {
@@ -25,7 +27,7 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException( ex   );
+            throw new BO.BlAlreadyExistException(ex);
         }
 
     }
@@ -34,32 +36,39 @@ internal class TaskImplementation : ITask
     {
         try
         {
-            BO.Task boTask = Read(id)
-                        //List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
-                        //                            select item.DependentTask ?? 0).ToList();
-            if (boTask.Dependencies == null) { throw new BO.BlDoesNotExistException(id, Task); }
+            BO.Task boTask = Read(id);
+            List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
+                                                    select item.DependentTask ?? 0).ToList();
+            if (dependenciesId == null)
+            { throw new BO.BlDoesNotExistException(id, _entityName); }
             _dal.Task.Delete(id);
         }
-        catch (Exception ex) { }
+        catch (DO.DalDoesNotExistsException ex)
+        {
+            throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
+        }
     }
 
     public Task Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
-            throw new BO.BlDoesNotExistException(id, "Task");
+            throw new BO.BlDoesNotExistException(id, _entityName);
        
         List<int?>? dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentTask == id)
                            select item.DependentOnTask).ToList();
+
         List<BO.TaskInList> ? dependencies = (from item in dependenciesId
+                                              let alias = _dal.Task.Read(p => p.Id == item)?.Ailas ?? " "
+                                              let description = _dal.Task.Read(p => p.Id == item)?.Description ?? " "
+                                              let temp = Read(item??0 ).Status
                                               select new BO.TaskInList()
                                               {
                                                   Id = item.Value,
-                                                  Alias = (_dal.Task.Read(p => p.Id == item)?.Ailas ?? " ",
-                                                  Description=
-                                                  //Description = (_dal.Task.Read(p => p.Id == item).Description,
-                                                  //Status = BO.Enums.Status.Unscheduled   //Status
-                                            }).ToList();
+                                                  Alias = alias,
+                                                  Description = description,
+                                                  Status = temp
+                                              }).ToList();
 
        
         DateTime? forecastDate = null;
@@ -85,7 +94,7 @@ internal class TaskImplementation : ITask
             Description = doTask.Description,
             CreatedAtDate = doTask.CreatedAtDate,
             Status = status,
-            //Dependencies = doTask.
+            Dependencies = dependencies,
             RequiredEffortTime = doTask.RequiredEffortTime,
             StartDate = doTask.StartDate,
             ScheduledDate = doTask.ScheduledDate,
@@ -121,15 +130,18 @@ internal class TaskImplementation : ITask
         catch (Exception ex) { }
 
         DO.Task updatedTask = new DO.Task
-        (item.Id, item.Alias, item.Description, false, item.CreatedAtDate, item.StartDate
+        (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
         , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
-         item.Deliverables, item.Remarks, item.Engineer.Id, item.Copmlexity);
+         item.Deliverables, item.Remarks, item.Engineer?.Id ?? 0, (DO.EngineerExperience)item.Copmlexity);
 
         try
         {
             _dal.Task.Update(updatedTask);
         }
-        catch (Exception ex) { }
+        catch (DO.DalDoesNotExistsException ex)
+        {
+            throw new BO.BlCannotBeDeletedException(ex);
+        }
 
     }
 
