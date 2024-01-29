@@ -15,7 +15,6 @@ public class Enums
         Unscheduled, 
         Scheduled, 
         OnTrack, 
-        InJeopardy, 
         Done
     }
 }

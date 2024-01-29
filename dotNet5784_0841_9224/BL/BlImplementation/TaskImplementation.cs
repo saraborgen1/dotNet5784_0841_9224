@@ -4,6 +4,7 @@ using BO;
 using DalApi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 internal class TaskImplementation : ITask
 {
@@ -31,10 +32,16 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            BO.Task boTask = Read(id);
+            if(boTask.Dependencies == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); } 
+            _dal.Task.Delete(id);
+        }
+        catch (Exception ex) { }
     }
 
-    public Task? Read(int id)
+    public Task Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
@@ -118,6 +125,7 @@ internal class TaskImplementation : ITask
 
     public void UpdateDate(int id, DateTime date)
     {
-        throw new NotImplementedException();
+        DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
+        if (doTask == null) { }
     }
 }
