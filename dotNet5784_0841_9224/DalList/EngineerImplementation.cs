@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 internal class EngineerImplementation : IEngineer
 {
+    private const string _entityName = nameof(Engineer);
     /// <summary>
     /// Adding a new object  of type Engineer to a database, (to the list of objects of type Engineer).
     /// </summary>
@@ -15,7 +16,7 @@ internal class EngineerImplementation : IEngineer
     {
 
         if (DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id) != null)
-            throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exist");
+            throw new DalAlreadyExistsException(item.Id, _entityName);
 
         DataSource.Engineers.Add(item);
 
@@ -29,7 +30,7 @@ internal class EngineerImplementation : IEngineer
     public void Delete(int id)
     {
         if (DataSource.Engineers.FirstOrDefault(item => item.Id == id && item.Active) == null)
-            throw new DalDoesNotExistsException(id,"Engineer");
+            throw new DalDoesNotExistsException(id, _entityName);
 
         DataSource.Engineers.Remove(DataSource.Engineers.FirstOrDefault(item => item.Id == id)!);
     }
@@ -65,7 +66,7 @@ internal class EngineerImplementation : IEngineer
     public void Update(Engineer item)
     {
         if (DataSource.Engineers.RemoveAll(p => p.Id == item.Id) == 0)
-            throw new DalDoesNotExistsException(item.Id,"Engineer");
+            throw new DalDoesNotExistsException(item.Id, _entityName);
         DataSource.Engineers.Add(item);
     }
     /// <summary>

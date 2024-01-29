@@ -4,6 +4,7 @@
 internal class TaskImplementation : ITask
 {
     readonly string s_tasks_xml = "tasks";
+    private const string _entityName = nameof(DO.Task);
 
     /// <summary>
     /// Adding a new object of type Task to a database, (to the list of objects of type Task).
@@ -30,7 +31,7 @@ internal class TaskImplementation : ITask
         var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
         if (taskList.RemoveAll(item => item.Id == id) == 0)
-            throw new DalDoesNotExistsException(id,"Task");
+            throw new DalDoesNotExistsException(id, _entityName);
 
         SaveListToXMLSerializer(taskList, s_tasks_xml);
     }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 internal class DependencyImplementation : IDependency
 {
+    private const string _entityName = nameof(Dependency);
     /// <summary>
     /// Adding a new object of type Dependency to a database, (to the list of objects of type Dependency).
     /// </summary>
@@ -28,7 +29,7 @@ internal class DependencyImplementation : IDependency
     public void Delete(int id)
     {
         if (DataSource.Dependencys.FirstOrDefault(item => item.Id == id) == null)
-            throw new DalDoesNotExistsException(id,"Dependencys");
+            throw new DalDoesNotExistsException(id, _entityName);
 
         DataSource.Dependencys.Remove(DataSource.Dependencys.FirstOrDefault(item => item.Id == id)!);
     }
@@ -66,7 +67,7 @@ internal class DependencyImplementation : IDependency
     public void Update(Dependency item)
     {
         if (DataSource.Dependencys.Find(d => d.Id == item.Id) == null) 
-            throw new DalDoesNotExistsException(item.Id, "Dependency");
+            throw new DalDoesNotExistsException(item.Id, _entityName);
 
         Delete(item.Id);
         DataSource.Dependencys.Add(item);

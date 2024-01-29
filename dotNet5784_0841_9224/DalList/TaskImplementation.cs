@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 internal class TaskImplementation : ITask
 {
+    private const string _entityName = nameof(DO.Task);
     /// <summary>
     /// Adding a new object of type Task to a database, (to the list of objects of type Task).
     /// </summary>
@@ -26,7 +27,7 @@ internal class TaskImplementation : ITask
     public void Delete(int id)
     {
         if (DataSource.Tasks.FirstOrDefault(item => item.Id == id) == null)
-            throw new DalDoesNotExistsException(id, "Task");
+            throw new DalDoesNotExistsException(id, _entityName);
 
         DataSource.Tasks.Remove(DataSource.Tasks.FirstOrDefault(item => item.Id == id)!);
     }

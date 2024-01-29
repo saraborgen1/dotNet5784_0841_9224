@@ -4,6 +4,7 @@ namespace Dal;
 internal class EngineerImplementation : IEngineer
 {
     readonly string s_engineers_xml = "engineers";
+    private const string _entityName = nameof(Engineer);
 
     /// <summary>
     /// Adding a new object  of type Engineer to a database, (to the list of objects of type Engineer).
@@ -17,7 +18,7 @@ internal class EngineerImplementation : IEngineer
 
 
         if (listEngineer.Exists(lec => lec?.Id == item.Id && lec.Active))
-            throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exist");
+            throw new DalAlreadyExistsException(item.Id,_entityName);
 
         listEngineer.Add(item);
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
@@ -35,7 +36,7 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
         if ((listEngineer.FirstOrDefault(p => p.Id == id))==null)
-            throw new DalDoesNotExistsException(id,"Engineer");
+            throw new DalDoesNotExistsException(id, _entityName);
 
         var newListEngineer = listEngineer.Select(item =>
         {
@@ -89,7 +90,7 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<DO.Task>(s_engineers_xml);
 
         if (listEngineer.RemoveAll(p => p.Id == item.Id) == 0)
-            throw new DalDoesNotExistsException(item.Id, "Engineer");
+            throw new DalDoesNotExistsException(item.Id, _entityName);
         Create(item);
     }
     /// <summary>

@@ -25,7 +25,7 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Engineer with ID={item.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException( ex   );
         }
 
     }
