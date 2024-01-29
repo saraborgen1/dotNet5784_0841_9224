@@ -28,6 +28,8 @@ public class BlTheInputIsInvalidException : Exception
 public class BlDoesNotExistException : Exception
 {
     public BlDoesNotExistException(int id, string name) : base($"{name} with ID={id} does Not exist") { }
+    public BlDoesNotExistException(Exception innerException)
+            : base(innerException.Message) { }
 }
 
 

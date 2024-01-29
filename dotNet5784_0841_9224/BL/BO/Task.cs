@@ -19,7 +19,7 @@ public class Task
     public BO.EngineerInTask? Engineer { get; set; }
     public BO.Enums.EngineerExperience Copmlexity { get; set; }
 
-    public List<int?>? DependentOnList { get; set; }
+  //  public List<int?>? DependentOnList { get; set; }
 
 
 

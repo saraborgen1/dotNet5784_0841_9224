@@ -1,8 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
-using DalApi;
-using DO;
 using System;
 using System.Collections.Generic;
 
@@ -13,18 +11,14 @@ internal class EngineerImplementation : IEngineer
     private const string _entityName = nameof(BO.Engineer);
     public void Create(BO.Engineer item)
     {
-        try
+        if (item.Id <= 0) throw new BlTheInputIsInvalidException("Id");
+        if (item.Name == null) throw new BlTheInputIsInvalidException("Name");
+        if (item.Cost <= 0) throw new BlTheInputIsInvalidException("Cost");
+        if (item.Email != null)
         {
-            if (item.Id <= 0) throw new BlTheInputIsInvalidException("Id");
-            if (item.Name == null) throw new BlTheInputIsInvalidException("Name");
-            if (item.Cost <= 0) throw new BlTheInputIsInvalidException("Cost");
-            if (item.Email != null)
-            {
-                if (!item.Email.Contains("@")) throw new BlTheInputIsInvalidException("Email");
-                if (!item.Email.Contains(".")) throw new BlTheInputIsInvalidException("Email");
-            }
+            if (!item.Email.Contains("@")) throw new BlTheInputIsInvalidException("Email");
+            if (!item.Email.Contains(".")) throw new BlTheInputIsInvalidException("Email");
         }
-       catch (BlTheInputIsInvalidException) { }
 
         DO.Engineer doEngineer = new DO.Engineer
             (item.Id, item.Name, item.Email, item.Level, item.Cost);
@@ -109,40 +103,32 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(BO.Engineer item)
     {
-        
-            var doEngeenir = _dal.Engineer.Read(p => p.Id == item.Id);
-        try
+
+        var doEngeenir = _dal.Engineer.Read(p => p.Id == item.Id);
+        if (item.Name == null) throw new BlTheInputIsInvalidException("Name");
+        if (item.Cost <= 0) throw new BlTheInputIsInvalidException("Cost");
+        if (item.Email != null)
         {
-            if (item.Name == null) throw new BlTheInputIsInvalidException("Name");
-            if (item.Cost <= 0) throw new BlTheInputIsInvalidException("Cost");
-            if (item.Email != null)
-            {
-                if (!item.Email.Contains("@")) throw new BlTheInputIsInvalidException("Email");
-                if (!item.Email.Contains(".")) throw new BlTheInputIsInvalidException("Email");
-            }
-            if ((doEngeenir!.Level != null) && (doEngeenir.Level > item.Level)) throw new BlTheInputIsInvalidException("Level");
+            if (!item.Email.Contains("@")) throw new BlTheInputIsInvalidException("Email");
+            if (!item.Email.Contains(".")) throw new BlTheInputIsInvalidException("Email");
         }
-        catch { }
+        if ((doEngeenir!.Level != null) && (doEngeenir.Level > item.Level)) throw new BlTheInputIsInvalidException("Level");
         try
         {
             DO.Engineer updatedEngeenir = new DO.Engineer(item.Id, item.Name, item.Email, item.Level, item.Cost);
             _dal.Engineer.Update(updatedEngeenir);
-        }
-        catch (DO.DalAlreadyExistsException ex)
-        {
-            throw new BO.BlAlreadyExistException(ex);
-        }
-      
-        if (item.Task != null)
-        {
-            try
+
+            if (item.Task != null)
             {
+
                 var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
                 DO.Task updatedTask = doTask with { EngineerId = item.Task.Id };
                 _dal.Task.Update(updatedTask);
-
             }
-            catch { }
+        }
+        catch (DO.DalDoesNotExistsException ex)
+        {
+            throw new BO.BlDoesNotExistException(ex);
         }
 
     }
