@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
+using DalApi;
 using System;
 using System.Collections.Generic;
 
@@ -97,7 +98,24 @@ internal class TaskImplementation : ITask
 
     public void Update(Task item)
     {
-       
+        try
+        {
+            var doTask = _dal.Task.Read(p => p.Id == item.Id);
+            //בדיקות תקינות להכל 
+        }
+        catch (Exception ex) { }
+
+        DO.Task updatedTask = new DO.Task
+        (item.Id, item.Alias, item.Description, false, item.CreatedAtDate, item.StartDate
+        , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
+         item.Deliverables, item.Remarks, item.Engineer.Id, item.Copmlexity);
+
+        try
+        {
+            _dal.Task.Update(updatedTask);
+        }
+        catch (Exception ex) { }
+
     }
 
     public void UpdateDate(int id, DateTime date)
