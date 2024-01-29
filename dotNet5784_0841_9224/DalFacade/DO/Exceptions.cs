@@ -5,7 +5,7 @@
 [Serializable]
 public class DalDoesNotExistsException : Exception
 {
-    public DalDoesNotExistsException(string? message) : base(message) { }
+    public DalDoesNotExistsException(int id ,string name) : base($"{name} with ID={id} does Not exist") { }
 }
 /// <summary>
 /// The id number already exists

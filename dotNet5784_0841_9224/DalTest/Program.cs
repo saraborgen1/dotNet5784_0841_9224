@@ -311,7 +311,6 @@ namespace DalTest
             Console.WriteLine("Enter numer of the difficulty level of the task");
             int difficultyNumber = int.Parse(Console.ReadLine());
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-            if (difficulty == null) { difficulty = task.Copmlexity.Value; }
             DO.Task task1 = new(id, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
             try
             {
@@ -474,7 +473,7 @@ namespace DalTest
             string email = Console.ReadLine();
             Console.WriteLine("Enter the level of the engineer");
             int difficultyNumber = int.Parse(Console.ReadLine());
-            EngineerExperience? difficulty = (EngineerExperience)difficultyNumber;
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             Console.WriteLine("Enter an hourly cost");
             double? cost = double.Parse(Console.ReadLine());
             if (name == null) { name = engineer.Name; }
