@@ -48,21 +48,20 @@ internal class TaskImplementation : ITask
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
             throw new BO.BlDoesNotExistException(id, "Task");
-        List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
-                                    select item.DependentTask ?? 0).ToList();
+       
+        List<int?>? dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentTask == id)
+                           select item.DependentOnTask).ToList();
         List<BO.TaskInList> ? dependencies = (from item in dependenciesId
                                               select new BO.TaskInList()
                                               {
-                                                  Id = item,
+                                                  Id = item.Value,
                                                   Alias = (_dal.Task.Read(p => p.Id == item)?.Ailas ?? " ",
                                                   Description=
                                                   //Description = (_dal.Task.Read(p => p.Id == item).Description,
                                                   //Status = BO.Enums.Status.Unscheduled   //Status
                                             }).ToList();
 
-        List<int?>? dependentOnList = null!;
-        dependentOnList = (from item in _dal.Dependency.ReadAll(p => p.DependentTask == id)
-                           select item.DependentOnTask).ToList();
+       
         DateTime? forecastDate = null;
         if (doTask.StartDate != null && doTask.ScheduledDate != null && doTask.RequiredEffortTime != null)
         {
@@ -95,8 +94,7 @@ internal class TaskImplementation : ITask
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
-            Copmlexity = (BO.Enums.EngineerExperience)doTask.Copmlexity,
-            DependentOnList = dependentOnList
+            Copmlexity = (BO.Enums.EngineerExperience)doTask.Copmlexity
         };
     }
 
