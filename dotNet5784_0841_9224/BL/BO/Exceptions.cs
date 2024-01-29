@@ -8,7 +8,7 @@ public class BlAlreadyExistException : Exception
                 : base(message, innerException) { }
 
     public BlAlreadyExistException(Exception innerException)
-                : base(innerException) { }
+                : base(innerException.Message) { }
 }
 
 [Serializable]
