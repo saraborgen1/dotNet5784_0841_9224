@@ -30,7 +30,7 @@ internal class TaskImplementation : ITask
         var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
 
         if (taskList.RemoveAll(item => item.Id == id) == 0)
-            throw new DalDoesNotExistsException($"Task with ID={id} does Not exist");
+            throw new DalDoesNotExistsException(id,"Task");
 
         SaveListToXMLSerializer(taskList, s_tasks_xml);
     }

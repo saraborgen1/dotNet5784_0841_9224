@@ -35,7 +35,7 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<Engineer>(s_engineers_xml);
 
         if ((listEngineer.FirstOrDefault(p => p.Id == id))==null)
-            throw new DalDoesNotExistsException($"Engineer with ID={id} does Not exist");
+            throw new DalDoesNotExistsException(id,"Engineer");
 
         var newListEngineer = listEngineer.Select(item =>
         {
@@ -89,7 +89,7 @@ internal class EngineerImplementation : IEngineer
         var listEngineer = LoadListFromXMLSerializer<DO.Task>(s_engineers_xml);
 
         if (listEngineer.RemoveAll(p => p.Id == item.Id) == 0)
-            throw new DalDoesNotExistsException($"Engineer with ID={item.Id} does Not exist");
+            throw new DalDoesNotExistsException(item.Id, "Engineer");
         Create(item);
     }
     /// <summary>

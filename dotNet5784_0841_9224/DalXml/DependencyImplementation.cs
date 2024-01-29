@@ -36,7 +36,7 @@ internal class DependencyImplementation : IDependency
         XElement dependencysRootElem =LoadListFromXMLElement(s_dependencys_xml);
 
         if (dependencysRootElem.Elements().FirstOrDefault(st => (int?)st.Element("Id") == id) == null)
-            throw new DalDoesNotExistsException($"_entityName with ID={id} does Not exist");
+            throw new DalDoesNotExistsException(id, _entityName);
 
         dependencysRootElem.Elements().FirstOrDefault(st => (int?)st.Element("Id") == id)!.Remove();
       

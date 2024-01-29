@@ -35,7 +35,7 @@ internal class TaskImplementation : ITask
         try
         {
             BO.Task boTask = Read(id);
-            if (boTask.Dependencies == null) { throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist"); }
+            if (boTask.Dependencies == null) { throw new BO.BlDoesNotExistException(id, Task); }
             _dal.Task.Delete(id);
         }
         catch (Exception ex) { }
@@ -45,7 +45,7 @@ internal class TaskImplementation : ITask
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
-            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+            throw new BO.BlDoesNotExistException(id, "Task");
         List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
                                     select item.DependentTask ?? 0).ToList();
         List<BO.TaskInList> ? dependencies = (from item in dependenciesId

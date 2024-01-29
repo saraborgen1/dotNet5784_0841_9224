@@ -1,4 +1,6 @@
-﻿namespace DO;
+﻿using System.Xml.Linq;
+
+namespace DO;
 /// <summary>
 /// If an entity with this id is not found
 /// </summary>
@@ -13,7 +15,7 @@ public class DalDoesNotExistsException : Exception
 [Serializable]
 public class DalAlreadyExistsException : Exception
 {
-    public DalAlreadyExistsException(string? message) : base(message) { }
+    public DalAlreadyExistsException(int id, string name) : base($"{name} with ID={id} already exist") { }
 }
 /// <summary>
 /// File exception
