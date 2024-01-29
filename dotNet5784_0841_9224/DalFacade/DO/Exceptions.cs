@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace DO;
+﻿namespace DO;
 /// <summary>
 /// If an entity with this id is not found
 /// </summary>

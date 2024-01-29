@@ -10,15 +10,16 @@ using System.Collections.Generic;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    private const string _entityName = nameof(BO.Engineer);
     public void Create(BO.Engineer item)
     {
-        if (item.Id <= 0) throw new ArgumentException();
-        if (item.Name == null) throw new ArgumentException();
-        if (item.Cost <= 0) throw new ArgumentException();
+        if (item.Id <= 0) throw new BlTheInputIsInvalidException("Id");
+        if (item.Name == null) throw new BlTheInputIsInvalidException("Name");
+        if (item.Cost <= 0) throw new BlTheInputIsInvalidException("Cost");
         if (item.Email != null)
         {
-            if (!item.Email.Contains("@")) throw new ArgumentException();
-            if (!item.Email.Contains(".")) throw new ArgumentException();
+            if (!item.Email.Contains("@")) throw new BlTheInputIsInvalidException("Email");
+            if (!item.Email.Contains(".")) throw new BlTheInputIsInvalidException("Email");
         }
 
         DO.Engineer doEngineer = new DO.Engineer
@@ -30,7 +31,7 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"Engineer with ID={item.Id} already exists", ex);
+            throw new BO.BlAlreadyExistException(ex);
         }
 
     }
