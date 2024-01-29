@@ -34,7 +34,9 @@ internal class TaskImplementation : ITask
     {
         try
         {
-            BO.Task boTask = Read(id);
+            BO.Task boTask = Read(id)
+                        //List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
+                        //                            select item.DependentTask ?? 0).ToList();
             if (boTask.Dependencies == null) { throw new BO.BlDoesNotExistException(id, Task); }
             _dal.Task.Delete(id);
         }
