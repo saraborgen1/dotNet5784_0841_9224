@@ -13,7 +13,8 @@ public class BlAlreadyExistException : Exception
 public class BlCannotBeDeletedException : Exception
 {
     public BlCannotBeDeletedException(int id, string message, Exception innerException) : base($"{message} with ID={id} cannot be deleted because"+ innerException) { }
-   
+    public BlCannotBeDeletedException(int id, string message) : base($"{message} with ID={id} cannot be deleted because" ) { }
+
     public BlCannotBeDeletedException(Exception innerException)
                 : base(innerException.Message) { }
 }
@@ -31,6 +32,11 @@ public class BlDoesNotExistException : Exception
     public BlDoesNotExistException(Exception innerException)
             : base(innerException.Message) { }
 }
-
-
-
+public class BlNoDateException : Exception
+{
+    public BlNoDateException(string name): base(name) { }
+}
+public class BlDateClashException : Exception
+{
+    public BlDateClashException(string name) : base(name) { }
+}

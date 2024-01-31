@@ -1,20 +1,22 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using DalApi;
 using BO;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-internal class TaskImplementation : BlApi.ITask
+internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Task);
-    public void Create(Task item)
+    public void Create(BO.Task item)
     {
         if (item.Id <= 0) throw new ArgumentException();
         if (item.Alias == " ") throw new ArgumentException();
+
+        if (item.Dependencies != null)
+            item.Dependencies.ToList().ForEach( p =>_dal.Dependency.Create( new DO.Dependency(0, item.Id, p.Id)));
 
         DO.Task doTask = new DO.Task
       (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
@@ -37,40 +39,44 @@ internal class TaskImplementation : BlApi.ITask
         try
         {
             BO.Task boTask = Read(id);
-            List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
-                                                    select item.DependentTask ?? 0).ToList();
-            if (dependenciesId == null)
-            { throw new BO.BlDoesNotExistException(id, _entityName); }
-            _dal.Task.Delete(id);
         }
         catch (DO.DalDoesNotExistsException ex)
         {
             throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
         }
+        List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
+                                    select item.DependentTask ?? 0).ToList();
+        if (dependenciesId != null)
+            throw new BO.BlCannotBeDeletedException(id, _entityName);
+
+        _dal.Dependency.ReadAll(p => p.DependentTask == id).ToList().ForEach(item => _dal.Dependency.Delete(item.Id));
+
+        _dal.Task.Delete(id);
+
     }
 
-    public Task Read(int id)
+    public BO.Task Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
             throw new BO.BlDoesNotExistException(id, _entityName);
-       
+
         List<int?>? dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentTask == id)
-                           select item.DependentOnTask).ToList();
+                                      select item.DependentOnTask).ToList();
 
-        List<BO.TaskInList> ? dependencies = (from item in dependenciesId
-                                              let alias = _dal.Task.Read(p => p.Id == item)?.Ailas ?? " "
-                                              let description = _dal.Task.Read(p => p.Id == item)?.Description ?? " "
-                                              let temp = Read(item??0 ).Status
-                                              select new BO.TaskInList()
-                                              {
-                                                  Id = item.Value,
-                                                  Alias = alias,
-                                                  Description = description,
-                                                  Status = temp
-                                              }).ToList();
+        List<BO.TaskInList>? dependencies = (from item in dependenciesId
+                                             let alias = _dal.Task.Read(p => p.Id == item)?.Ailas ?? " "
+                                             let description = _dal.Task.Read(p => p.Id == item)?.Description ?? " "
+                                             let temp = (BO.Enums.Status)Read(item ?? 0).Status
+                                             select new BO.TaskInList()
+                                             {
+                                                 Id = item.Value,
+                                                 Alias = alias,
+                                                 Description = description,
+                                                 Status = temp
+                                             }).ToList();
 
-       
+
         DateTime? forecastDate = null;
         if (doTask.StartDate != null && doTask.ScheduledDate != null && doTask.RequiredEffortTime != null)
         {
@@ -107,7 +113,7 @@ internal class TaskImplementation : BlApi.ITask
         };
     }
 
-    public IEnumerable<Task> ReadAll(Func<Task, bool> filter = null!)
+    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool> filter = null!)
     {
         var doTaskList = (from DO.Task doTask in _dal.Task.ReadAll()
                           select Read(doTask.Id)).ToList();
@@ -120,15 +126,28 @@ internal class TaskImplementation : BlApi.ITask
         return doTaskList;
     }
 
-    public void Update(Task item)
+    public void Update(BO.Task item)
     {
-        try
-        {
+ 
             var doTask = _dal.Task.Read(p => p.Id == item.Id);
             if (doTask == null) throw new BlDoesNotExistException(item.Id, _entityName);
+            if (item.ScheduledDate != null)
+            if (item.Dependencies != null)
+            {
+                foreach (var temp in item.Dependencies)
+                {
+                    if (_dal.Task.Read(p => p.Id == temp.Id)!.ScheduledDate == null)
+                        throw new BlNoDateException("The task it depends on doesnt have a scheduled date");
+                }
+                foreach (var p in item.Dependencies)
+                {
+                    if (BO.Task.Read(p.Id).ForecastDate > item.ScheduledDate)
+                        throw new BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
+                }
+            }
+        if (item.DeadlineDate != null && item.ScheduledDate != null && item.DeadlineDate < item.ScheduledDate)
+            throw new BlDateClashException("The end date is before the start date");
 
-        }
-        catch (Exception ex) { }
 
         DO.Task updatedTask = new DO.Task
         (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
@@ -148,12 +167,24 @@ internal class TaskImplementation : BlApi.ITask
 
     public void UpdateDate(int id, DateTime date)
     {
+    
         BO.Task? boTask = Read(id);
-        if (boTask == null) { throw mlsdkc}
-        List<BO.TaskInList>? dependencies = boTask.Dependencies;
+        var dependencies = boTask.Dependencies;
+        if (dependencies != null)
+        {
+            foreach (var item in dependencies)
+            {
+                if (_dal.Task.Read(p => p.Id == item.Id)!.ScheduledDate == null) 
+                    throw new BlNoDateException("The task it depends on doesnt have a scheduled date");
+            }
+            foreach (var item in dependencies)
+            {
+                if (BO.Task.Read(item.Id).ForecastDate> date)
+                    throw new BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
+            }
+            DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date };
+            _dal.Task.Update(newTask);
 
-
-        TaskInList.
-
+        }
     }
 }
