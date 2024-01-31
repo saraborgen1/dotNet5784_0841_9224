@@ -125,7 +125,8 @@ internal class TaskImplementation : BlApi.ITask
         try
         {
             var doTask = _dal.Task.Read(p => p.Id == item.Id);
-            //בדיקות תקינות להכל 
+            if (doTask == null) throw new BlDoesNotExistException(item.Id, _entityName);
+
         }
         catch (Exception ex) { }
 
