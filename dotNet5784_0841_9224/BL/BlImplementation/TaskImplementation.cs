@@ -48,14 +48,13 @@ internal class TaskImplementation : ITask
         if (dependenciesId != null)
             throw new BO.BlCannotBeDeletedException(id, _entityName);
 
-        var temp2 = item.Dependencies.Select(p =>
+        var temp = (_dal.Dependency.ReadAll(p => p.DependentTask == id)
+            .ToList())
+            .Select(item =>
         {
-            if (Read(p.Id).ForecastDate > item.ScheduledDate)
-                throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
-            return p;
-        }).ToList();
-
-        _dal.Dependency.ReadAll(p => p.DependentTask == id).ToList().select(item => _dal.Dependency.Delete(item.Id));
+            _dal.Dependency.Delete(item.Id);
+            return item;
+        });
 
         _dal.Task.Delete(id);
 
@@ -183,16 +182,18 @@ internal class TaskImplementation : ITask
         var dependencies = boTask.Dependencies;
         if (dependencies != null)
         {
-            foreach (var item in dependencies)
+            var temp1 = dependencies.Select(item =>
             {
                 if (_dal.Task.Read(p => p.Id == item.Id)!.ScheduledDate == null)
                     throw new BO.BlNoDateException("The task it depends on doesnt have a scheduled date");
-            }
-            foreach (var item in dependencies)
+                 return item;
+            });
+            var temp2 = dependencies.Select(item =>
             {
                 if (Read(item.Id).ForecastDate > date)
                     throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
-            }
+                return item;
+            });
             DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date };
             _dal.Task.Update(newTask);
 
