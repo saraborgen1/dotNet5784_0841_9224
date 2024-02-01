@@ -1,10 +1,8 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 internal class TaskImplementation : ITask
 {
@@ -16,7 +14,7 @@ internal class TaskImplementation : ITask
         if (item.Alias == " ") throw new ArgumentException();
 
         if (item.Dependencies != null)
-            item.Dependencies.ToList().ForEach( p =>_dal.Dependency.Create( new DO.Dependency(0, item.Id, p.Id)));
+            item.Dependencies.ToList().ForEach(p => _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id)));
 
         DO.Task doTask = new DO.Task
       (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
@@ -54,7 +52,6 @@ internal class TaskImplementation : ITask
         _dal.Task.Delete(id);
 
     }
-
     public BO.Task Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
@@ -128,25 +125,25 @@ internal class TaskImplementation : ITask
 
     public void Update(BO.Task item)
     {
- 
-            var doTask = _dal.Task.Read(p => p.Id == item.Id);
-            if (doTask == null) throw new BlDoesNotExistException(item.Id, _entityName);
-            if (item.ScheduledDate != null)
+
+        var doTask = _dal.Task.Read(p => p.Id == item.Id);
+        if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
+        if (item.ScheduledDate != null)
             if (item.Dependencies != null)
             {
-                foreach (var temp in item.Dependencies)
+                (item.Dependencies).ForEach(t =>
                 {
-                    if (_dal.Task.Read(p => p.Id == temp.Id)!.ScheduledDate == null)
-                        throw new BlNoDateException("The task it depends on doesnt have a scheduled date");
-                }
-                foreach (var p in item.Dependencies)
+                    if (_dal.Task.Read(p => p.Id == t.Id)!.ScheduledDate == null)
+                        throw new BO.BlNoDateException("The task it depends on doesnt have a scheduled date");
+                });
+                (item.Dependencies).ForEach(p =>
                 {
                     if (BO.Task.Read(p.Id).ForecastDate > item.ScheduledDate)
-                        throw new BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
-                }
+                        throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
+                });
             }
         if (item.DeadlineDate != null && item.ScheduledDate != null && item.DeadlineDate < item.ScheduledDate)
-            throw new BlDateClashException("The end date is before the start date");
+            throw new BO.BlDateClashException("The end date is before the start date");
 
 
         DO.Task updatedTask = new DO.Task
@@ -167,20 +164,20 @@ internal class TaskImplementation : ITask
 
     public void UpdateDate(int id, DateTime date)
     {
-    
+
         BO.Task? boTask = Read(id);
         var dependencies = boTask.Dependencies;
         if (dependencies != null)
         {
             foreach (var item in dependencies)
             {
-                if (_dal.Task.Read(p => p.Id == item.Id)!.ScheduledDate == null) 
-                    throw new BlNoDateException("The task it depends on doesnt have a scheduled date");
+                if (_dal.Task.Read(p => p.Id == item.Id)!.ScheduledDate == null)
+                    throw new BO.BlNoDateException("The task it depends on doesnt have a scheduled date");
             }
             foreach (var item in dependencies)
             {
-                if (BO.Task.Read(item.Id).ForecastDate> date)
-                    throw new BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
+                if (BO.Task.Read(item.Id).ForecastDate > date)
+                    throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
             }
             DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date };
             _dal.Task.Update(newTask);
