@@ -10,16 +10,16 @@ internal class TaskImplementation : ITask
     private const string _entityName = nameof(BO.Task);
     public void Create(BO.Task item)
     {
-        if (item.Id <= 0) throw new ArgumentException();
-        if (item.Alias == " ") throw new ArgumentException();
+        if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
+        if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
 
         if (item.Dependencies != null)
             item.Dependencies.ToList().ForEach(p => _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id)));
 
         DO.Task doTask = new DO.Task
-      (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
+      (item.Id, item.Alias, item.Description, item.CreatedAtDate, null
       , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
-      item.Deliverables, item.Remarks, item.Engineer?.Id ?? 0, (DO.EngineerExperience)item.Copmlexity);
+      item.Deliverables, item.Remarks, null, (DO.EngineerExperience)item.Copmlexity);
 
         try
         {
@@ -110,7 +110,7 @@ internal class TaskImplementation : ITask
         };
     }
 
-    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool> filter = null!)
+    public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null!)
     {
         var doTaskList = (from DO.Task doTask in _dal.Task.ReadAll()
                           select Read(doTask.Id)).ToList();

@@ -19,15 +19,15 @@ internal class EngineerImplementation : IEngineer
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
         }
 
-        if (item.Task != null)
-        {
-            var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
-            if (doTask != null)
-            {
-                DO.Task updatedTask = doTask with { EngineerId = item.Id };
-                _dal.Task.Update(updatedTask);
-            }
-        }
+        //if (item.Task != null)
+        //{
+        //    var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
+        //    if (doTask != null)
+        //    {
+        //        DO.Task updatedTask = doTask with { EngineerId = item.Id };
+        //        _dal.Task.Update(updatedTask);
+        //    }
+        //}
 
         DO.Engineer doEngineer = new DO.Engineer
             (item.Id, item.Name, item.Email, item.Level, item.Cost);
@@ -47,10 +47,11 @@ internal class EngineerImplementation : IEngineer
     {
 
         BO.Engineer engineer = Read(id)!;
-        if ((engineer.Task == null) ||
-            (_dal.Task.Read(p => p.Id == engineer.Task.Id) == null) ||
-           (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate == null) ||
-           (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate > DateTime.Now))
+
+        if (engineer.Task == null)&&
+        //    ||(_dal.Task.Read(p => p.Id == engineer.Task.Id) == null) ||
+        //   (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate == null) ||
+        //   (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate > DateTime.Now))
         {
             try
             {
