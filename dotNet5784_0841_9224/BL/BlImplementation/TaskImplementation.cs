@@ -176,7 +176,7 @@ internal class TaskImplementation : ITask
             }
             foreach (var item in dependencies)
             {
-                if (BO.Task.Read(item.Id).ForecastDate > date)
+                if (Read(item.Id).ForecastDate > date)
                     throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
             }
             DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date };

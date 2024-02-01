@@ -12,11 +12,21 @@ internal class EngineerImplementation : IEngineer
     {
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Name == null) throw new BO.BlTheInputIsInvalidException("Name");
-        if (item.Cost <= 0) throw new BO.BlTheInputIsInvalidException("Cost");
+        if (item.Cost == null || item.Cost <= 0) throw new BO.BlTheInputIsInvalidException("Cost");
         if (item.Email != null)
         {
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
+        }
+
+        if (item.Task != null)
+        {
+            var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
+            if (doTask != null)
+            {
+                DO.Task updatedTask = doTask with { EngineerId = item.Id };
+                _dal.Task.Update(updatedTask);
+            }
         }
 
         DO.Engineer doEngineer = new DO.Engineer
@@ -35,23 +45,24 @@ internal class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        try
+
+        BO.Engineer engineer = Read(id)!;
+        if ((engineer.Task == null) ||
+            (_dal.Task.Read(p => p.Id == engineer.Task.Id) == null) ||
+           (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate == null) ||
+           (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate > DateTime.Now))
         {
-            BO.Engineer engineer = Read(id)!;
-            if ((engineer.Task == null) ||
-                (_dal.Task.Read(p => p.Id == engineer.Task.Id) == null) ||
-               (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate == null) ||
-               (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate > DateTime.Now))
+            try
             {
                 _dal.Engineer.Delete(id);
                 return;
             }
+            catch (DO.DalDoesNotExistsException ex)
+            {
+                throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
+            }
         }
-        catch (DO.DalDoesNotExistsException ex)
-        {
-            throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
-        }
-
+        throw new BO.BlCannotBeDeletedException(id, _entityName);
     }
 
     public BO.Engineer? Read(int id)
@@ -107,6 +118,7 @@ internal class EngineerImplementation : IEngineer
     {
 
         var doEngeenir = _dal.Engineer.Read(p => p.Id == item.Id);
+        if (doEngeenir == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
         if (item.Name == null) throw new BO.BlTheInputIsInvalidException("Name");
         if (item.Cost <= 0) throw new BO.BlTheInputIsInvalidException("Cost");
         if (item.Email != null)
@@ -114,7 +126,7 @@ internal class EngineerImplementation : IEngineer
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
         }
-        if ((doEngeenir.Level != null) && (doEngeenir.Level > item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
+        if ((doEngeenir.Level > item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
         try
         {
             DO.Engineer updatedEngeenir = new DO.Engineer(item.Id, item.Name, item.Email, item.Level, item.Cost);
@@ -122,10 +134,12 @@ internal class EngineerImplementation : IEngineer
 
             if (item.Task != null)
             {
-
                 var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
-                DO.Task updatedTask = doTask with { EngineerId = item.Task.Id };
-                _dal.Task.Update(updatedTask);
+                if (doTask != null)
+                {
+                    DO.Task updatedTask = doTask with { EngineerId = item.Id };
+                    _dal.Task.Update(updatedTask);
+                }
             }
         }
         catch (DO.DalDoesNotExistsException ex)
