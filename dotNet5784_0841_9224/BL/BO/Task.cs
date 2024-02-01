@@ -18,11 +18,6 @@ public class Task
     public string? Remarks { get; set; }
     public BO.EngineerInTask? Engineer { get; set; }
     public BO.Enums.EngineerExperience Copmlexity { get; set; }
-
-  //  public List<int?>? DependentOnList { get; set; }
-
-
-
-
+    public override string ToString() => this.ToStringProperty();
 
 }

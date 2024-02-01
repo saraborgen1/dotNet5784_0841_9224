@@ -11,4 +11,5 @@ public class TaskInList
     public string? Alias { get; set; }
     public string? Description { get; set; }
     public BO.Enums.Status Status { get; set; }
+    public override string ToString() => this.ToStringProperty();
 }
