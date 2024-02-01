@@ -138,7 +138,7 @@ internal class TaskImplementation : ITask
                 });
                 (item.Dependencies).ForEach(p =>
                 {
-                    if (BO.Task.Read(p.Id).ForecastDate > item.ScheduledDate)
+                    if (Read(p.Id).ForecastDate > item.ScheduledDate)
                         throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
                 });
             }

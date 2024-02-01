@@ -38,7 +38,10 @@ internal class EngineerImplementation : IEngineer
         try
         {
             BO.Engineer engineer = Read(id)!;
-            if ((engineer.Task == null) || (BO.Task.Read(engineer.Task.Id).StartDate == null) || (BO.Task.Read(engineer.Task.Id).StartDate > DateTime.Now))
+            if ((engineer.Task == null) ||
+                (_dal.Task.Read(p => p.Id == engineer.Task.Id) == null) ||
+               (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate == null) ||
+               (_dal.Task.Read(p => p.Id == engineer.Task.Id)!.StartDate > DateTime.Now))
             {
                 _dal.Engineer.Delete(id);
                 return;
@@ -74,7 +77,7 @@ internal class EngineerImplementation : IEngineer
         };
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool> filter = null!)
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
         var doEngineerList = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
                               select new BO.Engineer()
