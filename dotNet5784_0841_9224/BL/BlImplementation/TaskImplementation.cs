@@ -3,6 +3,7 @@ using BlApi;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -47,7 +48,14 @@ internal class TaskImplementation : ITask
         if (dependenciesId != null)
             throw new BO.BlCannotBeDeletedException(id, _entityName);
 
-        _dal.Dependency.ReadAll(p => p.DependentTask == id).ToList().ForEach(item => _dal.Dependency.Delete(item.Id));
+        var temp2 = item.Dependencies.Select(p =>
+        {
+            if (Read(p.Id).ForecastDate > item.ScheduledDate)
+                throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
+            return p;
+        }).ToList();
+
+        _dal.Dependency.ReadAll(p => p.DependentTask == id).ToList().select(item => _dal.Dependency.Delete(item.Id));
 
         _dal.Task.Delete(id);
 
@@ -131,16 +139,22 @@ internal class TaskImplementation : ITask
         if (item.ScheduledDate != null)
             if (item.Dependencies != null)
             {
-                (item.Dependencies).ForEach(t =>
+                var temp1 = item.Dependencies.Select(t =>
                 {
-                    if (_dal.Task.Read(p => p.Id == t.Id)!.ScheduledDate == null)
-                        throw new BO.BlNoDateException("The task it depends on doesnt have a scheduled date");
-                });
-                (item.Dependencies).ForEach(p =>
+                    var dependentTask = _dal.Task.Read(p => p.Id == t.Id);
+
+                    if (dependentTask?.ScheduledDate == null)
+                        throw new BO.BlNoDateException("The task it depends on doesn't have a scheduled date");
+
+                    return t;
+                }).ToList();
+
+                var temp2 = item.Dependencies.Select(p =>
                 {
                     if (Read(p.Id).ForecastDate > item.ScheduledDate)
                         throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
-                });
+                    return p;
+                }).ToList();
             }
         if (item.DeadlineDate != null && item.ScheduledDate != null && item.DeadlineDate < item.ScheduledDate)
             throw new BO.BlDateClashException("The end date is before the start date");
