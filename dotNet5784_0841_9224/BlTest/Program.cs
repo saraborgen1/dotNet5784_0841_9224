@@ -11,7 +11,7 @@ namespace BlTest
         /// <summary>
         /// A function that displays a main menu and captures the selection of the variable
         /// </summary>
-        enum Menue { Exit, Task, Engineer,Time };
+        enum Menue { Exit, Task, Engineer, Time };
 
         /// <summary>
         /// A function that displays a submenu for the entities and captures the user's selection.
@@ -62,7 +62,7 @@ namespace BlTest
                 DalTest.Initialization.Do();
             }
 
-            Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nTo exit the main program press 0");
+            Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nFor enter hours for tasks in the project\r\n To exit the main program press 0");
         }
 
         /// <summary>
@@ -77,6 +77,10 @@ namespace BlTest
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\n To update the data of an existing object, press 5\r\n");
         }
 
+        private static void subMenueMTime()
+        {
+            Console.WriteLine();
+        }
         /// <summary>
         /// Submenu activation for a task entity
         /// </summary>
@@ -111,6 +115,11 @@ namespace BlTest
                         break;
                 }
             }
+        }
+
+        private static void timeCase()
+        {
+
         }
 
 
@@ -154,27 +163,19 @@ namespace BlTest
         private static void createTaskCase()
         {
             Console.WriteLine("Enter alies");
-            string alies = Console.ReadLine();
+            string alies = Console.ReadLine()!;
 
             Console.WriteLine("Enter description");
-            string description = Console.ReadLine();
+            string description = Console.ReadLine()!;
 
-            Console.WriteLine("Enter task creation date");
-            DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
+            //Console.WriteLine("Enter Status");
 
-            Console.WriteLine("Enter planned date for the start of work");
-            DateTime? startDate = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Enter dependencies");
+            List<BO.TaskInList>? dependencies = Console.ReadLine();
 
-            Console.WriteLine("Enter date of commencement of work on the assignment");
-            DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter deadline");
-            DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter actual end date");
-            DateTime? completeDate = DateTime.Parse(Console.ReadLine());
-
-            TimeSpan? requiredEffortTime = deadlineDate - startDate;
+            Console.WriteLine(" required Effort Time ");
+            string requiredEffortTime = Console.ReadLine()!;
+            
 
             Console.WriteLine("Enter product");
             string product = Console.ReadLine();
@@ -185,13 +186,13 @@ namespace BlTest
             Console.WriteLine("Enter the engineer ID assigned to the task");
             int.TryParse(Console.ReadLine(), out int engineerID);
 
-            Console.WriteLine("Enter numer of the difficulty level of the task");
+            Console.WriteLine("Enter number of the difficulty level of the task");
             int.TryParse(Console.ReadLine(), out int difficultyNumber);
 
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
 
             DO.Task task = new(0, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
-            s_dal.Task.Create(task);
+            s_bl.Task.Create(task);
         }
 
         /// <summary>
@@ -398,18 +399,25 @@ namespace BlTest
                 string userInput = Console.ReadLine()!;
                 while (Enum.TryParse(userInput, out menue) && menue != Menue.Exit)
                 {
-                    switch (menue)
+                    try
                     {
-                        case Menue.Task:
-                            taskCase();
-                            break;
-                        case Menue.Engineer:
-                            engineerCase();
-                            break;
-                         case Menue.Time:
-                            timeCase();
-                        default:
-                            break;
+                        switch (menue)
+                        {
+                            case Menue.Task:
+                                taskCase();
+                                break;
+                            case Menue.Engineer:
+                                engineerCase();
+                                break;
+                            case Menue.Time:
+                                timeCase();
+                            default:
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
                     }
                     menueM();
                     userInput = Console.ReadLine();
