@@ -270,13 +270,15 @@ namespace BlTest
             string? alias = task.Alias;
             if (change("Alias"))
             {
-
+                Console.WriteLine("Enter alies");
+                alias = Console.ReadLine()!;
             }
 
        string? description= task.Description;
             if (change("Description"))
             {
-
+                Console.WriteLine("Enter description");
+                description = Console.ReadLine()!;
             }
             DateTime? createdAtDate = task.CreatedAtDate;
             if (change("CreatedAtDate"))
@@ -292,12 +294,25 @@ namespace BlTest
             List<BO.TaskInList>? dependencies = task.Dependencies;
             if (change("Dependencies"))
             {
-
+                dependencies = null;
+                Console.WriteLine("Enter a list of id of dependencies. When you are done, enter 0");
+                int num = int.Parse(Console.ReadLine()!);
+                while (num != 0)
+                {
+                    dependencies!.Add(new BO.TaskInList() { Id = num, Alias = null, Description = null, Status = 0 });
+                    num = int.Parse(Console.ReadLine()!);
+                }
             }
             TimeSpan? requiredEffortTime  = task.RequiredEffortTime;
             if (change("RequiredEffortTime"))
             {
-
+                Console.WriteLine("Enter required Effort Time");
+                bool temp = TimeSpan.TryParse(Console.ReadLine(), out requiredEffortTime);
+                while (!temp)
+                {
+                    Console.WriteLine("ERROR,Enter required Effort Time");
+                    temp = TimeSpan.TryParse(Console.ReadLine(), out requiredEffortTime);
+                }
             }
             DateTime? startDate = task.StartDate;
             if (change("StartDate"))
