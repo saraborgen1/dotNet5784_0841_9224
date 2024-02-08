@@ -17,4 +17,10 @@ public class Enums
         OnTrack, 
         Done
     }
+    public enum ProjectStatus
+    {
+        Creation,
+        Scheduling,
+        Start
+    }
 }

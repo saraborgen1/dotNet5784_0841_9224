@@ -13,6 +13,7 @@ internal class EngineerImplementation : IEngineer
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Name == null) throw new BO.BlTheInputIsInvalidException("Name");
         if (item.Cost == null || item.Cost <= 0) throw new BO.BlTheInputIsInvalidException("Cost");
+        if (item.Email == null) throw new BO.BlTheInputIsInvalidException("Email");
         if (item.Email != null)
         {
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
@@ -30,7 +31,6 @@ internal class EngineerImplementation : IEngineer
         {
             throw new BO.BlAlreadyExistException(ex);
         }
-
     }
 
     public void Delete(int id)

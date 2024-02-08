@@ -11,7 +11,9 @@ internal class TaskImplementation : ITask
     {
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
-
+        if(item.Description==null) throw new BO.BlTheInputIsInvalidException("Description");
+        if(item.RequiredEffortTime==null||item.RequiredEffortTime< TimeSpan.Zero) throw new BO.BlTheInputIsInvalidException("RequiredEffortTime");
+        if(item.Deliverables==null) throw new BO.BlTheInputIsInvalidException("Deliverables");
         if (item.Dependencies != null)
         {
             var temp = item.Dependencies.ToList().Select(p =>
@@ -21,11 +23,9 @@ internal class TaskImplementation : ITask
             });
         }
 
-
-
         DO.Task doTask = new DO.Task
-      (item.Id, item.Alias, item.Description, item.CreatedAtDate, null
-      , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
+      (item.Id, item.Alias, item.Description,DateTime.Now, null
+      , null, null, null, item.RequiredEffortTime,
       item.Deliverables, item.Remarks, null, (DO.EngineerExperience)item.Copmlexity);
 
         try
