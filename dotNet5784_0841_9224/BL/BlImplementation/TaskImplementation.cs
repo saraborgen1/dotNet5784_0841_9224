@@ -7,8 +7,11 @@ internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Task);
+    private IState state = new StateImplementation();
     public void Create(BO.Task item)
     {
+        if (state.StatusProject == BO.Enums.ProjectStatus.Start)
+            throw new BO.BlCannotBeDeletedWronfStateException("Cannot create a task at this state");
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
         if(item.Description==null) throw new BO.BlTheInputIsInvalidException("Description");
@@ -41,7 +44,7 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        if (IBl.GetState() == BO.Enums.ProjectStatus.Start)
+        if (state.StatusProject == BO.Enums.ProjectStatus.Start)
             throw new BO.BlCannotBeDeletedWronfStateException("Cannot delete a task at this state");
         try
         {
@@ -147,9 +150,12 @@ internal class TaskImplementation : ITask
 
     public void Update(BO.Task item)
     {
-
+        
         var doTask = _dal.Task.Read(p => p.Id == item.Id);
         if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
+
+        if(item.RequiredEffortTime!=doTask.RequiredEffortTime)
+
         if (item.ScheduledDate != null)
             if (item.Dependencies != null)
             {
@@ -187,6 +193,22 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlCannotBeDeletedException(ex);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 

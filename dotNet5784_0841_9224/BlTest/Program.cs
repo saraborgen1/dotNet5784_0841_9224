@@ -11,7 +11,7 @@ namespace BlTest
         /// <summary>
         /// A function that displays a main menu and captures the selection of the variable
         /// </summary>
-        enum Menue { Exit, Task, Engineer };
+        enum Menue { Exit, Task, Engineer,Time };
 
         /// <summary>
         /// A function that displays a submenu for the entities and captures the user's selection.
@@ -395,7 +395,7 @@ namespace BlTest
             {
                 Menue menue;
                 menueM();
-                string userInput = Console.ReadLine();
+                string userInput = Console.ReadLine()!;
                 while (Enum.TryParse(userInput, out menue) && menue != Menue.Exit)
                 {
                     switch (menue)
@@ -406,6 +406,8 @@ namespace BlTest
                         case Menue.Engineer:
                             engineerCase();
                             break;
+                         case Menue.Time:
+                            timeCase();
                         default:
                             break;
                     }
