@@ -423,18 +423,23 @@ namespace BlTest
         private static void createEngineerCase()
         {
             Console.WriteLine("Enter a unique ID number");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine()!);
+
             Console.WriteLine("Enter the name of the engineer (full name)");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine()!;
+
             Console.WriteLine("Enter an email address");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine()!;
+
             Console.WriteLine("Enter the level of the engineer");
-            int difficultyNumber = int.Parse(Console.ReadLine());
-            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            int difficultyNumber = int.Parse(Console.ReadLine()!);
+            BO.Enums.EngineerExperience difficulty = (BO.Enums.EngineerExperience)difficultyNumber;
+
             Console.WriteLine("Enter an hourly cost");
-            double cost = double.Parse(Console.ReadLine());
-            Engineer engineer = new Engineer(id, name, email, difficulty, cost);
-            s_dal.Engineer.Create(engineer);
+            double cost = double.Parse(Console.ReadLine()!);
+
+            BO.Engineer engineer = new() { Id = id, Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
+            s_bl.Engineer.Create(engineer);
         }
         /// <summary>
         /// A function that orders a print function for a specific engineer - according to his thesis
@@ -442,8 +447,8 @@ namespace BlTest
         private static void readEngineerCase()
         {
             Console.WriteLine("Enter Id");
-            int id = int.Parse(Console.ReadLine());
-            Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
+            int id = int.Parse(Console.ReadLine()!);
+            BO.Engineer engineer = s_bl.Engineer.Read(id)!;
             Console.WriteLine(engineer.ToString());
         }
         /// <summary>
@@ -451,8 +456,8 @@ namespace BlTest
         /// </summary>
         private static void readAllEngineerCase()
         {
-            IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAll();
-            foreach (Engineer item in engineers)
+            IEnumerable<BO.Engineer> engineers = s_bl.Engineer.ReadAll();
+            foreach (BO.Engineer item in engineers)
             {
                 Console.WriteLine(item.ToString());
             }
@@ -462,7 +467,7 @@ namespace BlTest
         /// </summary>
         private static void readAllDeletedEngineerCase()
         {
-            IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAllDelete();
+            IEnumerable<Engineer> engineers = s_bl.Engineer.ReadAllDelete();
             foreach (Engineer item in engineers)
             {
                 Console.WriteLine(item.ToString());
@@ -475,28 +480,41 @@ namespace BlTest
         private static void updateEngineerCase()
         {
             Console.WriteLine("Enter Id");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine()!);
+            BO.Engineer engineer = s_bl.Engineer.Read(id)!;
 
-            Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
-            Console.WriteLine(engineer.ToString());
+            string? name = engineer.Name;
+            if (change("Name"))
+            {
+                Console.WriteLine("Enter the name of the engineer (full name)");
+                name = Console.ReadLine()!;
+            }
 
-            Console.WriteLine("Enter the name of the engineer (full name)");
-            string name = Console.ReadLine();
-            Console.WriteLine("Enter an email address");
-            string email = Console.ReadLine();
-            Console.WriteLine("Enter the level of the engineer");
-            int difficultyNumber = int.Parse(Console.ReadLine());
-            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-            Console.WriteLine("Enter an hourly cost");
-            double? cost = double.Parse(Console.ReadLine());
-            if (name == null) { name = engineer.Name; }
-            if (email == null) { email = engineer.Email; }
-            if (difficulty == null) { difficulty = engineer.Level; }
-            if (cost == null) { cost = engineer.Cost; }
-            engineer = new Engineer(id, name, email, difficulty, cost);
+            string? email = engineer.Email;
+            if (change("Email"))
+            {
+                Console.WriteLine("Enter an email address");
+                email = Console.ReadLine()!;
+            }
+
+            BO.Enums.EngineerExperience difficulty = engineer.Level;
+            if (change("Level"))
+            {
+                Console.WriteLine("Enter the level of the engineer");
+                difficulty = (BO.Enums.EngineerExperience)int.Parse(Console.ReadLine()!);
+            }
+
+            double? cost  = engineer.Cost;
+            if (change("Cost"))
+            {
+                Console.WriteLine("Enter an hourly cost");
+                cost = double.Parse(Console.ReadLine()!);
+            }
+
+            engineer = new() { Id = id, Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
             try
             {
-                s_dal.Engineer.Update(engineer);
+                s_bl.Engineer.Update(engineer);
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
             return;
@@ -507,10 +525,10 @@ namespace BlTest
         private static void deleteEngineerCase()
         {
             Console.WriteLine("Enter id");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine()!);
             try
             {
-                s_dal.Engineer.Delete(id);
+                s_bl.Engineer.Delete(id);
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
@@ -539,6 +557,7 @@ namespace BlTest
                                 break;
                             case Menue.Time:
                                 timeCase();
+                                break;
                             default:
                                 break;
                         }
