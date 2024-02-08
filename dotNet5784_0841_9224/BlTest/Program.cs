@@ -1,5 +1,4 @@
 ﻿using DO;
-using System.Collections.Specialized;
 using System.Xml.Linq;
 using static BO.Enums;
 using static Dal.XMLTools;
@@ -136,7 +135,7 @@ namespace BlTest
 
         private static void timeCase()
         {
-
+            dje
         }
 
 
@@ -273,33 +272,28 @@ namespace BlTest
             BO.Task task = s_bl.Task.Read(id);
             string? alias = task.Alias;
             if (change("Alias"))
-            {
-                Console.WriteLine("Enter alies");
                 alias = Console.ReadLine()!;
-            }
 
-       string? description= task.Description;
+            string? description = task.Description;
             if (change("Description"))
-            {
-                Console.WriteLine("Enter description");
                 description = Console.ReadLine()!;
-            }
+            
             DateTime? createdAtDate = task.CreatedAtDate;
-            if (change("CreatedAtDate"))
-            {
-
-            }
 
             BO.Enums.Status status = task.Status;
             if (change("Status"))
             {
-
+                bool temp = int.TryParse(Console.ReadLine(), out int difficultyNumber);
+                while (!temp || difficultyNumber < 0 || difficultyNumber > 3)
+                {
+                    Console.WriteLine("ERROR,Enter number of the difficulty level of the task between 0-3");
+                    temp = int.TryParse(Console.ReadLine(), out difficultyNumber);
+                }
+                BO.Enums.EngineerExperience difficulty = (BO.Enums.EngineerExperience)difficultyNumber;
             }
             List<BO.TaskInList>? dependencies = task.Dependencies;
             if (change("Dependencies"))
             {
-                dependencies = null;
-                Console.WriteLine("Enter a list of id of dependencies. When you are done, enter 0");
                 int num = int.Parse(Console.ReadLine()!);
                 while (num != 0)
                 {
@@ -307,51 +301,87 @@ namespace BlTest
                     num = int.Parse(Console.ReadLine()!);
                 }
             }
-            TimeSpan? requiredEffortTime  = task.RequiredEffortTime;
+            TimeSpan? requiredEffortTime = task.RequiredEffortTime;
             if (change("RequiredEffortTime"))
             {
-                Console.WriteLine("Enter required Effort Time");
-                bool temp = TimeSpan.TryParse(Console.ReadLine(), out requiredEffortTime);
+                bool temp = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan tempRequiredEffortTime);
                 while (!temp)
                 {
                     Console.WriteLine("ERROR,Enter required Effort Time");
-                    temp = TimeSpan.TryParse(Console.ReadLine(), out requiredEffortTime);
+                    temp = TimeSpan.TryParse(Console.ReadLine(), out tempRequiredEffortTime);
                 }
+                requiredEffortTime = tempRequiredEffortTime;
             }
+
             DateTime? startDate = task.StartDate;
             if (change("StartDate"))
             {
-
+                bool temp = DateTime.TryParse(Console.ReadLine(), out DateTime tempStartDate);
+                while (!temp)
+                {
+                    Console.WriteLine("ERROR,Enter StartDate Time");
+                    temp = DateTime.TryParse(Console.ReadLine(), out tempStartDate);
+                }
+                startDate = tempStartDate;
             }
-             DateTime? scheduledDate = task.ScheduledDate;
+
+            DateTime? scheduledDate = task.ScheduledDate;
             if (change("ScheduledDate"))
             {
-
+                bool temp = DateTime.TryParse(Console.ReadLine(), out DateTime tempScheduledDate);
+                while (!temp)
+                {
+                    Console.WriteLine("ERROR,Enter StartDate Time");
+                    temp = DateTime.TryParse(Console.ReadLine(), out tempScheduledDate);
+                }
+                scheduledDate = tempScheduledDate;
             }
             DateTime? forecastDate = task.ForecastDate;
             if (change("ForecastDate"))
             {
-
+                bool temp = DateTime.TryParse(Console.ReadLine(), out DateTime tempForecastDate);
+                while (!temp)
+                {
+                    Console.WriteLine("ERROR,Enter ForecastDate Time");
+                    temp = DateTime.TryParse(Console.ReadLine(), out tempForecastDate);
+                }
+                forecastDate = tempForecastDate;
             }
+
             DateTime? deadlineDate = task.DeadlineDate;
             if (change("DeadlineDate"))
             {
-
+                bool temp = DateTime.TryParse(Console.ReadLine(), out DateTime tempDeadlineDate);
+                while (!temp)
+                {
+                    Console.WriteLine("ERROR,Enter ForecastDate Time");
+                    temp = DateTime.TryParse(Console.ReadLine(), out tempDeadlineDate);
+                }
+                deadlineDate = tempDeadlineDate;
             }
+
             DateTime? completeDate = task.CompleteDate;
             if (change("CompleteDate"))
             {
-
+                bool temp = DateTime.TryParse(Console.ReadLine(), out DateTime tempCompleteDate);
+                while (!temp)
+                {
+                    Console.WriteLine("ERROR,Enter ForecastDate Time");
+                    temp = DateTime.TryParse(Console.ReadLine(), out tempCompleteDate);
+                }
+                completeDate = tempCompleteDate;
             }
+
             string? deliverables = task.Deliverables;
             if (change("Deliverables"))
             {
-
+                deliverables = Console.ReadLine()!;
             }
+
             string? remarks = task.Remarks;
             if (change("Remarks"))
             {
-
+                remarks = Console.ReadLine()!;
             }
             BO.EngineerInTask? engineer = task.Engineer;
             if (change("Engineer"))
@@ -364,12 +394,12 @@ namespace BlTest
 
             }
 
-DO.Task task1 = new(id, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
-try
-{
-    s_dal.Task.Update(task1);
-}
-catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            DO.Task task1 = new(id, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            try
+            {
+                s_dal.Task.Update(task1);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
 
         }
@@ -377,154 +407,154 @@ catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         /// Deleting a task entity according to the received id
         /// </summary>
         private static void deleteTaskCase()
-{
-    Console.WriteLine("Enter id");
-    int id = int.Parse(Console.ReadLine()!);
-    try
-    {
-        s_bl.Task.Delete(id);
-    }
-    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-}
+        {
+            Console.WriteLine("Enter id");
+            int id = int.Parse(Console.ReadLine()!);
+            try
+            {
+                s_bl.Task.Delete(id);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+        }
 
-/// <summary>
-/// A function that calls an initialization function for a new engineer with all his details
-/// </summary>
-private static void createEngineerCase()
-{
-    Console.WriteLine("Enter a unique ID number");
-    int id = int.Parse(Console.ReadLine());
-    Console.WriteLine("Enter the name of the engineer (full name)");
-    string name = Console.ReadLine();
-    Console.WriteLine("Enter an email address");
-    string email = Console.ReadLine();
-    Console.WriteLine("Enter the level of the engineer");
-    int difficultyNumber = int.Parse(Console.ReadLine());
-    EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-    Console.WriteLine("Enter an hourly cost");
-    double cost = double.Parse(Console.ReadLine());
-    Engineer engineer = new Engineer(id, name, email, difficulty, cost);
-    s_dal.Engineer.Create(engineer);
-}
-/// <summary>
-/// A function that orders a print function for a specific engineer - according to his thesis
-/// </summary>
-private static void readEngineerCase()
-{
-    Console.WriteLine("Enter Id");
-    int id = int.Parse(Console.ReadLine());
-    Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
-    Console.WriteLine(engineer.ToString());
-}
-/// <summary>
-/// A function that calls a print function for a list of existing engineers with all the data in it
-/// </summary>
-private static void readAllEngineerCase()
-{
-    IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAll();
-    foreach (Engineer item in engineers)
-    {
-        Console.WriteLine(item.ToString());
-    }
-}
-/// <summary>
-/// A function that calls a print function for a list of existing engineers with all the data in it
-/// </summary>
-private static void readAllDeletedEngineerCase()
-{
-    IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAllDelete();
-    foreach (Engineer item in engineers)
-    {
-        Console.WriteLine(item.ToString());
-    }
-}
+        /// <summary>
+        /// A function that calls an initialization function for a new engineer with all his details
+        /// </summary>
+        private static void createEngineerCase()
+        {
+            Console.WriteLine("Enter a unique ID number");
+            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the name of the engineer (full name)");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter an email address");
+            string email = Console.ReadLine();
+            Console.WriteLine("Enter the level of the engineer");
+            int difficultyNumber = int.Parse(Console.ReadLine());
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            Console.WriteLine("Enter an hourly cost");
+            double cost = double.Parse(Console.ReadLine());
+            Engineer engineer = new Engineer(id, name, email, difficulty, cost);
+            s_dal.Engineer.Create(engineer);
+        }
+        /// <summary>
+        /// A function that orders a print function for a specific engineer - according to his thesis
+        /// </summary>
+        private static void readEngineerCase()
+        {
+            Console.WriteLine("Enter Id");
+            int id = int.Parse(Console.ReadLine());
+            Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
+            Console.WriteLine(engineer.ToString());
+        }
+        /// <summary>
+        /// A function that calls a print function for a list of existing engineers with all the data in it
+        /// </summary>
+        private static void readAllEngineerCase()
+        {
+            IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAll();
+            foreach (Engineer item in engineers)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+        /// <summary>
+        /// A function that calls a print function for a list of existing engineers with all the data in it
+        /// </summary>
+        private static void readAllDeletedEngineerCase()
+        {
+            IEnumerable<Engineer?> engineers = s_dal.Engineer.ReadAllDelete();
+            foreach (Engineer item in engineers)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
 
-/// <summary>
-/// A function that calls a function to update data for an existing engineer. If the user entered a null variable the function will leave the previous value of the engineer
-/// </summary>
-private static void updateEngineerCase()
-{
-    Console.WriteLine("Enter Id");
-    int id = int.Parse(Console.ReadLine());
+        /// <summary>
+        /// A function that calls a function to update data for an existing engineer. If the user entered a null variable the function will leave the previous value of the engineer
+        /// </summary>
+        private static void updateEngineerCase()
+        {
+            Console.WriteLine("Enter Id");
+            int id = int.Parse(Console.ReadLine());
 
-    Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
-    Console.WriteLine(engineer.ToString());
+            Engineer engineer = s_dal.Engineer.Read(item => item.Id == id);
+            Console.WriteLine(engineer.ToString());
 
-    Console.WriteLine("Enter the name of the engineer (full name)");
-    string name = Console.ReadLine();
-    Console.WriteLine("Enter an email address");
-    string email = Console.ReadLine();
-    Console.WriteLine("Enter the level of the engineer");
-    int difficultyNumber = int.Parse(Console.ReadLine());
-    EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-    Console.WriteLine("Enter an hourly cost");
-    double? cost = double.Parse(Console.ReadLine());
-    if (name == null) { name = engineer.Name; }
-    if (email == null) { email = engineer.Email; }
-    if (difficulty == null) { difficulty = engineer.Level; }
-    if (cost == null) { cost = engineer.Cost; }
-    engineer = new Engineer(id, name, email, difficulty, cost);
-    try
-    {
-        s_dal.Engineer.Update(engineer);
-    }
-    catch (Exception ex) { Console.WriteLine(ex.ToString()); }
-    return;
-}
-/// <summary>
-/// A function that activates delete that deletes an engineer from the list of engineers according to a desired Id
-/// </summary>
-private static void deleteEngineerCase()
-{
-    Console.WriteLine("Enter id");
-    int id = int.Parse(Console.ReadLine());
-    try
-    {
-        s_dal.Engineer.Delete(id);
-    }
-    catch (Exception ex) { Console.WriteLine(ex.Message); }
-}
-/// <summary>
-/// A main program that checks the integrity of the program and the entities that exist in it
-/// </summary>
-/// <param name="args"></param>
-static void Main(string[] args)
-{
-    try
-    {
-        Menue menue;
-        menueM();
-        string userInput = Console.ReadLine()!;
-        while (Enum.TryParse(userInput, out menue) && menue != Menue.Exit)
+            Console.WriteLine("Enter the name of the engineer (full name)");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter an email address");
+            string email = Console.ReadLine();
+            Console.WriteLine("Enter the level of the engineer");
+            int difficultyNumber = int.Parse(Console.ReadLine());
+            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
+            Console.WriteLine("Enter an hourly cost");
+            double? cost = double.Parse(Console.ReadLine());
+            if (name == null) { name = engineer.Name; }
+            if (email == null) { email = engineer.Email; }
+            if (difficulty == null) { difficulty = engineer.Level; }
+            if (cost == null) { cost = engineer.Cost; }
+            engineer = new Engineer(id, name, email, difficulty, cost);
+            try
+            {
+                s_dal.Engineer.Update(engineer);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            return;
+        }
+        /// <summary>
+        /// A function that activates delete that deletes an engineer from the list of engineers according to a desired Id
+        /// </summary>
+        private static void deleteEngineerCase()
+        {
+            Console.WriteLine("Enter id");
+            int id = int.Parse(Console.ReadLine());
+            try
+            {
+                s_dal.Engineer.Delete(id);
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+        }
+        /// <summary>
+        /// A main program that checks the integrity of the program and the entities that exist in it
+        /// </summary>
+        /// <param name="args"></param>
+        static void Main(string[] args)
         {
             try
             {
-                switch (menue)
+                Menue menue;
+                menueM();
+                string userInput = Console.ReadLine()!;
+                while (Enum.TryParse(userInput, out menue) && menue != Menue.Exit)
                 {
-                    case Menue.Task:
-                        taskCase();
-                        break;
-                    case Menue.Engineer:
-                        engineerCase();
-                        break;
-                    case Menue.Time:
-                        timeCase();
-                    default:
-                        break;
+                    try
+                    {
+                        switch (menue)
+                        {
+                            case Menue.Task:
+                                taskCase();
+                                break;
+                            case Menue.Engineer:
+                                engineerCase();
+                                break;
+                            case Menue.Time:
+                                timeCase();
+                            default:
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                    menueM();
+                    userInput = Console.ReadLine();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
             }
-            menueM();
-            userInput = Console.ReadLine();
         }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.ToString());
-    }
-}
     }
 }
