@@ -1,7 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
@@ -15,7 +13,15 @@ internal class TaskImplementation : ITask
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
 
         if (item.Dependencies != null)
-            item.Dependencies.ToList().ForEach(p => _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id)));
+        {
+            var temp = item.Dependencies.ToList().Select(p =>
+            {
+                _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
+                return p;
+            });
+        }
+
+
 
         DO.Task doTask = new DO.Task
       (item.Id, item.Alias, item.Description, item.CreatedAtDate, null
@@ -43,8 +49,9 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
         }
-        List<int> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
-                                    select item.DependentTask ?? 0).ToList();
+        List<int?> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
+                                     where item.DependentTask != null
+                                     select item.DependentTask).ToList();
         if (dependenciesId != null)
             throw new BO.BlCannotBeDeletedException(id, _entityName);
 
@@ -65,16 +72,22 @@ internal class TaskImplementation : ITask
         if (doTask == null)
             throw new BO.BlDoesNotExistException(id, _entityName);
 
-        List<int?>? dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentTask == id)
-                                      select item.DependentOnTask).ToList();
+        var gDependenciesId = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
+                               group temp by temp.DependentTask % id into gs
+                               select gs).ToList();
+
+        var dependenciesId = (from temp in gDependenciesId
+                              where temp.Key == 0
+                              from item in temp
+                              select item.Id).ToList();
 
         List<BO.TaskInList>? dependencies = (from item in dependenciesId
                                              let alias = _dal.Task.Read(p => p.Id == item)?.Ailas ?? " "
                                              let description = _dal.Task.Read(p => p.Id == item)?.Description ?? " "
-                                             let temp = (BO.Enums.Status)Read(item ?? 0).Status
+                                             let temp = (BO.Enums.Status)Read(item).Status
                                              select new BO.TaskInList()
                                              {
-                                                 Id = item.Value,
+                                                 Id = item,
                                                  Alias = alias,
                                                  Description = description,
                                                  Status = temp
@@ -186,7 +199,7 @@ internal class TaskImplementation : ITask
             {
                 if (_dal.Task.Read(p => p.Id == item.Id)!.ScheduledDate == null)
                     throw new BO.BlNoDateException("The task it depends on doesnt have a scheduled date");
-                 return item;
+                return item;
             });
             var temp2 = dependencies.Select(item =>
             {

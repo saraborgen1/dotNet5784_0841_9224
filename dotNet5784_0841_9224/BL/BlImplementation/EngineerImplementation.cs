@@ -98,6 +98,7 @@ internal class EngineerImplementation : IEngineer
         if (filter != null)
             return (from item in doEngineerList
                     where filter(item)
+                    orderby item.Cost
                     select item).ToList();
 
         return doEngineerList;
