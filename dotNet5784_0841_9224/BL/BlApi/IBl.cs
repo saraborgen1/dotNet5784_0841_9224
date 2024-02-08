@@ -5,6 +5,6 @@ public interface IBl
     public IEngineer Engineer { get; }
     public DateTime ProjectCreate { init; get; }
     public DateTime ProjectEnd { init; get; }
-    public BO.Enums.ProjectStatus getState { get; }
+    public BO.Enums.ProjectStatus GetState();
     
 }

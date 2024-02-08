@@ -41,6 +41,8 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
+        if (IBl.GetState() == BO.Enums.ProjectStatus.Start)
+            throw new BO.BlCannotBeDeletedWronfStateException("Cannot delete a task at this state");
         try
         {
             BO.Task boTask = Read(id);
