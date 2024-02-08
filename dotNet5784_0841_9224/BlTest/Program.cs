@@ -1,5 +1,6 @@
 ﻿using DO;
 using System.Xml.Linq;
+using static BO.Enums;
 using static Dal.XMLTools;
 
 namespace BlTest
@@ -168,30 +169,55 @@ namespace BlTest
             Console.WriteLine("Enter description");
             string description = Console.ReadLine()!;
 
-            //Console.WriteLine("Enter Status");
+            List<BO.TaskInList>? dependencies = null;
+            Console.WriteLine("Enter a list of id of dependencies. When you are done, enter 0");
+            int num= int.Parse(Console.ReadLine()!);
+            while (num!=0)
+            {
+                dependencies!.Add(new BO.TaskInList(){ Id = num, Alias=null, Description=null, Status=0 });
+                num = int.Parse(Console.ReadLine()!);
+            }
 
-            Console.WriteLine("Enter dependencies");
-            List<BO.TaskInList>? dependencies = Console.ReadLine();
+            Console.WriteLine("Enter required Effort Time");
+            bool temp = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan requiredEffortTime);
+            while (!temp)
+            {
+                Console.WriteLine("ERROR,Enter required Effort Time");
+                temp = TimeSpan.TryParse(Console.ReadLine(), out requiredEffortTime);
+            }
 
-            Console.WriteLine(" required Effort Time ");
-            string requiredEffortTime = Console.ReadLine()!;
-            
-
-            Console.WriteLine("Enter product");
-            string product = Console.ReadLine();
+            Console.WriteLine("Enter deliverables");
+            string deliverables = Console.ReadLine()!;
 
             Console.WriteLine("Enter remarks");
-            string remarks = Console.ReadLine();
+            string remarks = Console.ReadLine()!;
 
-            Console.WriteLine("Enter the engineer ID assigned to the task");
-            int.TryParse(Console.ReadLine(), out int engineerID);
+            Console.WriteLine("Enter number of the difficulty level of the task between 0-4");
+            temp= int.TryParse(Console.ReadLine(), out int difficultyNumber);
+            while (!temp|| difficultyNumber<0|| difficultyNumber>4) 
+            {
+                Console.WriteLine("ERROR,Enter number of the difficulty level of the task between 0-4");
+                temp = int.TryParse(Console.ReadLine(), out difficultyNumber);
+            }
+            BO.Enums.EngineerExperience difficulty = (BO.Enums.EngineerExperience)difficultyNumber;
 
-            Console.WriteLine("Enter number of the difficulty level of the task");
-            int.TryParse(Console.ReadLine(), out int difficultyNumber);
-
-            EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
-
-            DO.Task task = new(0, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            BO.Task task = new(){Id=0,
+                Alias=alies,
+                Description= description,
+                CreatedAtDate=null,
+                Status= Status.Unscheduled,
+                Dependencies= dependencies,
+                RequiredEffortTime= requiredEffortTime,
+                StartDate=null,
+                ScheduledDate=null,
+                ForecastDate=null,
+                DeadlineDate=null,
+                CompleteDate=null,
+                Deliverables=deliverables,
+                Remarks= remarks,
+                Engineer=null,
+                Copmlexity=difficulty
+            };
             s_bl.Task.Create(task);
         }
 
@@ -201,9 +227,9 @@ namespace BlTest
         private static void readTaskCase()
         {
             Console.WriteLine("Enter Id");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine()!);
 
-            DO.Task task = s_dal.Task.Read(item => item.Id == id);
+            BO.Task task = s_bl.Task.Read(id);
             Console.WriteLine(task.ToString());
         }
 
@@ -212,9 +238,9 @@ namespace BlTest
         /// </summary>
         private static void readAllTaskCase()
         {
-            IEnumerable<DO.Task?> tasks = s_dal.Task.ReadAll();
+            IEnumerable<BO.Task> tasks = s_bl.Task.ReadAll();
 
-            foreach (DO.Task item in tasks)
+            foreach (BO.Task item in tasks)
                 Console.WriteLine(item);
         }
 
@@ -224,9 +250,9 @@ namespace BlTest
         private static void updateTaskCase()
         {
             Console.WriteLine("Enter Id");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine()!);
 
-            DO.Task task = s_dal.Task.Read(item => item.Id == id);
+            BO.Task task = s_bl.Task.Read(id);
 
             Console.WriteLine("Enter alies");
             string alies = Console.ReadLine();
@@ -281,10 +307,10 @@ namespace BlTest
         private static void deleteTaskCase()
         {
             Console.WriteLine("Enter id");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine()!);
             try
             {
-                s_dal.Task.Delete(id);
+                s_bl.Task.Delete(id);
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
