@@ -1,4 +1,5 @@
 ﻿using DO;
+using System.Collections.Specialized;
 using System.Xml.Linq;
 using static BO.Enums;
 using static Dal.XMLTools;
@@ -18,7 +19,10 @@ namespace BlTest
                 temp = int.TryParse(Console.ReadLine(), out num);
             }
             if (num == 0)
+            {
+                Console.WriteLine($"enter {name}");
                 return true;
+            }
             return false;
         }
         /// <summary>
@@ -360,44 +364,6 @@ namespace BlTest
 
             }
 
-        Console.WriteLine("Enter alies");
-            string alies = Console.ReadLine();
-            if (alies == null)
-                alies = task.Ailas;
-
-            Console.WriteLine("Enter description");
-            string description = Console.ReadLine();
-            if (description == null)
-                description = task.Description;
-
-            Console.WriteLine("Enter task creation date");
-            DateTime? createdAtDate = DateTime.Parse(Console.ReadLine());
-            if (createdAtDate == null) { createdAtDate = task.CreatedAtDate; }
-    Console.WriteLine("Enter planned date for the start of work");
-            DateTime? startDate = DateTime.Parse(Console.ReadLine());
-            if (startDate == null) { startDate = task.StartDate; }
-Console.WriteLine("Enter date of commencement of work on the assignment");
-DateTime? scheduledDate = DateTime.Parse(Console.ReadLine());
-if (scheduledDate == null) { scheduledDate = task.ScheduledDate; }
-Console.WriteLine("Enter deadline");
-DateTime? deadlineDate = DateTime.Parse(Console.ReadLine());
-if (deadlineDate == null) { deadlineDate = task.DeadlineDate; }
-Console.WriteLine("Enter actual end date");
-DateTime? completeDate = DateTime.Parse(Console.ReadLine());
-if (completeDate == null) { completeDate = task.CompleteDate; }
-TimeSpan? requiredEffortTime = deadlineDate - startDate;
-Console.WriteLine("Enter product");
-string product = Console.ReadLine();
-if (product == null) { product = task.Deliverables; }
-Console.WriteLine("Enter remarks");
-string remarks = Console.ReadLine();
-if (remarks == null) { remarks = task.Remarks; }
-Console.WriteLine("Enter the engineer ID assigned to the task");
-int? engineerID = int.Parse(Console.ReadLine());
-if (engineerID == 0) { engineerID = task.EngineerId; }
-Console.WriteLine("Enter numer of the difficulty level of the task");
-int difficultyNumber = int.Parse(Console.ReadLine());
-EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
 DO.Task task1 = new(id, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
 try
 {
