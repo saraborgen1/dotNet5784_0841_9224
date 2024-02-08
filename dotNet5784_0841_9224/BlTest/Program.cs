@@ -314,12 +314,36 @@ namespace BlTest
             {
 
             }
-        public DateTime? DeadlineDate { get; set; }
-        public DateTime? CompleteDate { get; set; }
-        public string? Deliverables { get; set; }
-        public string? Remarks { get; set; }
-        public BO.EngineerInTask? Engineer { get; set; }
-        public BO.Enums.EngineerExperience Copmlexity { get; set; }
+            DateTime? deadlineDate = task.DeadlineDate;
+            if (change("DeadlineDate"))
+            {
+
+            }
+            DateTime? completeDate = task.CompleteDate;
+            if (change("CompleteDate"))
+            {
+
+            }
+            string? deliverables = task.Deliverables;
+            if (change("Deliverables"))
+            {
+
+            }
+            string? remarks = task.Remarks;
+            if (change("Remarks"))
+            {
+
+            }
+            BO.EngineerInTask? engineer = task.Engineer;
+            if (change("Engineer"))
+            {
+
+            }
+            BO.Enums.EngineerExperience copmlexity = task.Copmlexity;
+            if (change("Copmlexity"))
+            {
+
+            }
 
         Console.WriteLine("Enter alies");
             string alies = Console.ReadLine();
