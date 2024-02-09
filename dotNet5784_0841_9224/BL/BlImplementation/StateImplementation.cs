@@ -17,7 +17,7 @@ internal class StateImplementation : IState
         set
         {
             XElement root = LoadListFromXMLElement("data-config");
-            root.Element("StartProject")?.SetValue(value);
+            root.Element("StartProject")?.SetValue(value!);
             SaveListToXMLElement(root, "data-config");
         }
 
