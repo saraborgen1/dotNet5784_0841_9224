@@ -2,9 +2,7 @@
 <config>
   <NextTaskId>21</NextTaskId>
   <NextDependencyId>52</NextDependencyId>
-	<StartProject>
-		
-	</StartProject>
-	<EndProject></EndProject>
-	<StatusProject></StatusProject>
+  <StartProject></StartProject>
+  <EndProject></EndProject>
+  <StatusProject></StatusProject>
 </config>

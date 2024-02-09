@@ -105,4 +105,9 @@ internal class EngineerImplementation : IEngineer
                where !item.Active
                select item;
     }
+    public void DeleteAll()
+    {
+        List<Engineer> newListEngineer = new List<Engineer>(); // Create a new empty list
+        SaveListToXMLSerializer(newListEngineer, s_engineers_xml); // Save the empty list to XML
+    }
 }

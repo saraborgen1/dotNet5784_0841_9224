@@ -81,10 +81,7 @@ internal class EngineerImplementation : IEngineer
     }
     public void DeleteAll()
     {
-        if (DataSource.Engineers.ReadAllDelete().FirstOrDefault(item => item.Id == id) == null)
-            throw new DalDoesNotExistsException(id, _entityName);
-
-        DataSource.Tasks.Remove(DataSource.Tasks.FirstOrDefault(item => item.Id == id)!);
+        DataSource.Engineers.Clear();
     }
 }
 

@@ -12,7 +12,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Architectural Planning</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>2</Id>
@@ -26,7 +26,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Structural Framing</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>3</Id>
@@ -40,7 +40,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Electrical Wiring</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>4</Id>
@@ -54,7 +54,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Plumbing Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>5</Id>
@@ -82,7 +82,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Drywall Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>7</Id>
@@ -96,7 +96,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Flooring Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>8</Id>
@@ -110,7 +110,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Roofing Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>9</Id>
@@ -138,7 +138,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Interior Painting</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>11</Id>
@@ -152,7 +152,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Window Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>12</Id>
@@ -166,7 +166,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Door Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>13</Id>
@@ -180,7 +180,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Cabinet Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>14</Id>
@@ -194,7 +194,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Appliance Setup</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>15</Id>
@@ -236,7 +236,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Driveway Paving</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>18</Id>
@@ -250,7 +250,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Home Security System Setup</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>19</Id>
@@ -264,7 +264,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Smart Home Integration</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>20</Id>
