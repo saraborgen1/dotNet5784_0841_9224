@@ -7,5 +7,6 @@ public interface IEngineer
     public void Create(BO.Engineer item);
     public void Delete(int id);
     public void Update(BO.Engineer item);
-
+    public IEnumerable<BO.Engineer> ReadAllDelete();
+    public void DeleteAll();
 }

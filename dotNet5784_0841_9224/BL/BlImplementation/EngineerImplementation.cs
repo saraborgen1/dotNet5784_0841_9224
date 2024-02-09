@@ -38,8 +38,8 @@ internal class EngineerImplementation : IEngineer
 
         BO.Engineer engineer = Read(id)!;
 
-        var doTask = _dal.Task.ReadAll().Where(p=>p.EngineerId == id).ToList();
-        if (doTask == null) 
+        var doTask = _dal.Task.ReadAll().Where(p => p.EngineerId == id).ToList();
+        if (doTask == null)
         {
             try
             {
@@ -136,6 +136,14 @@ internal class EngineerImplementation : IEngineer
         {
             throw new BO.BlDoesNotExistException(ex);
         }
+
+    }
+    public IEnumerable<BO.Engineer> ReadAllDelete()
+    {
+        return 1;
+    }
+    public void DeleteAll()
+    {
 
     }
 }
