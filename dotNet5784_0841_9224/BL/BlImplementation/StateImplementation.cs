@@ -3,7 +3,7 @@ using BlApi;
 using BO;
 using System;
 using System.Xml.Linq;
-
+using static Dal.XMLTools;
 internal class StateImplementation : IState
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
@@ -11,16 +11,16 @@ internal class StateImplementation : IState
     {
         get
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml");
+            XElement root = LoadListFromXMLElement("data-config");
             return DateTime.TryParse((string?)root.Element("StartProject"), out var result) ? (DateTime?)result : null;
-
         }
         set
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml"); ;
-            root.Element("StartProject")?.SetValue(value?.ToString());
-            root.Save(@"..\xml\data_config.xml");
+            XElement root = LoadListFromXMLElement("data-config");
+            root.Element("StartProject")?.SetValue(value);
+            SaveListToXMLElement(root, "data-config");
         }
+
     }
 
 

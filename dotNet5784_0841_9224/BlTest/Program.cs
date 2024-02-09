@@ -79,7 +79,7 @@ namespace BlTest
             }
 
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nTo exit the main program press 0");
-            //if (s_bl.State.StartProject.GetType==null)
+            if (s_bl.State.StartProject==null)
                 Console.WriteLine("For enter hours for tasks in the project 3");
         }
 
