@@ -8,4 +8,5 @@ internal class Bl : IBl
 
     public IEngineer Engineer => new EngineerImplementation();
 
+    public IState State => new StateImplementation();
 }

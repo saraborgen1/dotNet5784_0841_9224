@@ -112,10 +112,10 @@ internal class EngineerImplementation : IEngineer
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
         }
-        if ((doEngeenir.Level > item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
+        if ((doEngeenir.Level > (DO.EngineerExperience)item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
         try
         {
-            DO.Engineer updatedEngeenir = new DO.Engineer(item.Id, item.Name, item.Email, item.Level, item.Cost);
+            DO.Engineer updatedEngeenir = new DO.Engineer(item.Id, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
             _dal.Engineer.Update(updatedEngeenir);
 
             if (item.Task != null)

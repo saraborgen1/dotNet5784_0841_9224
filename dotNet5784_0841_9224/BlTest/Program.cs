@@ -1,9 +1,7 @@
-﻿using DalApi;
-using DO;
+﻿using DO;
 using System.Xml.Linq;
 using static BO.Enums;
 using static Dal.XMLTools;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlTest
 {
@@ -530,8 +528,8 @@ namespace BlTest
         /// </summary>
         private static void readAllDeletedEngineerCase()
         {
-            IEnumerable<Engineer> engineers = s_bl.Engineer.ReadAllDeleted();
-            foreach (Engineer item in engineers)
+            IEnumerable<BO.Engineer> engineers = s_bl.Engineer.ReadAllDelete();
+            foreach (BO.Engineer item in engineers)
             {
                 Console.WriteLine(item.ToString());
             }

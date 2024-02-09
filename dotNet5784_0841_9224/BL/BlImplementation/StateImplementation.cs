@@ -3,18 +3,49 @@ using BlApi;
 using BO;
 using DalApi;
 using System;
+using System.Data.Common;
+using System.Xml.Linq;
 
 internal class StateImplementation : IState
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    public DateTime StartProject { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
-    public DateTime EndProject { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+    public DateTime? StartProject
+    {
+        get
+        {
+            XElement root = XElement.Load(@"..\xml\data_config.xml");
+            return DateTime.TryParse((string?)root.Element("StartProject"), out var result) ? (DateTime?)result : null;
+
+        }
+        set
+        {
+            XElement root = XElement.Load(@"..\xml\data_config.xml");;
+            root.Element("StartProject")?.SetValue(value?.ToString());
+            root.Save(@"..\xml\data_config.xml");
+        }   
+    }
+
+    public DateTime? EndProject 
+    {
+        get
+        {
+            XElement root = XElement.Load(@"..\xml\data_config.xml");
+            return DateTime.TryParse((string?)root.Element("EndProject"), out var result) ? (DateTime?)result : null;
+
+        }
+        set
+        {
+            XElement root = XElement.Load(@"..\xml\data_config.xml"); ;
+            root.Element("EndProject")?.SetValue(value?.ToString());
+            root.Save(@"..\xml\data_config.xml");
+        }
+    }
     public BO.Enums.ProjectStatus StatusProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 
     public void UpdateState()
     {
-        if (ProjectCreate == null)
+        if (StartProject == null)
             StatusProject= Enums.ProjectStatus.Creation;
         if (_dal.Task.Read(p => p.StartDate == null) != null)
             StatusProject= Enums.ProjectStatus.Scheduling;
