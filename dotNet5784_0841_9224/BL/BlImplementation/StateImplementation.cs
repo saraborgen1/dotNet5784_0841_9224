@@ -1,9 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
-using DalApi;
 using System;
-using System.Data.Common;
 using System.Xml.Linq;
 
 internal class StateImplementation : IState
@@ -19,13 +17,14 @@ internal class StateImplementation : IState
         }
         set
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml");;
+            XElement root = XElement.Load(@"..\xml\data_config.xml"); ;
             root.Element("StartProject")?.SetValue(value?.ToString());
             root.Save(@"..\xml\data_config.xml");
-        }   
+        }
     }
 
-    public DateTime? EndProject 
+
+    public DateTime? EndProject
     {
         get
         {
@@ -46,9 +45,9 @@ internal class StateImplementation : IState
     public void UpdateState()
     {
         if (StartProject == null)
-            StatusProject= Enums.ProjectStatus.Creation;
+            StatusProject = Enums.ProjectStatus.Creation;
         if (_dal.Task.Read(p => p.StartDate == null) != null)
-            StatusProject= Enums.ProjectStatus.Scheduling;
-        StatusProject= Enums.ProjectStatus.Start;
+            StatusProject = Enums.ProjectStatus.Scheduling;
+        StatusProject = Enums.ProjectStatus.Start;
     }
 }
