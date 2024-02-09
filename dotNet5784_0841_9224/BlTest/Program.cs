@@ -1,4 +1,5 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 using System.Xml.Linq;
 using static BO.Enums;
 using static Dal.XMLTools;
@@ -32,7 +33,7 @@ namespace BlTest
         /// <summary>
         /// A function that displays a submenu for the entities and captures the user's selection.
         /// </summary>
-        enum SubMenue { Exit, Create, Read, ReadAll, Delete, Update, UpdateDate };
+        enum SubMenue { Exit, Create, Read, ReadAll, Delete, Update, UpdateDate, ReadDeleted };
 
         // <summary>
         /// Reset the running number
@@ -55,14 +56,14 @@ namespace BlTest
             foreach (BO.Task item in tasks)
                 s_bl.Task.Delete(item.Id);
 
-
-            IEnumerable<BO.Engineer> engineers = s_bl.Engineer.ReadAll().ToList();
-
-            foreach (BO.Engineer item in engineers)
-                s_bl.Engineer.Delete(item.Id);
+            s_bl.Engineer.DeleteAll();
 
             getAndIncreaseNextId("NextTaskId");
             getAndIncreaseNextId("NextDependencyId");
+
+            s_bl.State.StartProject = null;
+            s_bl.State.EndProject = null;
+            s_bl.State.StatusProject = BO.Enums.ProjectStatus.Creation;
         }
 
         /// <summary>
@@ -78,7 +79,9 @@ namespace BlTest
                 DalTest.Initialization.Do();
             }
 
-            Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nFor enter hours for tasks in the project\r\n To exit the main program press 0");
+            Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\n To exit the main program press 0");
+            if (s_bl.State.StartProject==null)
+                Console.WriteLine("For enter hours for tasks in the project 3");
         }
 
         /// <summary>
@@ -95,7 +98,8 @@ namespace BlTest
 
         private static void subMenueMTime()
         {
-            Console.WriteLine();
+            Console.WriteLine( "Enter start project date");
+
         }
         /// <summary>
         /// Submenu activation for a task entity
@@ -133,7 +137,7 @@ namespace BlTest
             }
         }
 
-        private static void timeCase()
+        private static void updateDateTaskCase()
         {
             Console.WriteLine("Enter id");
             int.TryParse(Console.ReadLine(), out int id);
@@ -180,6 +184,10 @@ namespace BlTest
                     case SubMenue.Update:
                         updateEngineerCase();
                         break;
+                    case SubMenue.ReadDeleted:
+                        readAllDeletedEngineerCase();
+                        break;
+
                     default:
                         break;
                 }
