@@ -3,6 +3,7 @@ using DO;
 using System.Xml.Linq;
 using static BO.Enums;
 using static Dal.XMLTools;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BlTest
 {
@@ -93,12 +94,19 @@ namespace BlTest
         }
         private static void subMenueMEngineer()
         {
-            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\n To update the data of an existing object, press 5\r\n");
+            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\n To update the data of an existing object, press 5\r\n To display the list of all the deleted objects of the entity type press 7 ");
         }
 
         private static void subMenueMTime()
         {
             Console.WriteLine( "Enter start project date");
+            var temp = DateTime.TryParse(Console.ReadLine(), out DateTime projectDate);
+            while (!temp || projectDate < DateTime.Now)
+            {
+                temp = DateTime.TryParse(Console.ReadLine(), out projectDate);
+            }
+
+            s_bl.State.StartProject= projectDate;
 
         }
         /// <summary>
@@ -611,7 +619,7 @@ namespace BlTest
                                 engineerCase();
                                 break;
                             case Menue.Time:
-                                timeCase();
+                                subMenueMTime();
                                 break;
                             default:
                                 break;
