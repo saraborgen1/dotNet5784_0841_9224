@@ -514,7 +514,7 @@ namespace BlTest
         /// </summary>
         private static void readAllDeletedEngineerCase()
         {
-            IEnumerable<Engineer> engineers = s_bl.Engineer.ReadAllDelete();
+            IEnumerable<Engineer> engineers = s_bl.Engineer.ReadAllDeleted();
             foreach (Engineer item in engineers)
             {
                 Console.WriteLine(item.ToString());

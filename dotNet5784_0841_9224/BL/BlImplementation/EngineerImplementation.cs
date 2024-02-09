@@ -8,6 +8,24 @@ internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
+    private BO.Engineer? BOFromDO(DO.Engineer doEngineer)
+    {
+        return new BO.Engineer()
+        {
+
+            Id = doEngineer.Id,
+            Name = doEngineer.Name,
+            Email = doEngineer.Email,
+            Level = (BO.Enums.EngineerExperience)doEngineer.Level,
+            Cost = doEngineer.Cost,
+            Task = new BO.TaskInEngineer()
+            {
+                Id = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!.Id,
+                Alias = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!.Ailas
+            }
+        };
+    }
+
     public void Create(BO.Engineer item)
     {
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
@@ -21,7 +39,7 @@ internal class EngineerImplementation : IEngineer
         }
 
         DO.Engineer doEngineer = new DO.Engineer
-            (item.Id, item.Name, item.Email, item.Level, item.Cost);
+            (item.Id, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
 
         try
         {
@@ -66,35 +84,13 @@ internal class EngineerImplementation : IEngineer
         if (temp != null)
             taskInEngineer = new BO.TaskInEngineer() { Id = temp.Id, Alias = temp.Ailas };
 
-        return new BO.Engineer()
-        {
-            Id = id,
-            Name = doEngineer.Name,
-            Email = doEngineer.Email,
-            Level = doEngineer.Level,
-            Cost = doEngineer.Cost,
-            Task = taskInEngineer
-        };
+        return BOFromDO(doEngineer);
     }
 
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
         var doEngineerList = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-                              select new BO.Engineer()
-                              {
-
-                                  Id = doEngineer.Id,
-                                  Name = doEngineer.Name,
-                                  Email = doEngineer.Email,
-                                  Level = doEngineer.Level,
-                                  Cost = doEngineer.Cost,
-                                  Task = new BO.TaskInEngineer()
-                                  {
-                                      Id = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!.Id,
-                                      Alias = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!.Ailas
-                                  }
-                              }).ToList();
-
+                              select BOFromDO( doEngineer)).ToList();
         if (filter != null)
             return (from item in doEngineerList
                     where filter(item)
@@ -140,10 +136,12 @@ internal class EngineerImplementation : IEngineer
     }
     public IEnumerable<BO.Engineer> ReadAllDelete()
     {
-        return 1;
+        var templist = _dal.Engineer.ReadAllDelete();
+        return from item in templist
+               select BOFromDO(item);
     }
     public void DeleteAll()
     {
-
+        _dal.Engineer.DeleteAll();
     }
 }
