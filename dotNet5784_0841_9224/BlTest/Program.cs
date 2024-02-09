@@ -299,10 +299,10 @@ namespace BlTest
                 bool temp = int.TryParse(Console.ReadLine(), out int difficultyNumber);
                 while (!temp || difficultyNumber < 0 || difficultyNumber > 3)
                 {
-                    Console.WriteLine("ERROR,Enter number of the difficulty level of the task between 0-3");
+                    Console.WriteLine("ERROR,Enter number of the status level of the task between 0-3");
                     temp = int.TryParse(Console.ReadLine(), out difficultyNumber);
                 }
-                BO.Enums.EngineerExperience difficulty = (BO.Enums.EngineerExperience)difficultyNumber;
+                status = (BO.Enums.Status)difficultyNumber;
             }
             List<BO.TaskInList>? dependencies = task.Dependencies;
             if (change("Dependencies"))
@@ -404,13 +404,37 @@ namespace BlTest
             BO.Enums.EngineerExperience copmlexity = task.Copmlexity;
             if (change("Copmlexity"))
             {
-                gdgf
+                bool temp = int.TryParse(Console.ReadLine(), out int difficultyNumber);
+                while (!temp || difficultyNumber < 0 || difficultyNumber > 4)
+                {
+                    Console.WriteLine("ERROR,Enter number of the difficulty level of the task between 0-3");
+                    temp = int.TryParse(Console.ReadLine(), out difficultyNumber);
+                }
+                copmlexity = (BO.Enums.EngineerExperience)difficultyNumber;
             }
 
-            DO.Task task1 = new(id, alies, description, createdAtDate, startDate, scheduledDate, deadlineDate, completeDate, requiredEffortTime, product, remarks, engineerID, difficulty);
+            BO.Task task1 = new()
+            {
+                Id = id,
+                Alias = alias,
+                Description = description,
+                CreatedAtDate = createdAtDate,
+                Status = status,
+                Dependencies = dependencies,
+                RequiredEffortTime = requiredEffortTime,
+                StartDate = startDate,
+                ScheduledDate = scheduledDate,
+                ForecastDate = forecastDate,
+                DeadlineDate = deadlineDate,
+                CompleteDate = completeDate,
+                Deliverables = deliverables,
+                Remarks = remarks,
+                Engineer = engineer,
+                Copmlexity = copmlexity
+            };
             try
             {
-                s_dal.Task.Update(task1);
+                s_bl.Task.Update(task1);
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
 
