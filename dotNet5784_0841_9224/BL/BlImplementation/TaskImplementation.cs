@@ -137,7 +137,8 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null!)
     {
-        var doTaskList = (from DO.Task doTask in _dal.Task.ReadAll()
+        var tempList = _dal.Task.ReadAll();
+        var doTaskList = (from DO.Task doTask in tempList
                           select Read(doTask.Id)).ToList();
 
         if (filter != null)
