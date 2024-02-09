@@ -399,8 +399,18 @@ namespace BlTest
             BO.EngineerInTask? engineer = task.Engineer;
             if (change("Engineer"))
             {
-                dasd
+                int numsId = int.Parse(Console.ReadLine()!);
+                while (numsId < 0)
+                {
+                    Console.WriteLine("ERROR,Invalid ID card");
+                    numsId = int.Parse(Console.ReadLine()!);
+                }
+                engineer = new()
+                { Id = numsId,
+                  Name = s_bl.Engineer.Read(numsId)!.Name
+                };
             }
+
             BO.Enums.EngineerExperience copmlexity = task.Copmlexity;
             if (change("Copmlexity"))
             {
@@ -604,7 +614,7 @@ namespace BlTest
                         Console.WriteLine(ex.ToString());
                     }
                     menueM();
-                    userInput = Console.ReadLine();
+                    userInput = Console.ReadLine()!;
                 }
             }
             catch (Exception ex)
