@@ -135,7 +135,20 @@ namespace BlTest
 
         private static void timeCase()
         {
-            dje
+            Console.WriteLine("Enter id");
+            int.TryParse(Console.ReadLine(), out int id);
+            while (id<0)
+            {
+                Console.WriteLine("Enter id");
+                int.TryParse(Console.ReadLine(), out  id);
+            }
+            Console.WriteLine("Enter ScheduledDate");
+            var temp = DateTime.TryParse(Console.ReadLine(), out DateTime ScheduledDate);
+            while(!temp ||  ScheduledDate < DateTime.Now) 
+            {
+                temp = DateTime.TryParse(Console.ReadLine(), out  ScheduledDate);
+            }
+            s_bl.Task.UpdateDate(id, ScheduledDate);
         }
 
 
@@ -277,7 +290,7 @@ namespace BlTest
             string? description = task.Description;
             if (change("Description"))
                 description = Console.ReadLine()!;
-            
+
             DateTime? createdAtDate = task.CreatedAtDate;
 
             BO.Enums.Status status = task.Status;
@@ -504,7 +517,7 @@ namespace BlTest
                 difficulty = (BO.Enums.EngineerExperience)int.Parse(Console.ReadLine()!);
             }
 
-            double? cost  = engineer.Cost;
+            double? cost = engineer.Cost;
             if (change("Cost"))
             {
                 Console.WriteLine("Enter an hourly cost");
