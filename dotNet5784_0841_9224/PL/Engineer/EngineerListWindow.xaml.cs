@@ -39,5 +39,9 @@ namespace PL.Engineer
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

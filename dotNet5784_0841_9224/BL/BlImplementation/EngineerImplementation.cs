@@ -9,7 +9,7 @@ internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
-    private BO.Engineer? BOFromDO(DO.Engineer doEngineer)
+    private BO.Engineer BOFromDO(DO.Engineer doEngineer)
     {
         return new BO.Engineer()
         {
@@ -21,8 +21,8 @@ internal class EngineerImplementation : BlApi.IEngineer
             Cost = doEngineer.Cost,
             Task = new BO.TaskInEngineer()
             {
-                Id = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!.Id,
-                Alias = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!.Ailas
+                Id = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!?.Id ??0,
+                Alias = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!?.Ailas ??" "
             }
         };
     }
