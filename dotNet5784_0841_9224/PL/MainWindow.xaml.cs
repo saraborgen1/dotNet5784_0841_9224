@@ -22,9 +22,18 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnEngeneers_Click(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
+        }
+
+        private void btnInitialization_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to perform a data reset?", "", MessageBoxImage.OK, MessageBoxImage.Question);
+            if(mbResult == MessageBoxResult.OK)
+            {
+                DalTest.Initialization.Do();
+            }
         }
     }
 }
