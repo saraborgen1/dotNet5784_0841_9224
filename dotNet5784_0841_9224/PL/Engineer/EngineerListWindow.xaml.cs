@@ -23,11 +23,21 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        public IEnumerable<BO.Engineer> EngineerList
+        {
+            get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
+            set { SetValue(EngineerListProperty, value); }
+        }
+
+        public static readonly DependencyProperty EngineerListProperty =
+            DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
+
     }
 }
