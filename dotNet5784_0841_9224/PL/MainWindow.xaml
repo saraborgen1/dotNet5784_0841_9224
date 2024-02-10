@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!--A button that leads to the list view window-->
+        <Button Content="List view" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="192" Margin="286,276,0,0" Click="Button_Click"/>
 
     </Grid>
 </Window>

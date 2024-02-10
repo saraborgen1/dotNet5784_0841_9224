@@ -25,6 +25,7 @@
             <!--Filter ComboBox-->
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
+        <!--List display-->
         <ListView Grid.Row="1">
             <ListView.View>
                 <GridView>
@@ -32,6 +33,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <!--Add button-->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
     </Grid>
 </Window>
