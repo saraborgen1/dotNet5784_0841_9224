@@ -84,11 +84,11 @@ namespace BlTest
         /// </summary>
         private static void subMenueM()
         {
-            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\n To update the data of an existing object, press 5\r\nTo update the start date of a task, press 6\r\n");
+            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\nTo update the data of an existing object, press 5\r\nTo update the start date of a task, press 6");
         }
         private static void subMenueMEngineer()
         {
-            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\n To update the data of an existing object, press 5\r\n To display the list of all the deleted objects of the entity type press 7 ");
+            Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\nTo update the data of an existing object, press 5\r\nTo display the list of all the deleted objects of the entity type press 7");
         }
 
         private static void subMenueMTime()
