@@ -19,9 +19,15 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerListWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public EngineerListWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
