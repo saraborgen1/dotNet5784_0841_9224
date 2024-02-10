@@ -38,16 +38,8 @@ namespace DalTest
         /// </summary>
         private static void reset()
         {
-            IEnumerable<DO.Task> tasks = s_dal.Task.ReadAll().ToList();
-
-            foreach (DO.Task item in tasks)
-                s_dal.Task.Delete(item.Id);
-
-            IEnumerable<DO.Dependency> dependencys = s_dal.Dependency.ReadAll().ToList();
-
-            foreach (Dependency item in dependencys)
-                s_dal.Dependency.Delete(item.Id);
-
+            s_dal.Task.DeleteAll();
+            s_dal.Dependency.DeleteAll();
             s_dal.Engineer.DeleteAll();
             getAndIncreaseNextId("NextTaskId");
             getAndIncreaseNextId("NextDependencyId");

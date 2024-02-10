@@ -67,4 +67,8 @@ internal class TaskImplementation : ITask
 
         DataSource.Tasks.Add(item);
     }
+    public void DeleteAll()
+    {
+        DataSource.Tasks.Clear();
+    }
 }

@@ -50,18 +50,14 @@ namespace BlTest
         /// </summary>
         private static void reset()
         {
-            IEnumerable<BO.Task> tasks = s_bl.Task.ReadAll().ToList();
-
-            foreach (BO.Task item in tasks)
-                s_bl.Task.Delete(item.Id);
-
-            s_bl.Engineer.DeleteAll();
+            s_bl.Task.Delete(0);
+            s_bl.Engineer.Delete(0);
 
             getAndIncreaseNextId("NextTaskId");
             getAndIncreaseNextId("NextDependencyId");
 
-            s_bl.State.StartProject = null;
-            s_bl.State.EndProject = null;
+            //s_bl.State.StartProject = null;
+            //s_bl.State.EndProject = null;
             s_bl.State.StatusProject = BO.Enums.ProjectStatus.Creation;
         }
 
@@ -79,7 +75,7 @@ namespace BlTest
             }
 
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nTo exit the main program press 0");
-            if (s_bl.State.StartProject==null)
+            if (s_bl.State.StatusProject==BO.Enums.ProjectStatus.Creation)
                 Console.WriteLine("For enter hours for tasks in the project 3");
         }
 
@@ -105,6 +101,7 @@ namespace BlTest
             }
 
             s_bl.State.StartProject= projectDate;
+            s_bl.State.StatusProject = BO.Enums.ProjectStatus.Scheduling;
 
         }
         /// <summary>

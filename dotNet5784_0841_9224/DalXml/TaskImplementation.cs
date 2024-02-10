@@ -78,5 +78,10 @@ internal class TaskImplementation : ITask
 
         SaveListToXMLSerializer(taskList, s_tasks_xml);
     }
+    public void DeleteAll()
+    {
+        List<DO.Task> newListTask = new List<DO.Task>(); // Create a new empty list
+        SaveListToXMLSerializer(newListTask, s_tasks_xml); // Save the empty list to XML
+    }
 
 }

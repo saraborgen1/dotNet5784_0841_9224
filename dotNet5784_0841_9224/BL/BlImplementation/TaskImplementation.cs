@@ -31,7 +31,7 @@ internal class TaskImplementation : ITask
         }
 
         DO.Task doTask = new DO.Task
-      (item.Id, item.Alias, item.Description,DateTime.Now, null
+      (item.Id, item.Alias, item.Description, DateTime.Now, null
       , null, null, null, item.RequiredEffortTime,
       item.Deliverables, item.Remarks, null, (DO.EngineerExperience)item.Copmlexity);
 
@@ -48,6 +48,12 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
+        if (id == 0)
+        {
+            _dal.Task.DeleteAll();
+            _dal.Dependency.DeleteAll();
+            return;
+        }
         if (state.StatusProject == BO.Enums.ProjectStatus.Start)
             throw new BO.BlCannotBeDeletedWrongStateException("Cannot delete a task at this state");
         try
@@ -90,13 +96,16 @@ internal class TaskImplementation : ITask
                               from item in temp
                               select item.Id).ToList();
 
-        List<BO.TaskInList>? dependencies = (from item in dependenciesId
+        var dependentOn = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
+                           select temp.DependentOnTask).ToList();
+
+        List<BO.TaskInList>? dependencies = (from item in dependentOn
                                              let alias = _dal.Task.Read(p => p.Id == item)?.Ailas ?? " "
                                              let description = _dal.Task.Read(p => p.Id == item)?.Description ?? " "
-                                             let temp = (BO.Enums.Status)Read(item).Status
+                                             let temp = (BO.Enums.Status)Read(item ?? 0).Status
                                              select new BO.TaskInList()
                                              {
-                                                 Id = item,
+                                                 Id = _dal.Dependency.Read(t => t.Id == item)?.DependentOnTask ?? 0,
                                                  Alias = alias,
                                                  Description = description,
                                                  Status = temp
@@ -155,32 +164,32 @@ internal class TaskImplementation : ITask
 
     public void Update(BO.Task item)
     {
-        
+
         var doTask = _dal.Task.Read(p => p.Id == item.Id);
         if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
 
-        if(item.RequiredEffortTime!=doTask.RequiredEffortTime)
+        if (item.RequiredEffortTime != doTask.RequiredEffortTime)
 
-        if (item.ScheduledDate != null)
-            if (item.Dependencies != null)
-            {
-                var temp1 = item.Dependencies.Select(t =>
+            if (item.ScheduledDate != null)
+                if (item.Dependencies != null)
                 {
-                    var dependentTask = _dal.Task.Read(p => p.Id == t.Id);
+                    var temp1 = item.Dependencies.Select(t =>
+                    {
+                        var dependentTask = _dal.Task.Read(p => p.Id == t.Id);
 
-                    if (dependentTask?.ScheduledDate == null)
-                        throw new BO.BlNoDateException("The task it depends on doesn't have a scheduled date");
+                        if (dependentTask?.ScheduledDate == null)
+                            throw new BO.BlNoDateException("The task it depends on doesn't have a scheduled date");
 
-                    return t;
-                }).ToList();
+                        return t;
+                    }).ToList();
 
-                var temp2 = item.Dependencies.Select(p =>
-                {
-                    if (Read(p.Id).ForecastDate > item.ScheduledDate)
-                        throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
-                    return p;
-                }).ToList();
-            }
+                    var temp2 = item.Dependencies.Select(p =>
+                    {
+                        if (Read(p.Id).ForecastDate > item.ScheduledDate)
+                            throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
+                        return p;
+                    }).ToList();
+                }
         if (item.DeadlineDate != null && item.ScheduledDate != null && item.DeadlineDate < item.ScheduledDate)
             throw new BO.BlDateClashException("The end date is before the start date");
 

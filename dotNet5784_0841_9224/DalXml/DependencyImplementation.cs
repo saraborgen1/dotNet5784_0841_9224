@@ -1,5 +1,7 @@
 ﻿namespace Dal;
 
+using DalApi;
+using DO;
 using static XMLTools;
 
 internal class DependencyImplementation : IDependency
@@ -84,5 +86,10 @@ internal class DependencyImplementation : IDependency
         XElement dependency = itemToXelement(item, _entityName);
         listDependency.Add(dependency);
         SaveListToXMLElement(listDependency, s_dependencys_xml);
+    }
+    public void DeleteAll()
+    {
+        List<Dependency> newListDependency = new List<Dependency>(); // Create a new empty list
+        SaveListToXMLSerializer(newListDependency, s_dependencys_xml); // Save the empty list to XML
     }
 }

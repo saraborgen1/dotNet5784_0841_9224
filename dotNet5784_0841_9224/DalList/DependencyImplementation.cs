@@ -72,4 +72,8 @@ internal class DependencyImplementation : IDependency
         Delete(item.Id);
         DataSource.Dependencys.Add(item);
     }
+    public void DeleteAll()
+    {
+        DataSource.Dependencys.Clear();
+    }
 }

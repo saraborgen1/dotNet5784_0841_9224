@@ -1,10 +1,11 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using DalApi;
 using System;
 using System.Collections.Generic;
 
 
-internal class EngineerImplementation : IEngineer
+internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
@@ -53,6 +54,11 @@ internal class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
+        if (id == 0)
+        {
+            _dal.Engineer.DeleteAll();
+            return;
+        }
 
         BO.Engineer engineer = Read(id)!;
 

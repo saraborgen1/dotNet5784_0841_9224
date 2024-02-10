@@ -39,7 +39,7 @@ internal class StateImplementation : IState
             root.Save(@"..\xml\data_config.xml");
         }
     }
-    public BO.Enums.ProjectStatus StatusProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public BO.Enums.ProjectStatus StatusProject { get; set;}
 
 
     public void UpdateState()

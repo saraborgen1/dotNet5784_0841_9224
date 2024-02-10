@@ -6,6 +6,5 @@ using DO;
 public interface IEngineer : ICrud<Engineer>
 { 
     public IEnumerable<Engineer> ReadAllDelete();
-    public void DeleteAll();
 }
 
