@@ -40,7 +40,11 @@ public class BlDateClashException : Exception
 {
     public BlDateClashException(string name) : base(name) { }
 }
-public class BlCannotBeDeletedWronfStateException: Exception
+public class BlCannotBeDeletedWrongStateException: Exception
 {
-   public BlCannotBeDeletedWronfStateException(string problem):base(problem) { }
+   public BlCannotBeDeletedWrongStateException(string problem):base(problem) { }
+}
+public class BlCannotAddWrongStateException : Exception
+{
+    public BlCannotAddWrongStateException(string problem) : base(problem) { }
 }

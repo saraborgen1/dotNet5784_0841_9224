@@ -8,15 +8,19 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Task);
     private IState state = new StateImplementation();
-    public void Create(BO.Task item)
+    private void validation(BO.Task item)
     {
         if (state.StatusProject == BO.Enums.ProjectStatus.Start)
-            throw new BO.BlCannotBeDeletedWronfStateException("Cannot create a task at this state");
+            throw new BO.BlCannotAddWrongStateException("Cannot create a task at this state");
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
-        if(item.Description==null) throw new BO.BlTheInputIsInvalidException("Description");
-        if(item.RequiredEffortTime==null||item.RequiredEffortTime< TimeSpan.Zero) throw new BO.BlTheInputIsInvalidException("RequiredEffortTime");
-        if(item.Deliverables==null) throw new BO.BlTheInputIsInvalidException("Deliverables");
+        if (item.Description == null) throw new BO.BlTheInputIsInvalidException("Description");
+        if (item.RequiredEffortTime == null || item.RequiredEffortTime < TimeSpan.Zero) throw new BO.BlTheInputIsInvalidException("RequiredEffortTime");
+        if (item.Deliverables == null) throw new BO.BlTheInputIsInvalidException("Deliverables");
+    }
+    public void Create(BO.Task item)
+    {
+        validation(item);
         if (item.Dependencies != null)
         {
             var temp = item.Dependencies.ToList().Select(p =>
@@ -45,7 +49,7 @@ internal class TaskImplementation : ITask
     public void Delete(int id)
     {
         if (state.StatusProject == BO.Enums.ProjectStatus.Start)
-            throw new BO.BlCannotBeDeletedWronfStateException("Cannot delete a task at this state");
+            throw new BO.BlCannotBeDeletedWrongStateException("Cannot delete a task at this state");
         try
         {
             BO.Task boTask = Read(id);
