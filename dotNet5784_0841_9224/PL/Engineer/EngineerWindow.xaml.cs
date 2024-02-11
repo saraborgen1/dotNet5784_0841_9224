@@ -19,11 +19,13 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public EngineerWindow()
         {
             InitializeComponent();
         }
-
+        public static readonly DependencyProperty EngineerProperty =
+          DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
