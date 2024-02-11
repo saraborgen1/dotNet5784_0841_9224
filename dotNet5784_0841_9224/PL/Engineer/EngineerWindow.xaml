@@ -6,7 +6,32 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="6,0,-6,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Label Id-->
+        <Label Content="Id" HorizontalAlignment="Left" Margin="322,68,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <!--Label Name-->
+        <Label Content="Name" HorizontalAlignment="Left" Margin="322,108,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <!--Label Email-->
+        <Label Content="Email" HorizontalAlignment="Left" Margin="322,148,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <!--Label Level-->
+        <Label Content="Level" HorizontalAlignment="Left" Margin="322,188,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <!--Label Cost-->
+        <Label Content="Cost" HorizontalAlignment="Left" Margin="322,228,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <!--TextBox Id-->
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,68,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <!--TextBox Name-->
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,108,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <!--TextBox Email-->
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,148,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <!--TextBox Level-->
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,188,0,0" VerticalAlignment="Top" Width="120"/>
+        <!--TextBox Cost-->
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,228,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <!--Button Add/Update-->
+        <Button Content="Button" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
