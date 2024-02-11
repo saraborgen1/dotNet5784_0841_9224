@@ -24,7 +24,8 @@
             <!--Filter options label-->
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="46,0,0,0" VerticalAlignment="Center"/>
             <!--Filter ComboBox-->
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
+                Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
         <!--List display-->
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}" SelectionChanged="ListView_SelectionChanged">
