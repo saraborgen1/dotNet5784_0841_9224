@@ -8,7 +8,8 @@ public class Enums
         AdvancedBeginner,
         Intermediate,
         Advanced,
-        Expert
+        Expert,
+        None//default for filter in pl
     }
     public enum Status
     {

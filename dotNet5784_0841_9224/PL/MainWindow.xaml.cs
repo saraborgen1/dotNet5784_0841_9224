@@ -13,7 +13,7 @@ namespace PL
             InitializeComponent();
         }
 
-        private void btnEngeneers_Click(object sender, RoutedEventArgs e)
+        private void btnEngineers_Click(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
         }
