@@ -24,9 +24,7 @@ namespace PL.Engineer
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
+      
         public BO.Enums.EngineerExperience Level { get; set; } = BO.Enums.EngineerExperience.None;
 
         private void ComboBox_EngineerLevelFilter(object sender, SelectionChangedEventArgs e)
@@ -38,7 +36,13 @@ namespace PL.Engineer
 
         private void Button_EngineerWindow(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().Show();
+            new EngineerWindow().ShowDialog();
+        }
+
+        private void SelectedEngineer(object sender, RoutedEventArgs e)
+        {
+            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            new EngineerWindow(engineer!.Id).ShowDialog();
         }
     }
 }
