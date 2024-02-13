@@ -45,7 +45,10 @@ namespace PL.Engineer
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
-                catch (Exception ex) { Console.WriteLine(ex); }
+                catch (Exception ex) 
+                {
+                    MessageBox.Show(ex.ToString(), "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
 
             try
             {
@@ -53,7 +56,10 @@ namespace PL.Engineer
                 MessageBox.Show("The engineer was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
-            catch (Exception ex) { Console.WriteLine(ex); }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.ToString(), "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

@@ -15,7 +15,6 @@ namespace PL.Engineer
             EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
-      
         public IEnumerable<BO.Engineer> EngineerList
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
@@ -27,7 +26,6 @@ namespace PL.Engineer
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
         public BO.Enums.EngineerExperience Level { get; set; } = BO.Enums.EngineerExperience.None;
 
@@ -38,5 +36,9 @@ namespace PL.Engineer
 
         }
 
+        private void Button_EngineerWindow(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().Show();
+        }
     }
 }

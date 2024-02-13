@@ -80,4 +80,12 @@
     <Cost>301</Cost>
     <Active>true</Active>
   </Engineer>
+  <Engineer>
+    <Id>123456785</Id>
+    <Name>nurit</Name>
+    <Email>nurit@nurit.com</Email>
+    <Level>Beginner</Level>
+    <Cost>0.1</Cost>
+    <Active>true</Active>
+  </Engineer>
 </ArrayOfEngineer>
