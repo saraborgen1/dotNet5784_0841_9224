@@ -42,13 +42,16 @@ namespace PL.Engineer
                 try
                 {
                     s_bl.Engineer.Create(EngineerProperty);
-                    
+                    MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
                 catch (Exception ex) { Console.WriteLine(ex); }
 
             try
             {
                 s_bl.Engineer.Update(EngineerProperty);
+                MessageBox.Show("The engineer was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             catch (Exception ex) { Console.WriteLine(ex); }
         }
