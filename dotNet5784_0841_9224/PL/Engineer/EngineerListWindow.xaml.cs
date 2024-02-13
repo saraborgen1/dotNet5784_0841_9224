@@ -41,8 +41,9 @@ namespace PL.Engineer
 
         private void SelectedEngineer(object sender, RoutedEventArgs e)
         {
-            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            new EngineerWindow(engineer!.Id).ShowDialog();
+                BO.Engineer? engineer = (sender as ListView)?.SelectedItems as BO.Engineer;
+                new EngineerWindow(engineer!.Id).ShowDialog();
+
         }
     }
 }
