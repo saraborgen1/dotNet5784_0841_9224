@@ -15,10 +15,7 @@ namespace PL.Engineer
             EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
         public IEnumerable<BO.Engineer> EngineerList
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }

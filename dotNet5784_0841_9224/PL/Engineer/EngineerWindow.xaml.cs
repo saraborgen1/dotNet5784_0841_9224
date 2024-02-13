@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace PL.Engineer
 {
@@ -20,21 +8,22 @@ namespace PL.Engineer
     public partial class EngineerWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public EngineerWindow(int id =0)
+        bool isCreate = false;
+        public EngineerWindow(int id = 0)
         {
-            BO.Engineer engineer;
             InitializeComponent();
             if (id == 0)
             {
-                engineer = new BO.Engineer();
+                EngineerProperty = new BO.Engineer();
+                isCreate = true;
             }
             else
                 try
                 {
-                    engineer = s_bl.Engineer.Read(id)!;
+                    EngineerProperty = s_bl.Engineer.Read(id)!;
                 }
                 catch (Exception ex) { Console.WriteLine(ex); }
-                
+
         }
         public BO.Engineer EngineerProperty
         {
@@ -46,9 +35,22 @@ namespace PL.Engineer
           DependencyProperty.Register("EngineerProperty", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
+            if (isCreate == true)
 
+                try
+                {
+                    s_bl.Engineer.Create(EngineerProperty);
+                    
+                }
+                catch (Exception ex) { Console.WriteLine(ex); }
+
+            try
+            {
+                s_bl.Engineer.Update(EngineerProperty);
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
         }
     }
 }
