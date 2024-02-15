@@ -34,32 +34,7 @@ namespace BlTest
         /// </summary>
         enum SubMenue { Exit, Create, Read, ReadAll, Delete, Update, UpdateDate, ReadDeleted };
 
-        // <summary>
-        /// Reset the running number
-        /// </summary>
-        /// <param name="elemName">name of running number</param>
-        private static void getAndIncreaseNextId(string elemName)
-        {
-            XElement root = LoadListFromXMLElement("data-config");
-            root.Element(elemName)?.SetValue(1);
-            SaveListToXMLElement(root, "data-config");
-        }
 
-        /// <summary>
-        /// Deletes the entities and resets the running numbers
-        /// </summary>
-        private static void reset()
-        {
-            s_bl.Task.Delete(0);
-            s_bl.Engineer.Delete(0);
-
-            getAndIncreaseNextId("NextTaskId");
-            getAndIncreaseNextId("NextDependencyId");
-
-            //s_bl.State.StartProject = null;
-            //s_bl.State.EndProject = null;
-            s_bl.State.StatusProject = BO.Enums.ProjectStatus.Creation;
-        }
 
         /// <summary>
         /// Print main menu
@@ -70,12 +45,13 @@ namespace BlTest
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
             if (ans == "Y")
             {
-                reset();
-                DalTest.Initialization.Do();
+                s_bl.ResetDB();
+                s_bl.InitializeDB();
+
             }
 
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nTo exit the main program press 0");
-            if (s_bl.State.StatusProject==BO.Enums.ProjectStatus.Creation)
+            if (s_bl.State.StatusProject()==BO.Enums.ProjectStatus.Creation)
                 Console.WriteLine("For enter hours for tasks in the project 3");
         }
 
