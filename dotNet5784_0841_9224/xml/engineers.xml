@@ -88,4 +88,28 @@
     <Cost>0.1</Cost>
     <Active>true</Active>
   </Engineer>
+  <Engineer>
+    <Id>987654345</Id>
+    <Name>fhf</Name>
+    <Email>@.</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>45</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>5678</Id>
+    <Name>fghj</Name>
+    <Email>@.</Email>
+    <Level>Beginner</Level>
+    <Cost>4567</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>654738290</Id>
+    <Name>fghj</Name>
+    <Email>@.</Email>
+    <Level>Expert</Level>
+    <Cost>543</Cost>
+    <Active>true</Active>
+  </Engineer>
 </ArrayOfEngineer>

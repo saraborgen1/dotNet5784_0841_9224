@@ -9,8 +9,10 @@ namespace PL.Engineer
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         bool isCreate = false;
-        public EngineerWindow(int id = 0)
+        private event Action<(int engineerId, bool isUpdateOrAdd)> _onUpdateOrAdd;
+        public EngineerWindow(Action<(int,bool)> onUpdateOrAdd, int id = 0)
         {
+            _onUpdateOrAdd = onUpdateOrAdd;
             InitializeComponent();
             if (id == 0)
             {
@@ -42,6 +44,7 @@ namespace PL.Engineer
                 try
                 {
                     s_bl.Engineer.Create(EngineerProperty);
+                    _onUpdateOrAdd((EngineerProperty.Id, true));
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
@@ -53,6 +56,7 @@ namespace PL.Engineer
             try
             {
                 s_bl.Engineer.Update(EngineerProperty);
+                _onUpdateOrAdd((EngineerProperty.Id, false));
                 MessageBox.Show("The engineer was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
