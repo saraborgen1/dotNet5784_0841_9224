@@ -68,11 +68,10 @@ namespace PL.Engineer
             new EngineerWindow(addOrUpdateChanged).ShowDialog();
         }
 
-        private void SelectedEngineer(object sender, RoutedEventArgs e)
+        private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
             new EngineerWindow(addOrUpdateChanged, engineer!.Id).ShowDialog();
-
         }
     }
 }
