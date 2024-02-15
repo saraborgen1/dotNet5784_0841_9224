@@ -24,12 +24,6 @@ public static class Initialization
     /// Reset the running number
     /// </summary>
     /// <param name="elemName">name of running number</param>
-    private static void getAndIncreaseNextId(string elemName)
-    {
-        XElement root = LoadListFromXMLElement("data-config");
-        root.Element(elemName)?.SetValue(1);
-        SaveListToXMLElement(root, "data-config");
-    }
 
     public static void reset()
     {
