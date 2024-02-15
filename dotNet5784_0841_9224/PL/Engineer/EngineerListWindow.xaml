@@ -30,7 +30,7 @@
             
         </Grid>
         <!--List display-->
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}" Selected="SelectedEngineer">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

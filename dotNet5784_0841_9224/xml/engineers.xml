@@ -88,4 +88,12 @@
     <Cost>0.1</Cost>
     <Active>true</Active>
   </Engineer>
+  <Engineer>
+    <Id>987654322</Id>
+    <Name>jh</Name>
+    <Email>@.</Email>
+    <Level>Beginner</Level>
+    <Cost>12</Cost>
+    <Active>true</Active>
+  </Engineer>
 </ArrayOfEngineer>
