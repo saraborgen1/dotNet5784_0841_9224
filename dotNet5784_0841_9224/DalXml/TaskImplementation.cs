@@ -58,8 +58,8 @@ internal class TaskImplementation : ITask
 
         if (filter != null)
             return (from item in taskList
-                   where filter(item)
-                   select item).ToList();
+                    where filter(item)
+                    select item).ToList();
 
         return taskList.ToList();
     }
@@ -82,6 +82,11 @@ internal class TaskImplementation : ITask
     {
         List<DO.Task> newListTask = new List<DO.Task>(); // Create a new empty list
         SaveListToXMLSerializer(newListTask, s_tasks_xml); // Save the empty list to XML
+
+        //Initialization of the running number of the id
+        XElement root = LoadListFromXMLElement("data-config");
+        root.Element("NextTaskId")?.SetValue(1);
+        SaveListToXMLElement(root, "data-config");
     }
 
 }

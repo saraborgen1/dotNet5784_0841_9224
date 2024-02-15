@@ -26,24 +26,12 @@ namespace DalTest
         /// Reset the running number
         /// </summary>
         /// <param name="elemName">name of running number</param>
-        private static void getAndIncreaseNextId(string elemName)
-        {
-            XElement root = LoadListFromXMLElement("data-config");
-            root.Element(elemName)?.SetValue(1);
-            SaveListToXMLElement(root, "data-config");
-        }
-
-        /// <summary>
-        /// Deletes the entities and resets the running numbers
-        /// </summary>
-        private static void reset()
-        {
-            s_dal.Task.DeleteAll();
-            s_dal.Dependency.DeleteAll();
-            s_dal.Engineer.DeleteAll();
-            getAndIncreaseNextId("NextTaskId");
-            getAndIncreaseNextId("NextDependencyId");
-        }
+        //private static void getAndIncreaseNextId(string elemName)
+        //{
+        //    XElement root = LoadListFromXMLElement("data-config");
+        //    root.Element(elemName)?.SetValue(1);
+        //    SaveListToXMLElement(root, "data-config");
+        //}
 
         /// <summary>
         /// Print main menu
@@ -55,7 +43,6 @@ namespace DalTest
 
             if (ans == "Y") //stage 3
             {
-                reset();
                 //Initialization.Do(s_dal); //stage 2
                 Initialization.Do(); //stage 4
             }

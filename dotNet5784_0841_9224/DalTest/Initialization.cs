@@ -1,6 +1,10 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.Xml.Linq;
+using static Dal.XMLTools;
+
+
 public static class Initialization
 {
     /// <summary>
@@ -14,10 +18,34 @@ public static class Initialization
     /// <exception cref="NullReferenceException"></exception>
     /// 
     //public static void Do(IDal dal) //stage 2
+
+
+    /// <summary>
+    /// Reset the running number
+    /// </summary>
+    /// <param name="elemName">name of running number</param>
+    private static void getAndIncreaseNextId(string elemName)
+    {
+        XElement root = LoadListFromXMLElement("data-config");
+        root.Element(elemName)?.SetValue(1);
+        SaveListToXMLElement(root, "data-config");
+    }
+
+    public static void reset()
+    {
+        s_dal = Factory.Get; //stage 4
+        s_dal.Task.DeleteAll();
+        s_dal.Dependency.DeleteAll();
+        s_dal.Engineer.DeleteAll();
+    }
+
+
     public static void Do() //stage 4
     {
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        //reset();
         s_dal = Factory.Get; //stage 4
+  
         createTasks();
         createDependencys();
         createEngineers();

@@ -91,5 +91,10 @@ internal class DependencyImplementation : IDependency
     {
         List<Dependency> newListDependency = new List<Dependency>(); // Create a new empty list
         SaveListToXMLSerializer(newListDependency, s_dependencys_xml); // Save the empty list to XML
+
+        //Initialization of the running number of the id
+        XElement root = LoadListFromXMLElement("data-config");
+        root.Element("NextDependencyId")?.SetValue(1);
+        SaveListToXMLElement(root, "data-config");
     }
 }
