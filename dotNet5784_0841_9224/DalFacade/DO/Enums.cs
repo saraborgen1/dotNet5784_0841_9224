@@ -10,4 +10,10 @@ public enum EngineerExperience
     Advanced, 
     Expert
 }
+public enum ProjectStatus
+{
+    Creation,
+    Scheduling,
+    Start
+}
 

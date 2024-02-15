@@ -14,4 +14,7 @@ public interface IDal
     /// property of engineer interface
     /// </summary>
     IEngineer Engineer { get; }
+    public DateTime? StartProject { set; get; }
+    public DateTime? EndProject { set; get; }
+    public DO.ProjectStatus StatusProject();
 }

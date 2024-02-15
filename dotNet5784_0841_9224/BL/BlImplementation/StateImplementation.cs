@@ -39,15 +39,13 @@ internal class StateImplementation : IState
             root.Save(@"..\xml\data_config.xml");
         }
     }
-    public BO.Enums.ProjectStatus StatusProject { get; set;}
 
-
-    public void UpdateState()
+    public BO.Enums.ProjectStatus StatusProject()
     {
         if (StartProject == null)
-            StatusProject = Enums.ProjectStatus.Creation;
+            return Enums.ProjectStatus.Creation;
         if (_dal.Task.Read(p => p.StartDate == null) != null)
-            StatusProject = Enums.ProjectStatus.Scheduling;
-        StatusProject = Enums.ProjectStatus.Start;
+            return Enums.ProjectStatus.Scheduling;
+        return Enums.ProjectStatus.Start;
     }
 }

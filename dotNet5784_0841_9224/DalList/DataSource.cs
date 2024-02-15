@@ -13,7 +13,7 @@ internal static class DataSource
         /// A running ID number for the dependency
         /// </summary>
         internal const int startDependencyId = 1;
-        private static int nextDependencyId = startTaskId;
+        private static int nextDependencyId = startDependencyId;
         internal static int NextDependencyId { get => nextDependencyId++; }
     }
     internal static List<DO.Task> Tasks { get; } = new();

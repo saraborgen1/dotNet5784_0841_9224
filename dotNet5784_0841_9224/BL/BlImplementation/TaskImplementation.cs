@@ -11,7 +11,7 @@ internal class TaskImplementation : ITask
     private IState state = new StateImplementation();
     private void validation(BO.Task item)
     {
-        if (state.StatusProject == BO.Enums.ProjectStatus.Start)
+        if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
             throw new BO.BlCannotAddWrongStateException("Cannot create a task at this state");
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
@@ -55,7 +55,7 @@ internal class TaskImplementation : ITask
             _dal.Dependency.DeleteAll();
             return;
         }
-        if (state.StatusProject == BO.Enums.ProjectStatus.Start)
+        if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
             throw new BO.BlCannotBeDeletedWrongStateException("Cannot delete a task at this state");
         try
         {
@@ -169,7 +169,7 @@ internal class TaskImplementation : ITask
         var doTask = _dal.Task.Read(p => p.Id == item.Id);
         if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
 
-        if (state.StatusProject == Enums.ProjectStatus.Creation)
+        if (state.StatusProject() == Enums.ProjectStatus.Creation)
         {
             if (item.StartDate != doTask.StartDate ||
                        item.ScheduledDate != doTask.ScheduledDate ||
@@ -179,7 +179,7 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
         }
 
-        if (state.StatusProject == Enums.ProjectStatus.Scheduling)
+        if (state.StatusProject() == Enums.ProjectStatus.Scheduling)
         {
             if (item.CreatedAtDate != doTask.CreatedAtDate ||
                        item.RequiredEffortTime != doTask.RequiredEffortTime ||
@@ -189,7 +189,7 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
         }
 
-        if (state.StatusProject == Enums.ProjectStatus.Start)
+        if (state.StatusProject() == Enums.ProjectStatus.Start)
         {
             if (item.Description != doTask.Description ||
                  item.CreatedAtDate != doTask.CreatedAtDate ||
