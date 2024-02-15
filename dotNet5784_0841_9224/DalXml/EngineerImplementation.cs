@@ -87,10 +87,12 @@ internal class EngineerImplementation : IEngineer
     /// <param name="item">A reference to an updated existing object of type Engineer</param>
     public void Update(Engineer item)
     {
-        var listEngineer = LoadListFromXMLSerializer<DO.Task>(s_engineers_xml);
+        var listEngineer = LoadListFromXMLSerializer<DO.Engineer>(s_engineers_xml);
 
         if (listEngineer.RemoveAll(p => p.Id == item.Id) == 0)
             throw new DalDoesNotExistsException(item.Id, _entityName);
+
+        SaveListToXMLSerializer(listEngineer, s_engineers_xml);
         Create(item);
     }
     /// <summary>

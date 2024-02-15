@@ -10,16 +10,16 @@ namespace BlTest
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         private static bool change(string name)
         {
-            Console.WriteLine($"if you would like to update the {name} enter 1 if not enter 0 \n");
+            Console.WriteLine($"if you would like to update the {name} enter 1 if not enter 0");
             var temp = int.TryParse(Console.ReadLine(), out int num);
             while (!temp || (num != 0 && num != 1))
             {
                 Console.WriteLine($" you idiot , wht cant you read instructions ,I told you if you would like to update the {name} enter 1 if not enter 0 \n");
                 temp = int.TryParse(Console.ReadLine(), out num);
             }
-            if (num == 0)
+            if (num == 1)
             {
-                Console.WriteLine($"enter {name}");
+                //Console.WriteLine($"enter {name}");
                 return true;
             }
             return false;
