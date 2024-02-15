@@ -44,7 +44,7 @@ namespace DalTest
             if (ans == "Y") //stage 3
             {
                 //Initialization.Do(s_dal); //stage 2
-                Initialization.reset();
+                Initialization.Reset();
                 Initialization.Do(); //stage 4
             }
 

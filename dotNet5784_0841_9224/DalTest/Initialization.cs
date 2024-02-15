@@ -25,7 +25,7 @@ public static class Initialization
     /// </summary>
     /// <param name="elemName">name of running number</param>
 
-    public static void reset()
+    public static void Reset()
     {
         s_dal = Factory.Get; //stage 4
         s_dal.Task.DeleteAll();

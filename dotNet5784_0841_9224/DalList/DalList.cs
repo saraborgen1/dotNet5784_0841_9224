@@ -1,5 +1,8 @@
 ﻿namespace Dal;
 using DalApi;
+using DO;
+using System;
+
 sealed internal class DalList : IDal
 {
     public static IDal Instance { get; } = new DalList();
@@ -17,5 +20,13 @@ sealed internal class DalList : IDal
     /// Interface property implement
     /// </summary>
     public IEngineer Engineer => new EngineerImplementation();
+
+    public DateTime? StartProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public DateTime? EndProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public ProjectStatus StatusProject()
+    {
+        throw new NotImplementedException();
+    }
 }
 

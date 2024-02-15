@@ -12,4 +12,12 @@ sealed internal class DalXml : IDal
     public IDependency Dependency => new DependencyImplementation();
 
     public IEngineer Engineer => new EngineerImplementation();
+
+    public DateTime? StartProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public DateTime? EndProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+    public ProjectStatus StatusProject()
+    {
+        throw new NotImplementedException();
+    }
 }
