@@ -48,3 +48,9 @@ public class BlCannotAddWrongStateException : Exception
 {
     public BlCannotAddWrongStateException(string problem) : base(problem) { }
 }
+
+
+    public class BlCannotUpdateWrongStateException : Exception
+{
+    public BlCannotUpdateWrongStateException(string problem) : base(problem) { }
+}

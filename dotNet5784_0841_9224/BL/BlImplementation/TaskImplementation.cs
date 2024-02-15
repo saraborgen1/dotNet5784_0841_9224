@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using BO;
 using System.Data;
 using System.Linq;
 
@@ -167,6 +168,35 @@ internal class TaskImplementation : ITask
 
         var doTask = _dal.Task.Read(p => p.Id == item.Id);
         if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
+
+        if (state.StatusProject == Enums.ProjectStatus.Creation)
+        {
+            if (item.StartDate != doTask.StartDate ||
+                       item.ScheduledDate != doTask.ScheduledDate ||
+                       item.DeadlineDate != doTask.DeadlineDate ||
+                       item.CompleteDate != doTask.CompleteDate ||
+                       item.Engineer != null)
+                throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
+        }
+
+        if (state.StatusProject == Enums.ProjectStatus.Scheduling)
+        {
+            if (item.CreatedAtDate != doTask.CreatedAtDate ||
+                       item.RequiredEffortTime != doTask.RequiredEffortTime ||
+                       item.StartDate != doTask.StartDate ||
+                       item.CompleteDate != doTask.CompleteDate ||
+                       item.Engineer != null)
+                throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
+        }
+
+        if (state.StatusProject == Enums.ProjectStatus.Start)
+        {
+            if (item.Description != doTask.Description ||
+                 item.CreatedAtDate != doTask.CreatedAtDate ||
+                  item.RequiredEffortTime != doTask.RequiredEffortTime ||
+                  item.ScheduledDate != doTask.ScheduledDate)
+                throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
+        }
 
         if (item.RequiredEffortTime != doTask.RequiredEffortTime)
 
