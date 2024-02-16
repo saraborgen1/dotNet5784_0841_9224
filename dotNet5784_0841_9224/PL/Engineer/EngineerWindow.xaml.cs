@@ -1,5 +1,4 @@
-﻿using BO;
-using System.Windows;
+﻿using System.Windows;
 
 namespace PL.Engineer
 {
@@ -11,7 +10,7 @@ namespace PL.Engineer
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         bool isCreate = false;
         private event Action<(int engineerId, bool isUpdateOrAdd)> _onUpdateOrAdd;
-        public EngineerWindow(Action<(int,bool)> onUpdateOrAdd, int id = 0)
+        public EngineerWindow(Action<(int, bool)> onUpdateOrAdd, int id = 0)
         {
             _onUpdateOrAdd = onUpdateOrAdd;
             InitializeComponent();
@@ -41,18 +40,37 @@ namespace PL.Engineer
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
             
-                if (EngineerProperty.Id < 100000000 || EngineerProperty.Id > 1000000000) { }
-                if (EngineerProperty.Name == " ") { }
-                if (EngineerProperty.Email != null)
+            if (EngineerProperty.Id < 100000000 || EngineerProperty.Id > 1000000000)
+            {
+                MessageBoxResult mbResult = MessageBox.Show("The Id must contain exactly 9 digits", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (EngineerProperty.Name == " ")
+            {
+                MessageBoxResult mbResult = MessageBox.Show("You must enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (EngineerProperty.Email == null)
+            {
+                MessageBoxResult mbResult = MessageBox.Show("Email must be entered", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (EngineerProperty.Email != null)
+            {
+                if (!EngineerProperty.Email.Contains("@"))
                 {
-                    if (!EngineerProperty.Email.Contains("@")) { };
-                    if (!EngineerProperty.Email.Contains(".")) { };
-                }
-                if (EngineerProperty.Cost == null || EngineerProperty.Cost <= 0) { }
-            
-          
+                    MessageBoxResult mbResult = MessageBox.Show("@ must appear in email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                };
+                if (!EngineerProperty.Email.Contains("."))
+                {
+                    MessageBoxResult mbResult = MessageBox.Show("A dot must appear in the email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                };
+            }
+            if (EngineerProperty.Cost == null || EngineerProperty.Cost <= 0)
+            {
+                MessageBoxResult mbResult = MessageBox.Show("Must enter a positive salary for the employee", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-                if (isCreate == true)
+
+
+            if (isCreate == true)
 
                 try
                 {
@@ -61,7 +79,7 @@ namespace PL.Engineer
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -73,7 +91,7 @@ namespace PL.Engineer
                 MessageBox.Show("The engineer was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
             }
