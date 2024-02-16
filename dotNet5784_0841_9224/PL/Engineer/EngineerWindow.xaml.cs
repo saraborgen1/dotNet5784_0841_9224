@@ -24,7 +24,11 @@ namespace PL.Engineer
                 {
                     EngineerProperty = s_bl.Engineer.Read(id)!;
                 }
-                catch (Exception ex) { MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
         }
         public BO.Engineer EngineerProperty
@@ -42,30 +46,36 @@ namespace PL.Engineer
             
             if (EngineerProperty.Id < 100000000 || EngineerProperty.Id > 1000000000)
             {
-                MessageBoxResult mbResult = MessageBox.Show("The Id must contain exactly 9 digits", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("The Id must contain exactly 9 digits", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             if (EngineerProperty.Name == " ")
             {
-                MessageBoxResult mbResult = MessageBox.Show("You must enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+               MessageBox.Show("You must enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             if (EngineerProperty.Email == null)
             {
-                MessageBoxResult mbResult = MessageBox.Show("Email must be entered", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Email must be entered", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             if (EngineerProperty.Email != null)
             {
                 if (!EngineerProperty.Email.Contains("@"))
                 {
-                    MessageBoxResult mbResult = MessageBox.Show("@ must appear in email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("@ must appear in email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 };
                 if (!EngineerProperty.Email.Contains("."))
                 {
-                    MessageBoxResult mbResult = MessageBox.Show("A dot must appear in the email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("A dot must appear in the email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 };
             }
             if (EngineerProperty.Cost == null || EngineerProperty.Cost <= 0)
             {
-                MessageBoxResult mbResult = MessageBox.Show("Must enter a positive salary for the employee", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Must enter a positive salary for the employee", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
 
@@ -82,6 +92,7 @@ namespace PL.Engineer
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
 
             try
@@ -94,6 +105,7 @@ namespace PL.Engineer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
     }
