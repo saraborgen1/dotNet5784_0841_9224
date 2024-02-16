@@ -42,11 +42,11 @@ namespace Dal
             }
         }
 
-        public ITask Task => throw new NotImplementedException();
+        public ITask Task => new TaskImplementation();
 
-        public IDependency Dependency => throw new NotImplementedException();
+        public IDependency Dependency => new DependencyImplementation();
 
-        public IEngineer Engineer => throw new NotImplementedException();
+        public IEngineer Engineer => new EngineerImplementation();
 
         public ProjectStatus StatusProject()
         {

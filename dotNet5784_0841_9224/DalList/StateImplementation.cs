@@ -10,11 +10,11 @@ namespace Dal;
 
 internal class StateImplementation : IDal
 {
-    public ITask Task => throw new NotImplementedException();
+    public ITask Task => new TaskImplementation();
 
-    public IDependency Dependency => throw new NotImplementedException();
+    public IDependency Dependency => new DependencyImplementation();
 
-    public IEngineer Engineer => throw new NotImplementedException();
+    public IEngineer Engineer => new EngineerImplementation();
 
     public DateTime? StartProject { get => DataSource.Config.startProject; set => DataSource.Config.startProject=value ; }
     public DateTime? EndProject { get => DataSource.Config.endProject; set => DataSource.Config.endProject=value; }
