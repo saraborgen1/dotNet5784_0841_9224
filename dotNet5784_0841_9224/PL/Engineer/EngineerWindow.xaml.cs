@@ -40,7 +40,7 @@ namespace PL.Engineer
 
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
-            if(EngineerProperty.Id==0|| EngineerProperty.Id<100000000|| EngineerProperty.Id > 1000000000) { }
+            if(EngineerProperty.Id<100000000|| EngineerProperty.Id > 1000000000) { }
             if(EngineerProperty.Name==" ") { }
             if (EngineerProperty.Email != null)
             {
