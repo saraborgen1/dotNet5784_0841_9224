@@ -11,14 +11,11 @@ internal class StateImplementation : IState
     {
         get
         {
-            XElement root = LoadListFromXMLElement("data-config");
-            return DateTime.TryParse((string?)root.Element("StartProject"), out var result) ? (DateTime?)result : null;
+            return _dal.StartProject;
         }
         set
         {
-            XElement root = LoadListFromXMLElement("data-config");
-            root.Element("StartProject")?.SetValue(value!);
-            SaveListToXMLElement(root, "data-config");
+            _dal.StartProject = value;
         }
 
     }
@@ -28,24 +25,16 @@ internal class StateImplementation : IState
     {
         get
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml");
-            return DateTime.TryParse((string?)root.Element("EndProject"), out var result) ? (DateTime?)result : null;
-
+            return _dal.EndProject;
         }
         set
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml"); ;
-            root.Element("EndProject")?.SetValue(value?.ToString());
-            root.Save(@"..\xml\data_config.xml");
+            _dal.EndProject = value;
         }
     }
 
     public BO.Enums.ProjectStatus StatusProject()
     {
-        if (StartProject == null)
-            return Enums.ProjectStatus.Creation;
-        if (_dal.Task.Read(p => p.StartDate == null) != null)
-            return Enums.ProjectStatus.Scheduling;
-        return Enums.ProjectStatus.Start;
+        return (BO.Enums.ProjectStatus)_dal.StatusProject();
     }
 }

@@ -8,11 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <!--A button that leads to the list view window-->
-        <Button Content="List view" HorizontalAlignment="Left" VerticalAlignment="Top" Height="75" Width="192" Margin="286,276,0,0" Click="btnEngineers_Click"/>
+        <Button Content="List view" HorizontalAlignment="Left" VerticalAlignment="Top" Height="22" Width="643" Margin="114,303,0,0" Click="btnEngineers_Click"/>
         <!--A button that leads to initializing the database-->
-        <Button Content="Initialization" HorizontalAlignment="Left" Margin="286,138,0,0" VerticalAlignment="Top" Height="54" Width="192" Click="btnInitialization_Click"/>
+        <Button Content="Initialization" HorizontalAlignment="Left" Margin="488,185,0,0" VerticalAlignment="Top" Height="54" Width="192" Click="btnInitialization_Click"/>
         <!--A button that leads to reset the database-->
-        <Button Content="Reset" HorizontalAlignment="Left" Height="148" Margin="91,69,0,0" VerticalAlignment="Top" Width="169" Click="btnReset_Click"/>
+        <Button Content="Reset" HorizontalAlignment="Left" Height="251" Margin="40,35,0,0" VerticalAlignment="Top" Width="432" Click="btnReset_Click"/>
 
     </Grid>
 </Window>

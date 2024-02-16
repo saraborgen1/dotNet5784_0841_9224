@@ -1,4 +1,5 @@
-﻿using DO;
+﻿using BlApi;
+using DO;
 using System.Xml.Linq;
 using static BO.Enums;
 using static Dal.XMLTools;
@@ -51,7 +52,7 @@ namespace BlTest
             }
 
             Console.WriteLine("Select an entity you want to check:\r\nFor a task tap 1\r\nFor the engineer press 2\r\nTo exit the main program press 0");
-            if (s_bl.State.StatusProject()==BO.Enums.ProjectStatus.Creation)
+            if (s_bl.State.StartProject==null)
                 Console.WriteLine("For enter hours for tasks in the project 3");
         }
 
@@ -75,9 +76,7 @@ namespace BlTest
             {
                 temp = DateTime.TryParse(Console.ReadLine(), out projectDate);
             }
-
-            s_bl.State.StartProject= projectDate;
-            s_bl.State.StatusProject = BO.Enums.ProjectStatus.Scheduling;
+            s_bl.State.StartProject = projectDate;
 
         }
         /// <summary>
