@@ -21,12 +21,16 @@ sealed internal class DalList : IDal
     /// </summary>
     public IEngineer Engineer => new EngineerImplementation();
 
-    public DateTime? StartProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public DateTime? EndProject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public DateTime? StartProject { get => DataSource.Config.startProject; set => DataSource.Config.startProject = value; }
+    public DateTime? EndProject { get => DataSource.Config.endProject; set => DataSource.Config.endProject = value; }
 
     public ProjectStatus StatusProject()
     {
-        throw new NotImplementedException();
+        if (StartProject == null)
+            return ProjectStatus.Creation;
+        if (Task.Read(p => p.StartDate == null) != null)
+            return ProjectStatus.Scheduling;
+        return ProjectStatus.Start;
     }
 }
 
