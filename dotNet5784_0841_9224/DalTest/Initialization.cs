@@ -31,6 +31,8 @@ public static class Initialization
         s_dal.Task.DeleteAll();
         s_dal.Dependency.DeleteAll();
         s_dal.Engineer.DeleteAll();
+        s_dal.StartProject = null;
+        s_dal.EndProject = null;
     }
 
 

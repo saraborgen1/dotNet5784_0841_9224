@@ -13,7 +13,7 @@ internal class TaskImplementation : ITask
     {
         if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
             throw new BO.BlCannotAddWrongStateException("Cannot create a task at this state");
-        if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
+        if (state.StatusProject() != BO.Enums.ProjectStatus.Creation && item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
         if (item.Description == null) throw new BO.BlTheInputIsInvalidException("Description");
         if (item.RequiredEffortTime == null || item.RequiredEffortTime < TimeSpan.Zero) throw new BO.BlTheInputIsInvalidException("RequiredEffortTime");
@@ -217,7 +217,6 @@ internal class TaskImplementation : ITask
         if (item.DeadlineDate != null && item.ScheduledDate != null && item.DeadlineDate < item.ScheduledDate)
             throw new BO.BlDateClashException("The end date is before the start date");
 
-
         DO.Task updatedTask = new DO.Task
         (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
         , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
@@ -231,23 +230,6 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlCannotBeDeletedException(ex);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public void UpdateDate(int id, DateTime date)

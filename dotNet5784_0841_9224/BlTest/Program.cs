@@ -74,6 +74,7 @@ namespace BlTest
             var temp = DateTime.TryParse(Console.ReadLine(), out DateTime projectDate);
             while (!temp || projectDate < DateTime.Now)
             {
+                Console.WriteLine("Enter start a valid project date");
                 temp = DateTime.TryParse(Console.ReadLine(), out projectDate);
             }
             s_bl.State.StartProject = projectDate;
@@ -183,12 +184,12 @@ namespace BlTest
             Console.WriteLine("Enter description");
             string description = Console.ReadLine()!;
 
-            List<BO.TaskInList>? dependencies = null;
+            List<BO.TaskInList> dependencies = new List<BO.TaskInList>();
             Console.WriteLine("Enter a list of id of dependencies. When you are done, enter 0");
             int num = int.Parse(Console.ReadLine()!);
             while (num != 0)
             {
-                dependencies!.Add(new BO.TaskInList() { Id = num, Alias = null, Description = null, Status = 0 });
+                dependencies.Add(new BO.TaskInList() { Id = num, Alias = null, Description = null, Status = 0 });
                 num = int.Parse(Console.ReadLine()!);
             }
 

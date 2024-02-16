@@ -23,7 +23,7 @@ sealed internal class DalXml : IDal
         set
         {
             XElement root = LoadListFromXMLElement("data-config");
-            root.Element("StartProject")?.SetValue(value!);
+            root.Element("StartProject")?.SetValue(value == null ? "" : value.Value.ToString("yyyy-MM-dd"));
             SaveListToXMLElement(root, "data-config");
         }
 
@@ -34,15 +34,15 @@ sealed internal class DalXml : IDal
     {
         get
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml");
+            XElement root = XElement.Load(@"..\xml\data-config.xml");
             return DateTime.TryParse((string?)root.Element("EndProject"), out var result) ? (DateTime?)result : null;
 
         }
         set
         {
-            XElement root = XElement.Load(@"..\xml\data_config.xml"); ;
-            root.Element("EndProject")?.SetValue(value?.ToString());
-            root.Save(@"..\xml\data_config.xml");
+            XElement root = XElement.Load(@"..\xml\data-config.xml");
+            root.Element("EndProject")?.SetValue(value == null ? "" : value.Value.ToString("yyyy-MM-dd"));
+            root.Save(@"..\xml\data-config.xml");
         }
     }
 
