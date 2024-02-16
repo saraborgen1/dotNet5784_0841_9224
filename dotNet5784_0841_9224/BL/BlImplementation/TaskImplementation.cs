@@ -49,12 +49,6 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        if (id == 0)
-        {
-            _dal.Task.DeleteAll();
-            _dal.Dependency.DeleteAll();
-            return;
-        }
         if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
             throw new BO.BlCannotBeDeletedWrongStateException("Cannot delete a task at this state");
         try

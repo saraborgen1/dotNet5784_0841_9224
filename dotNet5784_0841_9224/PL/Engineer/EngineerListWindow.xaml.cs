@@ -52,8 +52,10 @@ namespace PL.Engineer
                     var index = _engineers.FindIndex(e => e.Id == item.engineerId);
                     if (index is not -1)
                     {
+
                         EngineerList[index] = engineer!;
                         _engineers[index] = engineer!;
+
                     }
                 }
 
@@ -71,7 +73,11 @@ namespace PL.Engineer
         private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            new EngineerWindow(addOrUpdateChanged, engineer!.Id).ShowDialog();
+            if(engineer != null)
+            {
+                new EngineerWindow(addOrUpdateChanged, engineer.Id).ShowDialog();
+            }
+            
         }
     }
 }
