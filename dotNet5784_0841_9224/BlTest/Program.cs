@@ -20,7 +20,7 @@ namespace BlTest
             }
             if (num == 1)
             {
-                //Console.WriteLine($"enter {name}");
+                Console.WriteLine($"enter {name}");
                 return true;
             }
             return false;
@@ -520,28 +520,28 @@ namespace BlTest
             string? name = engineer.Name;
             if (change("Name"))
             {
-                Console.WriteLine("Enter the name of the engineer (full name)");
+                //Console.WriteLine("Enter the name of the engineer (full name)");
                 name = Console.ReadLine()!;
             }
 
             string? email = engineer.Email;
             if (change("Email"))
             {
-                Console.WriteLine("Enter an email address");
+                //Console.WriteLine("Enter an email address");
                 email = Console.ReadLine()!;
             }
 
             BO.Enums.EngineerExperience difficulty = engineer.Level;
             if (change("Level"))
             {
-                Console.WriteLine("Enter the level of the engineer");
+                //Console.WriteLine("Enter the level of the engineer");
                 difficulty = (BO.Enums.EngineerExperience)int.Parse(Console.ReadLine()!);
             }
 
             double? cost = engineer.Cost;
             if (change("Cost"))
             {
-                Console.WriteLine("Enter an hourly cost");
+                //Console.WriteLine("Enter an hourly cost");
                 cost = double.Parse(Console.ReadLine()!);
             }
 
