@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using BO;
+using System.Windows;
 
 namespace PL.Engineer
 {
@@ -24,7 +25,7 @@ namespace PL.Engineer
                 {
                     EngineerProperty = s_bl.Engineer.Read(id)!;
                 }
-                catch (Exception ex) { Console.WriteLine(ex); }
+                catch (Exception ex) { MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error); }
 
         }
         public BO.Engineer EngineerProperty
@@ -59,7 +60,7 @@ namespace PL.Engineer
                 }
                 catch (Exception ex) 
                 {
-                    MessageBox.Show(ex.ToString(), "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             try
@@ -71,7 +72,7 @@ namespace PL.Engineer
             }
             catch (Exception ex) 
             {
-                MessageBox.Show(ex.ToString(), "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

@@ -62,7 +62,7 @@ namespace PL.Engineer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void Button_EngineerWindow(object sender, RoutedEventArgs e)
