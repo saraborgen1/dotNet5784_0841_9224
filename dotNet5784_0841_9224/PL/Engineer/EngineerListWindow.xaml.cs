@@ -10,6 +10,10 @@ namespace PL.Engineer
     public partial class EngineerListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        /// <summary>
+        /// con
+        /// </summary>
         public EngineerListWindow()
         {
             _engineers = s_bl?.Engineer.ReadAll()!.ToList()!;
@@ -17,18 +21,33 @@ namespace PL.Engineer
             InitializeComponent();
         }
 
+        /// <summary>
+        /// EngineerList Property
+        /// </summary>
         public ObservableCollection<BO.Engineer> EngineerList
         {
             get { return (ObservableCollection<BO.Engineer>)GetValue(EngineerListProperty); }
             set { SetValue(EngineerListProperty, value); }
         }
 
+
+        /// <summary>
+        /// makes EngineerList  DependencyProperty
+        /// </summary>
         public static readonly DependencyProperty EngineerListProperty =
             DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// Level Property
+        /// </summary>
         public BO.Enums.EngineerExperience Level { get; set; } = BO.Enums.EngineerExperience.None;
         List<BO.Engineer> _engineers;
+
+        /// <summary>
+        /// Respond to the value change event and cause the list of items to be updated on the display
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBox_EngineerLevelFilter(object sender, SelectionChangedEventArgs e)
         {
 
@@ -37,6 +56,10 @@ namespace PL.Engineer
 
         }
 
+        /// <summary>
+        /// Adds or deletes an entity
+        /// </summary>
+        /// <param name="item"> id of entity and if we are adding or updating</param>
         private void addOrUpdateChanged((int engineerId, bool isUpdateOrAdd) item)
         {
             try
@@ -65,11 +88,21 @@ namespace PL.Engineer
                 MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        /// <summary>
+        /// opens EngineerWindow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_EngineerWindow(object sender, RoutedEventArgs e)
         {
             new EngineerWindow(addOrUpdateChanged).ShowDialog();
         }
 
+        /// <summary>
+        /// Opening a single item display window in update mode
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;

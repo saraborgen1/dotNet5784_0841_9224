@@ -78,6 +78,9 @@ internal class TaskImplementation : ITask
 
         SaveListToXMLSerializer(taskList, s_tasks_xml);
     }
+    /// <summary>
+    /// A function that deletes all objects of the entity type
+    /// </summary>
     public void DeleteAll()
     {
         List<DO.Task> newListTask = new List<DO.Task>(); // Create a new empty list

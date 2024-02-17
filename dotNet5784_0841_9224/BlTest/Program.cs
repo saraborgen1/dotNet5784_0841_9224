@@ -9,6 +9,12 @@ namespace BlTest
     internal class Program
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        /// <summary>
+        /// a function that askes if update is wanted
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private static bool change(string name)
         {
             Console.WriteLine($"if you would like to update the {name} enter 1 if not enter 0");
@@ -63,11 +69,18 @@ namespace BlTest
         {
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\nTo update the data of an existing object, press 5\r\nTo update the start date of a task, press 6");
         }
+
+        /// <summary>
+        /// Engineer submenu
+        /// </summary>
         private static void subMenueMEngineer()
         {
             Console.WriteLine("Select the method you want to perform:\r\nTo exit the main menu press 0\r\nTo add a new object of the entity type to the list tap 1\r\nTo display an object by ID, press 2\r\nTo display the list of all objects of the entity type press 3\r\nTo delete an existing object from the list, press 4\r\nTo update the data of an existing object, press 5\r\nTo display the list of all the deleted objects of the entity type press 7");
         }
 
+        /// <summary>
+        /// Time submenu
+        /// </summary>
         private static void subMenueMTime()
         {
             Console.WriteLine( "Enter start project date");
@@ -93,6 +106,10 @@ namespace BlTest
                 switch (subMenue)
                 {
                     case SubMenue.Create:
+                        for (int i =20;i>=2;i--)
+                        {
+                            s_bl.Task.Delete(i);
+                        }
                         createTaskCase();
                         break;
                     case SubMenue.Read:
@@ -116,6 +133,9 @@ namespace BlTest
             }
         }
 
+        /// <summary>
+        ///  update Date Task Case
+        /// </summary>
         private static void updateDateTaskCase()
         {
             Console.WriteLine("Enter id");

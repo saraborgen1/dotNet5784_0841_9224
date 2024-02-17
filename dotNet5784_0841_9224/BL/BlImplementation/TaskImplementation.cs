@@ -9,6 +9,13 @@ internal class TaskImplementation : ITask
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Task);
     private IState state = new StateImplementation();
+
+    /// <summary>
+    /// checks if everything is valid for the stage
+    /// </summary>
+    /// <param name="item">An object of type Bo</param>
+    /// <exception cref="BO.BlCannotAddWrongStateException">Cannot Add Wrong State</exception>
+    /// <exception cref="BO.BlTheInputIsInvalidException">The Input Is Invalid</exception>
     private void validation(BO.Task item)
     {
         if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
@@ -19,6 +26,12 @@ internal class TaskImplementation : ITask
         if (item.RequiredEffortTime == null || item.RequiredEffortTime < TimeSpan.Zero) throw new BO.BlTheInputIsInvalidException("RequiredEffortTime");
         if (item.Deliverables == null) throw new BO.BlTheInputIsInvalidException("Deliverables");
     }
+
+    /// <summary>
+    /// Adding a new object to  database
+    /// </summary>
+    /// <param name="item">An object of type Bo</param>
+    /// <exception cref="BO.BlAlreadyExistException">Already Exist</exception>
     public void Create(BO.Task item)
     {
         validation(item);
@@ -47,6 +60,12 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// Deletion of an existing object with a certain ID, from the list of entity type objects.
+    /// </summary>
+    /// <param name="id">condition</param>
+    /// <exception cref="BO.BlCannotBeDeletedWrongStateException">Cannot Be Deleted Wrong State</exception>
+    /// <exception cref="BO.BlCannotBeDeletedException">Cannot Be Deleted</exception>
     public void Delete(int id)
     {
         if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
@@ -76,6 +95,13 @@ internal class TaskImplementation : ITask
         _dal.Task.Delete(id);
 
     }
+
+    /// <summary>
+    /// Returns an entity from the list that id matches param
+    /// </summary>
+    /// <param name="id">condition</param>
+    /// <returns>an entity from the list that meets the condition</returns>
+    /// <exception cref="BO.BlDoesNotExistException">Does Not Exist</exception>
     public BO.Task Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == id);
@@ -143,6 +169,11 @@ internal class TaskImplementation : ITask
         };
     }
 
+    /// <summary>
+    /// Returns all entitys from the list that meets the condition
+    /// </summary>
+    /// <param name="filter">condition</param>
+    /// <returns>Returns all entitys from the list that meets the condition</returns>
     public IEnumerable<BO.Task> ReadAll(Func<BO.Task, bool>? filter = null!)
     {
         var tempList = _dal.Task.ReadAll();
@@ -157,42 +188,51 @@ internal class TaskImplementation : ITask
         return doTaskList;
     }
 
+    /// <summary>
+    /// Update of an existing object
+    /// </summary>
+    /// <param name="item">An object of type Bo</param>
+    /// <exception cref="BO.BlCannotUpdateWrongStateException">Cannot Update WrongS tate</exception>
+    /// <exception cref="BO.BlNoDateException">No Date</exception>
+    /// <exception cref="BO.BlDateClashException">Date Clash</exception>
+    /// <exception cref="BO.BlCannotBeDeletedException">Cannot Be Deleted</exception>
     public void Update(BO.Task item)
     {
 
-        var doTask = _dal.Task.Read(p => p.Id == item.Id);
-        if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
+        var boTask = Read(item.Id);
+       // if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
 
         if (state.StatusProject() == Enums.ProjectStatus.Creation)
         {
-            if (item.StartDate != doTask.StartDate ||
-                       item.ScheduledDate != doTask.ScheduledDate ||
-                       item.DeadlineDate != doTask.DeadlineDate ||
-                       item.CompleteDate != doTask.CompleteDate ||
+            if (item.StartDate != boTask.StartDate ||
+                       item.ScheduledDate != boTask.ScheduledDate ||
+                       item.DeadlineDate != boTask.DeadlineDate ||
+                       item.CompleteDate != boTask.CompleteDate ||
                        item.Engineer != null)
-                throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Scheduling)
         {
-            if (item.CreatedAtDate != doTask.CreatedAtDate ||
-                       item.RequiredEffortTime != doTask.RequiredEffortTime ||
-                       item.StartDate != doTask.StartDate ||
-                       item.CompleteDate != doTask.CompleteDate ||
+            if (item.CreatedAtDate != boTask.CreatedAtDate ||
+                       item.RequiredEffortTime != boTask.RequiredEffortTime ||
+                       item.StartDate != boTask.StartDate ||
+                       item.CompleteDate != boTask.CompleteDate ||
                        item.Engineer != null)
-                throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Start)
         {
-            if (item.Description != doTask.Description ||
-                 item.CreatedAtDate != doTask.CreatedAtDate ||
-                  item.RequiredEffortTime != doTask.RequiredEffortTime ||
-                  item.ScheduledDate != doTask.ScheduledDate)
-                throw new BO.BlCannotUpdateWrongStateException("There is a figure that must not be changed at this stage");
+            if (item.Description != boTask.Description ||
+                 item.CreatedAtDate != boTask.CreatedAtDate ||
+                  item.RequiredEffortTime != boTask.RequiredEffortTime ||
+                  item.ScheduledDate != boTask.ScheduledDate||
+                item.Dependencies!=boTask.Dependencies)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
         }
 
-        if (item.RequiredEffortTime != doTask.RequiredEffortTime)
+        if (item.RequiredEffortTime != boTask.RequiredEffortTime)
 
             if (item.ScheduledDate != null)
                 if (item.Dependencies != null)
@@ -232,6 +272,13 @@ internal class TaskImplementation : ITask
         }
     }
 
+    /// <summary>
+    /// updates a date of a task
+    /// </summary>
+    /// <param name="id">id of entity to update</param>
+    /// <param name="date">new date</param>
+    /// <exception cref="BO.BlNoDateException">No Date</exception>
+    /// <exception cref="BO.BlDateClashException">Date Clash</exception>
     public void UpdateDate(int id, DateTime date)
     {
 

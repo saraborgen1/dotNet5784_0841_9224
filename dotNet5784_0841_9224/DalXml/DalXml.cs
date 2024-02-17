@@ -6,13 +6,24 @@ sealed internal class DalXml : IDal
 {
     public static IDal Instance { get; } = new DalXml();
     private DalXml() { }
-
+    /// <summary>
+    /// The realization of the entitie
+    /// </summary>
     public ITask Task => new TaskImplementation();
+    /// <summary>
+    /// The realization of the entitie
+    /// </summary>
 
     public IDependency Dependency => new DependencyImplementation();
+    /// <summary>
+    /// The realization of the entitie
+    /// </summary>
 
     public IEngineer Engineer => new EngineerImplementation();
 
+    /// <summary>
+    /// An propotie that represents the project start date
+    /// </summary>
     public DateTime? StartProject
     {
         get
@@ -29,7 +40,9 @@ sealed internal class DalXml : IDal
 
     }
 
-
+    /// <summary>
+    /// An propotie that represents the project end date
+    /// </summary
     public DateTime? EndProject
     {
         get
@@ -45,7 +58,10 @@ sealed internal class DalXml : IDal
             root.Save(@"..\xml\data-config.xml");
         }
     }
-
+    /// <summary>
+    /// A function that returns the project status
+    /// </summary>
+    /// <returns>project status</returns>
     public ProjectStatus StatusProject()
     {
         if (StartProject == null)

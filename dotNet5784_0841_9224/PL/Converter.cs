@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace PL;
 
+/// <summary>
+/// converts num into bool for add or update
+/// </summary>
 class ConvertIdToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -20,6 +23,10 @@ class ConvertIdToContent : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+/// <summary>
+/// converts num into bool for IsEnabled
+/// </summary>
 class ConvertIdIsEnabled : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

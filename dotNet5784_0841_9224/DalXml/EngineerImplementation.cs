@@ -107,6 +107,9 @@ internal class EngineerImplementation : IEngineer
                where !item.Active
                select item;
     }
+    /// <summary>
+    /// A function that deletes all objects of the entity type
+    /// </summary>
     public void DeleteAll()
     {
         List<Engineer> newListEngineer = new List<Engineer>(); // Create a new empty list

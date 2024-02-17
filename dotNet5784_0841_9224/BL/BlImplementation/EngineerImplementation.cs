@@ -9,6 +9,12 @@ internal class EngineerImplementation : BlApi.IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
+
+    /// <summary>
+    /// converts entity of DO to BO
+    /// </summary>
+    /// <param name="doEngineer"> what is being converted</param>
+    /// <returns> entity of  BO type</returns>
     private BO.Engineer BOFromDO(DO.Engineer doEngineer)
     {
         return new BO.Engineer()
@@ -27,6 +33,12 @@ internal class EngineerImplementation : BlApi.IEngineer
         };
     }
 
+    /// <summary>
+    /// Adding a new object to  database
+    /// </summary>
+    /// <param name="item"></param>
+    /// <exception cref="BO.BlTheInputIsInvalidException">The Input Is Invalid</exception>
+    /// <exception cref="BO.BlAlreadyExistException">Already Exist</exception>
     public void Create(BO.Engineer item)
     {
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
@@ -52,6 +64,11 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
     }
 
+    /// <summary>
+    /// Deletion of an existing object with a certain ID, from the list of entity type objects.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="BO.BlCannotBeDeletedException">Cannot Be Deleted</exception>
     public void Delete(int id)
     {
         if (id == 0)
@@ -78,6 +95,12 @@ internal class EngineerImplementation : BlApi.IEngineer
         throw new BO.BlCannotBeDeletedException(id, _entityName);
     }
 
+    /// <summary>
+    /// Returns an entity from the list that id matches param
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>an entity from the list that meets the condition</returns>
+    /// <exception cref="BO.BlDoesNotExistException">Does Not Exist</exception>
     public BO.Engineer? Read(int id)
     {
         DO.Engineer? doEngineer = _dal.Engineer.Read(p => p.Id == id);
@@ -93,6 +116,11 @@ internal class EngineerImplementation : BlApi.IEngineer
         return BOFromDO(doEngineer);
     }
 
+    /// <summary>
+    /// Returns all entitys from the list that meets the condition
+    /// </summary>
+    /// <param name="filter">condition</param>
+    /// <returns>Returns all entitys from the list that meets the condition</returns>
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
         var doEngineerList = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
@@ -106,6 +134,12 @@ internal class EngineerImplementation : BlApi.IEngineer
         return doEngineerList;
     }
 
+    /// <summary>
+    /// Update of an existing object
+    /// </summary>
+    /// <param name="item">An object of type Bo</param>
+    /// <exception cref="BO.BlDoesNotExistException">Does Not Exist</exception>
+    /// <exception cref="BO.BlTheInputIsInvalidException">The Input Is Invalid</exception>
     public void Update(BO.Engineer item)
     {
 
@@ -140,12 +174,21 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
 
     }
+
+    /// <summary>
+    /// returns all deleted engineer
+    /// </summary>
+    /// <returns>all deleted engineer</returns>
     public IEnumerable<BO.Engineer> ReadAllDelete()
     {
         var templist = _dal.Engineer.ReadAllDelete();
         return from item in templist
                select BOFromDO(item);
     }
+
+    /// <summary>
+    /// deletes all objects of the entity type
+    /// </summary>
     public void DeleteAll()
     {
         _dal.Engineer.DeleteAll();

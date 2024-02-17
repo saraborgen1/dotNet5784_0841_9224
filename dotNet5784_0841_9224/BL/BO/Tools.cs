@@ -4,6 +4,12 @@ namespace BO;
 
 static class Tools
 {
+    /// <summary>
+    /// a function that prints all of the fields of the entity
+    /// </summary>
+    /// <typeparam name="T">template  entity type</typeparam>
+    /// <param name="t"> </param>
+    /// <returns> info of entity</returns>
     public static string ToStringProperty<T>(this T t)
     {
         

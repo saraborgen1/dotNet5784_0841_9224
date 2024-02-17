@@ -67,6 +67,9 @@ internal class TaskImplementation : ITask
 
         DataSource.Tasks.Add(item);
     }
+    /// <summary>
+    /// A function that deletes all objects of the entity type
+    /// </summary>
     public void DeleteAll()
     {
         DataSource.Tasks.Clear();

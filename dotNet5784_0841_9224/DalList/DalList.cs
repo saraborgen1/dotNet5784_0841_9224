@@ -21,9 +21,20 @@ sealed internal class DalList : IDal
     /// </summary>
     public IEngineer Engineer => new EngineerImplementation();
 
+    /// <summary>
+    /// An propotie that represents the project start date
+    /// </summary>
     public DateTime? StartProject { get => DataSource.Config.startProject; set => DataSource.Config.startProject = value; }
+
+    /// <summary>
+    /// An propotie that represents the project end date
+    /// </summary
     public DateTime? EndProject { get => DataSource.Config.endProject; set => DataSource.Config.endProject = value; }
 
+    /// <summary>
+    /// A function that returns the project status
+    /// </summary>
+    /// <returns>project status</returns>
     public ProjectStatus StatusProject()
     {
         if (StartProject == null)

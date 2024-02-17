@@ -11,20 +11,10 @@ public static class Initialization
     /// access variable to  entitys
     /// </summary>
     private static IDal? s_dal;
-    /// <summary>
-    /// initial data
-    /// </summary>
-    /// <param name="dal">variable according to which we will realize the entities</param>
-    /// <exception cref="NullReferenceException"></exception>
-    /// 
-    //public static void Do(IDal dal) //stage 2
-
 
     /// <summary>
-    /// Reset the running number
+    /// A function that empties the database
     /// </summary>
-    /// <param name="elemName">name of running number</param>
-
     public static void Reset()
     {
         s_dal = Factory.Get; //stage 4
@@ -35,7 +25,9 @@ public static class Initialization
         s_dal.EndProject = null;
     }
 
-
+    /// <summary>
+    /// A function that initializes the database
+    /// </summary>
     public static void Do() //stage 4
     {
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2

@@ -87,6 +87,9 @@ internal class DependencyImplementation : IDependency
         listDependency.Add(dependency);
         SaveListToXMLElement(listDependency, s_dependencys_xml);
     }
+    /// <summary>
+    /// A function that deletes all objects of the entity type
+    /// </summary>
     public void DeleteAll()
     {
         List<Dependency> newListDependency = new List<Dependency>(); // Create a new empty list

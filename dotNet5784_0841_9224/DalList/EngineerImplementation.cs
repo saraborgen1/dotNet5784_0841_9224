@@ -11,7 +11,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="item">A reference to an existing object of the Engineer type. The object was created in an upper layer and its fields are already filled with normal values.</param>
     /// <returns>The method will return the running number of the newly created object in the list.</returns>
-    /// <exception cref="NotImplementedException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
+    /// <exception cref="DalAlreadyExistsException">In case of an attempt to add an object that already exists - an exception will be thrown</exception>
     public int Create(Engineer item)
     {
 
@@ -26,7 +26,7 @@ internal class EngineerImplementation : IEngineer
     /// Deletion of an existing object with a certain ID, from the list of Engineer type objects.
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="NotImplementedException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
+    /// <exception cref="DalDoesNotExistsException">If there is no object with the received ID number - an appropriate exception will be thrown</exception>
     public void Delete(int id)
     {
         if (DataSource.Engineers.FirstOrDefault(item => item.Id == id && item.Active) == null)
@@ -62,7 +62,7 @@ internal class EngineerImplementation : IEngineer
     /// Update of an existing object. The update will consist of deleting the existing object with the same ID number and replacing it with a new object with the same ID number and updated fields.
     /// </summary>
     /// <param name="item">A reference to an updated existing object of type Engineer.</param>
-    /// <exception cref="NotImplementedException">If there is no object with the received ID number - an exception will be thrown</exception>
+    /// <exception cref="DalDoesNotExistsException">If there is no object with the received ID number - an exception will be thrown</exception>
     public void Update(Engineer item)
     {
         if (DataSource.Engineers.RemoveAll(p => p.Id == item.Id) == 0)
@@ -70,7 +70,7 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.Add(item);
     }
     /// <summary>
-    /// print all deleted engineer
+    /// returns all deleted engineer
     /// </summary>
     /// <returns> deleted engineer collection</returns>
     public IEnumerable<Engineer> ReadAllDelete()
@@ -79,6 +79,9 @@ internal class EngineerImplementation : IEngineer
                where !item.Active
                select item).ToList();
     }
+    /// <summary>
+    /// A function that deletes all objects of the entity type
+    /// </summary>
     public void DeleteAll()
     {
         DataSource.Engineers.Clear();

@@ -2,6 +2,9 @@
 
 public class Enums
 {
+    /// <summary>
+    /// engineer level enum
+    /// </summary>
     public enum EngineerExperience
     {
         Beginner,
@@ -11,6 +14,10 @@ public class Enums
         Expert,
         None//default for filter in pl
     }
+
+    /// <summary>
+    /// task status enum
+    /// </summary>
     public enum Status
     {
         Unscheduled, 
@@ -18,6 +25,10 @@ public class Enums
         OnTrack, 
         Done
     }
+
+    /// <summary>
+    /// project status enum
+    /// </summary>
     public enum ProjectStatus
     {
         Creation,

@@ -10,6 +10,12 @@ namespace PL.Engineer
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         bool isCreate = false;
         private event Action<(int engineerId, bool isUpdateOrAdd)> _onUpdateOrAdd;
+
+        /// <summary>
+        /// con.
+        /// </summary>
+        /// <param name="onUpdateOrAdd"></param>
+        /// <param name="id"></param>
         public EngineerWindow(Action<(int, bool)> onUpdateOrAdd, int id = 0)
         {
             _onUpdateOrAdd = onUpdateOrAdd;
@@ -31,16 +37,27 @@ namespace PL.Engineer
                 }
 
         }
+
+        /// <summary>
+        /// EngineerProperty Property
+        /// </summary>
         public BO.Engineer EngineerProperty
         {
             get { return (BO.Engineer)GetValue(EngineerPropertyProperty); }
             set { SetValue(EngineerPropertyProperty, value); }
         }
 
+        /// <summary>
+        /// makes EngineerProperty DependencyProperty
+        /// </summary>
         public static readonly DependencyProperty EngineerPropertyProperty =
           DependencyProperty.Register("EngineerProperty", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// adds or update s\entity
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
             
