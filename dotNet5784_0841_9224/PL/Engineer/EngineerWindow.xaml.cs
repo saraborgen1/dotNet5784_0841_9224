@@ -54,7 +54,7 @@ namespace PL.Engineer
           DependencyProperty.Register("EngineerProperty", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
         /// <summary>
-        /// adds or update s\entity
+        /// adds  or update s\entity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
