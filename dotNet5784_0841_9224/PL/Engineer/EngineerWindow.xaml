@@ -33,7 +33,7 @@
         <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,188,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
                   SelectedValue="{Binding Level, Mode=TwoWay}"/>
-        <!--TextBox Cost-->
+        <!--TextBox  Cost-->
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,228,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <!--Button Add/Update-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Height="81" Width="306"
