@@ -106,10 +106,6 @@ namespace BlTest
                 switch (subMenue)
                 {
                     case SubMenue.Create:
-                        for (int i =20;i>=2;i--)
-                        {
-                            s_bl.Task.Delete(i);
-                        }
                         createTaskCase();
                         break;
                     case SubMenue.Read:
