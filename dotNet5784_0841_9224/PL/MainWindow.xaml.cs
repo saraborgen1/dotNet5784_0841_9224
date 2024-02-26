@@ -27,7 +27,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-
+            this.DataContext = this;
             CurrentDateProperty = s_bl.State.CurrentDate;
         }
 
