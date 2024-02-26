@@ -42,5 +42,16 @@ namespace PL
             if (mbResult == MessageBoxResult.Yes)
                 DalTest.Initialization.Reset();
         }
+
+        private void btnGantt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        private void btnTask_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskListWindow().Show();
+        }
     }
 }
