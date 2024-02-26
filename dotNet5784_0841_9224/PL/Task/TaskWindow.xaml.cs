@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Engineer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,14 +15,44 @@ using System.Windows.Shapes;
 
 namespace PL.Task
 {
-    /// <summary>
-    /// Interaction logic for TaskWindow.xaml
-    /// </summary>
+  
     public partial class TaskWindow : Window
     {
-        public TaskWindow()
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        bool isCreate = false;
+        private event Action<(int TaskId, bool isUpdateOrAdd)> _onUpdateOrAdd;
+
+       
+        public TaskWindow(Action<(int, bool)> onUpdateOrAdd, int id = 0)
         {
+            _onUpdateOrAdd = onUpdateOrAdd;
             InitializeComponent();
+            if (id == 0)
+            {
+                TaskProperty = new BO.Task();
+                isCreate = true;
+            }
+            else
+                try
+                {
+                    TaskProperty = s_bl.Task.Read(id)!;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
         }
+        public BO.Task TaskProperty
+        {
+            get { return (BO.Task)GetValue(TaskPropertyProperty); }
+            set { SetValue(TaskPropertyProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty TaskPropertyProperty =
+          DependencyProperty.Register("TaskProperty", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+     
     }
 }
