@@ -1,0 +1,17 @@
+﻿<Window x:Class="PL.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800">
+    <Grid>
+        <!--A button that leads to the list view window-->
+        <Button Content="List view" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Margin="0,250,0,0" Click="btnEngineers_Click"/>
+        <!--A button that leads to initializing the database-->
+        <Button Content="Initialization" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Height="67" Width="232" Click="btnInitialization_Click"/>
+        <!--A button that leads to reset the database-->
+        <Button Content="Reset" HorizontalAlignment="Center" Height="60" Margin="0,50,0,0" VerticalAlignment="Top" Width="200" Click="btnReset_Click"/>
+    </Grid>
+</Window>

@@ -8,28 +8,6 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
 
-        private void btnEngineers_Click(object sender, RoutedEventArgs e)
-        {
-            new EngineerListWindow().Show();
-        }
-
-        private void btnInitialization_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult mbResult = MessageBox.Show("Do you want to initialize the data?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (mbResult == MessageBoxResult.Yes)
-                DalTest.Initialization.Do();
-        }
-
-        private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult mbResult = MessageBox.Show("Do you want to reset the data?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (mbResult == MessageBoxResult.Yes)
-                DalTest.Initialization.Reset();
-        }
     }
 }
