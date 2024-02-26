@@ -24,7 +24,7 @@
         <Label Content="Cost" HorizontalAlignment="Left" Margin="322,228,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--TextBox Id-->
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,68,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"
-                IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" TextChanged="TextBox_TextChanged" />
+                IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
         <!--TextBox Name-->
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,108,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <!--TextBox Email-->
