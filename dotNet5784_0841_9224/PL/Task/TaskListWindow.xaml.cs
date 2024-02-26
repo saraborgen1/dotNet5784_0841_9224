@@ -44,13 +44,13 @@ namespace PL.Task
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
 
-        public BO.Enums.EngineerExperience Level { get; set; } = BO.Enums.EngineerExperience.None;
+        public BO.Enums.EngineerExperience Copmlexity { get; set; } = BO.Enums.EngineerExperience.None;
         List<BO.Task> _tasks;
 
         private void ComboBox_TaskLevelFilter(object sender, SelectionChangedEventArgs e)
         {
-            TaskList = new ObservableCollection<BO.Task>((Level == BO.Enums.EngineerExperience.None) ?
-           _tasks : _tasks.Where(item => item.Copmlexity == Level));
+            TaskList = new ObservableCollection<BO.Task>((Copmlexity == BO.Enums.EngineerExperience.None) ?
+           _tasks : _tasks.Where(item => item.Copmlexity == Copmlexity));
         }
 
         private void SelectedTask(object sender, SelectionChangedEventArgs e)

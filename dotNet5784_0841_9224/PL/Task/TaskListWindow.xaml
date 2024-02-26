@@ -26,7 +26,7 @@
             <!--Filter ComboBox-->
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
              Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   SelectedValue="{Binding Level, Mode=TwoWay}" SelectionChanged="ComboBox_TaskLevelFilter"/>
+                   SelectedValue="{Binding Copmlexity, Mode=TwoWay}" SelectionChanged="ComboBox_TaskLevelFilter"/>
         </Grid>
         <!--List display-->
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" SelectionChanged="SelectedTask">
