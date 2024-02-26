@@ -53,9 +53,47 @@ namespace PL.Task
            _tasks : _tasks.Where(item => item.Copmlexity == Copmlexity));
         }
 
+        private void addOrUpdateChanged((int TaskId, bool isUpdateOrAdd) item)
+        {
+            try
+            {
+                var task = s_bl.Task.Read(item.TaskId);
+                if (item.isUpdateOrAdd)
+                {
+                    TaskList.Add(task!);
+                    _tasks.Add(task!);
+                }
+                else
+                {
+                    var index = _tasks.FindIndex(e => e.Id == item.TaskId);
+                    if (index is not -1)
+                    {
+
+                        TaskList[index] = task!;
+                        _tasks[index] = task!;
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void Button_TaskWindow(object sender, RoutedEventArgs e)
+        {
+            new TaskWindow(addOrUpdateChanged).ShowDialog();
+        }
+
         private void SelectedTask(object sender, SelectionChangedEventArgs e)
         {
-           
+            BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
+            if (task != null)
+            {
+                new TaskWindow(addOrUpdateChanged, task.Id).ShowDialog();
+            }
+
         }
     }
 }
