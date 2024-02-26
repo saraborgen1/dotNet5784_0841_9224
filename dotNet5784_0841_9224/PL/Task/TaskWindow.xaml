@@ -39,8 +39,8 @@
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,100,0,0" Grid.Column="1"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding CreatedAtDate, Mode=TwoWay}"/>
             <ComboBox HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"
-                ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
-                SelectedValue="{Binding Level, Mode=TwoWay}"/>
+                ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}"
+                SelectedValue="{Binding Status, Mode=TwoWay}"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,250,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding RequiredEffortTime, Mode=TwoWay}"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding StartDate, Mode=TwoWay}"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,350,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding ScheduledDate, Mode=TwoWay}"/>

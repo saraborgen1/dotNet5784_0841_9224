@@ -1,5 +1,6 @@
 ﻿using PL.Engineer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,6 @@ namespace PL.Task
 
         public static readonly DependencyProperty TaskPropertyProperty =
           DependencyProperty.Register("TaskProperty", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
-     
+
     }
 }
