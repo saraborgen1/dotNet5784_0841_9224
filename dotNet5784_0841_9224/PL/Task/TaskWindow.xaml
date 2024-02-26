@@ -20,7 +20,6 @@
             <Label Content="Alias" HorizontalAlignment="Left" Margin="33,50,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <Label Content="Description" HorizontalAlignment="Left" Margin="33,100,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <Label Content="CreatedAtDate" HorizontalAlignment="Left" Margin="33,150,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
-            <Label Content="Status" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Center" Height="35" Width="126"/>
             <Label Content="RequiredEffortTime" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <Label Content="StartDate" HorizontalAlignment="Left" Margin="33,300,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <Label Content="ScheduledDate" HorizontalAlignment="Left" Margin="33,350,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
@@ -38,9 +37,6 @@
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,50,0,0" Grid.Column="1"/>
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,100,0,0" Grid.Column="1"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding CreatedAtDate, Mode=TwoWay}"/>
-            <ComboBox HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"
-                ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}"
-                SelectedValue="{Binding Status, Mode=TwoWay}"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,250,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding RequiredEffortTime, Mode=TwoWay}"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,300,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding StartDate, Mode=TwoWay}"/>
             <DatePicker HorizontalAlignment="Left" Margin="0,350,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding ScheduledDate, Mode=TwoWay}"/>
