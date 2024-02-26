@@ -8,6 +8,6 @@
         <local:StatusCollection x:Key="StatusCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
-        <local: x:Key="
+        <!--<local: CurrentDa6 x:Key="-->
     </Application.Resources>
 </Application>
