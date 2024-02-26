@@ -105,6 +105,7 @@ namespace PL.Engineer
                     _onUpdateOrAdd((EngineerProperty.Id, true));
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
+                    return;
                 }
                 catch (Exception ex)
                 {

@@ -18,5 +18,12 @@ public interface IState
     /// <returns>projest status</returns>
     public BO.Enums.ProjectStatus StatusProject();
 
+    /// <summary>
+    /// propotie of  Current time project
+    /// </summary>
+
+    public DateTime? CurrentDate { set; get; }
+
+
 
 }

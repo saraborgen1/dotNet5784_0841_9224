@@ -37,4 +37,16 @@ internal class StateImplementation : IState
     {
         return (BO.Enums.ProjectStatus)_dal.StatusProject();
     }
+
+    public DateTime? CurrentDate
+    {
+        get
+        {
+            return _dal.CurrentDate;
+        }
+        set
+        {
+            _dal.CurrentDate = value;
+        }
+    }
 }

@@ -7,5 +7,6 @@
         <local:EngineersCollection x:Key="EngineersCollectionKey" />
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
+        <local: x:Key="
     </Application.Resources>
 </Application>

@@ -24,6 +24,8 @@ internal static class DataSource
         /// An propotie that represents the project end date
         /// </summary
         public static DateTime? endProject=null;
+
+        public static DateTime? currentDate = DateTime.Now;
     }
     internal static List<DO.Task> Tasks { get; } = new();
     internal static List<DO.Engineer> Engineers { get; } = new();

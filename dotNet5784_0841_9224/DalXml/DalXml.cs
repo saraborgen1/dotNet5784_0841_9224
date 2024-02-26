@@ -70,4 +70,23 @@ sealed internal class DalXml : IDal
             return ProjectStatus.Scheduling;
         return ProjectStatus.Start;
     }
+    /// <summary>
+    /// propotie of  Current time project
+    /// </summary>
+
+    public DateTime? CurrentDate
+    {
+        get
+        {
+            XElement root = XElement.Load(@"..\xml\data-config.xml");
+            return DateTime.TryParse((string?)root.Element("CurrentTime"), out var result) ? (DateTime?)result : null;
+
+        }
+        set
+        {
+            XElement root = XElement.Load(@"..\xml\data-config.xml");
+            root.Element("CurrentTime")?.SetValue(value == null ? "" : value.Value.ToString("yyyy-MM-dd"));
+            root.Save(@"..\xml\data-config.xml");
+        }
+    }
 }

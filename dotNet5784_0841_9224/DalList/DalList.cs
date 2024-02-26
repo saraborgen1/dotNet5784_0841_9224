@@ -43,5 +43,10 @@ sealed internal class DalList : IDal
             return ProjectStatus.Scheduling;
         return ProjectStatus.Start;
     }
+    /// <summary>
+    /// propotie of  Current time project
+    /// </summary>
+
+    public DateTime? CurrentDate { get => DataSource.Config.currentDate; set => DataSource.Config.currentDate = value; }
 }
 

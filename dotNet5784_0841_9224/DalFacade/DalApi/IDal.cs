@@ -27,4 +27,9 @@ public interface IDal
     /// </summary>
     /// <returns>project status</returns>
     public DO.ProjectStatus StatusProject();
+
+    /// <summary>
+    /// propotie of  Current time project
+    /// </summary>
+    public DateTime? CurrentDate { set; get; }
 }
