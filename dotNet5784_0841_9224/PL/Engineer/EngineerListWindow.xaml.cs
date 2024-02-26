@@ -50,7 +50,6 @@ namespace PL.Engineer
         /// <param name="e"></param>
         private void ComboBox_EngineerLevelFilter(object sender, SelectionChangedEventArgs e)
         {
-
             EngineerList = new ObservableCollection<BO.Engineer>((Level == BO.Enums.EngineerExperience.None) ?
             _engineers : _engineers.Where(item => item.Level == Level));
 
