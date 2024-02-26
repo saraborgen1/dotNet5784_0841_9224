@@ -10,7 +10,7 @@ namespace BlTest
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        /// <summary>
+        ///; <summary>
         /// a function that askes if  update is wanted
         /// </summary>
         /// <param name="name"></param>
