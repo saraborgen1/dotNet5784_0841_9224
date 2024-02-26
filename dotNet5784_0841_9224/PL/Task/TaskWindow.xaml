@@ -30,8 +30,8 @@
             <Label Content="Remarks" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="126" Grid.Column="2" Margin="33,0,0,0"/>
             <Label Content="Engineer" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
             <Label Content="Copmlexity" HorizontalAlignment="Left" Margin="33,300,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
-            
-            <Button Grid.Column="4" Content="Button" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78"/>
+
+            <Button Grid.Column="4" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
 
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"/>
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,50,0,0" Grid.Column="1"/>

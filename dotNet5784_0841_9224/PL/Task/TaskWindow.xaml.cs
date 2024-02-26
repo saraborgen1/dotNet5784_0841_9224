@@ -55,5 +55,40 @@ namespace PL.Task
         public static readonly DependencyProperty TaskPropertyProperty =
           DependencyProperty.Register("TaskProperty", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
+        private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
+        {
+            //בדיקות תקינות ובדיקות מה מותר לעדכן מה ובאיזה שלב
+
+
+
+            if (isCreate == true)
+
+                try
+                {
+                    s_bl.Task.Create(TaskProperty);
+                    _onUpdateOrAdd((TaskProperty.Id, true));
+                    MessageBox.Show("The Task was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+            try
+            {
+                s_bl.Task.Update(TaskProperty);
+                _onUpdateOrAdd((TaskProperty.Id, false));
+                MessageBox.Show("The Task was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
     }
 }
