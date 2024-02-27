@@ -26,9 +26,10 @@ namespace PL
 
         public MainWindow()
         {
-            InitializeComponent();
-            this.DataContext = this;
             CurrentDateProperty = s_bl.State.CurrentDate;
+            InitializeComponent();
+            
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
