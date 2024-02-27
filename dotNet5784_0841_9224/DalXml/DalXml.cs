@@ -79,13 +79,13 @@ sealed internal class DalXml : IDal
         get
         {
             XElement root = XElement.Load(@"..\xml\data-config.xml");
-            return DateTime.TryParse((string?)root.Element("CurrentTime"), out var result) ? (DateTime?)result : null;
+            return DateTime.TryParse((string?)root.Element("CurrentDate"), out var result) ? (DateTime?)result : DateTime.Now;
 
         }
         set
         {
             XElement root = XElement.Load(@"..\xml\data-config.xml");
-            root.Element("CurrentTime")?.SetValue(value == null ? "" : value.Value.ToString("yyyy-MM-dd"));
+            root.Element("CurrentDate")?.SetValue(value == null ? "" : value.Value.ToString("yyyy-MM-dd"));
             root.Save(@"..\xml\data-config.xml");
         }
     }
