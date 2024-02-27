@@ -24,7 +24,7 @@
             <!--Filter options label-->
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="46,0,0,0" VerticalAlignment="Center"/>
             <!--Filter ComboBox-->
-            <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}"
+            <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
              Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                    SelectedValue="{Binding Copmlexity, Mode=TwoWay}" SelectionChanged="ComboBox_TaskLevelFilter"/>
         </Grid>
