@@ -22,7 +22,7 @@ public interface IState
     /// propotie of  Current time project
     /// </summary>
 
-    public DateTime? CurrentDate { set; get; }
+    public DateTime CurrentDate { set; get; }
 
 
 

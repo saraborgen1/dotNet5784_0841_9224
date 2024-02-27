@@ -38,7 +38,7 @@ internal class StateImplementation : IState
         return (BO.Enums.ProjectStatus)_dal.StatusProject();
     }
 
-    public DateTime? CurrentDate
+    public DateTime CurrentDate
     {
         get
         {

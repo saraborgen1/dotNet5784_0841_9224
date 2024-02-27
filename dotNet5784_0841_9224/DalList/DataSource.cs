@@ -25,7 +25,7 @@ internal static class DataSource
         /// </summary
         public static DateTime? endProject=null;
 
-        public static DateTime? currentDate = DateTime.Now;
+        public static DateTime currentDate = DateTime.Now;
     }
     internal static List<DO.Task> Tasks { get; } = new();
     internal static List<DO.Engineer> Engineers { get; } = new();

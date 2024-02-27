@@ -23,6 +23,7 @@ public static class Initialization
         s_dal.Engineer.DeleteAll();
         s_dal.StartProject = null;
         s_dal.EndProject = null;
+        s_dal.CurrentDate= DateTime.Now;
     }
 
     /// <summary>

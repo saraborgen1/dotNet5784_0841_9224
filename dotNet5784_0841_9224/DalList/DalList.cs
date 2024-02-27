@@ -47,6 +47,6 @@ sealed internal class DalList : IDal
     /// propotie of  Current time project
     /// </summary>
 
-    public DateTime? CurrentDate { get => DataSource.Config.currentDate; set => DataSource.Config.currentDate = value; }
+    public DateTime CurrentDate { get => DataSource.Config.currentDate; set => DataSource.Config.currentDate = value; }
 }
 

@@ -74,18 +74,20 @@ sealed internal class DalXml : IDal
     /// propotie of  Current time project
     /// </summary>
 
-    public DateTime? CurrentDate
+    public DateTime CurrentDate
     {
         get
         {
             XElement root = XElement.Load(@"..\xml\data-config.xml");
-            return DateTime.TryParse((string?)root.Element("CurrentDate"), out var result) ? (DateTime?)result : DateTime.Now;
+
+            DateTime.TryParse((string?)root.Element("CurrentDate"), out var result);
+            return result;
 
         }
         set
         {
             XElement root = XElement.Load(@"..\xml\data-config.xml");
-            root.Element("CurrentDate")?.SetValue(value == null ? "" : value.Value.ToString("yyyy-MM-dd"));
+            root.Element("CurrentDate")?.SetValue(value.ToString("yyyy-MM-dd"));
             root.Save(@"..\xml\data-config.xml");
         }
     }
