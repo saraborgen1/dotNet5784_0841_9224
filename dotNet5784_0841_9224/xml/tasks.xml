@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>1</Id>
-    <Ailas>Layout</Ailas>
-    <Description>Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.</Description>
-    <CreatedAtDate>2023-01-11T00:00:00</CreatedAtDate>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <Deliverables>Architectural Planning</Deliverables>
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
-  </Task>
-  <Task>
     <Id>2</Id>
     <Ailas>Frame</Ailas>
     <Description>Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.</Description>
@@ -26,7 +12,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Structural Framing</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>3</Id>
@@ -40,7 +26,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Electrical Wiring</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>4</Id>
@@ -68,7 +54,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>HVAC Systems Setup</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>6</Id>
@@ -82,7 +68,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Drywall Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>7</Id>
@@ -138,7 +124,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Interior Painting</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>11</Id>
@@ -152,7 +138,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Window Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>12</Id>
@@ -166,7 +152,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Door Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>13</Id>
@@ -180,7 +166,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Cabinet Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>14</Id>
@@ -208,7 +194,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Landscaping Design</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>16</Id>
@@ -222,7 +208,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Fence Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>17</Id>
@@ -264,7 +250,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Smart Home Integration</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>20</Id>
@@ -278,53 +264,11 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Final Inspection</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
-  </Task>
-  <Task>
-    <Id>2</Id>
-    <Ailas>Framed</Ailas>
-    <Description>Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.</Description>
-    <CreatedAtDate>2023-01-22T00:00:00</CreatedAtDate>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <Deliverables>Structural Framing</Deliverables>
-    <EngineerId>0</EngineerId>
-    <Copmlexity>AdvancedBeginner</Copmlexity>
-  </Task>
-  <Task>
-    <Id>1</Id>
-    <Ailas>Layout</Ailas>
-    <Description>Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.</Description>
-    <CreatedAtDate>2023-01-11T00:00:00</CreatedAtDate>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <Deliverables>Architectural Planning</Deliverables>
-    <EngineerId>0</EngineerId>
     <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>1</Id>
-    <Ailas>Layoutdefghjk</Ailas>
-    <Description>Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.</Description>
-    <CreatedAtDate>2023-01-11T00:00:00</CreatedAtDate>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <Deliverables>Architectural Planning</Deliverables>
-    <EngineerId>0</EngineerId>
-    <Copmlexity>Intermediate</Copmlexity>
-  </Task>
-  <Task>
-    <Id>1</Id>
-    <Ailas>Layout234567890</Ailas>
+    <Ailas>Layoutdtfgh</Ailas>
     <Description>Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.</Description>
     <CreatedAtDate>2023-01-11T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />

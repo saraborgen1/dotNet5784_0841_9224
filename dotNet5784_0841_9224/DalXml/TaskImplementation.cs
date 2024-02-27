@@ -71,9 +71,9 @@ internal class TaskImplementation : ITask
     /// <param name="item">A reference to an updated existing object of type Task</param>
     public void Update(DO.Task item)
     {
-        var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
-
         Delete(item.Id);
+
+        var taskList = LoadListFromXMLSerializer<DO.Task>(s_tasks_xml);
         taskList.Add(item);
 
         SaveListToXMLSerializer(taskList, s_tasks_xml);
