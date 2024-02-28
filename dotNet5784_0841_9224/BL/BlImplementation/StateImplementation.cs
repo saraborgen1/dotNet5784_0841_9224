@@ -49,4 +49,28 @@ internal class StateImplementation : IState
             _dal.CurrentDate = value;
         }
     }
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// a function to add Month
+    /// </summary>
+    public void AddMonth()
+    {
+        CurrentDate = CurrentDate.AddMonths(1);
+    }
+    public void AddDay()
+    {
+        CurrentDate = CurrentDate.AddDays(1);
+    }
+    public void AddWeek()
+    {
+        CurrentDate = CurrentDate.AddDays(7);
+    }
 }

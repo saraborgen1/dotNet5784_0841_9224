@@ -26,4 +26,11 @@ public interface IState
 
 
 
+    /// <summary>
+    /// a function to add Month
+    /// </summary>
+    public void AddMonth();
+    public void AddDay();
+    public void AddWeek();
+
 }

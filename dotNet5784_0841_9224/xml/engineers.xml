@@ -80,4 +80,60 @@
     <Cost>301</Cost>
     <Active>true</Active>
   </Engineer>
+  <Engineer>
+    <Id>295925376</Id>
+    <Name>Sara Borgen</Name>
+    <Email>sara.borgen@emailgame.com</Email>
+    <Level>Expert</Level>
+    <Cost>124</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>352193413</Id>
+    <Name>Naama Leah Radonsky</Name>
+    <Email>naama.radonsky@emailgame.com</Email>
+    <Level>Expert</Level>
+    <Cost>256</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>351324493</Id>
+    <Name>Ester Dray</Name>
+    <Email>ester.dray@emailgame.com</Email>
+    <Level>Expert</Level>
+    <Cost>269</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>353132033</Id>
+    <Name>Ariela Levin</Name>
+    <Email>ariela.levin@emailgame.com</Email>
+    <Level>Expert</Level>
+    <Cost>107</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>242182119</Id>
+    <Name>Dina Klein</Name>
+    <Email>dina.klein@emailgame.com</Email>
+    <Level>Beginner</Level>
+    <Cost>177</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>292947175</Id>
+    <Name>Shira Israelof</Name>
+    <Email>shira.israelof@emailgame.com</Email>
+    <Level>Beginner</Level>
+    <Cost>276</Cost>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>236760911</Id>
+    <Name>Dani Levi</Name>
+    <Email>dani.levi@emailgame.com</Email>
+    <Level>Beginner</Level>
+    <Cost>172</Cost>
+    <Active>true</Active>
+  </Engineer>
 </ArrayOfEngineer>
