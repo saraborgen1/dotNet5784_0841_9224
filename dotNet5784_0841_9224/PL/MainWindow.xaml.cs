@@ -34,5 +34,10 @@ namespace PL
         {
             new AdminWindow().Show();
         }
+
+        private void Button_AddYear(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
