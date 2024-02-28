@@ -3,6 +3,7 @@ namespace BO;
 public class Engineer
 {
     public int Id { get; init; }
+    public int? Password { get; init; }
     public string? Name { get; set; }
     public string? Email { get; set; }
     public BO.Enums.EngineerExperience Level { get; set; }
