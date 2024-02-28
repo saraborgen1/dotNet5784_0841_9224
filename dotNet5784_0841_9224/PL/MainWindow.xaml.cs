@@ -37,6 +37,12 @@ namespace PL
 
         private void Button_AddYear(object sender, RoutedEventArgs e)
         {
+            s_bl.State.AddYear();
+            CurrentDateProperty = s_bl.State.CurrentDate;
+        }
+
+        private void Button_AddDay(object sender, RoutedEventArgs e)
+        {
 
         }
     }

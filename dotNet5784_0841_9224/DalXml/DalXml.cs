@@ -80,8 +80,14 @@ sealed internal class DalXml : IDal
         {
             XElement root = XElement.Load(@"..\xml\data-config.xml");
 
-            DateTime.TryParse((string?)root.Element("CurrentDate"), out var result);
-            return result;
+            if (DateTime.TryParse((string?)root.Element("CurrentDate"), out var result))
+                return result;
+            CurrentDate=DateTime.Now;
+            return CurrentDate;
+         //   DateTime.TryParse((string?)root.Element("CurrentDate"), out var result) ? (DateTime?)result : null;
+          //  DateTime.TryParse((string?)root.Element("CurrentDate"), out var result);
+
+          //  return result;
 
         }
         set

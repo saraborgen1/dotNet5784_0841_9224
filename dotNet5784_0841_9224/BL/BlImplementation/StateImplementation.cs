@@ -7,6 +7,9 @@ using static Dal.XMLTools;
 internal class StateImplementation : IState
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
+    /// <summary>
+    /// propotie of start date project
+    /// </summary>
     public DateTime? StartProject
     {
         get
@@ -20,7 +23,9 @@ internal class StateImplementation : IState
 
     }
 
-
+    /// <summary>
+    /// propotie of start date project
+    /// </summary>
     public DateTime? EndProject
     {
         get
@@ -32,12 +37,18 @@ internal class StateImplementation : IState
             _dal.EndProject = value;
         }
     }
-
+    /// <summary>
+    /// function that returns projest status
+    /// </summary>
+    /// <returns>projest status</returns>
     public BO.Enums.ProjectStatus StatusProject()
     {
         return (BO.Enums.ProjectStatus)_dal.StatusProject();
     }
 
+    /// <summary>
+    /// propotie of  Current time project
+    /// </summary>
     public DateTime CurrentDate
     {
         get
@@ -48,5 +59,13 @@ internal class StateImplementation : IState
         {
             _dal.CurrentDate = value;
         }
+    }
+
+    /// <summary>
+    /// a function to add year
+    /// </summary>
+    public void AddYear()
+    {
+        CurrentDate=CurrentDate.AddYears(1);
     }
 }

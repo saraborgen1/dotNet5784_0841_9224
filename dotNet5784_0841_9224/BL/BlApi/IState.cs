@@ -24,6 +24,11 @@ public interface IState
 
     public DateTime CurrentDate { set; get; }
 
+    /// <summary>
+    /// a function to add year
+    /// </summary>
+    public void AddYear();
+
 
 
 }
