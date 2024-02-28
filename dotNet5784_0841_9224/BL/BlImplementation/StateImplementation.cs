@@ -68,4 +68,28 @@ internal class StateImplementation : IState
     {
         CurrentDate=CurrentDate.AddYears(1);
     }
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// a function to add Month
+    /// </summary>
+    public void AddMonth()
+    {
+        CurrentDate = CurrentDate.AddMonths(1);
+    }
+    public void AddDay()
+    {
+        CurrentDate = CurrentDate.AddDays(1);
+    }
+    public void AddWeek()
+    {
+        CurrentDate = CurrentDate.AddDays(7);
+    }
 }

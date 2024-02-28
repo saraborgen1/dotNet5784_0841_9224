@@ -23,9 +23,9 @@
             </PasswordBox.RenderTransform>
         </PasswordBox>
         <!--Button day-->
-        <Button Content="One day" HorizontalAlignment="Left" Height="49" Margin="434,99,0,0" VerticalAlignment="Top" Width="67"/>
-        <!--Button hour-->
-        <Button Content="One hour" HorizontalAlignment="Left" Height="49" Margin="506,99,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="One day" HorizontalAlignment="Left" Height="49" Margin="434,99,0,0" VerticalAlignment="Top" Width="67" Click="Button_AddDay"/>
+        <!--Button week-->
+        <Button Content="One week" HorizontalAlignment="Left" Height="49" Margin="506,99,0,0" VerticalAlignment="Top" Width="75" Click="Button_AddWeek"/>
         <Label Content= "{Binding Date, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Left" Height="57" Margin="434,42,0,0" VerticalAlignment="Top" Width="147"/>
         <Label Content="ברוכים הבאים לסוף שלכם . אם הגעתם לכאן סימן שמשעמם לכם ומאסתם" HorizontalAlignment="Left" Height="40" Margin="21,22,0,0" VerticalAlignment="Top" Width="408"/>
         <!--Button year-->
@@ -33,6 +33,6 @@
         <!--temp-->
         <Button Content="temp" HorizontalAlignment="Left" Height="91" Margin="385,254,0,0" VerticalAlignment="Top" Width="218" Click="Button_Click"/>
         <!--Button month-->
-        <Button Content="One month" HorizontalAlignment="Center" Height="48" Margin="0,100,0,0" VerticalAlignment="Top" Width="64"/>
+        <Button Content="One month" HorizontalAlignment="Center" Height="48" Margin="0,100,0,0" VerticalAlignment="Top" Width="64" Click="Button_AddMonth"/>
     </Grid>
 </Window>

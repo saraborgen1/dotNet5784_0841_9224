@@ -45,5 +45,25 @@ namespace PL
         {
 
         }
+
+        private void Button_AddMonth(object sender, RoutedEventArgs e)
+        {
+            s_bl.State.AddMonth();
+            CurrentDateProperty = s_bl.State.CurrentDate;
+        }
+
+        private void Button_AddDay(object sender, RoutedEventArgs e)
+        {
+            s_bl.State.AddDay();
+            CurrentDateProperty = s_bl.State.CurrentDate;
+
+        }
+
+        private void Button_AddWeek(object sender, RoutedEventArgs e)
+        {
+            s_bl.State.AddWeek();
+            CurrentDateProperty = s_bl.State.CurrentDate;
+
+        }
     }
 }
