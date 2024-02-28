@@ -8,6 +8,7 @@ namespace BlTest
 {
     internal class Program
     {
+        private static readonly Random s_rand = new();
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         ///; <summary>
@@ -488,7 +489,7 @@ namespace BlTest
             Console.WriteLine("Enter an hourly cost");
             double cost = double.Parse(Console.ReadLine()!);
 
-            BO.Engineer engineer = new() { Id = id, Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
+            BO.Engineer engineer = new() { Id = id,Password=s_rand.Next(10000000, 100000000), Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
             s_bl.Engineer.Create(engineer);
         }
         /// <summary>
@@ -561,7 +562,7 @@ namespace BlTest
                 cost = double.Parse(Console.ReadLine()!);
             }
 
-            engineer = new() { Id = id, Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
+            engineer = new() { Id = id, Password = engineer.Password, Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
             try
             {
                 s_bl.Engineer.Update(engineer);

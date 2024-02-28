@@ -19,7 +19,6 @@ internal class EngineerImplementation : IEngineer
 
         if (listEngineer.Exists(lec => lec?.Id == item.Id && lec.Active))
             throw new DalAlreadyExistsException(item.Id,_entityName);
-
         listEngineer.Add(item);
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
 
