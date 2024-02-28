@@ -94,7 +94,7 @@ internal class EngineerImplementation : IEngineer
     /// <returns>password</returns>
    public int? GetPassword(int id)
     {
-        var temp = Read(item => item.Id == id && item.Active);
+        var temp = Read(item => item.Id == id);
         if (temp != null)
             return temp.Password;
         return null;

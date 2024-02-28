@@ -114,4 +114,13 @@ internal class EngineerImplementation : IEngineer
         List<Engineer> newListEngineer = new List<Engineer>(); // Create a new empty list
         SaveListToXMLSerializer(newListEngineer, s_engineers_xml); // Save the empty list to XML
     }
+
+    public int? GetPassword(int id)
+    {
+        var temp = Read(item => item.Id == id);
+        if (temp != null)
+            return temp.Password;
+        return null;
+    }
+
 }

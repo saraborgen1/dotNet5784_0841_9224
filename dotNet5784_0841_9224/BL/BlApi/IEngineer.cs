@@ -44,4 +44,11 @@ public interface IEngineer
     /// deletes all objects of the entity type
     /// </summary>
     public void DeleteAll();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public int GetPassword(int id);
 }
