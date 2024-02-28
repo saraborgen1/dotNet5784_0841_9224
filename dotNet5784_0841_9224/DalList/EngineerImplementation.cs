@@ -86,5 +86,18 @@ internal class EngineerImplementation : IEngineer
     {
         DataSource.Engineers.Clear();
     }
+
+    /// <summary>
+    /// returns password of engineer with that id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>password</returns>
+   public int? GetPassword(int id)
+    {
+        var temp = Read(item => item.Id == id && item.Active);
+        if (temp != null)
+            return temp.Password;
+        return null;
+    }
 }
 
