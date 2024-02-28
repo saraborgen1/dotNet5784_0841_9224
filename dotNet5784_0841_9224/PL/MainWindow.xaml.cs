@@ -41,11 +41,6 @@ namespace PL
             CurrentDateProperty = s_bl.State.CurrentDate;
         }
 
-        private void Button_AddDay(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_AddMonth(object sender, RoutedEventArgs e)
         {
             s_bl.State.AddMonth();
