@@ -12,9 +12,9 @@ namespace PL
         /// <summary>
         /// CurrentDate Property Property
         /// </summary>
-        public DateTime CurrentDateProperty
+        public DateTime? CurrentDateProperty
         {
-            get { return (DateTime)GetValue(CurrentDatePropertyProperty); }
+            get { return (DateTime?)GetValue(CurrentDatePropertyProperty); }
             set { SetValue(CurrentDatePropertyProperty, value); }
         }
 
@@ -22,14 +22,12 @@ namespace PL
         /// makes EngineerProperty DependencyProperty
         /// </summary>
         public static readonly DependencyProperty CurrentDatePropertyProperty =
-          DependencyProperty.Register("CurrentDateProperty", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+          DependencyProperty.Register("CurrentDateProperty", typeof(DateTime?), typeof(MainWindow), new PropertyMetadata(null));
 
         public MainWindow()
         {
-            CurrentDateProperty = s_bl.State.CurrentDate;         
+            CurrentDateProperty = s_bl.State.CurrentDate;
             InitializeComponent();
-            
-           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
