@@ -103,7 +103,7 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(EngineerProperty);
                     _onUpdateOrAdd((EngineerProperty.Id, true));
-                    int _password=s_bl.Engineer.GetPassword;
+                    int _password=s_bl.Engineer.GetPassword(EngineerProperty.Id);
                     MessageBox.Show($"Your engineer password is:{_password}", "password", MessageBoxButton.OK, MessageBoxImage.Information);
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
