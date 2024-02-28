@@ -8,6 +8,7 @@ namespace DalTest
 {
     internal class Program
     {
+        private static readonly Random s_rand = new();
         //static readonly IDal s_dal = new DalList(); //stage 2
         //static readonly IDal s_dal = new DalXml(); //stage 3
         static readonly IDal s_dal = Factory.Get; //stage 4
@@ -400,7 +401,7 @@ namespace DalTest
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             Console.WriteLine("Enter an hourly cost");
             double cost = double.Parse(Console.ReadLine());
-            Engineer engineer = new Engineer(id, name, email, difficulty, cost);
+            Engineer engineer = new Engineer(id, s_rand.Next(10000000, 100000000), name, email, difficulty, cost);
             s_dal.Engineer.Create(engineer);
         }
         /// <summary>
@@ -460,7 +461,7 @@ namespace DalTest
             if (email == null) { email = engineer.Email; }
             if (difficulty == null) { difficulty = engineer.Level; }
             if (cost == null) { cost = engineer.Cost; }
-            engineer = new Engineer(id, name, email, difficulty, cost);
+            engineer = new Engineer(id, engineer.Password, name, email, difficulty, cost);
             try
             {
                 s_dal.Engineer.Update(engineer);

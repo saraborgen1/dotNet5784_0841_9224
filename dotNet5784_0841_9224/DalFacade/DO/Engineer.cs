@@ -3,6 +3,7 @@
 /// Engineer entity represents an engineer with all its characteristics - its identifying details
 /// </summary>
 /// <param name="Id">Personal unique ID of the Engineer (as in national id card)</param>
+///<param name="Password">Private Password of the Engineer </param>
 /// <param name="Name">Private Name of the Engineer </param>
 /// <param name="Email">Engineer's personal email address</param>
 /// <param name="Level">The level of the engineer in the project</param>
@@ -11,6 +12,7 @@
 public record Engineer
 (
     int Id,
+    int? Password =null,
     string? Name = null,
     string? Email = null,
     EngineerExperience Level= EngineerExperience.Beginner,

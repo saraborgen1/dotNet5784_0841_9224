@@ -168,23 +168,25 @@ public static class Initialization
         {
             int _id;
             do
+            {
                 _id = s_rand.Next(200000000, 400000001);
+            }
             while (s_dal!.Engineer.Read(item => item.Id == _id) != null);
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _level = (EngineerExperience)_numforenum;
             int _cost;
             _cost = s_rand.Next(70, 301);
 
-            Engineer newEngineer = new Engineer(_id, EngineerNames[i], EngineerEmails[i], _level, _cost);
+            Engineer newEngineer = new Engineer(_id, s_rand.Next(10000000,100000000), EngineerNames[i], EngineerEmails[i], _level, _cost);
             s_dal!.Engineer.Create(newEngineer);
 
         }
 
-        Engineer newEngineer1 = new(123456789, "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
+        Engineer newEngineer1 = new(123456789,64738263 ,"Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
         s_dal!.Engineer.Create(newEngineer1);
-        Engineer newEngineer2 = new(987654321, "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
+        Engineer newEngineer2 = new(987654321,83353534 ,"Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
         s_dal!.Engineer!.Create(newEngineer2);
-        Engineer newEngineer3 = new(654567898, "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
+        Engineer newEngineer3 = new(654567898,93092838,"Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
         s_dal!.Engineer.Create(newEngineer3);
     }
 
