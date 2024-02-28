@@ -16,6 +16,6 @@ public interface IEngineer : ICrud<Engineer>
     /// </summary>
     /// <param name="id"></param>
     /// <returns>password</returns>
-    public int? Getpassword(int id);
+    public int? GetPassword(int id);
 }
 

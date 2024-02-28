@@ -194,4 +194,14 @@ internal class EngineerImplementation : BlApi.IEngineer
     {
         _dal.Engineer.DeleteAll();
     }
+
+    /// <summary>
+    /// returns password of engineer with that id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>password</returns>
+    public int GetPassword(int id)
+    {
+       return (int)Read(id)!.Password!;
+    }
 }
