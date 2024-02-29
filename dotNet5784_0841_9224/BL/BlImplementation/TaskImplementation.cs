@@ -298,7 +298,7 @@ internal class TaskImplementation : ITask
                     throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
                 return item;
             });
-            DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date };
+            DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date, DeadlineDate=(date+boTask.RequiredEffortTime)};
             _dal.Task.Update(newTask);
 
         }
@@ -334,8 +334,9 @@ internal class TaskImplementation : ITask
                 catch (Exception ex)
                 { throw new BlDoesNotExistException(ex); }
             }
-        task.StartDate = max;
-        task.DeadlineDate = max + task.RequiredEffortTime;
+        //task.StartDate = max;
+        //task.DeadlineDate = max + task.RequiredEffortTime;
+        UpdateDate(task.Id, (DateTime)max!);
     }
 }
 
