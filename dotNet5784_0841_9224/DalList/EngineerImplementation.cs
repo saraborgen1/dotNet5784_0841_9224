@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 internal class EngineerImplementation : IEngineer
 {
+    private static readonly Random s_rand = new();
     private const string _entityName = nameof(Engineer);
     /// <summary>
     /// Adding a new object  of type Engineer to a database, (to the list of objects of type Engineer).
@@ -18,7 +19,10 @@ internal class EngineerImplementation : IEngineer
         if (DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id) != null)
             throw new DalAlreadyExistsException(item.Id, _entityName);
 
-        DataSource.Engineers.Add(item);
+        int newPassword = s_rand.Next(10000000, 100000000);
+        DO.Engineer newTask = item with { Password = newPassword };
+
+        DataSource.Engineers.Add(newTask);
 
         return item.Id;
     }
