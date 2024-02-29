@@ -21,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class AdminWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public AdminWindow()
         {
             InitializeComponent();
@@ -54,5 +55,20 @@ namespace PL
         {
             new TaskListWindow().Show();
         }
+
+        private void btnAutoScheduling_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                s_bl.Task.AutoScheduling();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            MessageBox.Show("The auto scheduling was done successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
     }
 }

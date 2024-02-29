@@ -303,4 +303,39 @@ internal class TaskImplementation : ITask
 
         }
     }
+
+    public void AutoScheduling()
+    {
+        if (state.StartProject == null || state.EndProject == null)
+            throw new BlCannotDoAutoSchedulingException("Project dates were not enterd\n");
+        var tasks = ReadAll();
+        foreach (var task in tasks)
+        {
+            if (task.StartDate == null)
+                setAutoDate(task);
+        }
+    }
+
+    private void setAutoDate(BO.Task task)
+    {
+        DateTime? max = state.StartProject;
+        if (task.Dependencies != null)
+            foreach (var dep in task.Dependencies)
+            {
+                try
+                {
+                    var depTask = Read(dep.Id);
+                    if (depTask.DeadlineDate == null)
+                    {
+                        setAutoDate(depTask);
+                        max = max > depTask.DeadlineDate ? max : depTask.DeadlineDate;
+                    }
+                }
+                catch (Exception ex)
+                { throw new BlDoesNotExistException(ex); }
+            }
+        task.StartDate = max;
+        task.DeadlineDate = max + task.RequiredEffortTime;
+    }
 }
+

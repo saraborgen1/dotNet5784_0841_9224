@@ -41,4 +41,6 @@ public interface ITask
     /// <param name="date"> new date</param>
     public void UpdateDate(int id, DateTime date);
 
+    public void AutoScheduling();
+
 }

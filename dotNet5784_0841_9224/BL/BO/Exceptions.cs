@@ -90,3 +90,12 @@ public class BlCannotUpdateWrongStateException : Exception
 {
     public BlCannotUpdateWrongStateException(string problem) : base(problem) { }
 }
+
+/// <summary>
+/// Cannot do auto scheduling exception
+/// </summary>
+[Serializable]
+public class BlCannotDoAutoSchedulingException : Exception
+{
+    public BlCannotDoAutoSchedulingException(string problem) : base(problem) { }
+}

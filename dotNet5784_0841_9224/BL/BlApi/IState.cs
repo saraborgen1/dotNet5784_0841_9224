@@ -38,6 +38,4 @@ public interface IState
     public void AddDay();
     public void AddWeek();
 
-    public void AutoScheduling();
-
 }

@@ -67,7 +67,7 @@ internal class StateImplementation : IState
     /// </summary>
     public void AddYear()
     {
-        CurrentDate=CurrentDate.AddYears(1);
+        CurrentDate = CurrentDate.AddYears(1);
     }
 
     /// <summary>
@@ -84,20 +84,5 @@ internal class StateImplementation : IState
     public void AddWeek()
     {
         CurrentDate = CurrentDate.AddDays(7);
-    }
-
-    public void AutoScheduling()
-    {
-        var tasks = ReadAll();
-        foreach (var task in tasks) 
-        {
-            if(task.StartDate==null)
-                setAutoDate(task);
-        }
-    }
-
-    private void setAutoDate(DO.Task task)
-    {
-        if()
     }
 }
