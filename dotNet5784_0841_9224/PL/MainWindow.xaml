@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800"
     DataContext="{Binding CurrentDateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
-        <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187"/>
+        <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187" Click="Button_Enter"/>
         <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,86,0,0" VerticalAlignment="Top" Width="111"/>
         <TextBox HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,148,0,0" VerticalAlignment="Top" Width="111"/>

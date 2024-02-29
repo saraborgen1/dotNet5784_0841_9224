@@ -60,5 +60,11 @@ namespace PL
             CurrentDateProperty = s_bl.State.CurrentDate;
 
         }
+
+        private void Button_Enter(object sender, RoutedEventArgs e)
+        {
+           // if()
+                new EngineerWorker().Show();
+        }
     }
 }
