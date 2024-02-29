@@ -202,6 +202,7 @@ internal class EngineerImplementation : BlApi.IEngineer
     /// <returns>password</returns>
     public int GetPassword(int id)
     {
-       return (int)Read(id)!.Password!;
+        int temp= (int)Read(id)!.Password!;
+        return temp;
     }
 }
