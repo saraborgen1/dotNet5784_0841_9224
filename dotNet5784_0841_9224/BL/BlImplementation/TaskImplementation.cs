@@ -161,7 +161,6 @@ internal class TaskImplementation : ITask
             StartDate = doTask.StartDate,
             ScheduledDate = doTask.ScheduledDate,
             ForecastDate = forecastDate,
-            DeadlineDate = doTask.DeadlineDate,
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
@@ -206,7 +205,7 @@ internal class TaskImplementation : ITask
         {
             if (item.StartDate != boTask.StartDate ||
                        item.ScheduledDate != boTask.ScheduledDate ||
-                       item.DeadlineDate != boTask.DeadlineDate ||
+
                        item.CompleteDate != boTask.CompleteDate ||
                        item.Engineer != null)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
@@ -254,12 +253,10 @@ internal class TaskImplementation : ITask
                         return p;
                     }).ToList();
                 }
-        if (item.DeadlineDate != null && item.ScheduledDate != null && item.DeadlineDate < item.ScheduledDate)
-            throw new BO.BlDateClashException("The end date is before the start date");
 
         DO.Task updatedTask = new DO.Task
         (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
-        , item.ScheduledDate, item.DeadlineDate, item.CompleteDate, item.RequiredEffortTime,
+        , item.ScheduledDate, item.ForecastDate, item.CompleteDate, item.RequiredEffortTime,
          item.Deliverables, item.Remarks, item.Engineer?.Id ?? 0, (DO.EngineerExperience)item.Copmlexity);
 
         try
@@ -325,10 +322,10 @@ internal class TaskImplementation : ITask
                 try
                 {
                     var depTask = Read(dep.Id);
-                    if (depTask.DeadlineDate == null)
+                    if (depTask.ForecastDate == null)
                     {
                         setAutoDate(depTask);
-                        max = max > depTask.DeadlineDate ? max : depTask.DeadlineDate;
+                        max = max > depTask.ForecastDate ? max : depTask.ForecastDate;
                     }
                 }
                 catch (Exception ex)

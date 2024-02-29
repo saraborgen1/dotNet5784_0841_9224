@@ -7,7 +7,6 @@
 /// <param name="Description">A text detailing the task</param>
 /// <param name="StartDate">Indicates the time when the task was created by the administrator</param>
 /// <param name="ScheduledDate">Planned date for the start of work</param>
-/// <param name="DeadlineDate">Latest possible completion date for the work to be done</param>
 /// <param name="CompleteDate">Actual end date</param>
 /// <param name="RequiredEffortTime">The length of time to proceed with the task</param>
 /// <param name="Deliverables">A string describing the results or items provided at the end of the task</param>
