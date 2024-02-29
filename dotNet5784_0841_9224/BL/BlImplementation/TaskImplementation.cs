@@ -331,8 +331,6 @@ internal class TaskImplementation : ITask
                 catch (Exception ex)
                 { throw new BlDoesNotExistException(ex); }
             }
-        //task.StartDate = max;
-        //task.DeadlineDate = max + task.RequiredEffortTime;
         UpdateDate(task.Id, (DateTime)max!);
     }
 }
