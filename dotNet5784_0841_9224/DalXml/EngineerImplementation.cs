@@ -3,6 +3,7 @@
 namespace Dal;
 internal class EngineerImplementation : IEngineer
 {
+    private static readonly Random s_rand = new();
     readonly string s_engineers_xml = "engineers";
     private const string _entityName = nameof(Engineer);
 
@@ -19,7 +20,11 @@ internal class EngineerImplementation : IEngineer
 
         if (listEngineer.Exists(lec => lec?.Id == item.Id && lec.Active))
             throw new DalAlreadyExistsException(item.Id,_entityName);
-        listEngineer.Add(item);
+
+        int newPassword = s_rand.Next(10000000, 100000000);
+        DO.Engineer newTask = item with { Password = newPassword };
+
+        listEngineer.Add(newTask);
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
 
         return item.Id;

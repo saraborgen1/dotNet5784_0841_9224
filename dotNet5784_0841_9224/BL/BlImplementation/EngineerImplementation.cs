@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 internal class EngineerImplementation : BlApi.IEngineer
 {
+   
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
 
@@ -202,7 +203,6 @@ internal class EngineerImplementation : BlApi.IEngineer
     /// <returns>password</returns>
     public int GetPassword(int id)
     {
-        int temp= (int)Read(id)!.Password!;
-        return temp;
+        return (int)Read(id)!.Password!;
     }
 }
