@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Printing.IndexedProperties;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace PL.Admin
     /// </summary>
     public partial class WindowProjectDates : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public WindowProjectDates()
         {
             InitializeComponent();
@@ -28,5 +30,19 @@ namespace PL.Admin
         {
 
         }
+
+
+
+        public BlApi.IState StateProperty
+        {
+            get { return (BlApi.IState)GetValue(StatePropertyProperty); }
+            set { SetValue(StatePropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty StatePropertyProperty =
+            DependencyProperty.Register("StateProperty", typeof(BlApi.IState), typeof(WindowProjectDates), new PropertyMetadata(0));
+
+
     }
 }
