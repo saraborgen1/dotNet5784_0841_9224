@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using PL.Admin;
+using PL.Engineer;
 using PL.Task;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,11 @@ namespace PL
             }
 
             MessageBox.Show("The auto scheduling was done successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnProjectDates_Click(object sender, RoutedEventArgs e)
+        {
+            new WindowProjectDates().Show();
         }
 
     }

@@ -29,7 +29,15 @@ namespace PL.Admin
 
         private void Button_SetDates(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                StateProperty.SetProjectDates(StateProperty);
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
 
@@ -42,16 +50,32 @@ namespace PL.Admin
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StatePropertyProperty =
-            DependencyProperty.Register("StateProperty", typeof(BlApi.IState), typeof(WindowProjectDates), new PropertyMetadata(0));
+            DependencyProperty.Register("StateProperty", typeof(BlApi.IState), typeof(WindowProjectDates), new PropertyMetadata(null));
 
-        private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
+        private void SelectStartDate(object sender, SelectionChangedEventArgs e)
         {
-            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            if (engineer != null)
-            {
-                new EngineerWindow(addOrUpdateChanged, engineer.Id).ShowDialog();
-            }
+            // Cast sender to DatePicker
+            var datePicker = sender as DatePicker;
 
+            // Check if the cast was successful and the SelectedDate has value
+            if (datePicker != null && datePicker.SelectedDate.HasValue)
+            {
+                // Extract the date value if it exists
+                StateProperty.StartProject = datePicker.SelectedDate.Value;
+            }
+        }
+
+        private void SelectEndDate(object sender, SelectionChangedEventArgs e)
+        {
+            // Cast sender to DatePicker
+            var datePicker = sender as DatePicker;
+
+            // Check if the cast was successful and the SelectedDate has value
+            if (datePicker != null && datePicker.SelectedDate.HasValue)
+            {
+                // Extract the date value if it exists
+                StateProperty.EndProject = datePicker.SelectedDate.Value;
+            }
         }
     }
 }

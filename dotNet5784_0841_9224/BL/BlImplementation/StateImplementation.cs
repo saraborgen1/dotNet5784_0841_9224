@@ -2,8 +2,6 @@
 using BlApi;
 using BO;
 using System;
-using System.Xml.Linq;
-using static Dal.XMLTools;
 internal class StateImplementation : IState
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
@@ -85,4 +83,42 @@ internal class StateImplementation : IState
     {
         CurrentDate = CurrentDate.AddDays(7);
     }
+
+    public void SetProjectDates(IState state)
+    {
+        var _task = new TaskImplementation();
+        var tasks = _task.ReadAll();
+        DateTime lastDate = (DateTime)state.StartProject!;
+        foreach (var task in tasks)
+        {
+            if (task.Dependencies == null)
+            {
+                DateTime temp = (DateTime)(state.StartProject) + task.RequiredEffortTime;
+            }
+            lastDate = (lastDate > (+ )
+                    findEndDate(task);
+        }
+    }
+}
+
+private DateTime findEndDate(BO.Task task)
+{
+    DateTime? max = StartProject;
+    if (task.Dependencies != null)
+        foreach (var dep in task.Dependencies)
+        {
+            try
+            {
+                var depTask = Read(dep.Id);
+                if (depTask.ForecastDate == null)
+                {
+                    setAutoDate(depTask);
+                    max = max > depTask.ForecastDate ? max : depTask.ForecastDate;
+                }
+            }
+            catch (Exception ex)
+            { throw new BlDoesNotExistException(ex); }
+        }
+    UpdateDate(task.Id, (DateTime)max!);
+}
 }

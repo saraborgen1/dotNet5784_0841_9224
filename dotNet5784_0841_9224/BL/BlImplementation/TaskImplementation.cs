@@ -199,7 +199,7 @@ internal class TaskImplementation : ITask
     {
 
         var boTask = Read(item.Id);
-       // if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
+        // if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
 
         if (state.StatusProject() == Enums.ProjectStatus.Creation)
         {
@@ -226,8 +226,8 @@ internal class TaskImplementation : ITask
             if (item.Description != boTask.Description ||
                  item.CreatedAtDate != boTask.CreatedAtDate ||
                   item.RequiredEffortTime != boTask.RequiredEffortTime ||
-                  item.ScheduledDate != boTask.ScheduledDate||
-                item.Dependencies!=boTask.Dependencies)
+                  item.ScheduledDate != boTask.ScheduledDate ||
+                item.Dependencies != boTask.Dependencies)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
         }
 
@@ -295,7 +295,7 @@ internal class TaskImplementation : ITask
                     throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
                 return item;
             });
-            DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date, DeadlineDate=(date+boTask.RequiredEffortTime)};
+            DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date, DeadlineDate = (date + boTask.RequiredEffortTime) };
             _dal.Task.Update(newTask);
 
         }

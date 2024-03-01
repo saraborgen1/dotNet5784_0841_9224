@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using BO;
+using System.Diagnostics;
 
 internal class Bl : IBl
 {
