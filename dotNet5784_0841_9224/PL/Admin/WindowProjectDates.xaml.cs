@@ -31,26 +31,36 @@ namespace PL.Admin
         {
             try
             {
-                StateProperty.SetProjectDates(StateProperty);
+                s_bl.State.SetProjectDates(StartDateProperty, EndDateProperty);
             }
             catch(Exception ex) 
             {
                 MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            MessageBox.Show("Dates were updated successfuly", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
 
-        public BlApi.IState StateProperty
+        public DateTime StartDateProperty
         {
-            get { return (BlApi.IState)GetValue(StatePropertyProperty); }
-            set { SetValue(StatePropertyProperty, value); }
+            get { return (DateTime)GetValue(StartDatePropertyProperty); }
+            set { SetValue(StartDatePropertyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty StatePropertyProperty =
-            DependencyProperty.Register("StateProperty", typeof(BlApi.IState), typeof(WindowProjectDates), new PropertyMetadata(null));
+        public static readonly DependencyProperty StartDatePropertyProperty =
+            DependencyProperty.Register("StartDateProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(null));
+        public DateTime EndDateProperty
+        {
+            get { return (DateTime)GetValue(EndDatePropertyProperty); }
+            set { SetValue(EndDatePropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EndDatePropertyProperty =
+            DependencyProperty.Register("EndDateProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(null));
 
         private void SelectStartDate(object sender, SelectionChangedEventArgs e)
         {
@@ -61,7 +71,8 @@ namespace PL.Admin
             if (datePicker != null && datePicker.SelectedDate.HasValue)
             {
                 // Extract the date value if it exists
-                StateProperty.StartProject = datePicker.SelectedDate.Value;
+                StartDateProperty = datePicker.SelectedDate.Value;
+
             }
         }
 
@@ -74,7 +85,7 @@ namespace PL.Admin
             if (datePicker != null && datePicker.SelectedDate.HasValue)
             {
                 // Extract the date value if it exists
-                StateProperty.EndProject = datePicker.SelectedDate.Value;
+                EndDateProperty = datePicker.SelectedDate.Value;
             }
         }
     }

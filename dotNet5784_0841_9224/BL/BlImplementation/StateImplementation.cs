@@ -86,31 +86,31 @@ internal class StateImplementation : IState
         CurrentDate = CurrentDate.AddDays(7);
     }
 
-    public void SetProjectDates(IState state)
+    public void SetProjectDates(DateTime startDate, DateTime endDate)
     {
         var _task = new TaskImplementation();
         var tasks = _task.ReadAll();
-        DateTime max = (DateTime)state.StartProject!;
+        DateTime max = startDate;
         foreach (var task in tasks)
         {
-            DateTime temp = findEndDate(task, state);
+            DateTime temp = findEndDate(task, startDate);
             max = (max > temp) ? max : temp;
         }
-        if (max > state.EndProject)
+        if (max > endDate)
             throw new BlDateClashException("Not enough time\n");
-        StartProject = state.StartProject;
-        EndProject = state.EndProject;
+        StartProject = startDate;
+        EndProject = endDate;
 
     }
 
 
-    private DateTime findEndDate(BO.Task task, IState state)
+    private DateTime findEndDate(BO.Task task, DateTime startDate)
     {
         var _task = new TaskImplementation();
-        DateTime max = (DateTime)state.StartProject!;
+        DateTime max = startDate;
         if (task.Dependencies!.Count == 0)
         {
-            DateTime temp =(DateTime)state.StartProject + (TimeSpan)task.RequiredEffortTime!;
+            DateTime temp = startDate + (TimeSpan)task.RequiredEffortTime!;
             max = (max > temp) ? max : temp;
         }
         else
@@ -120,7 +120,7 @@ internal class StateImplementation : IState
                 try
                 {
                     var depTask = _task.Read(dep.Id);
-                    DateTime temp = findEndDate(depTask, state)+ (TimeSpan)task.RequiredEffortTime! ;
+                    DateTime temp = findEndDate(depTask, startDate) + (TimeSpan)task.RequiredEffortTime! ;
                     max = (max > temp) ? max : temp;
                 }
                 catch (Exception ex)

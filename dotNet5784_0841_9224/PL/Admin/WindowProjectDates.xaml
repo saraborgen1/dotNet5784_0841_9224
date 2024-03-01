@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="WindowProjectDates" Height="450" Width="800"
-        DataContext="{Binding StateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding StartDateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}" "{Binding EndDateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
+        DataContext=>
     <Grid>
         <Label Content="Start project" HorizontalAlignment="Left" Height="35" Margin="210,64,0,0" VerticalAlignment="Top" Width="107"/>
         <Label Content="End project" HorizontalAlignment="Left" Height="35" Margin="210,118,0,0" VerticalAlignment="Top" Width="107"/>
