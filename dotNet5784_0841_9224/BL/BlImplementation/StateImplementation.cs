@@ -2,6 +2,8 @@
 using BlApi;
 using BO;
 using System;
+using System.Data;
+
 internal class StateImplementation : IState
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
@@ -88,35 +90,43 @@ internal class StateImplementation : IState
     {
         var _task = new TaskImplementation();
         var tasks = _task.ReadAll();
-        DateTime lastDate = (DateTime)state.StartProject!;
+        DateTime max = (DateTime)state.StartProject!;
         foreach (var task in tasks)
         {
-            if (task.Dependencies == null)
-            {
-                DateTime temp = (DateTime)(state.StartProject) + task.RequiredEffortTime;
-            }
-            lastDate = (lastDate > (+ )
-                    findEndDate(task);
+            DateTime temp = findEndDate(task, state);
+            max = (max > temp) ? max : temp;
         }
-    }
-}
+        if (max > state.EndProject)
+            throw new BlDateClashException("Not enough time\n");
+        StartProject = state.StartProject;
+        EndProject = state.EndProject;
 
-private DateTime findEndDate(BO.Task task)
-{
-    DateTime? max = StartProject;
-    if (task.Dependencies != null)
-        foreach (var dep in task.Dependencies)
+    }
+
+
+    private DateTime findEndDate(BO.Task task, IState state)
+    {
+        var _task = new TaskImplementation();
+        DateTime max = (DateTime)state.StartProject!;
+        if (task.Dependencies!.Count == 0)
         {
-            try
-            {
-                var depTask = Read(dep.Id);
-                if (depTask.ForecastDate == null)
-                {
-                    setAutoDate(depTask);
-                    max = max > depTask.ForecastDate ? max : depTask.ForecastDate;
-                }
-            }
-            catch (Exception ex)
-            { throw new BlDoesNotExistException(ex); }
+            DateTime temp =(DateTime)state.StartProject + (TimeSpan)task.RequiredEffortTime!;
+            max = (max > temp) ? max : temp;
         }
+        else
+        {
+            foreach (var dep in task.Dependencies)
+            {
+                try
+                {
+                    var depTask = _task.Read(dep.Id);
+                    DateTime temp = findEndDate(depTask, state)+ (TimeSpan)task.RequiredEffortTime! ;
+                    max = (max > temp) ? max : temp;
+                }
+                catch (Exception ex)
+                { throw new BlDoesNotExistException(ex); }
+            }
+        }
+        return max;
+    }
 }
