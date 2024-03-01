@@ -31,7 +31,7 @@ namespace PL.Admin
         {
             try
             {
-                s_bl.State.SetProjectDates(StartDateProperty, EndDateProperty);
+                s_bl.State.SetProjectDates(StartDateProperty, (DateTime)EndDateProperty!);
             }
             catch(Exception ex) 
             {
@@ -39,6 +39,7 @@ namespace PL.Admin
                 return;
             }
             MessageBox.Show("Dates were updated successfuly", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
 
 
@@ -52,15 +53,15 @@ namespace PL.Admin
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StartDatePropertyProperty =
             DependencyProperty.Register("StartDateProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(null));
-        public DateTime EndDateProperty
+        public DateTime? EndDateProperty
         {
-            get { return (DateTime)GetValue(EndDatePropertyProperty); }
+            get { return (DateTime?)GetValue(EndDatePropertyProperty); }
             set { SetValue(EndDatePropertyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EndDatePropertyProperty =
-            DependencyProperty.Register("EndDateProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(null));
+            DependencyProperty.Register("EndDateProperty", typeof(DateTime?), typeof(WindowProjectDates), new PropertyMetadata(null));
 
         private void SelectStartDate(object sender, SelectionChangedEventArgs e)
         {

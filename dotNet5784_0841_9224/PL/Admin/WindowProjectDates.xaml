@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="WindowProjectDates" Height="450" Width="800"
-        DataContext="{Binding StartDateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}" "{Binding EndDateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
-        DataContext=>
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <Label Content="Start project" HorizontalAlignment="Left" Height="35" Margin="210,64,0,0" VerticalAlignment="Top" Width="107"/>
         <Label Content="End project" HorizontalAlignment="Left" Height="35" Margin="210,118,0,0" VerticalAlignment="Top" Width="107"/>
         <DatePicker HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" SelectedDateChanged="SelectStartDate"/>
         <DatePicker HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top"  SelectedDateChanged="SelectEndDate"/>
-        <Button Content="Set" HorizontalAlignment="Left" Height="51" Margin="232,184,0,0" VerticalAlignment="Top" Width="219" Click="Button_SetDates"/>
+        <Button Content="Set" HorizontalAlignment="Left" Height="51" Margin="232,184,0,0" VerticalAlignment="Top" Width="219" Click="Button_SetDates"
+                 IsEnabled="{Binding EndDateProperty, Mode=OneTime, Converter={StaticResource ConvertSetDatesIsEnabledKey}}" />
 
     </Grid>
 </Window>

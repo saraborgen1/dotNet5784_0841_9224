@@ -7,6 +7,7 @@
         <local:EngineersCollection x:Key="EngineersCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
+        <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
         <!--<\local: CurrentDa6 x:Key="-->
     </Application.Resources>
 </Application>
