@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.Engineer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing.IndexedProperties;
@@ -43,6 +44,14 @@ namespace PL.Admin
         public static readonly DependencyProperty StatePropertyProperty =
             DependencyProperty.Register("StateProperty", typeof(BlApi.IState), typeof(WindowProjectDates), new PropertyMetadata(0));
 
+        private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
+        {
+            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineer != null)
+            {
+                new EngineerWindow(addOrUpdateChanged, engineer.Id).ShowDialog();
+            }
 
+        }
     }
 }
