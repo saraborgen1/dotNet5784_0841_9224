@@ -1,0 +1,17 @@
+﻿<Window x:Class="PL.Admin.WindowProjectDates"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Admin"
+        mc:Ignorable="d"
+        Title="WindowProjectDates" Height="450" Width="800">
+    <Grid>
+        <Label Content="Start project" HorizontalAlignment="Left" Height="35" Margin="210,64,0,0" VerticalAlignment="Top" Width="107"/>
+        <Label Content="End project" HorizontalAlignment="Left" Height="35" Margin="210,118,0,0" VerticalAlignment="Top" Width="107"/>
+        <DatePicker HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top"/>
+        <Button Content="Set" HorizontalAlignment="Left" Height="51" Margin="232,184,0,0" VerticalAlignment="Top" Width="219" Click="Button_SetDates"/>
+
+    </Grid>
+</Window>
