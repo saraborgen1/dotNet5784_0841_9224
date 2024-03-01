@@ -134,7 +134,7 @@ internal class TaskImplementation : ITask
 
 
         DateTime? forecastDate = null;
-        if (doTask.StartDate != null && doTask.ScheduledDate != null && doTask.RequiredEffortTime != null)
+        if (doTask.ScheduledDate != null && doTask.RequiredEffortTime != null)
         {
             forecastDate = doTask.StartDate > doTask.ScheduledDate ? doTask.StartDate : doTask.ScheduledDate;
             forecastDate = (forecastDate + doTask.RequiredEffortTime);
