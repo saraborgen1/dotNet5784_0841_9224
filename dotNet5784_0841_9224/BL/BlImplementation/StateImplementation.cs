@@ -119,6 +119,4 @@ private DateTime findEndDate(BO.Task task)
             catch (Exception ex)
             { throw new BlDoesNotExistException(ex); }
         }
-    UpdateDate(task.Id, (DateTime)max!);
-}
 }
