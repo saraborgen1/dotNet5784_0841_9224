@@ -13,7 +13,7 @@
         <DatePicker HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" SelectedDateChanged="SelectStartDate"/>
         <DatePicker HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top"  SelectedDateChanged="SelectEndDate"/>
         <Button Content="Set" HorizontalAlignment="Left" Height="51" Margin="232,184,0,0" VerticalAlignment="Top" Width="219" Click="Button_SetDates"
-                 IsEnabled="{Binding EndDateProperty, Mode=OneTime, Converter={StaticResource ConvertSetDatesIsEnabledKey}}" />
+                 IsEnabled="{Binding Converter={StaticResource ConvertSetDatesIsEnabledKey}}" />
 
     </Grid>
 </Window>
