@@ -28,8 +28,9 @@ namespace PL
             InitializeComponent();
             try
             {
-                var _engineertask = (s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId)).FirstOrDefault(p=>p.Engineer!.Id == engineerId);
-               EngineerWorkerProperty = _engineertask!;
+                var _engineertask = s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId);
+                var _engincsceer = _engineertask.FirstOrDefault(p => p.Engineer!.Id == engineerId);
+            //    EngineerWorkerProperty = _engineertask!;
                 var _engineer = s_bl.Engineer.Read(engineerId);
                var _tasks = s_bl?.Task.ReadAll(s => (s.Engineer == null && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
                 TaskList = new ObservableCollection<BO.Task>(_tasks);

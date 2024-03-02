@@ -72,23 +72,23 @@ class TimeSpanToWidthConverter : IValueConverter
     }
 }
 
-public class TaskStatusToColorConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        var taskItem = value as TaskIte;
-        if (taskItem == null) return Brushes.Transparent;
+//public class TaskStatusToColorConverter : IValueConverter
+//{
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        var taskItem = value as TaskIte;
+//        if (taskItem == null) return Brushes.Transparent;
 
-        if (taskItem.IsDelayed(DateTime.Now))
-            return Brushes.Red; // מתעכבת
-        else if (taskItem.IsCompleted)
-            return Brushes.Green; // הושלמה
-        else
-            return Brushes.Blue; // לא התחילה / בתהליך
-    }
+//        if (taskItem.IsDelayed(DateTime.Now))
+//            return Brushes.Red; // מתעכבת
+//        else if (taskItem.IsCompleted)
+//            return Brushes.Green; // הושלמה
+//        else
+//            return Brushes.Blue; // לא התחילה / בתהליך
+//    }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
