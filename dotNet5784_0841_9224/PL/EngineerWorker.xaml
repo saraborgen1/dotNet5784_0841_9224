@@ -11,19 +11,15 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView ItemsSource="{Binding EngineerWorkerProperty}">
+        <ListView ItemsSource="{Binding TaskList}" Grid.Column="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView ItemsSource="{Binding TaskList}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Viewbox>
+            <TextBlock Text="{Binding EngineerWorkerProperty}" />
+        </Viewbox>
     </Grid>
 </Window>

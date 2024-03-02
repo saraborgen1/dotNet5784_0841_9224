@@ -28,8 +28,8 @@ namespace PL
             InitializeComponent();
             try
             {
-                var _engineer = s_bl.Engineer.Read(engineerId)!;
-               EngineerWorkerProperty = _engineer;
+                var _engineertask = s_bl.Task.ReadAll(s => s);
+               EngineerWorkerProperty = _engineertask;
                var _tasks = s_bl?.Task.ReadAll(s => (s.Engineer == null && s.Copmlexity <= _engineer.Level/*&&אין משימה שלא הסתיימה*/))!.ToList()!;
                 TaskList = new ObservableCollection<BO.Task>(_tasks);
             }
