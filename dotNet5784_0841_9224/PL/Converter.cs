@@ -46,7 +46,7 @@ class ConvertSetDatesIsEnabled : IValueConverter
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return  ( && (DateTime?)value!=null &&s_bl.State.StartProject!=null&& s_bl.State.EndProject != null) ? true : false;
+        return  (/* value.StartDateProperty &&value.EndDateProperty &&*/ s_bl.State.StartProject!=null&& s_bl.State.EndProject != null) ? true : false;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
