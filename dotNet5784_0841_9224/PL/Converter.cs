@@ -54,3 +54,18 @@ class ConvertSetDatesIsEnabled : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+class DateToWidthConverter : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        BO.Task task = (value as BO.Task);
+        return (int)((TimeSpan)task.RequiredEffortTime!).TotalDays;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

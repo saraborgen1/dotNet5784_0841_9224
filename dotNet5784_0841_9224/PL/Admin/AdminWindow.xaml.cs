@@ -48,7 +48,7 @@ namespace PL
 
         private void btnGantt_Click(object sender, RoutedEventArgs e)
         {
-
+            new WindowGantt().Show();
         }
 
 
