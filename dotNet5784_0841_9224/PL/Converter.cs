@@ -5,7 +5,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PL;
 
@@ -55,13 +57,34 @@ class ConvertSetDatesIsEnabled : IValueConverter
     }
 }
 
-class DateToWidthConverter : IValueConverter
+//class DateToWidthConverter : IValueConverter
+//{
+//    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        BO.Task task = (value as BO.Task);
+//        return (int)((TimeSpan)task.RequiredEffortTime!).TotalDays;
+//    }
+
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
+public class TaskStatusToColorConverter : IValueConverter
 {
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        BO.Task task = (value as BO.Task);
-        return (int)((TimeSpan)task.RequiredEffortTime!).TotalDays;
+        var taskItem = value as TaskIte;
+        if (taskItem == null) return Brushes.Transparent;
+
+        if (taskItem.IsDelayed(DateTime.Now))
+            return Brushes.Red; // מתעכבת
+        else if (taskItem.IsCompleted)
+            return Brushes.Green; // הושלמה
+        else
+            return Brushes.Blue; // לא התחילה / בתהליך
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

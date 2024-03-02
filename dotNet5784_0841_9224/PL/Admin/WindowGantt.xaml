@@ -8,11 +8,27 @@
         Title="WindowGantt" Height="450" Width="800"
         DataContext="{Binding TaskListProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}" >
     <Window.Resources>
-        <DataTemplate DataType="local:MyData">
-            <Grid>
-                <Rectangle Fill="Blue" Margin="{Binding , Converter={StaticResource DateToMarginConverter}}" Width="{Binding Duration, Converter={StaticResource DateToWidthConverterKey}}" Height="20"/>
-            </Grid>
-        </DataTemplate>
+        <!-- הגדרת ממירים לצבעים או לתכונות אחרות של המשימות -->
     </Window.Resources>
-    <Grid HorizontalAlignment="Left" Height="296" Margin="98,90,0,0" VerticalAlignment="Top" Width="517"/>
+
+    <Grid>
+        <ItemsControl ItemsSource="{Binding TaskList}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas Background="LightGray" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas>
+                        <Rectangle Width="{Binding RequiredEffortTime, Converter={StaticResource TimeSpanToWidthConverter}}"
+                                   Height="20" Fill="{Binding Status, Converter={StaticResource StatusToColorBrushConverter}}"
+                                   Canvas.Left="{Binding StartDate, Converter={StaticResource DateToLeftConverter}}"
+                                   Canvas.Top="{Binding Id, Converter={StaticResource IdToTopConverter}}" />
+                        <TextBlock Text="{Binding Ailas}" Canvas.Left="{Binding StartDate, Converter={StaticResource DateToLeftConverter}}" Canvas.Top="{Binding Id, Converter={StaticResource IdToTopConverter}}" Margin="2,0"/>
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
 </Window>
