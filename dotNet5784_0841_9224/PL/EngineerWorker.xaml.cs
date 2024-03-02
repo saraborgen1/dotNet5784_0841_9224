@@ -28,9 +28,10 @@ namespace PL
             InitializeComponent();
             try
             {
-                var _engineertask = s_bl.Task.ReadAll(s => s);
-               EngineerWorkerProperty = _engineertask;
-               var _tasks = s_bl?.Task.ReadAll(s => (s.Engineer == null && s.Copmlexity <= _engineer.Level/*&&אין משימה שלא הסתיימה*/))!.ToList()!;
+                var _engineertask = (s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId)).FirstOrDefault(p=>p.Engineer!.Id == engineerId);
+               EngineerWorkerProperty = _engineertask!;
+                var _engineer = s_bl.Engineer.Read(engineerId);
+               var _tasks = s_bl?.Task.ReadAll(s => (s.Engineer == null && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
                 TaskList = new ObservableCollection<BO.Task>(_tasks);
             }
             catch (Exception ex)
@@ -40,14 +41,14 @@ namespace PL
             }
         }
 
-        public BO.Engineer EngineerWorkerProperty
+        public BO.Task EngineerWorkerProperty
         {
-            get { return (BO.Engineer)GetValue(EngineerWorkerPropertyProperty); }
+            get { return (BO.Task)GetValue(EngineerWorkerPropertyProperty); }
             set { SetValue(EngineerWorkerPropertyProperty, value); }
         }
 
         public static readonly DependencyProperty EngineerWorkerPropertyProperty =
-          DependencyProperty.Register("EngineerProperty", typeof(BO.Engineer), typeof(EngineerWorker), new PropertyMetadata(null));
+          DependencyProperty.Register("EngineerProperty", typeof(BO.Task), typeof(EngineerWorker), new PropertyMetadata(null));
 
         public ObservableCollection<BO.Task> TaskList
         {
