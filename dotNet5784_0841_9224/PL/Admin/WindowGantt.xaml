@@ -6,41 +6,27 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="WindowGantt" Height="450" Width="800"
-        DataContext="{Binding TaskListProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}" >
-    <!--<Window.Resources>
-        <local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverter" />
-        <local:TimeSpanToWidthConverter x:Key="TimeSpanToWidthConverter" />
-        <local:DateToLeftConverter x:Key="DateToLeftConverter" />
-        <local:IdToTopConverter x:Key="IdToTopConverter" />
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
+
+    <Window.Resources>
+        <!-- Converter to convert task status to brush color -->
+        <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverter" />-->
     </Window.Resources>
-
+    
     <Grid>
-        --><!-- Legend --><!--
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <Rectangle Width="15" Height="15" Fill="Red" Margin="5"/>
-            <TextBlock Text="Delayed" VerticalAlignment="Center"/>
-            --><!-- Add more rectangles and textblocks for other statuses if needed --><!--
-        </StackPanel>
-
-        --><!-- Gantt Chart --><!--
-        <ItemsControl ItemsSource="{Binding TaskList}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas Background="LightGray" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
+        <ItemsControl ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized" Margin="65,51,83,44">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Canvas>
-                        <Rectangle Width="{Binding RequiredEffortTime, Converter={StaticResource TimeSpanToWidthConverter}}"
-                                   Height="20" Fill="{Binding Status, Converter={StaticResource StatusToColorBrushConverter}}"
-                                   Canvas.Left="{Binding StartDate, Converter={StaticResource DateToLeftConverter}}"
-                                   Canvas.Top="{Binding Id, Converter={StaticResource IdToTopConverter}}" />
-                        <TextBlock Text="{Binding Name}" Canvas.Left="{Binding StartDate, Converter={StaticResource DateToLeftConverter}}" Canvas.Top="{Binding Id, Converter={StaticResource IdToTopConverter}}" Margin="2,0"/>
-                        --><!-- Add ID if needed --><!--
-                    </Canvas>
+                    <Border BorderThickness="1" BorderBrush="Gray">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock HorizontalAlignment="Left"  Text="{Binding Id}"  FontWeight="Bold" Background="Violet" />
+                            <TextBlock HorizontalAlignment="Left"  Text="{Binding Alias}" Width="{Binding TaskDays}" FontWeight="Bold" Background="BlueViolet" />
+                            <Rectangle HorizontalAlignment="Left"  Height="20" Width="{Binding Id}" Fill="Green" />
+                            <Rectangle HorizontalAlignment="Left"  Height="20" Width="{Binding Id}" Fill="Yellow"/>
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-    </Grid>-->
+    </Grid>
 </Window>

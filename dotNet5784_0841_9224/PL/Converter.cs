@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using static BO.Enums;
 
 namespace PL;
 
@@ -72,23 +73,31 @@ class TimeSpanToWidthConverter : IValueConverter
     }
 }
 
-//public class TaskStatusToColorConverter : IValueConverter
-//{
-//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-//    {
-//        var taskItem = value as TaskIte;
-//        if (taskItem == null) return Brushes.Transparent;
+public class StatusToColorBrushConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is Status status)
+        {
+            switch (status)
+            {
+                case Status.Unscheduled:
+                    return Brushes.Gray;
+                case Status.Scheduled:
+                    return Brushes.Blue;
+                case Status.OnTrack:
+                    return Brushes.Green;
+                case Status.Done:
+                    return Brushes.LightGreen;
+                default:
+                    return Brushes.Black;
+            }
+        }
+        return Brushes.Black;
+    }
 
-//        if (taskItem.IsDelayed(DateTime.Now))
-//            return Brushes.Red; // מתעכבת
-//        else if (taskItem.IsCompleted)
-//            return Brushes.Green; // הושלמה
-//        else
-//            return Brushes.Blue; // לא התחילה / בתהליך
-//    }
-
-//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
