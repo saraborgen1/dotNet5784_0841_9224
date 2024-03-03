@@ -32,4 +32,6 @@ public interface IDal
     /// propotie of  Current time project
     /// </summary>
     public DateTime CurrentDate { set; get; }
+    public int AdminPassword { get;}
+    public int AdminUserId { get;}
 }

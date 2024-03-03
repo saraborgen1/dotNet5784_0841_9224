@@ -1,5 +1,5 @@
-﻿using PL.Engineer;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace PL
 {
@@ -30,10 +30,6 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new AdminWindow().Show();
-        }
 
         private void Button_AddYear(object sender, RoutedEventArgs e)
         {
@@ -63,13 +59,61 @@ namespace PL
 
         private void Button_Enter(object sender, RoutedEventArgs e)
         {
-           // if()
-                new EngineerWorker().Show();
+            if (IdProperty == s_bl.AdminUserId)
+                if (PasswordProperty == s_bl.AdminPassword)
+                    new AdminWindow().Show();
+                else
+                {
+                    MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            else
+            {
+                var engineer = s_bl.Engineer.Read(IdProperty);
+                if (engineer != null)
+                    if (engineer.Password == PasswordProperty)
+                        new EngineerWorker().Show();
+                    else
+                    {
+                        MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+            }
+
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+
+        public int PasswordProperty
         {
-            new EngineerWorker().Show();
+            get { return (int)GetValue(PasswordPropertyProperty); }
+            set { SetValue(PasswordPropertyProperty, value); }
         }
+
+        // Using a DependencyProperty as the backing store for PasswordProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PasswordPropertyProperty =
+            DependencyProperty.Register("PasswordProperty", typeof(int), typeof(MainWindow), new PropertyMetadata(0));
+
+
+        public int IdProperty
+        {
+            get { return (int)GetValue(IdPropertyProperty); }
+            set { SetValue(IdPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IdProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IdPropertyProperty =
+            DependencyProperty.Register("IdProperty", typeof(int), typeof(MainWindow), new PropertyMetadata(0));
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            if (passwordBox != null)
+            {
+                int password;
+                if (int.TryParse(passwordBox.Password, out password))
+                    PasswordProperty = password;
+            }
+        }
+
     }
 }

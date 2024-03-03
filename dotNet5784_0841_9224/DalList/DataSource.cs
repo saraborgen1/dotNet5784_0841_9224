@@ -26,6 +26,8 @@ internal static class DataSource
         public static DateTime? endProject=null;
 
         public static DateTime currentDate = DateTime.Now;
+        public static int adminPassword = 12345678;
+        public static int adminUserId = 0;
     }
     internal static List<DO.Task> Tasks { get; } = new();
     internal static List<DO.Engineer> Engineers { get; } = new();

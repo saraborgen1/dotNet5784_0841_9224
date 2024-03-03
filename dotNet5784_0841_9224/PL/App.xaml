@@ -9,6 +9,7 @@
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
         <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
         <local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />
+        <local:ConvertStringToInt x:Key="ConvertStringToIntKey"/>
         <!--<local:DateToWidthConverter x:Key="DateToWidthConverterKey"/>-->
         <!--<\local: CurrentDa6 x:Key="-->
     </Application.Resources>

@@ -6,22 +6,15 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-    DataContext="{Binding CurrentDateProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187" Click="Button_Enter"/>
         <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,86,0,0" VerticalAlignment="Top" Width="111"/>
-        <TextBox HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+       <!--Id text box-->
+        <TextBox HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,148,0,0" VerticalAlignment="Top" Width="111"/>
-        <PasswordBox HorizontalAlignment="Left" Height="42" Margin="40,137,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.5,0.5">
-            <PasswordBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.557"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </PasswordBox.RenderTransform>
-        </PasswordBox>
+       <!--password box-->
+        <PasswordBox HorizontalAlignment="Left" Height="42" Margin="40,137,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>
         <!--Button day-->
         <Button Content="One day" HorizontalAlignment="Left" Height="49" Margin="434,99,0,0" VerticalAlignment="Top" Width="67" Click="Button_AddDay"/>
         <!--Button week-->
@@ -31,9 +24,7 @@
         <!--Button year-->
         <Button Content="One year" HorizontalAlignment="Left" Height="49" Margin="291,99,0,0" VerticalAlignment="Top" Width="68" Click="Button_AddYear"/>
         <!--temp-->
-        <Button Content="temp" HorizontalAlignment="Left" Height="91" Margin="385,194,0,0" VerticalAlignment="Top" Width="218" Click="Button_Click"/>
         <!--Button month-->
         <Button Content="One month" HorizontalAlignment="Center" Height="48" Margin="0,100,0,0" VerticalAlignment="Top" Width="64" Click="Button_AddMonth"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="45" Margin="385,321,0,0" VerticalAlignment="Top" Width="244" Click="Button_Click_1"/>
     </Grid>
 </Window>

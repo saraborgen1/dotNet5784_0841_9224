@@ -97,4 +97,22 @@ sealed internal class DalXml : IDal
             root.Save(@"..\xml\data-config.xml");
         }
     }
+
+    public int AdminPassword
+    {
+        get
+        {
+            XElement root = XElement.Load(@"..\xml\data-config.xml");
+            return int.Parse((string)root.Element("AdminPassword")!);
+        }
+    }
+
+    public int AdminUserId
+    {
+        get
+        {
+            XElement root = XElement.Load(@"..\xml\data-config.xml");
+            return int.Parse((string)root.Element("AdminUserId")!);
+        }
+    }
 }

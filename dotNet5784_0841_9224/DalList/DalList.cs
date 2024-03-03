@@ -48,5 +48,7 @@ sealed internal class DalList : IDal
     /// </summary>
 
     public DateTime CurrentDate { get => DataSource.Config.currentDate; set => DataSource.Config.currentDate = value; }
+    public int AdminPassword { get => DataSource.Config.adminPassword;}
+    public int AdminUserId { get => DataSource.Config.adminUserId;}
 }
 

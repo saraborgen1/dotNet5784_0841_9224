@@ -25,4 +25,8 @@ public interface IBl
     /// function that clears database
     /// </summary>
     public void ResetDB();
+
+    public int AdminPassword { get; }
+    public int AdminUserId {  get; }
+
 }

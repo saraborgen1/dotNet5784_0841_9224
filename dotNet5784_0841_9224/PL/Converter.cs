@@ -44,12 +44,13 @@ class ConvertIdIsEnabled : IValueConverter
     }
 }
 
-class ConvertSetDatesIsEnabled : IValueConverter
+
+class ConvertStringToInt : IValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return  (/* value.StartDateProperty &&value.EndDateProperty &&*/ s_bl.State.StartProject!=null&& s_bl.State.EndProject != null) ? true : false;
+        return (int)value;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -58,6 +59,19 @@ class ConvertSetDatesIsEnabled : IValueConverter
     }
 }
 
+class ConvertSetDatesIsEnabled : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (/* value.StartDateProperty &&value.EndDateProperty &&*/ s_bl.State.StartProject != null && s_bl.State.EndProject != null) ? true : false;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 class TimeSpanToWidthConverter : IValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
