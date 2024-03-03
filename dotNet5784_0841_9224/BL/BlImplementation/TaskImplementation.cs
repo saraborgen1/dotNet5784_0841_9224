@@ -139,16 +139,26 @@ internal class TaskImplementation : ITask
             forecastDate = doTask.StartDate > doTask.ScheduledDate ? doTask.StartDate : doTask.ScheduledDate;
             forecastDate = (forecastDate + doTask.RequiredEffortTime);
         }
+
+        List<BO.EngineerInTask?> engineer = (from item in _dal.Task.Read(p => p.Id==id)
+                                             select new BO.EngineerInTask()
+                                             {
+                                                 Id = item.EngineerId?? null,
+                                                 Name = _dal.Engineer.Read(item.EngineerId).Name ?? null
+                                              
+                                             }).ToList();
+
         BO.Enums.Status status;
         if (doTask.ScheduledDate == null)
             status = BO.Enums.Status.Unscheduled;
         else
             status = BO.Enums.Status.Scheduled;
-
         if (doTask.StartDate != null)
             status = BO.Enums.Status.OnTrack;
         if (doTask.CompleteDate != null)
             status = BO.Enums.Status.Done;
+
+
         return new BO.Task()
         {
             Id = doTask.Id,
@@ -164,6 +174,7 @@ internal class TaskImplementation : ITask
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
+            Engineer=engineer,
             Copmlexity = (BO.Enums.EngineerExperience)doTask.Copmlexity
         };
     }
