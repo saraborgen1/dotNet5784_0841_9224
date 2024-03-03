@@ -140,11 +140,12 @@ internal class TaskImplementation : ITask
             forecastDate = (forecastDate + doTask.RequiredEffortTime);
         }
 
-        List<BO.EngineerInTask?> engineer = (from item in _dal.Task.Read(p => p.Id==id)
+
+        List<BO.EngineerInTask?> engineer = (from item in _dal.Task.ReadAll()
                                              select new BO.EngineerInTask()
                                              {
-                                                 Id = item.EngineerId?? null,
-                                                 Name = _dal.Engineer.Read(item.EngineerId).Name ?? null
+                                                 Id = (int)item.EngineerId!,
+                                                 Name = _dal.Engineer.Read(item.EngineerId).Name
                                               
                                              }).ToList();
 
