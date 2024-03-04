@@ -141,13 +141,17 @@ internal class TaskImplementation : ITask
         }
 
 
-        List<BO.EngineerInTask?> engineer = (from item in _dal.Task.ReadAll()
-                                             select new BO.EngineerInTask()
-                                             {
-                                                 Id = (int)item.EngineerId!,
-                                                 Name = _dal.Engineer.Read(item.EngineerId).Name
-                                              
-                                             }).ToList();
+        var engineer = _dal.Task.Read(p => p.Id == id);
+        BO.EngineerInTask? engineerInTask = null;
+        if (engineer != null) 
+        {
+            engineerInTask = new BO.EngineerInTask()
+            {
+                Id = (int)engineer.EngineerId!,
+                Name = _dal.Engineer.Read(p=>p.Id==engineer.EngineerId)!.Name
+            };
+        }
+      
 
         BO.Enums.Status status;
         if (doTask.ScheduledDate == null)
@@ -175,7 +179,7 @@ internal class TaskImplementation : ITask
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
-            Engineer=engineer,
+            Engineer = engineerInTask,
             Copmlexity = (BO.Enums.EngineerExperience)doTask.Copmlexity
         };
     }
