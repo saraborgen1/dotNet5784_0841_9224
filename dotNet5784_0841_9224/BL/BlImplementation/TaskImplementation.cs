@@ -139,16 +139,31 @@ internal class TaskImplementation : ITask
             forecastDate = doTask.StartDate > doTask.ScheduledDate ? doTask.StartDate : doTask.ScheduledDate;
             forecastDate = (forecastDate + doTask.RequiredEffortTime);
         }
+
+
+        var engineer = _dal.Task.Read(p => p.Id == id);
+        BO.EngineerInTask? engineerInTask = null;
+        if (engineer != null) 
+        {
+            engineerInTask = new BO.EngineerInTask()
+            {
+                Id = (int)engineer.EngineerId!,
+                Name = _dal.Engineer.Read(p=>p.Id==engineer.EngineerId)!.Name
+            };
+        }
+      
+
         BO.Enums.Status status;
         if (doTask.ScheduledDate == null)
             status = BO.Enums.Status.Unscheduled;
         else
             status = BO.Enums.Status.Scheduled;
-
         if (doTask.StartDate != null)
             status = BO.Enums.Status.OnTrack;
         if (doTask.CompleteDate != null)
             status = BO.Enums.Status.Done;
+
+
         return new BO.Task()
         {
             Id = doTask.Id,
@@ -164,6 +179,7 @@ internal class TaskImplementation : ITask
             CompleteDate = doTask.CompleteDate,
             Deliverables = doTask.Deliverables,
             Remarks = doTask.Remarks,
+            Engineer = engineerInTask,
             Copmlexity = (BO.Enums.EngineerExperience)doTask.Copmlexity
         };
     }
