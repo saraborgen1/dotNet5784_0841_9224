@@ -44,7 +44,12 @@ internal class StateImplementation : IState
     /// <returns>projest status</returns>
     public BO.Enums.ProjectStatus StatusProject()
     {
-        return (BO.Enums.ProjectStatus)_dal.StatusProject();
+        //return (BO.Enums.ProjectStatus)_dal.StatusProject();
+        if (StartProject == null)
+            return BO.Enums.ProjectStatus.Creation;
+        if (_dal.Task.Read(p => p.ScheduledDate == null) != null)
+            return BO.Enums.ProjectStatus.Scheduling;
+        return BO.Enums.ProjectStatus.Start;
     }
 
     /// <summary>

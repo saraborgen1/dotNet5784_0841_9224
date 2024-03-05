@@ -35,14 +35,6 @@ internal class TaskImplementation : ITask
     public void Create(BO.Task item)
     {
         validation(item);
-        if (item.Dependencies != null)
-        {
-            var temp = item.Dependencies.ToList().Select(p =>
-            {
-                _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
-                return p;
-            });
-        }
 
         DO.Task doTask = new DO.Task
       (item.Id, item.Alias, item.Description, DateTime.Now, null
@@ -56,6 +48,14 @@ internal class TaskImplementation : ITask
         catch (DO.DalAlreadyExistsException ex)
         {
             throw new BO.BlAlreadyExistException(ex);
+        }
+        if (item.Dependencies != null)
+        {
+            var temp = item.Dependencies.ToList().Select(p =>
+            {
+                _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
+                return p;
+            });
         }
 
     }
@@ -143,7 +143,7 @@ internal class TaskImplementation : ITask
 
         var engineer = _dal.Task.Read(p => p.Id == id);
         BO.EngineerInTask? engineerInTask = null;
-        if (engineer != null) 
+        if (engineer != null)
         {
             engineerInTask = new BO.EngineerInTask()
             {
@@ -151,7 +151,7 @@ internal class TaskImplementation : ITask
                 Name = engineer.EngineerId.HasValue ? _dal.Engineer.Read(p => p.Id == engineer.EngineerId)?.Name : " "
             };
         }
-      
+
 
         BO.Enums.Status status;
         if (doTask.ScheduledDate == null)
@@ -244,6 +244,16 @@ internal class TaskImplementation : ITask
                   item.RequiredEffortTime != boTask.RequiredEffortTime ||
                   item.ScheduledDate != boTask.ScheduledDate ||
                 item.Dependencies != boTask.Dependencies)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.Description != boTask.Description)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.CreatedAtDate != boTask.CreatedAtDate)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.RequiredEffortTime != boTask.RequiredEffortTime)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.ScheduledDate != boTask.ScheduledDate)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.Dependencies != boTask.Dependencies)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
         }
 

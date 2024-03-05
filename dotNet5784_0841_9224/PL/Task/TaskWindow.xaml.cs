@@ -55,6 +55,19 @@ namespace PL.Task
         public static readonly DependencyProperty TaskPropertyProperty =
           DependencyProperty.Register("TaskProperty", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
+
+
+        public int DepProperty
+        {
+            get { return (int)GetValue(DepPropertyProperty); }
+            set { SetValue(DepPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DepProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DepPropertyProperty =
+            DependencyProperty.Register("DepProperty", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
+
+
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
             //בדיקות תקינות ובדיקות מה מותר לעדכן מה ובאיזה שלב

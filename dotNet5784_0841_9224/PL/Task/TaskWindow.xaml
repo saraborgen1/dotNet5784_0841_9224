@@ -49,6 +49,10 @@
                       ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
                        SelectedValue="{Binding Copmlexity, Mode=TwoWay}"/>
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1" Margin="0,200,0,0"/>
+            <Button Grid.Column="1" Content="Add dependency" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="35" Margin="121,354,0,0" VerticalAlignment="Top" Width="113"/>
+            <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,358,0,0" VerticalAlignment="Top" Width="94"/>
+            <TreeView Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="0,358,0,0" VerticalAlignment="Top" Width="108"/>
+            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="35" Margin="83,354,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="67" TextChanged="TextBox_TextChanged"/>
         </Grid>
 
     </Grid>

@@ -39,7 +39,7 @@ sealed internal class DalList : IDal
     {
         if (StartProject == null)
             return ProjectStatus.Creation;
-        if (Task.Read(p => p.StartDate == null) != null)
+        if (Task.Read(p => p.ScheduledDate == null) != null)
             return ProjectStatus.Scheduling;
         return ProjectStatus.Start;
     }
