@@ -23,16 +23,16 @@ namespace PL
     public partial class EngineerWorker : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public EngineerWorker(int engineerId= 654567898)
+        public EngineerWorker(int engineerId)
         {
             InitializeComponent();
             try
             {
-                var _engineertask = s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId);
-                var _engincsceer = _engineertask.FirstOrDefault(p => p.Engineer!.Id == engineerId);
-            //    EngineerWorkerProperty = _engineertask!;
+                var _engineertask = s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId).ToList()!;
+               EngineerWorkerProperty = _engineertask.FirstOrDefault(p => p.Engineer!.Id == engineerId)!;
+
                 var _engineer = s_bl.Engineer.Read(engineerId);
-               var _tasks = s_bl?.Task.ReadAll(s => (s.Engineer == null && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
+                var _tasks = s_bl.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
                 TaskList = new ObservableCollection<BO.Task>(_tasks);
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace PL
         }
 
         public static readonly DependencyProperty EngineerWorkerPropertyProperty =
-          DependencyProperty.Register("EngineerProperty", typeof(BO.Task), typeof(EngineerWorker), new PropertyMetadata(null));
+          DependencyProperty.Register("EngineerWorkerProperty", typeof(BO.Task), typeof(EngineerWorker), new PropertyMetadata(null));
 
         public ObservableCollection<BO.Task> TaskList
         {
@@ -58,7 +58,7 @@ namespace PL
         }
 
         public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(EngineerWorker), new PropertyMetadata(null));
     }
 
 }

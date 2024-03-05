@@ -19,8 +19,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Viewbox>
-            <TextBlock Text="{Binding EngineerWorkerProperty}" />
-        </Viewbox>
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty}" VerticalAlignment="Top" Height="424" Width="390"/>
+
     </Grid>
 </Window>

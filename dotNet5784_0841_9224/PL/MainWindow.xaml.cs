@@ -72,7 +72,7 @@ namespace PL
                 var engineer = s_bl.Engineer.Read(IdProperty);
                 if (engineer != null)
                     if (engineer.Password == PasswordProperty)
-                        new EngineerWorker().Show();
+                        new EngineerWorker(IdProperty).Show();
                     else
                     {
                         MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
