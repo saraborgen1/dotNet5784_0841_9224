@@ -254,7 +254,7 @@ internal class TaskImplementation : ITask
             if (item.ScheduledDate != boTask.ScheduledDate)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
             if (item.Dependencies != boTask.Dependencies)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
