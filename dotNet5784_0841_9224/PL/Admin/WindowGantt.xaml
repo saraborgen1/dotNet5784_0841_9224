@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="WindowGantt" Height="450" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" >
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" >
 
     <Window.Resources>
         <!-- Converter to convert task status to brush color -->
