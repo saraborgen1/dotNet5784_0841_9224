@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerWindow" Height="450" Width="800"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    DataContext="{Binding EngineerProperty, RelativeSource={RelativeSource Self}}">
     <Grid Margin="6,0,-6,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

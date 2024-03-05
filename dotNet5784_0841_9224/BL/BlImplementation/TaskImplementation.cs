@@ -147,8 +147,8 @@ internal class TaskImplementation : ITask
         {
             engineerInTask = new BO.EngineerInTask()
             {
-                Id = (int)engineer.EngineerId!,
-                Name = _dal.Engineer.Read(p=>p.Id==engineer.EngineerId)!.Name
+                Id = engineer.EngineerId.HasValue ? (int)engineer.EngineerId : 0,
+                Name = engineer.EngineerId.HasValue ? _dal.Engineer.Read(p => p.Id == engineer.EngineerId)?.Name : " "
             };
         }
       
