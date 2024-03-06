@@ -63,10 +63,10 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var _engineer = s_bl.Engineer.Read(EngineerWorkerProperty.Engineer.Id.Value);
+            var _engineer = s_bl.Engineer.Read(EngineerWorkerProperty!.Engineer!.Id!.Value);
             var _tasks = s_bl.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
             //TaskList = new ObservableCollection<BO.Task>(_tasks);
-            new TaskListWindow(false, _engineer);
+            new TaskListWindow(false, _engineer).Show();
         
              
         }
