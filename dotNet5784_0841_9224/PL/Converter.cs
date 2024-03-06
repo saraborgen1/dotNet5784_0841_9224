@@ -106,8 +106,8 @@ class ConvertIdIsEnabled : IValueConverter
 //        byte r = (byte)(name[0] + 25);
 //        byte g = (byte)(name[name.Length / 2] + 125);
 //    }
-}
-}
+//}
+//}
 
 
 
