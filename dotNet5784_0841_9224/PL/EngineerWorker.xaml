@@ -12,14 +12,15 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView ItemsSource="{Binding TaskList}" Grid.Column="1">
+        <!--<ListView ItemsSource="{Binding TaskList}" Grid.Column="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty}" VerticalAlignment="Top" Height="424" Width="390"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="97" Margin="63,327,0,0" VerticalAlignment="Top" Width="289" Click="Button_Click"/>
 
     </Grid>
 </Window>

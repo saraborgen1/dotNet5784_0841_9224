@@ -67,7 +67,7 @@
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>HVAC Systems Setup</Deliverables>
-    <EngineerId xsi:nil="true" />
+	  <EngineerId >123456789</EngineerId>
     <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
@@ -279,5 +279,47 @@
     <Deliverables>Final Inspection</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Expert</Copmlexity>
+  </Task>
+  <Task>
+    <Id>1</Id>
+    <Ailas>Layout</Ailas>
+    <Description>Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.</Description>
+    <CreatedAtDate>2023-01-11T00:00:00</CreatedAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate>2024-03-05T00:00:00</ScheduledDate>
+    <DeadlineDate>2024-03-07T00:00:00</DeadlineDate>
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <Deliverables>Architectural Planning</Deliverables>
+    <EngineerId>0</EngineerId>
+    <Copmlexity>Beginner</Copmlexity>
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Ailas>Frame</Ailas>
+    <Description>Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.</Description>
+    <CreatedAtDate>2023-01-22T00:00:00</CreatedAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate>2024-03-05T00:00:00</ScheduledDate>
+    <DeadlineDate>2024-03-07T00:00:00</DeadlineDate>
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <Deliverables>Structural Framing</Deliverables>
+    <EngineerId>0</EngineerId>
+    <Copmlexity>Advanced</Copmlexity>
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <Ailas>Wire</Ailas>
+    <Description>Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.</Description>
+    <CreatedAtDate>2023-02-02T00:00:00</CreatedAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate>2024-03-05T00:00:00</ScheduledDate>
+    <DeadlineDate>2024-03-07T00:00:00</DeadlineDate>
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <Deliverables>Electrical Wiring</Deliverables>
+    <EngineerId>0</EngineerId>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
 </ArrayOfTask>

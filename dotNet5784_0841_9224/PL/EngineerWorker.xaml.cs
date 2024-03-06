@@ -31,9 +31,10 @@ namespace PL
                 var _engineertask = s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId).ToList()!;
                EngineerWorkerProperty = _engineertask.FirstOrDefault(p => p.Engineer!.Id == engineerId)!;
 
-                var _engineer = s_bl.Engineer.Read(engineerId);
-                var _tasks = s_bl.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
-                TaskList = new ObservableCollection<BO.Task>(_tasks);
+            //    var _engineer = s_bl.Engineer.Read(engineerId);
+            //    var _tasks = s_bl.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
+            //    //TaskList = new ObservableCollection<BO.Task>(_tasks);
+            //    TaskListWindow(false, _engineer);
             }
             catch (Exception ex)
             {
@@ -59,6 +60,16 @@ namespace PL
 
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(EngineerWorker), new PropertyMetadata(null));
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var _engineer = s_bl.Engineer.Read(EngineerWorkerProperty.Engineer.Id.Value);
+            var _tasks = s_bl.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
+            //TaskList = new ObservableCollection<BO.Task>(_tasks);
+            new TaskListWindow(false, _engineer);
+        
+             
+        }
     }
 
 }

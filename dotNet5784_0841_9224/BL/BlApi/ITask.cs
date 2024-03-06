@@ -42,5 +42,7 @@ public interface ITask
     public void UpdateDate(int id, DateTime date);
 
     public void AutoScheduling();
+    public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null);
+
 
 }

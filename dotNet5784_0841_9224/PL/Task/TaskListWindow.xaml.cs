@@ -22,10 +22,14 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public TaskListWindow()
+        public TaskListWindow(bool flag=true,BO.Engineer _engineer=null!)
         {
+            if(flag)
             _tasks = s_bl?.Task.ReadAll()!.ToList()!;
+            else
+            _tasks = s_bl?.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
             TaskList = new ObservableCollection<BO.Task>(_tasks);
+          
             InitializeComponent();
         }
 
