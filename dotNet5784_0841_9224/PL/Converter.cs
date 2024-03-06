@@ -1,8 +1,9 @@
-﻿using System.Globalization;
+﻿using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using static BO.Enums;
 
 namespace PL;
 
@@ -50,8 +51,8 @@ class ConvertIdIsEnabled : IValueConverter
 
 public class CellColorConverter : IMultiValueConverter
 {
-    Color[] arrColors = { Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow };
-
+    Color[] arrColors = { Colors.White, Colors.Red, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow };
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
         if (values[0] is DataGridCell cell && values[1] is DataRowView rowView)
@@ -62,31 +63,62 @@ public class CellColorConverter : IMultiValueConverter
                 string columnName = (string)cell.Column.Header;
                 int columnIndex = cell.Column.DisplayIndex;
 
-                if (columnIndex < 4)
+                if (columnIndex < 2)
                 {
                     return new SolidColorBrush(Colors.LightGoldenrodYellow);
                 }
 
-                bool content = row.Field<bool>(columnName);
-                string nameOfE = row.Field<string>("Engineer Name");
-                int? taskId = row.Field<int>("Task Id");
+                //  bool content = row.Field<bool>(columnName);
+                //   string nameOfE = row.Field<string>("Engineer Name");
+                DateTime day;
+                if (DateTime.TryParse(columnName, out day))
+                {
+                    int? taskId = row.Field<int>("Task Id");
+                    if (taskId.HasValue)
+                    {
+                        var task = s_bl.Task.Read(taskId.Value);
+                        if (day < task.StartDate || day > task.ForecastDate)
+                        {
+                          //  cell.Foreground = new SolidColorBrush(arrColors[0]);
+                            return new SolidColorBrush(arrColors[0]);
+                        }
+                        else
+                        {
+                            cell.Foreground = new SolidColorBrush(arrColors[3]);
+                            return new SolidColorBrush(arrColors[3]);
+                        }
 
-                if (content)
-                {
-                    Color color = arrColors[taskId ?? 0];
-                    cell.Foreground = new SolidColorBrush(color);
-                    return new SolidColorBrush(color);
-                }
-                else
-                {
-                    cell.Foreground = Brushes.LightGray;
-                    return new SolidColorBrush(Colors.LightGray);
+                        //if (task.CompleteDate == null )
+                        //{
+                        //    if(day > task.ForecastDate)
+                        //    {
+                        //        cell.Foreground = new SolidColorBrush(arrColors[1]);
+                        //        return new SolidColorBrush(arrColors[1]);
+                        //    }
+                        //    if(task.ScheduledDate > day)
+                        //    {
+                        //        cell.Foreground = new SolidColorBrush(arrColors[0]);
+                        //        return new SolidColorBrush(arrColors[0]);
+                        //    }
+                        //}
+                        //if(day > task.CompleteDate)
+                        //{
+
+                        //}
+
+                        //if (task.ScheduledDate > day || )
+                        //{
+
+                        //}
+
+                    }
                 }
             }
             catch (Exception)
             {
                 return new SolidColorBrush(Colors.Black);
             }
+
         }
         return new SolidColorBrush(Colors.DarkRed);
     }

@@ -38,18 +38,18 @@ namespace PL.Admin
                 dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Task Name", Binding = new Binding("[1]") });
                 dataTable.Columns.Add("Task Name", typeof(string));
 
-                dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Engineer Id", Binding = new Binding("[2]") });
-                dataTable.Columns.Add("Engineer Id", typeof(int));
+                //dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Engineer Id", Binding = new Binding("[2]") });
+                //dataTable.Columns.Add("Engineer Id", typeof(int));
 
-                dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Engineer Name", Binding = new Binding("[3]") });
-                dataTable.Columns.Add("Engineer Name", typeof(string));
+              //  dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Engineer Name", Binding = new Binding("[3]") });
+              //  dataTable.Columns.Add("Engineer Name", typeof(string));
 
-                int col = 4;
+                int col = 2;
                 for (DateTime day = (DateTime)s_bl.State.StartProject!; day <= (DateTime)s_bl.State.EndProject!; day = day.AddDays(1))
                 {
                     string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
                     dataGrid.Columns.Add(new DataGridTextColumn() { Header = strDay, Binding = new Binding($"[{col}]") });
-                    dataTable.Columns.Add(strDay, typeof(bool));
+                    //dataTable.Columns.Add(strDay, typeof(bool));
                     col++;
                 }
             }
@@ -63,22 +63,22 @@ namespace PL.Admin
                 DataRow row = dataTable.NewRow();
                 row[0] = task.Id;
                 row[1] = task.Alias;
-                row[2] = task.Engineer.Id;
-                row[3] = task.Engineer.Name;
+                //    row[2] = task.Engineer.Id;
+                //    row[3] = task.Engineer.Name;
 
-                for (DateTime day = (DateTime)s_bl.State.StartProject!; day <= (DateTime)s_bl.State.EndProject!; day = day.AddDays(1))
-                {
-                    string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
+                //for (DateTime day = (DateTime)s_bl.State.StartProject!; day <= (DateTime)s_bl.State.EndProject!; day = day.AddDays(1))
+                //{
+                //    string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
 
-                    if (day < task.StartDate || day > task.ForecastDate)
+                //    if (day < task.StartDate || day > task.ForecastDate)
 
-                        row[strDay] = false;
-                    else
-                    {
+                //        row[strDay] = false;
+                //    else
+                //    {
 
-                        row[strDay] = true;
-                    }
-                }
+                //        row[strDay] = true;
+                //    }
+                //}
                 dataTable.Rows.Add(row);
             }
 
