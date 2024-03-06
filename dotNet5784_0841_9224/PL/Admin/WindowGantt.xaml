@@ -8,25 +8,5 @@
         Title="WindowGantt" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" >
 
-    <Window.Resources>
-        <!-- Converter to convert task status to brush color -->
-        <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverter" />-->
-    </Window.Resources>
-    
-    <Grid>
-        <ItemsControl ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized" Margin="65,51,83,44">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="Gray">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock HorizontalAlignment="Left"  Text="{Binding Id}"  FontWeight="Bold" Background="Violet" />
-                            <TextBlock HorizontalAlignment="Left"  Text="{Binding Alias}" Width="{Binding TaskDays}" FontWeight="Bold" Background="BlueViolet" />
-                            <Rectangle HorizontalAlignment="Left"  Height="20" Width="{Binding Id}" Fill="Green" />
-                            <Rectangle HorizontalAlignment="Left"  Height="20" Width="{Binding Id}" Fill="Yellow"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    <DataGrid ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized" />
 </Window>

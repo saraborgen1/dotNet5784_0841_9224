@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace PL.Admin
 {
@@ -27,8 +28,8 @@ namespace PL.Admin
             DataTable dataTable = new DataTable(); //the logic container
 
             //add COLUMNS to datagrid and datatable
-            if (dataGrid != null)
-            {
+           if (dataGrid != null)
+           {
                 dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Task Id", Binding = new Binding("[0]") });
                 dataTable.Columns.Add("Task Id", typeof(int));
 
@@ -46,7 +47,7 @@ namespace PL.Admin
                 {
                     string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
                     dataGrid.Columns.Add(new DataGridTextColumn() { Header = strDay, Binding = new Binding($"[{col}]") });
-                    dataTable.Columns.Add(strDay, typeof(BO.Enums.Status));// typeof(System.Windows.Media.Color));
+                    dataTable.Columns.Add(strDay, typeof(Color));
                     col++;
                 }
             }
@@ -68,11 +69,11 @@ namespace PL.Admin
                     string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
 
                     if (day < task.StartDate || day > task.ForecastDate)
-                        row[strDay] = "EMPTY"; //"EMPTY";
+                        row[strDay] = Brushes.White;
                     else
                     {
 
-                        row[strDay] = "FULL"; //BO.TaskStatus.TaskIsSchedualed; //"FULL";
+                        row[strDay] = Brushes.Red;
                     }
                 }
                 dataTable.Rows.Add(row);
@@ -94,5 +95,9 @@ namespace PL.Admin
         public static readonly DependencyProperty TaskListPropertyProperty =
             DependencyProperty.Register("TaskListProperty", typeof(IEnumerable<BO.Task>), typeof(WindowGantt), new PropertyMetadata(null));
 
+        //private Color statusToColor()
+        //{
+
+        //}
     }
 }

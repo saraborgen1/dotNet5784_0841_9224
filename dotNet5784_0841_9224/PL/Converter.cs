@@ -109,7 +109,26 @@ class ConvertIdIsEnabled : IValueConverter
 //}
 //}
 
+public class StatusToColorBrushConverter : IMultiValueConverter
+{
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    {
+        string taskStatus = values[0] as string;
+        bool isDependency = (bool)values[1];
 
+        if (isDependency || taskStatus == "EMPTY")
+            return Brushes.Red; // Task is delayed or it's a dependency
+        else if (taskStatus == "FULL")
+            return Brushes.Green; // Task is on schedule
+        else
+            return Brushes.Blue; // Task not started yet
+    }
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 
 class ConvertStringToInt : IValueConverter
 {
@@ -145,35 +164,6 @@ class TimeSpanToWidthConverter : IValueConverter
     {
         BO.Task task = (value as BO.Task);
         return (int)((TimeSpan)task.RequiredEffortTime!).TotalDays;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class StatusToColorBrushConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (value is Status status)
-        {
-            switch (status)
-            {
-                case Status.Unscheduled:
-                    return Brushes.Gray;
-                case Status.Scheduled:
-                    return Brushes.Blue;
-                case Status.OnTrack:
-                    return Brushes.Green;
-                case Status.Done:
-                    return Brushes.LightGreen;
-                default:
-                    return Brushes.Black;
-            }
-        }
-        return Brushes.Black;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
