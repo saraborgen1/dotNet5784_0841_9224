@@ -119,5 +119,10 @@ namespace PL
         {
             new AdminWindow().Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new EngineerWorker(123456789).Show();
+        }
     }
 }

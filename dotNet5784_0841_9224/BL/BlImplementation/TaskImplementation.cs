@@ -142,14 +142,18 @@ internal class TaskImplementation : ITask
 
 
         var engineer = _dal.Task.Read(p => p.Id == id);
+        /*_dal.Engineer.Read(p => p.Id == (_dal.Task.Read(p => p.Id == id)).EngineerId)*/
+
         BO.EngineerInTask? engineerInTask = null;
         if (engineer != null)
         {
             engineerInTask = new BO.EngineerInTask()
             {
-                Id = engineer.EngineerId.HasValue ? (int)engineer.EngineerId : 0,
+                Id = engineer.EngineerId.HasValue? engineer.EngineerId : null,
                 Name = engineer.EngineerId.HasValue ? _dal.Engineer.Read(p => p.Id == engineer.EngineerId)?.Name : " "
             };
+            if (engineerInTask.Id == null)
+                engineerInTask = new BO.EngineerInTask();
         }
 
 
@@ -242,19 +246,20 @@ internal class TaskImplementation : ITask
             if (item.Description != boTask.Description ||
                  item.CreatedAtDate != boTask.CreatedAtDate ||
                   item.RequiredEffortTime != boTask.RequiredEffortTime ||
-                  item.ScheduledDate != boTask.ScheduledDate ||
-                item.Dependencies != boTask.Dependencies)
+                  item.ScheduledDate != boTask.ScheduledDate)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.Description != boTask.Description)
+            if (item.Dependencies.Count != boTask.Dependencies.Count)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.CreatedAtDate != boTask.CreatedAtDate)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.RequiredEffortTime != boTask.RequiredEffortTime)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.ScheduledDate != boTask.ScheduledDate)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.Dependencies != boTask.Dependencies)
-                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.Dependencies.Count != 0 && boTask.Dependencies.Count != 0)
+            {
+                int size = item.Dependencies.Count;
+                while (size < 0)
+                {
+                    if (item.Dependencies[size] != boTask.Dependencies[size])
+                        throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+                    size--;
+                }
+            }
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
@@ -278,6 +283,19 @@ internal class TaskImplementation : ITask
                         return p;
                     }).ToList();
                 }
+        if (boTask.Engineer == null||item.Engineer.Id != boTask.Engineer.Id)
+        {
+            if (item.Engineer.Id != null)
+            {
+                var engineer = _dal.Engineer.Read(p => p.Id == item.Engineer.Id);
+                if (engineer == null)
+                    throw new BO.BlDateClashException("An engineer with this ID does not exist");
+
+                if (item.Engineer.Name != engineer.Name)
+                    throw new BO.BlDateClashException("This name does not match the name of the holder of this ID");
+            }
+
+        }
 
         DO.Task updatedTask = new DO.Task
         (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
@@ -357,6 +375,21 @@ internal class TaskImplementation : ITask
                 { throw new BlDoesNotExistException(ex); }
             }
         UpdateDate(task.Id, (DateTime)max!);
+    }
+
+    public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null)
+    {
+        var allTasks = ReadAll();
+
+        var taskInList = allTasks.Select(item => new BO.TaskInList
+        {
+            Id = item.Id,
+            Alias = item.Alias,
+            Description = item.Description,
+            Status = (BO.Enums.Status)item.Status
+        }).ToList();
+
+        return taskInList;
     }
 }
 

@@ -73,7 +73,7 @@ namespace PL.Admin
                     else
                     {
 
-                        row[strDay] = Brushes.Red;
+                        row[strDay] =Brushes.Red; 
                     }
                 }
                 dataTable.Rows.Add(row);
