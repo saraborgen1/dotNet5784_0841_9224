@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Data;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -38,6 +39,18 @@ class ConvertIdIsEnabled : IValueConverter
     }
 }
 
+class ConvertIdEngineerIsEnabled : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value == null ? false : true;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 
 //class ImageConverter : IValueConverter
 //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

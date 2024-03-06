@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Converters;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -22,12 +23,16 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public TaskListWindow(bool flag=true,BO.Engineer _engineer=null!)
+        public TaskListWindow(bool flag = true, BO.Engineer _engineer = null!)
         {
-            if(flag)
-            _tasks = s_bl?.Task.ReadAll()!.ToList()!;
+            if (flag)
+                _tasks = s_bl?.Task.ReadAll()!.ToList()!;
             else
-            _tasks = s_bl?.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
+            {
+              
+                _tasks = s_bl?.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level && AreDependentTasksCompleted(s)==true))!.ToList()!;
+
+            }
             TaskList = new ObservableCollection<BO.Task>(_tasks);
           
             InitializeComponent();
@@ -99,5 +104,26 @@ namespace PL.Task
             }
 
         }
+        public bool AreDependentTasksCompleted(BO.Task task)
+        {
+            // אם אין למשימה תלויות, מחזירים TRUE
+            if (task.Dependencies == null || task.Dependencies.Count == 0)
+                return true;
+
+            // לולאה על כל התלויות של המשימה
+            foreach (var dependentTask in task.Dependencies)
+            {
+                // אם המשימה התלויה עדיין לא הסתיימה, מחזירים FALSE
+                if (dependentTask.Status == BO.Enums.Status.Done)
+                    return false;
+
+                // בדיקה רקורסיבית של המשימות התלויות של המשימה התלויה
+                AreDependentTasksCompleted(s_bl.Task.Read(dependentTask.Id));
+            }
+
+            // אם עברנו על כל התלויות וכולן הסתיימו, מחזירים TRUE
+            return true;
+        }
     }
+   
 }
