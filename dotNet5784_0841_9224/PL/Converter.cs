@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using static BO.Enums;
 
 namespace PL;
@@ -43,6 +44,24 @@ class ConvertIdIsEnabled : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+
+//class ImageConverter: IValueConverter
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//{ }
+//    try
+//    {
+//    if(!File.Exists((string)Value))
+//    throw new Exception(" ");
+//BitmapImage b=new BitmapImage(new Uri((string)value,Urikind.Relati))
+
+
+public class CellColorConverter:IMultiValueConverter
+{
+    Color[] arrColors = (Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow);
+    public
+}
+
 
 
 class ConvertStringToInt : IValueConverter
