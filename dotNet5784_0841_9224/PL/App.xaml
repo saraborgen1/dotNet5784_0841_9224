@@ -6,6 +6,7 @@
     <Application.Resources>
         <local:EngineersCollection x:Key="EngineersCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+        <local:ConvertIdToContent x:Key="ConvertIdEngineerIsEnabledKey"/>
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
         <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
         <local:ConvertStringToInt x:Key="ConvertStringToIntKey"/>
