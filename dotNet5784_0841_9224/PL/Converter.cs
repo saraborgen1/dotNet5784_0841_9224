@@ -63,7 +63,7 @@ class ConvertIdEngineerIsEnabled : IValueConverter
 
 public class CellColorConverter : IMultiValueConverter
 {
-    Color[] arrColors = { Colors.White, Colors.Red, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow };
+    Color[] arrColors = { Colors.White, Colors.Red, Colors.Green, Colors.RoyalBlue, Colors.Orange, Colors.LightYellow };
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
@@ -82,6 +82,7 @@ public class CellColorConverter : IMultiValueConverter
 
                 //  bool content = row.Field<bool>(columnName);
                 //   string nameOfE = row.Field<string>("Engineer Name");
+                DateTime currentDate=s_bl.State.CurrentDate;
                 DateTime day;
                 if (DateTime.TryParse(columnName, out day))
                 {
@@ -89,39 +90,42 @@ public class CellColorConverter : IMultiValueConverter
                     if (taskId.HasValue)
                     {
                         var task = s_bl.Task.Read(taskId.Value);
-                        if (day < task.StartDate || day > task.ForecastDate)
+                        if (day < task.ScheduledDate || day > task.ForecastDate)
                         {
-                          //  cell.Foreground = new SolidColorBrush(arrColors[0]);
+                           cell.Foreground = new SolidColorBrush(arrColors[0]);
                             return new SolidColorBrush(arrColors[0]);
                         }
                         else
                         {
-                            cell.Foreground = new SolidColorBrush(arrColors[3]);
-                            return new SolidColorBrush(arrColors[3]);
+                            //המשימה הסתיימה
+                            if (task.CompleteDate!=null)
+                            {
+                                cell.Foreground = new SolidColorBrush(arrColors[2]);
+                                return new SolidColorBrush(arrColors[2]);
+                            }
+                            // המסימה לא הושלמה והיא באיחור
+                            if (currentDate > task.ForecastDate)
+                            {
+                                cell.Foreground = new SolidColorBrush(arrColors[1]);
+                                return new SolidColorBrush(arrColors[1]);
+                            }
+                            //עוד לא התחילו את המשימה
+                            if (task.StartDate == null)
+                            {
+                                //לא התחילו כי לא הגיע זמן ההתחלה 
+                                if(task.ScheduledDate> currentDate)
+                                {
+                                    cell.Foreground = new SolidColorBrush(arrColors[3]);
+                                    return new SolidColorBrush(arrColors[3]);
+                                }
+                                //לא התחילו את המשימה ועבר המועד המתוכנן להתחלה 
+                                if(currentDate > task.ScheduledDate)
+                                {
+                                    cell.Foreground = new SolidColorBrush(arrColors[4]);
+                                    return new SolidColorBrush(arrColors[4]);
+                                }
+                            }
                         }
-
-                        //if (task.CompleteDate == null )
-                        //{
-                        //    if(day > task.ForecastDate)
-                        //    {
-                        //        cell.Foreground = new SolidColorBrush(arrColors[1]);
-                        //        return new SolidColorBrush(arrColors[1]);
-                        //    }
-                        //    if(task.ScheduledDate > day)
-                        //    {
-                        //        cell.Foreground = new SolidColorBrush(arrColors[0]);
-                        //        return new SolidColorBrush(arrColors[0]);
-                        //    }
-                        //}
-                        //if(day > task.CompleteDate)
-                        //{
-
-                        //}
-
-                        //if (task.ScheduledDate > day || )
-                        //{
-
-                        //}
 
                     }
                 }
@@ -132,7 +136,7 @@ public class CellColorConverter : IMultiValueConverter
             }
 
         }
-        return new SolidColorBrush(Colors.DarkRed);
+        return new SolidColorBrush(Colors.Silver);
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
