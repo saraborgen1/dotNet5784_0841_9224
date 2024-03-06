@@ -258,7 +258,6 @@ internal class TaskImplementation : ITask
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
-
             if (item.ScheduledDate != null)
                 if (item.Dependencies != null)
                 {
