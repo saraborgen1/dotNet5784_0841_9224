@@ -1,9 +1,10 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-
 namespace PL.Admin
 {
     /// <summary>
@@ -14,22 +15,23 @@ namespace PL.Admin
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public WindowGantt()
         {
+            TaskListProperty = s_bl.Task.ReadAll().ToList();
             InitializeComponent();
-            TaskListProperty = s_bl.Task.ReadAll();
             DataContext = this;
 
         }
 
+
         private void dataGridSched_Initialized(object sender, EventArgs e)
         {
-            TaskListProperty = s_bl.Task.ReadAll();
+            TaskListProperty = s_bl.Task.ReadAll().ToList();
             DataGrid? dataGrid = sender as DataGrid; //the graphic container
 
             DataTable dataTable = new DataTable(); //the logic container
 
             //add COLUMNS to datagrid and datatable
-           if (dataGrid != null)
-           {
+            if (dataGrid != null)
+            {
                 dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Task Id", Binding = new Binding("[0]") });
                 dataTable.Columns.Add("Task Id", typeof(int));
 
@@ -47,7 +49,7 @@ namespace PL.Admin
                 {
                     string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
                     dataGrid.Columns.Add(new DataGridTextColumn() { Header = strDay, Binding = new Binding($"[{col}]") });
-                    dataTable.Columns.Add(strDay, typeof(Color));
+                    dataTable.Columns.Add(strDay, typeof(bool));
                     col++;
                 }
             }
@@ -69,11 +71,12 @@ namespace PL.Admin
                     string strDay = $"{day.Day}/{day.Month}/{day.Year}"; //"21/2/2024"
 
                     if (day < task.StartDate || day > task.ForecastDate)
-                        row[strDay] = Brushes.White;
+
+                        row[strDay] = false;
                     else
                     {
 
-                        row[strDay] =Brushes.Red; 
+                        row[strDay] = true;
                     }
                 }
                 dataTable.Rows.Add(row);
@@ -85,19 +88,17 @@ namespace PL.Admin
             }
         }
 
-        public IEnumerable<BO.Task> TaskListProperty
+        public List<BO.Task> TaskListProperty
         {
-            get { return (IEnumerable<BO.Task>)GetValue(TaskListPropertyProperty); }
+            get { return (List<BO.Task>)GetValue(TaskListPropertyProperty); }
             set { SetValue(TaskListPropertyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for TaskListProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TaskListPropertyProperty =
-            DependencyProperty.Register("TaskListProperty", typeof(IEnumerable<BO.Task>), typeof(WindowGantt), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskListProperty", typeof(List<BO.Task>), typeof(WindowGantt), new PropertyMetadata(null));
 
-        //private Color statusToColor()
-        //{
 
-        //}
+
     }
 }

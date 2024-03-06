@@ -9,7 +9,11 @@
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
         <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
         <local:ConvertStringToInt x:Key="ConvertStringToIntKey"/>
-        <local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />
+        <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />-->
+        <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->
+        <local:CellColorConverter x:Key="CellColorConverterKey"/>
+
+
         <!--<local:DateToWidthConverter x:Key="DateToWidthConverterKey"/>-->
         <!--<\local: CurrentDa6 x:Key="-->
     </Application.Resources>
