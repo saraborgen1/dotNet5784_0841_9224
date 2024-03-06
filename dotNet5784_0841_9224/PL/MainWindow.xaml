@@ -26,5 +26,6 @@
         <!--temp-->
         <!--Button month-->
         <Button Content="One month" HorizontalAlignment="Center" Height="48" Margin="0,100,0,0" VerticalAlignment="Top" Width="64" Click="Button_AddMonth"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="359,217,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click"/>
     </Grid>
 </Window>
