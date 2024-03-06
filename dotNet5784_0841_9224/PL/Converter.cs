@@ -40,23 +40,72 @@ class ConvertIdIsEnabled : IValueConverter
 }
 
 
-//class ImageConverter: IValueConverter
+//class ImageConverter : IValueConverter
 //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 //{ }
 //    try
 //    {
-//    if(!File.Exists((string)Value))
+//    if(!File.Exists((string) Value))
 //    throw new Exception(" ");
-//BitmapImage b=new BitmapImage(new Uri((string)value,Urikind.Relati))
+//BitmapImage b = new BitmapImage(new Uri((string)value, Urikind.Relati))
 
+public class CellColorConverter : IMultiValueConverter
+{
+    Color[] arrColors = { Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow };
+
+    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+    {
+        if (values[0] is DataGridCell cell && values[1] is DataRowView rowView)
+        {
+            try
+            {
+                DataRow row = rowView.Row;
+                string columnName = (string)cell.Column.Header;
+                int columnIndex = cell.Column.DisplayIndex;
+
+                if (columnIndex < 4)
+                {
+                    return new SolidColorBrush(Colors.LightGoldenrodYellow);
+                }
+
+                bool content = row.Field<bool>(columnName);
+                string nameOfE = row.Field<string>("Engineer Name");
+                int? taskId = row.Field<int>("Task Id");
+
+                if (content)
+                {
+                    Color color = arrColors[taskId ?? 0];
+                    cell.Foreground = new SolidColorBrush(color);
+                    return new SolidColorBrush(color);
+                }
+                else
+                {
+                    cell.Foreground = Brushes.LightGray;
+                    return new SolidColorBrush(Colors.LightGray);
+                }
+            }
+            catch (Exception)
+            {
+                return new SolidColorBrush(Colors.Black);
+            }
+        }
+        return new SolidColorBrush(Colors.DarkRed);
+    }
+
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 
 //public class CellColorConverter : IMultiValueConverter
 //{
-//    Color[] arrColors = (Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow);
+//    Color[] arrColors = { Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow };
 //    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 //    {
 //        if (values[0] is DataGridCell cell && values[1] is DataRow row)
 //        {
+
 //            try
 //            {
 //                string columnName = (string)cell.Column.Header;
@@ -84,8 +133,8 @@ class ConvertIdIsEnabled : IValueConverter
 //                }
 //                if (content == false)
 //                {
-//                    cell.Foreground = Brushes LightGray;
-//                    return new SolidColorBrush(Colors LightGray);
+//                    cell.Foreground = Brushes.LightGray;
+//                    return new SolidColorBrush(Colors.LightGray);
 //                }
 //                //return new SolidColorBrush(Colors LightSteelBlue);
 //            }
@@ -96,39 +145,39 @@ class ConvertIdIsEnabled : IValueConverter
 //        }
 //        return new SolidColorBrush(Colors.DarkRed);// Error! object[] is invalid.
 //    }
-//    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-//    {
-//        throw new NotSupportedException();
-//    }
 
+//public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
 //    Color GetColorFromName(string name)
 //    {
 //        byte r = (byte)(name[0] + 25);
 //        byte g = (byte)(name[name.Length / 2] + 125);
+//        return Color.FromRgb(r, g, 0);
 //    }
 //}
+
+//public class StatusToColorBrushConverter : IMultiValueConverter
+//{
+//    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        string taskStatus = values[0] as string;
+//        bool isDependency = (bool)values[1];
+
+//        if (isDependency || taskStatus == "EMPTY")
+//            return Brushes.Red; // Task is delayed or it's a dependency
+//        else if (taskStatus == "FULL")
+//            return Brushes.Green; // Task is on schedule
+//        else
+//            return Brushes.Blue; // Task not started yet
+//    }
+
+//    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
 //}
-
-public class StatusToColorBrushConverter : IMultiValueConverter
-{
-    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-    {
-        string taskStatus = values[0] as string;
-        bool isDependency = (bool)values[1];
-
-        if (isDependency || taskStatus == "EMPTY")
-            return Brushes.Red; // Task is delayed or it's a dependency
-        else if (taskStatus == "FULL")
-            return Brushes.Green; // Task is on schedule
-        else
-            return Brushes.Blue; // Task not started yet
-    }
-
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
 
 class ConvertStringToInt : IValueConverter
 {
@@ -157,17 +206,17 @@ class ConvertSetDatesIsEnabled : IValueConverter
         throw new NotImplementedException();
     }
 }
-class TimeSpanToWidthConverter : IValueConverter
-{
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        BO.Task task = (value as BO.Task);
-        return (int)((TimeSpan)task.RequiredEffortTime!).TotalDays;
-    }
+//class TimeSpanToWidthConverter : IValueConverter
+//{
+//    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        BO.Task task = (value as BO.Task);
+//        return (int)((TimeSpan)task.RequiredEffortTime!).TotalDays;
+//    }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}

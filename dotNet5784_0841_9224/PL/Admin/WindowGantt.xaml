@@ -8,5 +8,65 @@
         Title="WindowGantt" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" >
 
-    <DataGrid ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized" />
+    <!--<DataGrid ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized">
+        <DataGrid.CellStyle>
+            <Style TargetType="DataGridCell">
+                <Setter Property="Background" Value="{Binding Id, Converter={StaticResource ConvertColorKey}}" />
+            </Style>
+        </DataGrid.CellStyle>
+    </DataGrid>-->
+
+    <!--<DataGrid ItemsSource="{Binding TaskListProperty}" >
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Id}" Header="Task Id" Width="SizeToHeader"/>
+            <DataGridTextColumn Binding="{Binding Alias}" Header="Name" Width="SizeToHeader"/>
+            --><!--<DataGridTemplateColumn Header="Birth " Width="SizeToHeader">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <DatePicker SelectedDate="{Binding BirthDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>--><!--
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>-->
+
+    <!--<DataGrid ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized">
+        <DataGrid.Columns>
+            --><!-- Define your DataGrid columns here --><!--
+        </DataGrid.Columns>
+        <DataGrid.CellStyle>
+            <Style TargetType="DataGridCell">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource CellColorConverterKey}">
+                            <Binding RelativeSource="{RelativeSource Self}" />
+                            <Binding Path="DataContext.TaskListProperty" RelativeSource="{RelativeSource AncestorType=Window}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataGrid.CellStyle>
+    </DataGrid>-->
+    <DataGrid ItemsSource="{Binding TaskListProperty}" Initialized="dataGridSched_Initialized">
+        <DataGrid.Columns>
+            <!-- Define your DataGrid columns here -->
+        </DataGrid.Columns>
+        <DataGrid.CellStyle>
+            <Style TargetType="DataGridCell">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <!-- Bind to multiple properties using MultiBinding -->
+                        <MultiBinding Converter="{StaticResource CellColorConverterKey}">
+                            <!-- Bind to the cell itself -->
+                            <Binding RelativeSource="{RelativeSource Self}" />
+                            <!-- Bind to the DataRow (assuming you have a DataRow property in your data context) -->
+                            <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=DataGridRow}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </DataGrid.CellStyle>
+    </DataGrid>
+
+
 </Window>
