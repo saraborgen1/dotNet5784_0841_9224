@@ -1,14 +1,8 @@
-﻿using BlApi;
-using System;
-using System.Collections.Generic;
+﻿using System.Data;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using static BO.Enums;
 
 namespace PL;
@@ -56,10 +50,63 @@ class ConvertIdIsEnabled : IValueConverter
 //BitmapImage b=new BitmapImage(new Uri((string)value,Urikind.Relati))
 
 
-public class CellColorConverter:IMultiValueConverter
-{
-    Color[] arrColors = (Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow);
-    public
+//public class CellColorConverter : IMultiValueConverter
+//{
+//    Color[] arrColors = (Colors.Purple, Colors.Pink, Colors.Plum, Colors.RoyalBlue, Colors.SeaGreen, Colors.LightYellow);
+//    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+//    {
+//        if (values[0] is DataGridCell cell && values[1] is DataRow row)
+//        {
+//            try
+//            {
+//                string columnName = (string)cell.Column.Header;
+//                //bool content =row.Field<bool>(columnName);
+//                int columnIndex = cell.Column.DisplayIndex;
+
+//                if (columnIndex < 4)
+//                {
+//                    //cell FontStyle = FontStyles.Italic;
+//                    //cell FontWeight = FontWeight.Bold;
+//                    //cell FontSize = 20;
+//                    return new SolidColorBrush(Colors.LightGoldenrodYellow);
+//                }
+
+//                bool content = row.Field<bool>(columnName);
+//                string? nameOfE = row.Field<string>("Engineer Name");
+//                int? taskId = row.Field<int>("Task Id");
+
+//                if (content == true)
+//                {
+//                    Color color = arrColors[taskId ?? 0];
+//                    cell.Foreground = new SolidColorBrush(color);
+//                    return new SolidColorBrush(color);
+//                    //return GetColorFromName(nameOfE);//new SolidColorBrush(Colors.L Colors.LightGreen);
+//                }
+//                if (content == false)
+//                {
+//                    cell.Foreground = Brushes LightGray;
+//                    return new SolidColorBrush(Colors LightGray);
+//                }
+//                //return new SolidColorBrush(Colors LightSteelBlue);
+//            }
+//            catch (Exception)
+//            {
+//                return new SolidColorBrush(Colors.Black);//Error! An Exception was thrown 
+//            }
+//        }
+//        return new SolidColorBrush(Colors.DarkRed);// Error! object[] is invalid.
+//    }
+//    public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+//    {
+//        throw new NotSupportedException();
+//    }
+
+//    Color GetColorFromName(string name)
+//    {
+//        byte r = (byte)(name[0] + 25);
+//        byte g = (byte)(name[name.Length / 2] + 125);
+//    }
+}
 }
 
 
