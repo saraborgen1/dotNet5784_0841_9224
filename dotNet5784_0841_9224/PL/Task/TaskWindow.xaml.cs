@@ -93,14 +93,23 @@ namespace PL.Task
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.Task.Delete(TaskProperty.Id);
+            try
+            {
+                s_bl.Task.Delete(TaskProperty.Id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            DepList = new ObservableCollection<BO.TaskInList?>(s_bl.Task.Read(id)!.Dependencies);
+            //DepList = new ObservableCollection<BO.TaskInList?>(s_bl.Task.Read(id)!.Dependencies);
+            int i = 1;
         }
         public ObservableCollection<BO.TaskInList?> DepList
         {
@@ -109,5 +118,6 @@ namespace PL.Task
         }
         public static readonly DependencyProperty DepListProperty =
            DependencyProperty.Register("DepList", typeof(IEnumerable<BO.TaskInList?>), typeof(EngineerListWindow), new PropertyMetadata(null));
+
     }
 }

@@ -26,7 +26,7 @@ public interface IBl
     /// </summary>
     public void ResetDB();
 
-    public int AdminPassword { get; }
+    public string AdminPassword { get; }
     public int AdminUserId {  get; }
 
 }

@@ -12,6 +12,11 @@ namespace PL
         /// <summary>
         /// CurrentDate Property Property
         /// </summary>
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
         public DateTime CurrentDateProperty
         {
             get { return (DateTime)GetValue(CurrentDatePropertyProperty); }
@@ -22,13 +27,9 @@ namespace PL
         /// makes EngineerProperty DependencyProperty
         /// </summary>
         public static readonly DependencyProperty CurrentDatePropertyProperty =
-          DependencyProperty.Register("CurrentDateProperty", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(null));
+          DependencyProperty.Register("CurrentDateProperty", typeof(DateTime), typeof(MainWindow), new PropertyMetadata(s_bl.State.CurrentDate));
 
-        public MainWindow()
-        {
-            CurrentDateProperty = s_bl.State.CurrentDate;
-            InitializeComponent();
-        }
+
 
 
         private void Button_AddYear(object sender, RoutedEventArgs e)
@@ -91,7 +92,7 @@ namespace PL
 
         // Using a DependencyProperty as the backing store for PasswordProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PasswordPropertyProperty =
-            DependencyProperty.Register("PasswordProperty", typeof(string), typeof(MainWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("PasswordProperty", typeof(string), typeof(MainWindow), new PropertyMetadata(null));
 
 
         public int IdProperty
@@ -108,11 +109,7 @@ namespace PL
         {
             var passwordBox = sender as PasswordBox;
             if (passwordBox != null)
-            {
-                string password;
-                if (int.TryParse(passwordBox.Password, out password))
-                    PasswordProperty = password;
-            }
+                    PasswordProperty = passwordBox.Password;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
