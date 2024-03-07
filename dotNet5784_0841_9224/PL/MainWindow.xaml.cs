@@ -83,15 +83,15 @@ namespace PL
         }
 
 
-        public int PasswordProperty
+        public string PasswordProperty
         {
-            get { return (int)GetValue(PasswordPropertyProperty); }
+            get { return (string)GetValue(PasswordPropertyProperty); }
             set { SetValue(PasswordPropertyProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for PasswordProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PasswordPropertyProperty =
-            DependencyProperty.Register("PasswordProperty", typeof(int), typeof(MainWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("PasswordProperty", typeof(string), typeof(MainWindow), new PropertyMetadata(0));
 
 
         public int IdProperty
@@ -109,7 +109,7 @@ namespace PL
             var passwordBox = sender as PasswordBox;
             if (passwordBox != null)
             {
-                int password;
+                string password;
                 if (int.TryParse(passwordBox.Password, out password))
                     PasswordProperty = password;
             }
