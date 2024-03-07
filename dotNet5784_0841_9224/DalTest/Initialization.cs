@@ -177,16 +177,16 @@ public static class Initialization
             int _cost;
             _cost = s_rand.Next(70, 301);
 
-            Engineer newEngineer = new Engineer(_id, s_rand.Next(10000000,100000000).ToString()!, EngineerNames[i], EngineerEmails[i], _level, _cost);
+            Engineer newEngineer = new Engineer(_id, s_rand.Next(10000000,100000000).ToString()!,"", EngineerNames[i], EngineerEmails[i], _level, _cost);
             s_dal!.Engineer.Create(newEngineer);
 
         }
 
-        Engineer newEngineer1 = new(123456789, "11111111", "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
+        Engineer newEngineer1 = new(123456789, "11111111","", "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
         s_dal!.Engineer.Create(newEngineer1);
-        Engineer newEngineer2 = new(987654321, "83353534", "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
+        Engineer newEngineer2 = new(987654321, "83353534", "", "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
         s_dal!.Engineer!.Create(newEngineer2);
-        Engineer newEngineer3 = new(654567898, "93092838", "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
+        Engineer newEngineer3 = new(654567898, "93092838", "", "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
         s_dal!.Engineer.Create(newEngineer3);
     }
 

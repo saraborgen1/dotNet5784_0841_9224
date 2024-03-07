@@ -3,6 +3,10 @@ using BlApi;
 using DalApi;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+
 
 
 internal class EngineerImplementation : BlApi.IEngineer
@@ -23,6 +27,7 @@ internal class EngineerImplementation : BlApi.IEngineer
 
             Id = doEngineer.Id,
             Password = doEngineer.Password,
+            Salt = doEngineer.Salt,
             Name = doEngineer.Name,
             Email = doEngineer.Email,
             Level = (BO.Enums.EngineerExperience)doEngineer.Level,
@@ -54,7 +59,7 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
 
         DO.Engineer doEngineer = new DO.Engineer
-            (item.Id,item.Password, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
+            (item.Id,item.Password,item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
 
         try
         {
@@ -163,7 +168,7 @@ internal class EngineerImplementation : BlApi.IEngineer
         if ((doEngeenir.Level > (DO.EngineerExperience)item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
         try
         {
-            DO.Engineer updatedEngeenir = new DO.Engineer(item.Id,item.Password,item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
+            DO.Engineer updatedEngeenir = new DO.Engineer(item.Id,item.Password,item.Salt,item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
             _dal.Engineer.Update(updatedEngeenir);
 
             if (item.Task != null)
