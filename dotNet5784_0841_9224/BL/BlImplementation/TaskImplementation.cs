@@ -385,7 +385,11 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null)
     {
-        var allTasks = ReadAll();
+        List<Task> allTasks; 
+        if (filter != null)
+            allTasks = ReadAll(filter).ToList();
+        else
+            allTasks = ReadAll().ToList();
 
         var taskInList = allTasks.Select(item => new BO.TaskInList
         {
@@ -396,6 +400,20 @@ internal class TaskImplementation : ITask
         }).ToList();
 
         return taskInList;
+    }
+    public List<int> DepIdList(BO.Task task)
+    {
+        return (from dep in task.Dependencies
+                select dep.Id).OrderBy(id => id).ToList();
+    }
+
+    public void UpdateDepList(BO.Task task, List<int> depIdList)
+    {
+        DO.Task? doTask = _dal.Task.Read(p => p.Id == task.Id);
+        if (doTask == null)
+            throw new BlDoesNotExistException(task.Id, "Task");
+        var boDepIdList = DepIdList(task);
+        var toTaskInList = DepIdList(toTaskInList(t => t.Id = ))
     }
 }
 

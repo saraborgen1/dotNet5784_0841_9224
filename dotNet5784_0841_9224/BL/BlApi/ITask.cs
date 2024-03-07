@@ -44,6 +44,9 @@ public interface ITask
     public void AutoScheduling();
     public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null);
 
-    public 
+    public List<int> DepIdList(BO.Task task);
+
+    public void UpdateDepList(BO.Task task, List<int> depIdList);
+
 
 }
