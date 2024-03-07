@@ -11,11 +11,5 @@ public interface IEngineer : ICrud<Engineer>
     /// <returns>deleted Engineers</returns>
     public IEnumerable<Engineer> ReadAllDelete();
 
-    /// <summary>
-    /// returns password of engineer with that id
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns>password</returns>
-    public int? GetPassword(int id);
 }
 

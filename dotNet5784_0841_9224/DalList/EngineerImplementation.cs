@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-internal class EngineerImplementation : IEngineer
+internal class EngineerImplementation :   IEngineer
 {
     private static readonly Random s_rand = new();
     private const string _entityName = nameof(Engineer);
@@ -86,19 +86,6 @@ internal class EngineerImplementation : IEngineer
     public void DeleteAll()
     {
         DataSource.Engineers.Clear();
-    }
-
-    /// <summary>
-    /// returns password of engineer with that id
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns>password</returns>
-   public string? GetPassword(int id)
-    {
-        var temp = Read(item => item.Id == id);
-        if (temp != null)
-            return temp.Password;
-        return null;
     }
 }
 
