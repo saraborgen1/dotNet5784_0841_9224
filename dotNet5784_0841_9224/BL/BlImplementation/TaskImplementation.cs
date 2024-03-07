@@ -3,6 +3,7 @@ using BlApi;
 using BO;
 using System.Data;
 using System.Linq;
+using static BO.Enums;
 
 internal class TaskImplementation : ITask
 {
@@ -136,8 +137,13 @@ internal class TaskImplementation : ITask
         DateTime? forecastDate = null;
         if (doTask.ScheduledDate != null && doTask.RequiredEffortTime != null)
         {
-            forecastDate = doTask.StartDate > doTask.ScheduledDate ? doTask.StartDate : doTask.ScheduledDate;
-            forecastDate = (forecastDate + doTask.RequiredEffortTime);
+            if (doTask.StartDate == null)
+                forecastDate = doTask.ScheduledDate + doTask.RequiredEffortTime;
+            else
+            {
+                forecastDate = doTask.StartDate > doTask.ScheduledDate ? doTask.StartDate : doTask.ScheduledDate;
+                forecastDate = (forecastDate + doTask.RequiredEffortTime);
+            }
         }
 
 
@@ -149,7 +155,7 @@ internal class TaskImplementation : ITask
         {
             engineerInTask = new BO.EngineerInTask()
             {
-                Id = engineer.EngineerId.HasValue? engineer.EngineerId : null,
+                Id = engineer.EngineerId.HasValue ? engineer.EngineerId : null,
                 Name = engineer.EngineerId.HasValue ? _dal.Engineer.Read(p => p.Id == engineer.EngineerId)?.Name : " "
             };
             if (engineerInTask.Id == null)
@@ -283,7 +289,7 @@ internal class TaskImplementation : ITask
                         return p;
                     }).ToList();
                 }
-        if (boTask.Engineer == null||item.Engineer.Id != boTask.Engineer.Id)
+        if (boTask.Engineer == null || item.Engineer.Id != boTask.Engineer.Id)
         {
             if (item.Engineer.Id != null)
             {
@@ -345,13 +351,14 @@ internal class TaskImplementation : ITask
 
     public void AutoScheduling()
     {
-        if (state.StartProject == null || state.EndProject == null)
+        if (state.StatusProject() == Enums.ProjectStatus.Creation)
             throw new BlCannotDoAutoSchedulingException("Project dates were not enterd\n");
         var tasks = ReadAll();
         foreach (var task in tasks)
         {
-            if (task.StartDate == null)
-                setAutoDate(task);
+            var tempTask = Read(task.Id);
+            if (tempTask.Status == Enums.Status.Unscheduled)
+                setAutoDate(tempTask);
         }
     }
 
@@ -364,11 +371,11 @@ internal class TaskImplementation : ITask
                 try
                 {
                     var depTask = Read(dep.Id);
-                    if (depTask.ForecastDate == null)
-                    {
+                    if (depTask.Status == Status.Unscheduled)
                         setAutoDate(depTask);
-                        max = max > depTask.ForecastDate ? max : depTask.ForecastDate;
-                    }
+
+                    depTask = Read(dep.Id);
+                    max = max > depTask.ForecastDate ? max : depTask.ForecastDate;
                 }
                 catch (Exception ex)
                 { throw new BlDoesNotExistException(ex); }

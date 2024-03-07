@@ -93,23 +93,30 @@ internal class StateImplementation : IState
 
     public void SetProjectDates(DateTime startDate, DateTime endDate)
     {
-        var _task = new TaskImplementation();
-        var tasks = _task.ReadAll();
-        DateTime max = startDate;
-        foreach (var task in tasks)
-        {
-            DateTime temp = findEndDate(task, startDate);
-            max = (max > temp) ? max : temp;
-        }
-        if (max > endDate)
+        DateTime minimumEndDate = startDate+ MinimumDays();
+        if (minimumEndDate > endDate)
             throw new BlDateClashException("Not enough time\n");
         StartProject = startDate;
         EndProject = endDate;
 
     }
 
+    public TimeSpan MinimumDays()
+    {
+        var _task = new TaskImplementation();
+        var tasks = _task.ReadAll();
+        DateTime startDate = DateTime.MinValue;
+        DateTime max = startDate;
+        foreach (var task in tasks)
+        {
+            DateTime temp = findMinimumDate(task, startDate);
+            max = (max > temp) ? max : temp;
+        }
+        return max - startDate;
+    }
 
-    private DateTime findEndDate(BO.Task task, DateTime startDate)
+
+    private DateTime findMinimumDate(BO.Task task, DateTime startDate)
     {
         var _task = new TaskImplementation();
         DateTime max = startDate;
@@ -125,7 +132,7 @@ internal class StateImplementation : IState
                 try
                 {
                     var depTask = _task.Read(dep.Id);
-                    DateTime temp = findEndDate(depTask, startDate) + (TimeSpan)task.RequiredEffortTime! ;
+                    DateTime temp = findMinimumDate(depTask, startDate) + (TimeSpan)task.RequiredEffortTime!;
                     max = (max > temp) ? max : temp;
                 }
                 catch (Exception ex)

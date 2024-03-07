@@ -33,7 +33,7 @@ namespace PL.Admin
             {
                 s_bl.State.SetProjectDates(StartDateProperty, (DateTime)EndDateProperty!);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -89,5 +89,29 @@ namespace PL.Admin
                 EndDateProperty = datePicker.SelectedDate.Value;
             }
         }
+
+
+
+        //public DateTime MinimumEndDateProperty
+        //{
+        //    get { return (DateTime)GetValue(MinimumEndDatePropertyProperty); }
+        //    set { SetValue(MinimumEndDatePropertyProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for MinimumEndDateProperty.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty MinimumEndDatePropertyProperty =
+        //    DependencyProperty.Register("MinimumEndDateProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(0));
+
+        private DateTime endDate_Initialized(object sender, EventArgs e)
+        {
+            if (sender is DatePicker datePicker)
+                return DateTime.MinValue;
+            return DateTime.MaxValue;
+           // DatePicker datePicker = sender as DatePicker;
+        }
+        //private void startDate_Initialized(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

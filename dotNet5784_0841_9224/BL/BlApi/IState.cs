@@ -37,7 +37,7 @@ public interface IState
     public void AddMonth();
     public void AddDay();
     public void AddWeek();
-
+    public TimeSpan MinimumDays();
     public void SetProjectDates(DateTime startDate,DateTime endStart);
 
 }
