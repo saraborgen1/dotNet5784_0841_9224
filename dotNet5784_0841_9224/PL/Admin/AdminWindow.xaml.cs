@@ -66,6 +66,7 @@ namespace PL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
 
             MessageBox.Show("The auto scheduling was done successfully", "", MessageBoxButton.OK, MessageBoxImage.Information);

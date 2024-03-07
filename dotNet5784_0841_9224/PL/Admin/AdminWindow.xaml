@@ -15,7 +15,8 @@
         <Button Content="Reset" HorizontalAlignment="Center" Height="60" Margin="0,50,0,0" VerticalAlignment="Top" Width="200" Click="btnReset_Click"/>
         <Button Content="Task List View" HorizontalAlignment="Left" Height="60" Margin="58,250,0,0" VerticalAlignment="Top" Width="184" Click="btnTask_Click"/>
         <Button Content="Gantt chart" HorizontalAlignment="Left" Height="58" Margin="58,126,0,0" VerticalAlignment="Top" Width="150" Click="btnGantt_Click"/>
-        <Button Content="Auto Scheduling" HorizontalAlignment="Left" Height="90" Margin="585,110,0,0" VerticalAlignment="Top" Width="110" Click="btnAutoScheduling_Click"/>
+        <Button Content="Auto Scheduling" HorizontalAlignment="Left" Height="90" Margin="585,110,0,0" VerticalAlignment="Top" Width="110" Click="btnAutoScheduling_Click"
+                  IsEnabled="{Binding Source={StaticResource ConvertSchedulingIsEnabledKey}}"/>
         <Button Content="Set Project dates" HorizontalAlignment="Left" Height="75" Margin="565,235,0,0" VerticalAlignment="Top" Width="130" Click="btnProjectDates_Click"/>
     </Grid>
 </Window>

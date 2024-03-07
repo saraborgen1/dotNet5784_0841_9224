@@ -9,6 +9,7 @@
         <local:ConvertIdToContent x:Key="ConvertIdEngineerIsEnabledKey"/>
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
         <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
+        <local:ConvertSetDatesIsEnabled x:Key="ConvertSchedulingIsEnabledKey"/>
         <local:ConvertStringToInt x:Key="ConvertStringToIntKey"/>
         <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />-->
         <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->
