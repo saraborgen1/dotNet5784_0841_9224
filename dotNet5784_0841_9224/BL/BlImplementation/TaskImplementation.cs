@@ -324,7 +324,7 @@ internal class TaskImplementation : ITask
 
         BO.Task? boTask = Read(id);
         var dependencies = boTask.Dependencies;
-        if (dependencies != null)
+        if (dependencies!.Count != 0)
         {
             var temp1 = dependencies.Select(item =>
             {
@@ -338,10 +338,9 @@ internal class TaskImplementation : ITask
                     throw new BO.BlDateClashException("The dependent task's start date is before the end date of the task it depends on");
                 return item;
             });
-            DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date, DeadlineDate = (date + boTask.RequiredEffortTime) };
-            _dal.Task.Update(newTask);
-
         }
+        DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date, DeadlineDate = (date + boTask.RequiredEffortTime) };
+        _dal.Task.Update(newTask);
     }
 
     public void AutoScheduling()
@@ -359,7 +358,7 @@ internal class TaskImplementation : ITask
     private void setAutoDate(BO.Task task)
     {
         DateTime? max = state.StartProject;
-        if (task.Dependencies != null)
+        if (task.Dependencies!.Count != 0)
             foreach (var dep in task.Dependencies)
             {
                 try
