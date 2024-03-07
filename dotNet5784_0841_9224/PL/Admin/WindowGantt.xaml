@@ -7,27 +7,32 @@
         mc:Ignorable="d"
         Title="WindowGantt" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" >
-    
-    <DataGrid ItemsSource="{Binding TaskListProperty , Mode=OneTime}" Initialized="dataGridSched_Initialized">
-        <DataGrid.Columns>
-            <!-- Define your DataGrid columns here -->
-        </DataGrid.Columns>
-        <DataGrid.CellStyle>
-            <Style TargetType="DataGridCell">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <!-- Bind to multiple properties using MultiBinding -->
-                        <MultiBinding Converter="{StaticResource CellColorConverterKey}">
-                            <!-- Bind to the cell itself -->
-                            <Binding RelativeSource="{RelativeSource Self}" Mode="OneWay" />
-                            <!-- Bind to the DataRow (assuming you have a DataRow property in your data context) -->
-                            <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=DataGridRow}"  Mode="OneWay"/>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </DataGrid.CellStyle>
-    </DataGrid>
-
+    <!--Extrnal Grid-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding TaskListProperty , Mode=OneTime}" Initialized="dataGridSched_Initialized" Grid.Row="0">
+            <DataGrid.Columns>
+                <!-- Define your DataGrid columns here -->
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <!-- Bind to multiple properties using MultiBinding -->
+                            <MultiBinding Converter="{StaticResource CellColorConverterKey}">
+                                <!-- Bind to the cell itself -->
+                                <Binding RelativeSource="{RelativeSource Self}" Mode="OneWay" />
+                                <!-- Bind to the DataRow (assuming you have a DataRow property in your data context) -->
+                                <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=DataGridRow}"  Mode="OneWay"/>
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+    </Grid>
 
 </Window>
