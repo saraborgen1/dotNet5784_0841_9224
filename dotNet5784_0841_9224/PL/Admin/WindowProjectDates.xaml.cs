@@ -74,8 +74,7 @@ namespace PL.Admin
             {
                 // Extract the date value if it exists
                 StartDateProperty = datePicker.SelectedDate.Value;
-
-
+                LimitEndProperty = datePicker.SelectedDate.Value + s_bl.State.MinimumDays();
             }
         }
 
@@ -89,20 +88,31 @@ namespace PL.Admin
             {
                 // Extract the date value if it exists
                 EndDateProperty = datePicker.SelectedDate.Value;
+                LimitStartProperty = datePicker.SelectedDate.Value - s_bl.State.MinimumDays();
             }
         }
-
-
-
-        public TimeSpan MinumunTimeProperty
+        public DateTime LimitStartProperty
         {
-            get { return (TimeSpan)GetValue(MinumunTimePropertyProperty); }
-            set { SetValue(MinumunTimePropertyProperty, value); }
+            get { return (DateTime)GetValue(LimitStartPropertyProperty); }
+            set { SetValue(LimitStartPropertyProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for MinumunTimeProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MinumunTimePropertyProperty =
-            DependencyProperty.Register("MinumunTimeProperty", typeof(TimeSpan), typeof(WindowProjectDates), new PropertyMetadata(s_bl.State.MinimumDays()));
+        // Using a DependencyProperty as the backing store for LimitStartProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LimitStartPropertyProperty =
+            DependencyProperty.Register("LimitStartProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(null));
+
+
+        public DateTime LimitEndProperty
+        {
+            get { return (DateTime)GetValue(LimitEndPropertyProperty); }
+            set { SetValue(LimitEndPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LimitEndProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LimitEndPropertyProperty =
+            DependencyProperty.Register("LimitEndProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(null));
+
+
 
     }
 }

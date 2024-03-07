@@ -119,5 +119,6 @@ namespace PL.Task
         public static readonly DependencyProperty DepListProperty =
            DependencyProperty.Register("DepList", typeof(IEnumerable<BO.TaskInList?>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
+
     }
 }

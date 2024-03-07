@@ -287,8 +287,7 @@ public class NullToBoolConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if(value == null) return true;
-        return false;
+        return value == null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

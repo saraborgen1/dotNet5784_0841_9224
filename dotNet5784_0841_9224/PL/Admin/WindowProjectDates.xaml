@@ -24,7 +24,7 @@
                                 <!-- Check if the SelectedDate of startDatePicker is null -->
                                 <Condition Binding="{Binding SelectedDate, ElementName=endDatePicker, Converter={StaticResource NullToBoolConverterKey}}" Value="False"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="DisplayDateEnd" Value="{Binding SelectedDate, ElementName=endDatePicker-MinumunTimeProperty}" />
+                            <Setter Property="DisplayDateEnd" Value="{Binding LimitStartProperty}" />
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -43,7 +43,7 @@
                                 <!-- Check if the SelectedDate of startDatePicker is null -->
                                 <Condition Binding="{Binding SelectedDate,ElementName=startDatePicker, Converter={StaticResource NullToBoolConverterKey}}" Value="False"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="DisplayDateStart" Value="{Binding SelectedDate, ElementName=startDatePicker+MinumunTimeProperty}" />
+                            <Setter Property="DisplayDateStart" Value= "{Binding LimitEndProperty}" />
                         </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
