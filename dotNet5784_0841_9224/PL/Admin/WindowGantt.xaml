@@ -33,6 +33,51 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
+        <Rectangle HorizontalAlignment="Left" Height="30" Margin="10,10,10,0" Grid.Row="1"  VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5" Fill="Red">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.006"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="30" Margin="150,10,10,0" Grid.Row="1" VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5" Fill="Green">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.006"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="30" Margin="215,10,10,0" Grid.Row="1"  VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5" Fill="RoyalBlue">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.006"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="30" Margin="310,10,10,0" Grid.Row="1"  VerticalAlignment="Top" Width="30" RenderTransformOrigin="0.5,0.5" Fill="Orange">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.006"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Label Content="Incomplete and late" HorizontalAlignment="Left" Height="23" Margin="35,10,10,0" Grid.Row="1" VerticalAlignment="Center" Width="116" FontSize="12"/>
+        <Label Content="Ended" HorizontalAlignment="Left" Height="23" Margin="175,10,10,0" Grid.Row="1" VerticalAlignment="Center" Width="53" FontSize="12"/>
+        <Label Content="Not started" HorizontalAlignment="Left" Height="23" Margin="240,10,10,0" Grid.Row="1" VerticalAlignment="Top" Width="74" FontSize="12"/>
+        <Label Content="Time passed and didn't start" HorizontalAlignment="Left" Height="23" Margin="337,10,10,0" Grid.Row="1" VerticalAlignment="Top" Width="162" FontSize="12"/>
+
     </Grid>
 
 </Window>
