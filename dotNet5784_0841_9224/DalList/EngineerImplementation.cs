@@ -19,10 +19,7 @@ internal class EngineerImplementation : IEngineer
         if (DataSource.Engineers.FirstOrDefault(engineer => engineer.Id == item.Id) != null)
             throw new DalAlreadyExistsException(item.Id, _entityName);
 
-        int newPassword = s_rand.Next(10000000, 100000000);
-        DO.Engineer newTask = item with { Password = newPassword };
-
-        DataSource.Engineers.Add(newTask);
+        DataSource.Engineers.Add(item);
 
         return item.Id;
     }
@@ -96,7 +93,7 @@ internal class EngineerImplementation : IEngineer
     /// </summary>
     /// <param name="id"></param>
     /// <returns>password</returns>
-   public int? GetPassword(int id)
+   public string? GetPassword(int id)
     {
         var temp = Read(item => item.Id == id);
         if (temp != null)

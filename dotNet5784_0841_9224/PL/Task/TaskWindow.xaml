@@ -79,10 +79,7 @@
             <ComboBox HorizontalAlignment="Left" Margin="0,328,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"
             ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
              SelectedValue="{Binding Copmlexity, Mode=TwoWay}"/>
-            <!--Label Active-->
-            <Label Content="Active" HorizontalAlignment="Left" Margin="33,372,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
-            <!--CheckBox Active-->
-            <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="491,381,0,0" VerticalAlignment="Top"/>
+          
 
             
             
@@ -92,6 +89,7 @@
             <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,342,0,0" VerticalAlignment="Top" Width="94"/>
             <TreeView Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="0,340,0,0" VerticalAlignment="Top" Width="108"/>
             <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="30,384,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="68"/>
+            <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Button_Click"/>
         </Grid>
 
     </Grid>

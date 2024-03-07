@@ -66,6 +66,12 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
     }
 
+    private static string hashPassword(string passwordWithSalt)
+    {
+        SHA512 shaM = new SHA512Managed();
+        return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(passwordWithSalt)));
+    }
+
     /// <summary>
     /// Deletion of an existing object with a certain ID, from the list of entity type objects.
     /// </summary>
@@ -174,7 +180,6 @@ internal class EngineerImplementation : BlApi.IEngineer
         {
             throw new BO.BlDoesNotExistException(ex);
         }
-
     }
 
     /// <summary>
@@ -201,8 +206,8 @@ internal class EngineerImplementation : BlApi.IEngineer
     /// </summary>
     /// <param name="id"></param>
     /// <returns>password</returns>
-    public int GetPassword(int id)
+    public string GetPassword(int id)
     {
-        return (int)Read(id)!.Password!;
+        return Read(id)!.Password!;
     }
 }

@@ -6,10 +6,10 @@
     <Application.Resources>
         <local:EngineersCollection x:Key="EngineersCollectionKey"/>
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
-        <local:ConvertIdToContent x:Key="ConvertIdEngineerIsEnabledKey"/>
         <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
+        <local:ConvertIdEngineerIsEnabled x:Key="ConvertIdEngineerIsEnabledKey"/>
         <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
-        <local:ConvertSetDatesIsEnabled x:Key="ConvertSchedulingIsEnabledKey"/>
+        <local:ConvertSchedulingIsEnabled x:Key="ConvertSchedulingIsEnabledKey"/>
         <local:ConvertStringToInt x:Key="ConvertStringToIntKey"/>
         <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />-->
         <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->

@@ -50,5 +50,5 @@ public interface IEngineer
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public int GetPassword(int id);
+    public string GetPassword(int id);
 }

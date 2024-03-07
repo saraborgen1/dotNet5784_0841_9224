@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Dal;
 internal class EngineerImplementation : IEngineer
@@ -21,10 +23,7 @@ internal class EngineerImplementation : IEngineer
         if (listEngineer.Exists(lec => lec?.Id == item.Id && lec.Active))
             throw new DalAlreadyExistsException(item.Id,_entityName);
 
-        int newPassword = s_rand.Next(10000000, 100000000);
-        DO.Engineer newTask = item with { Password = newPassword };
-
-        listEngineer.Add(newTask);
+        listEngineer.Add(item);
         SaveListToXMLSerializer(listEngineer, s_engineers_xml);
 
         return item.Id;
@@ -120,7 +119,7 @@ internal class EngineerImplementation : IEngineer
         SaveListToXMLSerializer(newListEngineer, s_engineers_xml); // Save the empty list to XML
     }
 
-    public int? GetPassword(int id)
+    public string? GetPassword(int id)
     {
         var temp = Read(item => item.Id == id);
         if (temp != null)

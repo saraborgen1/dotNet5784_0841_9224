@@ -12,7 +12,7 @@
 public record Engineer
 (
     int Id,
-    int? Password =null,
+    string? Password =null,
     string? Name = null,
     string? Email = null,
     EngineerExperience Level= EngineerExperience.Beginner,

@@ -38,5 +38,7 @@
         <!--Button Add/Update-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Height="81" Width="306"
            Click="Button_UpdateOrAdd" Grid.ColumnSpan="2"/>
+        
+        <Button Content="DeleteEngineer" HorizontalAlignment="Left" Height="67" Margin="55,297,0,0" VerticalAlignment="Top" Width="164" Click="Button_Click"/>
     </Grid>
 </Window>

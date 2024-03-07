@@ -103,5 +103,10 @@ namespace PL.Task
                 return;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            s_bl.Task.Delete(TaskProperty.Id);
+        }
     }
 }
