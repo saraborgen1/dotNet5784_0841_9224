@@ -134,7 +134,7 @@ public static class Initialization
             DateTime _ScheduledDate = _createdAtDate.AddDays(i * 10);
             DateTime _DeadlineDate = _ScheduledDate.AddDays(i + 50);
             DateTime _CompleteDate = _ScheduledDate.AddDays(2);
-            TimeSpan _requiredEffortTime = _CompleteDate - _StartDate;
+            TimeSpan _requiredEffortTime = TimeSpan.FromDays( s_rand.Next(2, 5));
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _EngineerId = (EngineerExperience)_numforenum;
             Task newTask = new Task(0, taskAliases[i], TaskDescriptions[i], _createdAtDate, null, null, null, null, _requiredEffortTime, TaskDeliverables[i], null, null, _EngineerId);
