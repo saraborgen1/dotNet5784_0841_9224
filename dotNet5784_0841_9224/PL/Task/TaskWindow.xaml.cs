@@ -106,10 +106,9 @@ namespace PL.Task
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_AddDep(object sender, RoutedEventArgs e)
         {
-            //DepList = new ObservableCollection<BO.TaskInList?>(s_bl.Task.Read(id)!.Dependencies);
-            int i = 1;
+
         }
         public ObservableCollection<BO.TaskInList?> DepList
         {
@@ -117,7 +116,19 @@ namespace PL.Task
             set { SetValue(DepListProperty, value); }
         }
         public static readonly DependencyProperty DepListProperty =
-           DependencyProperty.Register("DepList", typeof(IEnumerable<BO.TaskInList?>), typeof(EngineerListWindow), new PropertyMetadata(null));
+           DependencyProperty.Register("DepList", typeof(IEnumerable<BO.TaskInList?>), typeof(TaskWindow), new PropertyMetadata(null));
+
+
+        public int DepIdProperty
+        {
+            get { return (int)GetValue(DepIdPropertyProperty); }
+            set { SetValue(DepIdPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DepIdProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DepIdPropertyProperty =
+            DependencyProperty.Register("DepIdProperty", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
+
 
 
     }

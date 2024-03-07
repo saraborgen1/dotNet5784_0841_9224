@@ -96,8 +96,6 @@ public class CellColorConverter : IMultiValueConverter
                     return new SolidColorBrush(Colors.LightGoldenrodYellow);
                 }
 
-                //  bool content = row.Field<bool>(columnName);
-                //   string nameOfE = row.Field<string>("Engineer Name");
                 DateTime currentDate=s_bl.State.CurrentDate;
                 DateTime day;
                 if (DateTime.TryParse(columnName, out day))

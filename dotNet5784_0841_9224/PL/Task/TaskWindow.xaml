@@ -81,9 +81,9 @@
              SelectedValue="{Binding Copmlexity, Mode=TwoWay}"/>
             <!--Label dependency-->
             <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,342,0,0" VerticalAlignment="Top" Width="94"/>
-            <Button Content="Add dependency" HorizontalAlignment="Left" Height="35" Margin="44,384,0,0" VerticalAlignment="Top" Width="112" Click="Button_Click_1" />
-            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="30,384,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68"/>
-            <ListView Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="139,344,0,0" VerticalAlignment="Top" Width="123" ItemsSource="{Binding DepProperty}">
+            <Button Content="Add dependency" HorizontalAlignment="Left" Height="35" Margin="33,384,0,0" VerticalAlignment="Top" Width="102" Click="Button_AddDep" />
+            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="30,384,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" Text="{Binding DepIdProperty,Mode=OneWay}" />
+            <ListView Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="139,344,0,0" VerticalAlignment="Top" Width="123" ItemsSource="{Binding DepProperty, Mode=OneWay}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn/>
@@ -95,7 +95,8 @@
 
             <Button Grid.Column="4" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
             <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Delete_Click"/>
-           
+            <Button Content="Delete dep" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="35" Margin="0,384,0,0" VerticalAlignment="Top" Width="50"/>
+
         </Grid>
 
     </Grid>

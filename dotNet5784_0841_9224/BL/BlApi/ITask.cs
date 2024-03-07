@@ -44,5 +44,6 @@ public interface ITask
     public void AutoScheduling();
     public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null);
 
+    public 
 
 }
