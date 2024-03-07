@@ -245,7 +245,6 @@ namespace BlTest
                 StartDate = null,
                 ScheduledDate = null,
                 ForecastDate = null,
-                DeadlineDate = null,
                 CompleteDate = null,
                 Deliverables = deliverables,
                 Remarks = remarks,
@@ -365,18 +364,6 @@ namespace BlTest
                 forecastDate = tempForecastDate;
             }
 
-            DateTime? deadlineDate = task.DeadlineDate;
-            if (change("DeadlineDate"))
-            {
-                bool temp = DateTime.TryParse(Console.ReadLine(), out DateTime tempDeadlineDate);
-                while (!temp)
-                {
-                    Console.WriteLine("ERROR,Enter ForecastDate Time");
-                    temp = DateTime.TryParse(Console.ReadLine(), out tempDeadlineDate);
-                }
-                deadlineDate = tempDeadlineDate;
-            }
-
             DateTime? completeDate = task.CompleteDate;
             if (change("CompleteDate"))
             {
@@ -439,7 +426,6 @@ namespace BlTest
                 StartDate = startDate,
                 ScheduledDate = scheduledDate,
                 ForecastDate = forecastDate,
-                DeadlineDate = deadlineDate,
                 CompleteDate = completeDate,
                 Deliverables = deliverables,
                 Remarks = remarks,
@@ -489,7 +475,7 @@ namespace BlTest
             Console.WriteLine("Enter an hourly cost");
             double cost = double.Parse(Console.ReadLine()!);
 
-            BO.Engineer engineer = new() { Id = id,Password=s_rand.Next(10000000, 100000000), Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
+            BO.Engineer engineer = new() { Id = id,Password=s_rand.Next(10000000, 100000000).ToString(),Salt= s_rand.Next(), Name = name, Email = email, Level = difficulty, Cost = cost, Task = null };
             s_bl.Engineer.Create(engineer);
         }
         /// <summary>

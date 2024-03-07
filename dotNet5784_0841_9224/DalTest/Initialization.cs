@@ -1,6 +1,8 @@
 ﻿namespace DalTest;
 using DalApi;
 using DO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Xml.Linq;
 using static Dal.XMLTools;
 
@@ -38,6 +40,12 @@ public static class Initialization
         createTasks();
         createDependencys();
         createEngineers();
+    }
+
+    public static string hashPassword(string passwordWithSalt)
+    {
+        SHA512 shaM = new SHA512Managed();
+        return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(passwordWithSalt)));
     }
 
     /// <summary>
@@ -166,6 +174,9 @@ public static class Initialization
 
         for (int i = 0; i < EngineerNames.Length; i++)
         {
+            int salt = s_rand.Next();
+            string password = s_rand.Next(10000000, 100000000).ToString();
+            string hashedPassword = hashPassword(password + salt);
             int _id;
             do
             {
@@ -177,16 +188,18 @@ public static class Initialization
             int _cost;
             _cost = s_rand.Next(70, 301);
 
-            Engineer newEngineer = new Engineer(_id, s_rand.Next(10000000,100000000).ToString()!,"", EngineerNames[i], EngineerEmails[i], _level, _cost);
+            Engineer newEngineer = new Engineer(_id, hashedPassword, salt, EngineerNames[i], EngineerEmails[i], _level, _cost);
             s_dal!.Engineer.Create(newEngineer);
 
         }
-
-        Engineer newEngineer1 = new(123456789, "11111111","", "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
+        int salt0 = s_rand.Next();
+        Engineer newEngineer1 = new(123456789, hashPassword("11111111" + salt0), salt0, "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
         s_dal!.Engineer.Create(newEngineer1);
-        Engineer newEngineer2 = new(987654321, "83353534", "", "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
+        int salt1 = s_rand.Next();
+        Engineer newEngineer2 = new(987654321, hashPassword("22222222" + salt1) , salt1, "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);
         s_dal!.Engineer!.Create(newEngineer2);
-        Engineer newEngineer3 = new(654567898, "93092838", "", "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
+        int salt2 = s_rand.Next();
+        Engineer newEngineer3 = new(654567898, hashPassword("33333333" + salt2), salt2, "Tamar Chayat", "TAMARHAYAT1@gmail.com", (EngineerExperience)3, 301);
         s_dal!.Engineer.Create(newEngineer3);
     }
 

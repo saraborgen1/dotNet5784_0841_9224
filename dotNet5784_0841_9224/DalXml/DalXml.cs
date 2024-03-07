@@ -98,12 +98,12 @@ sealed internal class DalXml : IDal
         }
     }
 
-    public int AdminPassword
+    public string AdminPassword
     {
         get
         {
             XElement root = XElement.Load(@"..\xml\data-config.xml");
-            return int.Parse((string)root.Element("AdminPassword")!);
+            return (string)root.Element("AdminPassword")!;
         }
     }
 

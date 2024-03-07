@@ -119,12 +119,4 @@ internal class EngineerImplementation : IEngineer
         SaveListToXMLSerializer(newListEngineer, s_engineers_xml); // Save the empty list to XML
     }
 
-    public string? GetPassword(int id)
-    {
-        var temp = Read(item => item.Id == id);
-        if (temp != null)
-            return temp.Password;
-        return null;
-    }
-
 }

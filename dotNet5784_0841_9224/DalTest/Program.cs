@@ -401,7 +401,9 @@ namespace DalTest
             EngineerExperience difficulty = (EngineerExperience)difficultyNumber;
             Console.WriteLine("Enter an hourly cost");
             double cost = double.Parse(Console.ReadLine());
-            Engineer engineer = new Engineer(id, s_rand.Next(10000000, 100000000).ToString(),"", name, email, difficulty, cost);
+            int salt = s_rand.Next();
+            string password = s_rand.Next(10000000, 100000000).ToString();
+            Engineer engineer = new Engineer(id,Initialization.hashPassword(password+salt) , salt, name, email, difficulty, cost);
             s_dal.Engineer.Create(engineer);
         }
         /// <summary>

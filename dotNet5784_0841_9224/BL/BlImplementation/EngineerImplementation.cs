@@ -14,7 +14,7 @@ internal class EngineerImplementation : BlApi.IEngineer
    
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
-
+    private static readonly Random s_rand = new();
     /// <summary>
     /// converts entity of DO to BO
     /// </summary>
@@ -57,9 +57,10 @@ internal class EngineerImplementation : BlApi.IEngineer
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
         }
-
+        if(item.Password==null) throw new BO.BlTheInputIsInvalidException("Password");
+        item.Salt = s_rand.Next();
         DO.Engineer doEngineer = new DO.Engineer
-            (item.Id,item.Password,item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
+            (item.Id, hashPassword(item.Password+ item.Salt), item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
 
         try
         {
@@ -165,6 +166,7 @@ internal class EngineerImplementation : BlApi.IEngineer
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
         }
+        if (item.Password == null) throw new BO.BlTheInputIsInvalidException("Password");
         if ((doEngeenir.Level > (DO.EngineerExperience)item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
         try
         {
