@@ -14,6 +14,7 @@
         <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />-->
         <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->
         <local:CellColorConverter x:Key="CellColorConverterKey"/>
+        <local:NullToBoolConverter x:Key="NullToBoolConverterKey"/>
 
 
         <!--<local:DateToWidthConverter x:Key="DateToWidthConverterKey"/>-->

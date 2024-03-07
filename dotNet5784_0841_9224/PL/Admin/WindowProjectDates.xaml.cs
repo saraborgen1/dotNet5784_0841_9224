@@ -24,6 +24,7 @@ namespace PL.Admin
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public WindowProjectDates()
         {
+            //MinumunTimeProperty = s_bl.State.MinimumDays();
             InitializeComponent();
         }
 
@@ -74,6 +75,7 @@ namespace PL.Admin
                 // Extract the date value if it exists
                 StartDateProperty = datePicker.SelectedDate.Value;
 
+
             }
         }
 
@@ -92,26 +94,15 @@ namespace PL.Admin
 
 
 
-        //public DateTime MinimumEndDateProperty
-        //{
-        //    get { return (DateTime)GetValue(MinimumEndDatePropertyProperty); }
-        //    set { SetValue(MinimumEndDatePropertyProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for MinimumEndDateProperty.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty MinimumEndDatePropertyProperty =
-        //    DependencyProperty.Register("MinimumEndDateProperty", typeof(DateTime), typeof(WindowProjectDates), new PropertyMetadata(0));
-
-        private DateTime endDate_Initialized(object sender, EventArgs e)
+        public TimeSpan MinumunTimeProperty
         {
-            if (sender is DatePicker datePicker)
-                return DateTime.MinValue;
-            return DateTime.MaxValue;
-           // DatePicker datePicker = sender as DatePicker;
+            get { return (TimeSpan)GetValue(MinumunTimePropertyProperty); }
+            set { SetValue(MinumunTimePropertyProperty, value); }
         }
-        //private void startDate_Initialized(object sender, EventArgs e)
-        //{
 
-        //}
+        // Using a DependencyProperty as the backing store for MinumunTimeProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MinumunTimePropertyProperty =
+            DependencyProperty.Register("MinumunTimeProperty", typeof(TimeSpan), typeof(WindowProjectDates), new PropertyMetadata(s_bl.State.MinimumDays()));
+
     }
 }
