@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 
 namespace Dal;
 
@@ -114,5 +115,27 @@ sealed internal class DalXml : IDal
             XElement root = XElement.Load(@"..\xml\data-config.xml");
             return int.Parse((string)root.Element("AdminUserId")!);
         }
+    }
+    //תמונות
+    private string CopyFiles(string sourcePath, string destinationName)
+    {
+        try
+        {
+            int postfixIndex = sourcePath.LastIndexOf('.');
+            string postfix = sourcePath.Substring(postfixIndex);
+            destinationName += postfix;
+
+            string destinationPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string destinationFullName = @"images\passport\" + destinationName;
+
+            System.IO.File.Copy(sourcePath, destinationPath + "\\" + destinationFullName, true);
+            return destinationFullName;
+        }
+        catch (Exception ex)
+        {
+
+            return @"images\passport\empty_image.jpg";
+        }
+
     }
 }

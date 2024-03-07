@@ -1,4 +1,6 @@
-﻿namespace BO;
+﻿using System.ComponentModel;
+
+namespace BO;
 public class Engineer
 {
     public int Id { get; init; }
@@ -9,6 +11,15 @@ public class Engineer
     public BO.Enums.EngineerExperience Level { get; set; }
     public double? Cost { get; set; }
     public BO.TaskInEngineer? Task { get; set; }
+
+    [Browsable(false)]
+    public string ImageSource
+    {
+        get { return imageSource; }
+        set { imageSource = value; }
+    }
+    private string imageSource = (@"Empty Image");
+
     public override string ToString() => this.ToStringProperty();
 
 
