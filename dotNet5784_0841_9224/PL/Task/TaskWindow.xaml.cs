@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,8 +44,9 @@ namespace PL.Task
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-
+            
         }
+
         public BO.Task TaskProperty
         {
             get { return (BO.Task)GetValue(TaskPropertyProperty); }
@@ -54,19 +56,6 @@ namespace PL.Task
 
         public static readonly DependencyProperty TaskPropertyProperty =
           DependencyProperty.Register("TaskProperty", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
-
-
-
-        public int DepProperty
-        {
-            get { return (int)GetValue(DepPropertyProperty); }
-            set { SetValue(DepPropertyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for DepProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DepPropertyProperty =
-            DependencyProperty.Register("DepProperty", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
-
 
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
@@ -108,5 +97,17 @@ namespace PL.Task
         {
             s_bl.Task.Delete(TaskProperty.Id);
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DepList = new ObservableCollection<BO.TaskInList?>(s_bl.Task.Read(id)!.Dependencies);
+        }
+        public ObservableCollection<BO.TaskInList?> DepList
+        {
+            get { return (ObservableCollection<BO.TaskInList?>)GetValue(DepListProperty); }
+            set { SetValue(DepListProperty, value); }
+        }
+        public static readonly DependencyProperty DepListProperty =
+           DependencyProperty.Register("DepList", typeof(IEnumerable<BO.TaskInList?>), typeof(EngineerListWindow), new PropertyMetadata(null));
     }
 }

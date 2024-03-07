@@ -45,9 +45,9 @@
             <Label Content="ScheduledDate" HorizontalAlignment="Left" Margin="33,300,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--DatePicker ScheduledDate-->
             <DatePicker HorizontalAlignment="Left" Margin="0,298,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding ScheduledDate, Mode=TwoWay}"/>
-            
+
             <!-- פה להוסיף את התלויות-->
-            
+
             <!--Label ForecastDate-->
             <Label Content="ForecastDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2" Margin="33,0,0,0"/>
             <!--DatePicker ScheduledDate-->
@@ -79,17 +79,23 @@
             <ComboBox HorizontalAlignment="Left" Margin="0,328,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"
             ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
              SelectedValue="{Binding Copmlexity, Mode=TwoWay}"/>
-          
-
-            
-            
-            
-            <Button Grid.Column="4" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
-            <Button Content="Add dependency" HorizontalAlignment="Left" Height="35" Margin="44,384,0,0" VerticalAlignment="Top" Width="112"/>
+            <!--Label dependency-->
             <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,342,0,0" VerticalAlignment="Top" Width="94"/>
-            <TreeView Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="0,340,0,0" VerticalAlignment="Top" Width="108"/>
-            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="30,384,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="68"/>
-            <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Button_Click"/>
+            <Button Content="Add dependency" HorizontalAlignment="Left" Height="35" Margin="44,384,0,0" VerticalAlignment="Top" Width="112" Click="Button_Click_1" />
+            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="30,384,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68"/>
+            <ListView Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="139,344,0,0" VerticalAlignment="Top" Width="123" ItemsSource="{Binding DepProperty}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+
+
+            <Button Grid.Column="4" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
+            <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Delete_Click"/>
+           
         </Grid>
 
     </Grid>
