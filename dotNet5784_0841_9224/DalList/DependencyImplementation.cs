@@ -25,7 +25,7 @@ internal class DependencyImplementation : IDependency
     /// Deletion of an existing object with a certain ID, from the list of objects of type Dependency
     /// </summary>
     /// <param name="id">ID number of an object</param>
-    /// <exception cref="NotImplementedException">An attempt to delete an object that does not exist</exception>
+    /// <exception cref="DalDoesNotExistsException">An attempt to delete an object that does not exist</exception>
     public void Delete(int id)
     {
         if (DataSource.Dependencys.FirstOrDefault(item => item.Id == id) == null)
