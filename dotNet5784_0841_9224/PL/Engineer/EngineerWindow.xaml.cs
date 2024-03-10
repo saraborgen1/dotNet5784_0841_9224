@@ -12,7 +12,7 @@ namespace PL.Engineer
         private event Action<(int engineerId, bool isUpdateOrAdd)> _onUpdateOrAdd;
 
         /// <summary>
-        /// con.
+        /// con
         /// </summary>
         /// <param name="onUpdateOrAdd"></param>
         /// <param name="id"></param>
