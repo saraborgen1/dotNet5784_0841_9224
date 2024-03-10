@@ -217,4 +217,11 @@ internal class EngineerImplementation : BlApi.IEngineer
     {
         return Read(id)!.Password!;
     }
+    public bool comparePassword(int id,string password) 
+    { 
+        var temp=Read(id);
+        if(temp!.Password== hashPassword(password+temp.Salt))
+            return true;
+        return false;
+    }
 }
