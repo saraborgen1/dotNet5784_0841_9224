@@ -33,7 +33,7 @@ namespace PL.Task
                 _tasks = s_bl?.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level && AreDependentTasksCompleted(s)==true))!.ToList()!;
 
             }
-            TaskList = new List<BO.Task>(_tasks);
+            TaskList = new ObservableCollection<BO.Task>(_tasks);
           
             InitializeComponent();
         }
@@ -41,9 +41,9 @@ namespace PL.Task
         /// <summary>
         /// 
         /// </summary>
-        public List<BO.Task> TaskList
+        public ObservableCollection<BO.Task> TaskList
         {
-            get { return (List<BO.Task>)GetValue(TaskListProperty); }
+            get { return (ObservableCollection<BO.Task>)GetValue(TaskListProperty); }
             set { SetValue(TaskListProperty, value); }
         }
 
@@ -51,14 +51,14 @@ namespace PL.Task
         /// 
         /// </summary>
         public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskList", typeof(List<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskList", typeof(ObservableCollection<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
 
         public BO.Enums.EngineerExperience Copmlexity { get; set; } = BO.Enums.EngineerExperience.None;
         List<BO.Task> _tasks;
 
         private void ComboBox_TaskLevelFilter(object sender, SelectionChangedEventArgs e)
         {
-            TaskList = new List<BO.Task>((Copmlexity == BO.Enums.EngineerExperience.None) ?
+            TaskList = new ObservableCollection<BO.Task>((Copmlexity == BO.Enums.EngineerExperience.None) ?
            _tasks : _tasks.Where(item => item.Copmlexity == Copmlexity));
         }
 
