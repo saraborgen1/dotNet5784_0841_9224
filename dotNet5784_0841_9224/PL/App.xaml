@@ -15,6 +15,7 @@
         <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->
         <local:CellColorConverter x:Key="CellColorConverterKey"/>
         <local:NullToBoolConverter x:Key="NullToBoolConverterKey"/>
+        <local:DependenciesConverter x:Key="DependenciesConverterKey"/>
 
 
         <!--<local:DateToWidthConverter x:Key="DateToWidthConverterKey"/>-->

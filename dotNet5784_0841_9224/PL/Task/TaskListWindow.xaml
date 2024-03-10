@@ -32,7 +32,13 @@
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" SelectionChanged="SelectedTask">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Dependencies">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Dependencies, Converter={StaticResource DependenciesConverterKey}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

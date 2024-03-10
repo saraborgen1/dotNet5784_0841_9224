@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using BO;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Windows;
@@ -224,5 +225,21 @@ public class ConvertStatusToAuto : IValueConverter
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
+    }
+    public class DependenciesConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is List<TaskInList> dependencies)
+            {
+                return string.Join(", ", dependencies.Select(dep => dep.ToString()));
+            }
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
