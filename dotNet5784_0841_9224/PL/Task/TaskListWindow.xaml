@@ -7,31 +7,39 @@
         mc:Ignorable="d"
         Title="TaskListWindow" Height="640" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <!--Extrnal Grid-->
+    <!-- External Grid -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
             <RowDefinition Height="289*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid/>
-        <!--Internal, Upper Grid-->
+        <!-- Internal, Upper Grid -->
         <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--Filter options label-->
+            <!-- Filter options label -->
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="46,0,0,0" VerticalAlignment="Center"/>
-            <!--Filter ComboBox-->
+            <!-- Filter ComboBox -->
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
-             Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   SelectedValue="{Binding Copmlexity, Mode=TwoWay}" SelectionChanged="ComboBox_TaskLevelFilter"/>
+                      Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      SelectedValue="{Binding Copmlexity, Mode=TwoWay}" SelectionChanged="ComboBox_TaskLevelFilter"/>
         </Grid>
-        <!--List display-->
+        <!-- List display -->
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding TaskList}" SelectionChanged="SelectedTask">
             <ListView.View>
                 <GridView>
+                    <!-- ID -->
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
+                    <!-- Alias -->
+                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="100" />
+                    <!-- Description -->
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150" />
+                    <!-- Status -->
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100" />
+                    <!-- Dependencies -->
                     <GridViewColumn Header="Dependencies">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -39,10 +47,29 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <!-- RequiredEffortTime -->
+                    <GridViewColumn Header="Effort Time" DisplayMemberBinding="{Binding RequiredEffortTime}" Width="100" />
+                    <!-- StartDate -->
+                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}" Width="100" />
+                    <!-- ScheduledDate -->
+                    <GridViewColumn Header="Scheduled Date" DisplayMemberBinding="{Binding ScheduledDate}" Width="100" />
+                    <!-- ForecastDate -->
+                    <GridViewColumn Header="Forecast Date" DisplayMemberBinding="{Binding ForecastDate}" Width="100" />
+                    <!-- CompleteDate -->
+                    <GridViewColumn Header="Complete Date" DisplayMemberBinding="{Binding CompleteDate}" Width="100" />
+                    <!-- Deliverables -->
+                    <GridViewColumn Header="Deliverables" DisplayMemberBinding="{Binding Deliverables}" Width="150" />
+                    <!-- Remarks -->
+                    <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding Remarks}" Width="150" />
+                    <!-- Engineer -->
+                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding Engineer}" Width="100" />
+                    <!-- Complexity -->
+                    <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding Copmlexity}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <!--Add button-->
+
+        <!-- Add button -->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_TaskWindow" />
     </Grid>
 </Window>
