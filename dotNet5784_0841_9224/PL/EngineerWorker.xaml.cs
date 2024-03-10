@@ -30,6 +30,7 @@ namespace PL
             {
                 var _engineertask = s_bl.Task.ReadAll(s => s.Engineer!.Id== engineerId).ToList()!;
                EngineerWorkerProperty = _engineertask.FirstOrDefault(p => p.Engineer!.Id == engineerId)!;
+                EngineerProperty = s_bl.Engineer.Read(engineerId)!;
             }
             catch (Exception ex)
             {
@@ -48,13 +49,23 @@ namespace PL
           DependencyProperty.Register("EngineerWorkerProperty", typeof(BO.Task), typeof(EngineerWorker), new PropertyMetadata(null));
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        public BO.Engineer EngineerProperty
+        {
+            get { return (BO.Engineer)GetValue(EngineerPropertyProperty); }
+            set { SetValue(EngineerPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for EngineerProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty EngineerPropertyProperty =
+            DependencyProperty.Register("EngineerProperty", typeof(BO.Engineer), typeof(EngineerWorker), new PropertyMetadata(null));
+
+
+        private void Button_viewList(object sender, RoutedEventArgs e)
         {
             try
             {
-            var _engineer = s_bl.Engineer.Read(EngineerWorkerProperty!.Engineer!.Id!.Value);
-            var _tasks = s_bl.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level /*&&אין משימה שלא הסתיימה*/))!.ToList()!;
-            new TaskListWindow(false, _engineer!).Show();
+                new TaskListWindow(EngineerProperty, false).Show();
             }
             catch (Exception ex)
             {

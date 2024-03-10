@@ -193,7 +193,7 @@ public static class Initialization
 
         }
         int salt0 = s_rand.Next();
-        Engineer newEngineer1 = new(123456789, hashPassword("11111111" + salt0), salt0, "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)2, 300);
+        Engineer newEngineer1 = new(123456789, hashPassword("11111111" + salt0), salt0, "Eliezer El", "Eliezer@gmail.com", (EngineerExperience)1, 300);
         s_dal!.Engineer.Create(newEngineer1);
         int salt1 = s_rand.Next();
         Engineer newEngineer2 = new(987654321, hashPassword("22222222" + salt1) , salt1, "Shira Kehalani", "shira.ka017@gmail.com", (EngineerExperience)3, 301);

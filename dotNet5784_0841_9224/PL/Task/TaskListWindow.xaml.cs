@@ -23,14 +23,13 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public TaskListWindow(bool flag = true, BO.Engineer _engineer = null!)
+        public TaskListWindow(BO.Engineer _engineer=null!,bool flag = true)
         {
             if (flag)
                 _tasks = s_bl?.Task.ReadAll()!.ToList()!;
             else
             {
-              
-                _tasks = s_bl?.Task.ReadAll(s => (s.Engineer!.Id == 0 && s.Copmlexity <= _engineer!.Level && AreDependentTasksCompleted(s)==true))!.ToList()!;
+                _tasks = s_bl?.Task.ReadAll(s => (s.Engineer!.Id == null && s.Copmlexity <= _engineer!.Level&& AreDependentTasksCompleted(s)))!.ToList()!;
 
             }
             TaskList = new ObservableCollection<BO.Task>(_tasks);
@@ -115,14 +114,14 @@ namespace PL.Task
             {
                 // אם המשימה התלויה עדיין לא הסתיימה, מחזירים FALSE
                 if (dependentTask.Status == BO.Enums.Status.Done)
-                    return false;
+                    return true;
 
                 // בדיקה רקורסיבית של המשימות התלויות של המשימה התלויה
                 AreDependentTasksCompleted(s_bl.Task.Read(dependentTask.Id));
             }
 
             // אם עברנו על כל התלויות וכולן הסתיימו, מחזירים TRUE
-            return true;
+            return false;
         }
     }
    

@@ -13,7 +13,6 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty}" VerticalAlignment="Top" Height="424" Width="390"/>
-        <Button Content="viewList" HorizontalAlignment="Left" Height="97" Margin="34,120,0,0" VerticalAlignment="Top" Width="289" Click="Button_Click" Grid.Column="1"
-                 Visibility="{Binding EngineerWorkerProperty.Engineer, Mode=OneTime, Converter={StaticResource ConvertIdEngineerIsEnabledKey}, ConverterParameter='VisibleOrCollapsed'}"/>
+        <Button Content="viewList" HorizontalAlignment="Left" Height="97" Margin="34,120,0,0" VerticalAlignment="Top" Width="289" Click="Button_viewList" Grid.Column="1"/>
     </Grid>
 </Window>

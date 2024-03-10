@@ -48,6 +48,11 @@ namespace PL
 
         private void btnGantt_Click(object sender, RoutedEventArgs e)
         {
+            if(s_bl.State.StatusProject()!= BO.Enums.ProjectStatus.Start)
+            {
+                MessageBox.Show("No start dates for any tasks", "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             new WindowGantt().Show();
         }
 
@@ -74,6 +79,11 @@ namespace PL
 
         private void btnProjectDates_Click(object sender, RoutedEventArgs e)
         {
+            if(s_bl.State.StatusProject() != BO.Enums.ProjectStatus.Creation)
+            {
+                MessageBox.Show("The project start and end date cannot be reset after the entire project has been given dates", "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             new WindowProjectDates().Show();
         }
 
