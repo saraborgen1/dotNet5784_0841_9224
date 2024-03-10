@@ -200,3 +200,29 @@ public class NullToBoolConverter : IValueConverter
         throw new NotImplementedException();
     }
 }
+public class ConvertStatusToSetDates : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (s_bl.State.StatusProject() == BO.Enums.ProjectStatus.Creation);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+public class ConvertStatusToAuto : IValueConverter
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (s_bl.State.StatusProject() == BO.Enums.ProjectStatus.Scheduling);
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
