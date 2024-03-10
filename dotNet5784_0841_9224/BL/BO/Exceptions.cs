@@ -11,8 +11,7 @@ public class BlAlreadyExistException : Exception
 
     public BlAlreadyExistException(Exception innerException)
                 : base(innerException.Message) { }
-    public BlAlreadyExistException(string message)
-                : base(message) { }
+   
 }
 /// <summary>
 /// Exception for if it cant be deleted exists
@@ -46,6 +45,8 @@ public class BlDoesNotExistException : Exception
     public BlDoesNotExistException(int id, string name) : base($"{name} with ID={id} does Not exist") { }
     public BlDoesNotExistException(Exception innerException)
             : base(innerException.Message) { }
+    public BlDoesNotExistException(string message)
+               : base(message) { }
 }
 
 /// <summary>
