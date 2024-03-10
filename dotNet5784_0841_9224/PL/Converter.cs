@@ -10,7 +10,7 @@ using System.Windows.Media;
 namespace PL;
 
 /// <summary>
-/// converts num into bool for add or update
+/// converts num into bool for add or  update
 /// </summary>
 class ConvertIdToContent : IValueConverter
 {
