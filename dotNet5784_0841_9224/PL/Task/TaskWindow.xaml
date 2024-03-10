@@ -83,7 +83,7 @@
             <!--Button delete task-->
             <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Delete_Click"/>
             <!--ComboBox  Dependencies-->
-            <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="137,347,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding DependenciesProperty,Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChangedDeleteDep"/>
+            <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="137,347,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding TaskProperty.Dependencies,Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChangedDeleteDep"/>
             <!--ComboBox  options for Dependencies-->
             <ComboBox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="31" Margin="61,388,0,0" VerticalAlignment="Top" Width="122" ItemsSource="{Binding TaskInListProperty, Mode=TwoWay}" SelectionChanged="ComboBoxAllTasks_SelectionChanged"/>
 
