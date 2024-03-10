@@ -79,7 +79,7 @@
             <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,342,0,0" VerticalAlignment="Top" Width="94"/>
 
 
-            <Button Grid.Column="4" Content="{Binding TaskProperty.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
+            <Button Grid.Column="4" Content="{Binding TaskProperty.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="94" Width="102" Click="Button_UpdateOrAdd"/>
             <!--Button delete task-->
             <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Delete_Click"/>
             <!--ComboBox  Dependencies-->

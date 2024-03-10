@@ -91,7 +91,7 @@ public class BlCannotAddWrongStateException : Exception
 [Serializable]
 public class BlCannotUpdateWrongStateException : Exception
 {
-    public BlCannotUpdateWrongStateException(string problem) : base(problem) { }
+    public BlCannotUpdateWrongStateException(string field,string stage) : base($"The {field} cannot be changed at the {stage} stage") { }
 }
 
 /// <summary>

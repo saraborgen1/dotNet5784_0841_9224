@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Printing.IndexedProperties;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -52,13 +51,14 @@ namespace PL.Task
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
             //בדיקות תקינות ובדיקות מה מותר לעדכן מה ובאיזה שלב
-
-
+            if (DependenciesProperty != null)
+                TaskProperty.Dependencies = new List<BO.TaskInList>(DependenciesProperty.ToList());
 
             if (isCreate == true)
 
                 try
                 {
+
                     s_bl.Task.Create(TaskProperty);
                     _onUpdateOrAdd((TaskProperty.Id, true));
                     MessageBox.Show("The Task was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -113,7 +113,7 @@ namespace PL.Task
 
         private void ComboBoxAllTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(sender is ComboBox combo) 
+            if (sender is ComboBox combo)
             {
                 if (combo != null)
                 {

@@ -55,6 +55,7 @@ internal class TaskImplementation : ITask
             var temp = item.Dependencies.ToList().Select(p =>
             {
 
+                circuleDep(item.Id, Read(p.Id));
                 _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
                 return p;
             });
@@ -200,31 +201,39 @@ internal class TaskImplementation : ITask
 
         if (state.StatusProject() == Enums.ProjectStatus.Creation)
         {
-            if (item.StartDate != boTask.StartDate ||
-                       item.ScheduledDate != boTask.ScheduledDate ||
-
-                       item.CompleteDate != boTask.CompleteDate ||
-                       item.Engineer != null)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.StartDate != boTask.StartDate)
+                throw new BO.BlCannotUpdateWrongStateException("StartDate", "Creation");
+            if (item.ScheduledDate != boTask.ScheduledDate)
+                throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Creation");
+            if (item.CompleteDate != boTask.CompleteDate)
+                throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Creation");
+            if (item.Engineer != null)
+                throw new BO.BlCannotUpdateWrongStateException("Engineer", "Creation");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Scheduling)
         {
-            if (item.CreatedAtDate != boTask.CreatedAtDate ||
-                       item.RequiredEffortTime != boTask.RequiredEffortTime ||
-                       item.StartDate != boTask.StartDate ||
-                       item.CompleteDate != boTask.CompleteDate ||
-                       item.Engineer != null)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            if (item.CreatedAtDate != boTask.CreatedAtDate)
+                throw new BO.BlCannotUpdateWrongStateException("CreatedAtDate", "Scheduling");
+            if (item.RequiredEffortTime != boTask.RequiredEffortTime)
+                throw new BO.BlCannotUpdateWrongStateException("RequiredEffortTime", "Scheduling");
+            if (item.StartDate != boTask.StartDate)
+                throw new BO.BlCannotUpdateWrongStateException("StartDate", "Scheduling");
+            if (item.CompleteDate != boTask.CompleteDate)
+                throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Scheduling");
+            if (item.Engineer != null)
+                throw new BO.BlCannotUpdateWrongStateException("Engineer", "Scheduling");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Start)
         {
-            if (item.Description != boTask.Description ||
-                 item.CreatedAtDate != boTask.CreatedAtDate ||
-                  item.RequiredEffortTime != boTask.RequiredEffortTime ||
-                  item.ScheduledDate != boTask.ScheduledDate)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+            //if (item.Description != boTask.Description ||
+            if (item.CreatedAtDate != boTask.CreatedAtDate)
+                throw new BO.BlCannotUpdateWrongStateException("CreatedAtDate", "Start");
+            if (item.RequiredEffortTime != boTask.RequiredEffortTime)
+                throw new BO.BlCannotUpdateWrongStateException("RequiredEffortTime", "Start");
+           if(item.ScheduledDate != boTask.ScheduledDate)
+                throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Start");
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
@@ -404,7 +413,7 @@ internal class TaskImplementation : ITask
         }
         if (state.StatusProject() == Enums.ProjectStatus.Start)
             if (addDep.Count != 0 || deletDep.Count != 0)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+                throw new BO.BlCannotUpdateWrongStateException("Dependencies", "Start");
         foreach (var dep in addDep)
         {
             circuleDep(item.Id, Read(dep.Id));
