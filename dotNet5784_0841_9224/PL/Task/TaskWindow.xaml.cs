@@ -28,14 +28,15 @@ namespace PL.Task
                     TaskInListProperty = (s_bl.Task.ReadAll(p => p.Id != id)
                         .Select(task => s_bl.Task.GetTaskInList(task.Id))
                         .ToList()).ToList();
-                    DependenciesProperty = new ObservableCollection<BO.TaskInList>(s_bl.Task.GetAllTaskInList(id));
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-
+            if (TaskProperty.Dependencies != null)
+                DependenciesProperty = new ObservableCollection<BO.TaskInList>(TaskProperty.Dependencies);
         }
 
         public BO.Task TaskProperty
