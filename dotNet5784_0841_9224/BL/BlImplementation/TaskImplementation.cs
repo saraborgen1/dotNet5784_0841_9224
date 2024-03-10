@@ -109,29 +109,7 @@ internal class TaskImplementation : ITask
         if (doTask == null)
             throw new BO.BlDoesNotExistException(id, _entityName);
 
-        var gDependenciesId = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
-                               group temp by temp.DependentTask % id into gs
-                               select gs).ToList();
-
-        var dependenciesId = (from temp in gDependenciesId
-                              where temp.Key == 0
-                              from item in temp
-                              select item.Id).ToList();
-
-        var dependentOn = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
-                           select temp.DependentOnTask).ToList();
-
-        List<BO.TaskInList>? dependencies = (from item in dependentOn
-                                             let alias = _dal.Task.Read(p => p.Id == item)?.Ailas ?? " "
-                                             let description = _dal.Task.Read(p => p.Id == item)?.Description ?? " "
-                                             let temp = (BO.Enums.Status)Read(item ?? 0).Status
-                                             select new BO.TaskInList()
-                                             {
-                                                 Id = _dal.Dependency.Read(t => t.Id == item)?.DependentOnTask ?? 0,
-                                                 Alias = alias,
-                                                 Description = description,
-                                                 Status = temp
-                                             }).ToList();
+        List<BO.TaskInList>? dependencies = GetAllTaskInList(id);
 
 
         DateTime? forecastDate = null;
@@ -163,15 +141,7 @@ internal class TaskImplementation : ITask
         }
 
 
-        BO.Enums.Status status;
-        if (doTask.ScheduledDate == null)
-            status = BO.Enums.Status.Unscheduled;
-        else
-            status = BO.Enums.Status.Scheduled;
-        if (doTask.StartDate != null)
-            status = BO.Enums.Status.OnTrack;
-        if (doTask.CompleteDate != null)
-            status = BO.Enums.Status.Done;
+        BO.Enums.Status status = getStatus(doTask);
 
 
         return new BO.Task()
@@ -385,7 +355,7 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null)
     {
-        List<Task> allTasks; 
+        List<Task> allTasks;
         if (filter != null)
             allTasks = ReadAll(filter).ToList();
         else
@@ -411,9 +381,61 @@ internal class TaskImplementation : ITask
     {
         DO.Task? doTask = _dal.Task.Read(p => p.Id == task.Id);
         if (doTask == null)
-            throw new BlDoesNotExistException(task.Id, "Task");
+            throw new BlDoesNotExistException(task.Id, _entityName);
         var boDepIdList = DepIdList(task);
-        var toTaskInList = DepIdList(toTaskInList(t => t.Id = ))
+        //var toTaskInList = DepIdList(toTaskInList(t => t.Id = ))
+    }
+
+    private TaskInList GetTaskInList(int id)
+    {
+        var doTask = _dal.Task.Read(p => p.Id == id);
+        if (doTask == null)
+            throw new BlDoesNotExistException(id, _entityName);
+        return new BO.TaskInList()
+        {
+            Id = doTask.Id,
+            Alias = doTask.Ailas,
+            Description = doTask.Description,
+            Status = getStatus(doTask)
+        };
+
+    }
+
+    private List<TaskInList> GetAllTaskInList(int id)
+    {
+        var doTask = _dal.Task.Read(p => p.Id == id);
+        if (doTask == null)
+            throw new BlDoesNotExistException(id, _entityName);
+
+        List<int> dependentOn = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
+                                 where temp.DependentOnTask != null
+                                 select (int)temp.DependentOnTask!).ToList();
+
+        return (from item in dependentOn
+                select GetTaskInList(item)).ToList();
+    }
+
+    private BO.Enums.Status getStatus(DO.Task task)
+    {
+        if (task.ScheduledDate == null)
+            return Status.Unscheduled;
+        if (task.CompleteDate != null)
+            return Status.Done;
+        if (task.StartDate != null)
+            return Status.OnTrack;
+        return Status.Scheduled;
+    }
+
+    private void grouping(int id)
+    {
+        var gDependenciesId = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
+                               group temp by temp.DependentTask % id into gs
+                               select gs).ToList();
+
+        var dependenciesId = (from temp in gDependenciesId
+                              where temp.Key == 0
+                              from item in temp
+                              select item.Id).ToList();
     }
 }
 
