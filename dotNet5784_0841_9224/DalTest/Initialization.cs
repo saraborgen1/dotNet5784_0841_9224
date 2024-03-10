@@ -210,19 +210,19 @@ public static class Initialization
     {
         for (int i = 2; i < 20; i++)
         {
-            Dependency newDependency = new Dependency(0, i, i - 1);
-            s_dal!.Dependency.Create(newDependency);
-        }
-
-        for (int i = 4; i < 20; i++)
-        {
-            Dependency newDependency = new Dependency(0, i, 2);
+            Dependency newDependency = new Dependency(0, i, 1);
             s_dal!.Dependency.Create(newDependency);
         }
 
         for (int i = 3; i < 20; i++)
         {
             Dependency newDependency = new Dependency(0, i, 2);
+            s_dal!.Dependency.Create(newDependency);
+        }
+
+        for (int i = 4; i < 20; i++)
+        {
+            Dependency newDependency = new Dependency(0, i, 3);
             s_dal!.Dependency.Create(newDependency);
         }
     }

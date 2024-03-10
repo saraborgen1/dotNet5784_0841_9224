@@ -11,6 +11,8 @@ public class BlAlreadyExistException : Exception
 
     public BlAlreadyExistException(Exception innerException)
                 : base(innerException.Message) { }
+    public BlAlreadyExistException(string message)
+                : base(message) { }
 }
 /// <summary>
 /// Exception for if it cant be deleted exists
