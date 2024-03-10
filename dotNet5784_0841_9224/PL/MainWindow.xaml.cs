@@ -70,15 +70,22 @@ namespace PL
                 }
             else
             {
-                var engineer = s_bl.Engineer.Read(IdProperty);
-                if (engineer != null)
-                    if (engineer.Password == PasswordProperty)
-                        new EngineerWorker(IdProperty).Show();
-                    else
-                    {
-                        MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
+                try
+                {
+                    //var engineer = s_bl.Engineer.Read(IdProperty);
+                        if (s_bl.Engineer.comparePassword(IdProperty,PasswordProperty))
+                            new EngineerWorker(IdProperty).Show();
+                        else
+                        {
+                            MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
 
         }

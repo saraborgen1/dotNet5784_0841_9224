@@ -51,4 +51,5 @@ public interface IEngineer
     /// <param name="id"></param>
     /// <returns></returns>
     public string GetPassword(int id);
+    public bool comparePassword(int id, string password);
 }
