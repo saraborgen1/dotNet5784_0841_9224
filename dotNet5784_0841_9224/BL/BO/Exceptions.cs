@@ -99,3 +99,13 @@ public class BlCannotDoAutoSchedulingException : Exception
 {
     public BlCannotDoAutoSchedulingException(string problem) : base(problem) { }
 }
+
+/// <summary>
+/// Cannot create a circular dependency
+/// </summary>
+[Serializable]
+public class BlCirculDepException : Exception
+{
+    public BlCirculDepException(string problem) : base(problem) { }
+}
+

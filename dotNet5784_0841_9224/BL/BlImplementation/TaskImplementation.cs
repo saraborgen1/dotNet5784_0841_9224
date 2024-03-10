@@ -54,6 +54,7 @@ internal class TaskImplementation : ITask
         {
             var temp = item.Dependencies.ToList().Select(p =>
             {
+
                 _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
                 return p;
             });
@@ -224,18 +225,6 @@ internal class TaskImplementation : ITask
                   item.RequiredEffortTime != boTask.RequiredEffortTime ||
                   item.ScheduledDate != boTask.ScheduledDate)
                 throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.Dependencies.Count != boTask.Dependencies.Count)
-                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-            if (item.Dependencies.Count != 0 && boTask.Dependencies.Count != 0)
-            {
-                int size = item.Dependencies.Count;
-                while (size < 0)
-                {
-                    if (item.Dependencies[size] != boTask.Dependencies[size])
-                        throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
-                    size--;
-                }
-            }
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
@@ -276,7 +265,7 @@ internal class TaskImplementation : ITask
         DO.Task updatedTask = new DO.Task
         (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
         , item.ScheduledDate, item.ForecastDate, item.CompleteDate, item.RequiredEffortTime,
-         item.Deliverables, item.Remarks, item.Engineer?.Id ?? 0, (DO.EngineerExperience)item.Copmlexity);
+         item.Deliverables, item.Remarks, item.Engineer?.Id ?? null, (DO.EngineerExperience)item.Copmlexity);
 
         try
         {
@@ -353,40 +342,7 @@ internal class TaskImplementation : ITask
         UpdateDate(task.Id, (DateTime)max!);
     }
 
-    public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null)
-    {
-        List<Task> allTasks;
-        if (filter != null)
-            allTasks = ReadAll(filter).ToList();
-        else
-            allTasks = ReadAll().ToList();
-
-        var taskInList = allTasks.Select(item => new BO.TaskInList
-        {
-            Id = item.Id,
-            Alias = item.Alias,
-            Description = item.Description,
-            Status = (BO.Enums.Status)item.Status
-        }).ToList();
-
-        return taskInList;
-    }
-    public List<int> DepIdList(BO.Task task)
-    {
-        return (from dep in task.Dependencies
-                select dep.Id).OrderBy(id => id).ToList();
-    }
-
-    public void UpdateDepList(BO.Task task, List<int> depIdList)
-    {
-        DO.Task? doTask = _dal.Task.Read(p => p.Id == task.Id);
-        if (doTask == null)
-            throw new BlDoesNotExistException(task.Id, _entityName);
-        var boDepIdList = DepIdList(task);
-        //var toTaskInList = DepIdList(toTaskInList(t => t.Id = ))
-    }
-
-    private TaskInList GetTaskInList(int id)
+    public TaskInList GetTaskInList(int id)
     {
         var doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
@@ -401,7 +357,7 @@ internal class TaskImplementation : ITask
 
     }
 
-    private List<TaskInList> GetAllTaskInList(int id)
+    public List<TaskInList> GetAllTaskInList(int id)
     {
         var doTask = _dal.Task.Read(p => p.Id == id);
         if (doTask == null)
@@ -412,7 +368,7 @@ internal class TaskImplementation : ITask
                                  select (int)temp.DependentOnTask!).ToList();
 
         return (from item in dependentOn
-                select GetTaskInList(item)).ToList();
+                select GetTaskInList(item)).OrderBy(p => p.Id).ToList();
     }
 
     private BO.Enums.Status getStatus(DO.Task task)
@@ -436,6 +392,54 @@ internal class TaskImplementation : ITask
                               where temp.Key == 0
                               from item in temp
                               select item.Id).ToList();
+    }
+    private void updateDependencies(BO.Task item, BO.Task boTask)
+    {
+        var addDep = item.Dependencies != null ? item.Dependencies : new List<TaskInList>();
+        var deletDep = boTask.Dependencies != null ? boTask.Dependencies : new List<TaskInList>();
+        if (item.Dependencies != null && boTask.Dependencies != null)
+        {
+            addDep = item.Dependencies.Except(boTask.Dependencies).ToList();
+            deletDep = boTask.Dependencies.Except(item.Dependencies).ToList();
+        }
+        if (state.StatusProject() == Enums.ProjectStatus.Start)
+            if (addDep.Count != 0 || deletDep.Count != 0)
+                throw new BO.BlCannotUpdateWrongStateException("There is a field that must not be changed at this stage");
+        foreach (var dep in addDep)
+        {
+            circuleDep(item.Id, Read(dep.Id));
+            _dal.Dependency.Create(new DO.Dependency() { Id = 0, DependentOnTask = dep.Id, DependentTask = item.Id });
+        }
+        foreach (var dep in deletDep)
+        {
+            var temp = _dal.Dependency.Read(p => (p.DependentOnTask == dep.Id && p.DependentTask == item.Id));
+            if (temp == null)
+                throw new BlDoesNotExistException("There is no dependency with such details");
+            try
+            {
+                _dal.Dependency.Delete(temp.Id);
+            }
+            catch (Exception ex)
+            {
+                throw new BlCannotBeDeletedException(ex);
+            }
+
+        }
+
+
+
+
+    }
+    private void circuleDep(int id, BO.Task boTask)
+    {
+        if (boTask.Dependencies != null)
+            foreach (var dep in boTask.Dependencies)
+            {
+                if (dep.Id == id)
+                    throw new BlCirculDepException("Cannot create a circular dependency");
+                var task = Read(dep.Id);
+                circuleDep(id, task);
+            }
     }
 }
 

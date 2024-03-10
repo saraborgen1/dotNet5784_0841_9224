@@ -1,30 +1,18 @@
-﻿using PL.Engineer;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Printing.IndexedProperties;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.Task
 {
-  
+
     public partial class TaskWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         bool isCreate = false;
         private event Action<(int TaskId, bool isUpdateOrAdd)> _onUpdateOrAdd;
 
-       
+
         public TaskWindow(Action<(int, bool)> onUpdateOrAdd, int id = 0)
         {
             _onUpdateOrAdd = onUpdateOrAdd;
@@ -38,13 +26,17 @@ namespace PL.Task
                 try
                 {
                     TaskProperty = s_bl.Task.Read(id)!;
+                    TaskInListProperty = (s_bl.Task.ReadAll(p => p.Id != id)
+                        .Select(task => s_bl.Task.GetTaskInList(task.Id))
+                        .ToList()).ToList();
+                    DependenciesProperty = new ObservableCollection<BO.TaskInList>(s_bl.Task.GetAllTaskInList(id));
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-            
+
         }
 
         public BO.Task TaskProperty
@@ -106,30 +98,53 @@ namespace PL.Task
             }
         }
 
-        private void Button_AddDep(object sender, RoutedEventArgs e)
-        {
 
-        }
-        public ObservableCollection<BO.TaskInList?> DepList
+        public List<BO.TaskInList> TaskInListProperty
         {
-            get { return (ObservableCollection<BO.TaskInList?>)GetValue(DepListProperty); }
-            set { SetValue(DepListProperty, value); }
-        }
-        public static readonly DependencyProperty DepListProperty =
-           DependencyProperty.Register("DepList", typeof(IEnumerable<BO.TaskInList?>), typeof(TaskWindow), new PropertyMetadata(null));
-
-
-        public int DepIdProperty
-        {
-            get { return (int)GetValue(DepIdPropertyProperty); }
-            set { SetValue(DepIdPropertyProperty, value); }
+            get { return (List<BO.TaskInList>)GetValue(TaskInListPropertyProperty); }
+            set { SetValue(TaskInListPropertyProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for DepIdProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DepIdPropertyProperty =
-            DependencyProperty.Register("DepIdProperty", typeof(int), typeof(TaskWindow), new PropertyMetadata(0));
+        // Using a DependencyProperty as the backing store for TaskInListProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TaskInListPropertyProperty =
+            DependencyProperty.Register("TaskInListProperty", typeof(List<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
 
 
 
+        private void ComboBoxAllTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(sender is ComboBox combo) 
+            {
+                if (combo != null)
+                {
+                    if (DependenciesProperty.Where(item => item == (combo.SelectedItem as BO.TaskInList)!).FirstOrDefault() != null)
+                    {
+                        MessageBox.Show("Cannot add dependency because it already exists ", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                    DependenciesProperty.Add((combo.SelectedItem as BO.TaskInList)!);
+                }
+            }
+        }
+
+
+        public ObservableCollection<BO.TaskInList> DependenciesProperty
+        {
+            get { return (ObservableCollection<BO.TaskInList>)GetValue(DependenciesPropertyProperty); }
+            set { SetValue(DependenciesPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DependenciesProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DependenciesPropertyProperty =
+            DependencyProperty.Register("DependenciesProperty", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
+
+        private void ComboBox_SelectionChangedDeleteDep(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox combo)
+            {
+                if (combo != null)
+                    DependenciesProperty.Remove((combo.SelectedItem as BO.TaskInList)!);
+            }
+        }
     }
 }

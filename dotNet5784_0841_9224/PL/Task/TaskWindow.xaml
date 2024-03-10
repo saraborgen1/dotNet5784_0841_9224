@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
-        DataContext="{Binding TaskProperty, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding RelativeSource={RelativeSource Mode=self }}">
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -19,83 +19,73 @@
             <!--Label Id-->
             <Label Content="Id" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--TextBox Id-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"
-                IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"
+                IsEnabled="{Binding TaskProperty.Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
             <!--Label Alias-->
             <Label Content="Alias" HorizontalAlignment="Left" Margin="33,50,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--TextBox Alias-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,50,0,0" Grid.Column="1"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Alias, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,50,0,0" Grid.Column="1"/>
             <!--Label Description-->
             <Label Content="Description" HorizontalAlignment="Left" Margin="33,100,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--TextBox Description-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,100,0,0" Grid.Column="1"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Description, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,100,0,0" Grid.Column="1"/>
             <!--Label CreatedAtDate-->
             <Label Content="CreatedAtDate" HorizontalAlignment="Left" Margin="33,150,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--DatePicker CreatedAtDate-->
-            <DatePicker HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding CreatedAtDate, Mode=TwoWay}"/>
+            <DatePicker HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding TaskProperty.CreatedAtDate, Mode=TwoWay}"/>
             <!--Label RequiredEffortTime-->
             <Label Content="RequiredEffortTime" HorizontalAlignment="Left" Margin="33,200,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--TextBox RequiredEffortTime-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1" Margin="0,200,0,0"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.RequiredEffortTime, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1" Margin="0,200,0,0"/>
             <!--Label StartDate-->
             <Label Content="StartDate" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--DatePicker StartDate-->
-            <DatePicker HorizontalAlignment="Left" Margin="159,244,0,0" VerticalAlignment="Top" SelectedDate="{Binding StartDate, Mode=TwoWay}" Grid.ColumnSpan="2"/>
+            <DatePicker HorizontalAlignment="Left" Margin="159,244,0,0" VerticalAlignment="Top" SelectedDate="{Binding TaskProperty.StartDate, Mode=TwoWay}" Grid.ColumnSpan="2"/>
             <!--Label ScheduledDate-->
             <Label Content="ScheduledDate" HorizontalAlignment="Left" Margin="33,300,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--DatePicker ScheduledDate-->
-            <DatePicker HorizontalAlignment="Left" Margin="0,298,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding ScheduledDate, Mode=TwoWay}"/>
+            <DatePicker HorizontalAlignment="Left" Margin="0,298,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding TaskProperty.ScheduledDate, Mode=TwoWay}"/>
 
             <!-- פה להוסיף את התלויות-->
 
             <!--Label ForecastDate-->
             <Label Content="ForecastDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2" Margin="33,0,0,0"/>
             <!--DatePicker ScheduledDate-->
-            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" SelectedDate="{Binding ForecastDate, Mode=TwoWay}" />
-            <!--Label DeadlineDate-->
-            <Label Content="DeadlineDate" HorizontalAlignment="Left" Margin="33,50,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
-            <!--DatePicker DeadlineDate-->
-            <DatePicker HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Grid.Column="3" SelectedDate="{Binding DeadlineDate, Mode=TwoWay}"/>
+            <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" SelectedDate="{Binding TaskProperty.ForecastDate, Mode=TwoWay}" />
             <!--Label CompleteDate-->
             <Label Content="CompleteDate" HorizontalAlignment="Left" Margin="33,100,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
             <!--DatePicker CompleteDate-->
-            <DatePicker HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Grid.Column="3" SelectedDate="{Binding CompleteDate, Mode=TwoWay}"/>
+            <DatePicker HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Grid.Column="3" SelectedDate="{Binding TaskProperty.CompleteDate, Mode=TwoWay}"/>
             <!--Label Deliverables-->
             <Label Content="Deliverables" HorizontalAlignment="Left" Margin="33,150,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
             <!--TextBox Deliverables-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,150,0,0" Grid.Column="3"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Deliverables, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,150,0,0" Grid.Column="3"/>
             <!--Label Remarks-->
             <Label Content="Remarks" HorizontalAlignment="Left" VerticalAlignment="Center" Height="35" Width="126" Grid.Column="2" Margin="33,0,0,0"/>
             <!--TextBox Remarks-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,200,0,0" Grid.Column="3"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Remarks, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,200,0,0" Grid.Column="3"/>
             <!--Label Engineer-->
             <Label Content="Engineer" HorizontalAlignment="Left" Margin="33,250,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
             <!--TextBox Engineer-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Engineer.Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,250,0,0" Grid.Column="3"/>
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Engineer.Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,276,0,0" Grid.Column="3"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Engineer.Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,250,0,0" Grid.Column="3"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Engineer.Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,276,0,0" Grid.Column="3"/>
             <!--Label Copmlexity-->
             <Label Content="Copmlexity" HorizontalAlignment="Left" Margin="33,324,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
             <!--ComboBox Copmlexity-->
             <ComboBox HorizontalAlignment="Left" Margin="0,328,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"
             ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
-             SelectedValue="{Binding Copmlexity, Mode=TwoWay}"/>
+             SelectedValue="{Binding TaskProperty.Copmlexity, Mode=TwoWay}"/>
             <!--Label dependency-->
             <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,342,0,0" VerticalAlignment="Top" Width="94"/>
-            <Button Content="Add dependency" HorizontalAlignment="Left" Height="35" Margin="33,384,0,0" VerticalAlignment="Top" Width="102" Click="Button_AddDep" />
-            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="30,384,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="68" Text="{Binding DepIdProperty,Mode=OneWay}" />
-            <ListView Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="24" Margin="139,344,0,0" VerticalAlignment="Top" Width="123" ItemsSource="{Binding DepProperty, Mode=OneWay}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
 
 
-
-            <Button Grid.Column="4" Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
+            <Button Grid.Column="4" Content="{Binding TaskProperty.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="200" Width="78" Click="Button_UpdateOrAdd"/>
+            <!--Button delete task-->
             <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,327,0,0" VerticalAlignment="Top" Width="77" Click="Delete_Click"/>
-            <Button Content="Delete dep" Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="35" Margin="0,384,0,0" VerticalAlignment="Top" Width="50"/>
+            <!--ComboBox  Dependencies-->
+            <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="137,347,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding DependenciesProperty,Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChangedDeleteDep"/>
+            <!--ComboBox  options for Dependencies-->
+            <ComboBox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="31" Margin="61,388,0,0" VerticalAlignment="Top" Width="122" ItemsSource="{Binding TaskInListProperty, Mode=TwoWay}" SelectionChanged="ComboBoxAllTasks_SelectionChanged"/>
 
         </Grid>
 

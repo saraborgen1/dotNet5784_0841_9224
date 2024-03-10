@@ -1,4 +1,6 @@
-﻿namespace BlApi;
+﻿using BO;
+
+namespace BlApi;
 
 public interface ITask
 {
@@ -42,11 +44,8 @@ public interface ITask
     public void UpdateDate(int id, DateTime date);
 
     public void AutoScheduling();
-    public IEnumerable<BO.TaskInList> toTaskInList(Func<BO.Task, bool>? filter = null);
-
-    public List<int> DepIdList(BO.Task task);
-
-    public void UpdateDepList(BO.Task task, List<int> depIdList);
+    public TaskInList GetTaskInList(int id);
+    public List<TaskInList> GetAllTaskInList(int id);
 
 
 }
