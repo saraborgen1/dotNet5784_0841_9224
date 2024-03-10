@@ -207,7 +207,7 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Creation");
             if (item.CompleteDate != boTask.CompleteDate)
                 throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Creation");
-            if (item.Engineer != null)
+            if (item.Engineer.Id != null|| item.Engineer.Name!=null)
                 throw new BO.BlCannotUpdateWrongStateException("Engineer", "Creation");
         }
 
