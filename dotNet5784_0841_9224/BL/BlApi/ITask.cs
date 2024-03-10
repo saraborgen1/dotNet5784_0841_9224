@@ -46,6 +46,7 @@ public interface ITask
     public void AutoScheduling();
     public TaskInList GetTaskInList(int id);
     public List<TaskInList> GetAllTaskInList(int id);
+    public bool circuleDep(int id, BO.Task boTask);
 
 
 }

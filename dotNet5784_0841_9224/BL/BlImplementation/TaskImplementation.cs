@@ -55,7 +55,8 @@ internal class TaskImplementation : ITask
             var temp = item.Dependencies.ToList().Select(p =>
             {
 
-                circuleDep(item.Id, Read(p.Id));
+               if(! circuleDep(item.Id, Read(p.Id)))
+                    throw new BlCirculDepException("Cannot create a circular dependency");
                 _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
                 return p;
             });
@@ -270,6 +271,7 @@ internal class TaskImplementation : ITask
             }
 
         }
+        updateDependencies(item, boTask);
 
         DO.Task updatedTask = new DO.Task
         (item.Id, item.Alias, item.Description, item.CreatedAtDate, item.StartDate
@@ -416,7 +418,9 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("Dependencies", "Start");
         foreach (var dep in addDep)
         {
-            circuleDep(item.Id, Read(dep.Id));
+           if(!circuleDep(item.Id, Read(dep.Id)))
+                throw new BlCirculDepException("Cannot create a circular dependency");
+
             _dal.Dependency.Create(new DO.Dependency() { Id = 0, DependentOnTask = dep.Id, DependentTask = item.Id });
         }
         foreach (var dep in deletDep)
@@ -439,16 +443,17 @@ internal class TaskImplementation : ITask
 
 
     }
-    private void circuleDep(int id, BO.Task boTask)
+    public bool circuleDep(int id, BO.Task boTask)
     {
         if (boTask.Dependencies != null)
             foreach (var dep in boTask.Dependencies)
             {
                 if (dep.Id == id)
-                    throw new BlCirculDepException("Cannot create a circular dependency");
+                    return false;
                 var task = Read(dep.Id);
                 circuleDep(id, task);
             }
+        return true;
     }
 }
 

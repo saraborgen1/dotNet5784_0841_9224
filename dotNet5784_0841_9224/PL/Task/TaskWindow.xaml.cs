@@ -24,12 +24,20 @@ namespace PL.Task
             else
                 try
                 {
-                    TaskProperty = s_bl.Task.Read(id)!;
-                    TaskInListProperty = (s_bl.Task.ReadAll(p => p.Id != id)
-                        .Select(task => s_bl.Task.GetTaskInList(task.Id))
-                        .ToList()).ToList();
 
+                    TaskProperty = s_bl.Task.Read(id)!;
+                    if (TaskProperty.Dependencies == null)
+                        TaskProperty.Dependencies = new List<BO.TaskInList>();
+                    TaskInListProperty =
+                       (s_bl.Task.ReadAll(p => s_bl.Task.circuleDep(id, p) && p.Id != id)
+
+                       .Where
+                       (x => TaskProperty.Dependencies!.FirstOrDefault(t => t.Id == x.Id) == null)
+
+                       .Select(task => s_bl.Task.GetTaskInList(task.Id))
+                       ).ToList();
                 }
+
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -125,6 +133,7 @@ namespace PL.Task
                         return;
                     }
                     DependenciesProperty.Add((combo.SelectedItem as BO.TaskInList)!);
+                    TaskInListProperty.Remove((combo.SelectedItem as BO.TaskInList)!);
                 }
             }
         }
@@ -145,7 +154,10 @@ namespace PL.Task
             if (sender is ComboBox combo)
             {
                 if (combo != null)
+                {
                     DependenciesProperty.Remove((combo.SelectedItem as BO.TaskInList)!);
+                    TaskInListProperty.Add((combo.SelectedItem as BO.TaskInList)!);
+                }
             }
         }
     }
