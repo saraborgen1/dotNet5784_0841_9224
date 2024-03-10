@@ -19,20 +19,16 @@ namespace PL.Task
             if (id == 0)
             {
                 TaskProperty = new BO.Task();
-                TaskProperty.Dependencies = new List<BO.TaskInList>();
                 isCreate = true;
             }
             else
                 try
                 {
                     TaskProperty = s_bl.Task.Read(id)!;
-                    if(TaskProperty.Dependencies==null)
-                        TaskProperty.Dependencies = new List<BO.TaskInList>();
-
                     TaskInListProperty = (s_bl.Task.ReadAll(p => p.Id != id)
                         .Select(task => s_bl.Task.GetTaskInList(task.Id))
                         .ToList()).ToList();
-                    TaskProperty.Dependencies = (s_bl.Task.GetAllTaskInList(id));
+                    DependenciesProperty = new ObservableCollection<BO.TaskInList>(s_bl.Task.GetAllTaskInList(id));
                 }
                 catch (Exception ex)
                 {
@@ -55,6 +51,9 @@ namespace PL.Task
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
             //בדיקות תקינות ובדיקות מה מותר לעדכן מה ובאיזה שלב
+            if (DependenciesProperty != null)
+                TaskProperty.Dependencies = new List<BO.TaskInList>(DependenciesProperty.ToList());
+
 
             if (isCreate == true)
 
@@ -119,33 +118,33 @@ namespace PL.Task
             {
                 if (combo != null)
                 {
-                    if (TaskProperty.Dependencies!.Where(item => item == (combo.SelectedItem as BO.TaskInList)!).FirstOrDefault() != null)
+                    if (DependenciesProperty.Where(item => item == (combo.SelectedItem as BO.TaskInList)!).FirstOrDefault() != null)
                     {
                         MessageBox.Show("Cannot add dependency because it already exists ", "", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-                    TaskProperty.Dependencies.Add((combo.SelectedItem as BO.TaskInList)!);
+                    DependenciesProperty.Add((combo.SelectedItem as BO.TaskInList)!);
                 }
             }
         }
 
 
-        //public ObservableCollection<BO.TaskInList> DependenciesProperty
-        //{
-        //    get { return (ObservableCollection<BO.TaskInList>)GetValue(DependenciesPropertyProperty); }
-        //    set { SetValue(DependenciesPropertyProperty, value); }
-        //}
+        public ObservableCollection<BO.TaskInList> DependenciesProperty
+        {
+            get { return (ObservableCollection<BO.TaskInList>)GetValue(DependenciesPropertyProperty); }
+            set { SetValue(DependenciesPropertyProperty, value); }
+        }
 
-        //// Using a DependencyProperty as the backing store for DependenciesProperty.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty DependenciesPropertyProperty =
-        //    DependencyProperty.Register("DependenciesProperty", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
+        // Using a DependencyProperty as the backing store for DependenciesProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DependenciesPropertyProperty =
+            DependencyProperty.Register("DependenciesProperty", typeof(ObservableCollection<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
 
         private void ComboBox_SelectionChangedDeleteDep(object sender, SelectionChangedEventArgs e)
         {
             if (sender is ComboBox combo)
             {
                 if (combo != null)
-                    TaskProperty.Dependencies!.Remove((combo.SelectedItem as BO.TaskInList)!);
+                    DependenciesProperty.Remove((combo.SelectedItem as BO.TaskInList)!);
             }
         }
     }
