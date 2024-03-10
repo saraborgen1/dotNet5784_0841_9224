@@ -59,7 +59,6 @@ namespace PL.Task
 
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
-            //בדיקות תקינות ובדיקות מה מותר לעדכן מה ובאיזה שלב
             if (DependenciesProperty != null)
                 TaskProperty.Dependencies = new List<BO.TaskInList>(DependenciesProperty.ToList());
 
