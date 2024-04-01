@@ -6,13 +6,13 @@
     <Description>Planning the layout involves creating a blueprint for the building's design, considering spatial arrangements and functionality.</Description>
     <CreatedAtDate>2023-01-11T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-10T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-12T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-07T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-09T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Architectural Planning</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>2</Id>
@@ -20,13 +20,13 @@
     <Description>Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.</Description>
     <CreatedAtDate>2023-01-22T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-12T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-16T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-09T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-12T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Structural Framing</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>3</Id>
@@ -34,13 +34,13 @@
     <Description>Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.</Description>
     <CreatedAtDate>2023-02-02T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-16T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-20T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-12T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-15T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Electrical Wiring</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>4</Id>
@@ -48,13 +48,13 @@
     <Description>Plumbing installation involves setting up the plumbing system, including pipes, fixtures, and ensuring efficient water distribution.</Description>
     <CreatedAtDate>2023-02-13T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-24T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-19T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Plumbing Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>5</Id>
@@ -62,13 +62,13 @@
     <Description>HVAC Systems Setup focuses on installing heating, ventilation, and air conditioning systems to maintain a comfortable and controlled indoor environment.</Description>
     <CreatedAtDate>2023-02-24T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-22T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-19T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>HVAC Systems Setup</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>6</Id>
@@ -76,10 +76,10 @@
     <Description>Drywall installation is the process of fixing gypsum boards to create interior walls, providing a smooth and finished surface.</Description>
     <CreatedAtDate>2023-03-07T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-22T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-19T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Drywall Installation</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Expert</Copmlexity>
@@ -90,10 +90,10 @@
     <Description>Flooring installation involves laying various types of flooring materials, enhancing the aesthetics and functionality of different spaces.</Description>
     <CreatedAtDate>2023-03-18T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-22T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Flooring Installation</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Expert</Copmlexity>
@@ -104,13 +104,13 @@
     <Description>Roofing installation includes constructing the roof structure and covering, protecting the building from weather elements.</Description>
     <CreatedAtDate>2023-03-29T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-22T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Roofing Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>9</Id>
@@ -118,13 +118,13 @@
     <Description>Exterior painting is the application of protective coatings and decorative finishes to the exterior surfaces, enhancing the building's appearance.</Description>
     <CreatedAtDate>2023-04-09T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-23T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Exterior Painting</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>10</Id>
@@ -132,13 +132,13 @@
     <Description>Interior painting involves applying paint or finishes to interior walls, ceilings, and other surfaces, providing a desired aesthetic.</Description>
     <CreatedAtDate>2023-04-20T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-23T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Interior Painting</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>11</Id>
@@ -146,13 +146,13 @@
     <Description>Window installation focuses on placing windows, allowing natural light, ventilation, and enhancing the overall design of the building.</Description>
     <CreatedAtDate>2023-05-01T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-22T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Window Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>12</Id>
@@ -160,13 +160,13 @@
     <Description>Door installation involves fixing doors, providing security, access, and contributing to the building's architectural style.</Description>
     <CreatedAtDate>2023-05-12T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-24T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-19T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Door Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>13</Id>
@@ -174,13 +174,13 @@
     <Description>Cabinet installation is the process of placing storage cabinets in various rooms, optimizing space and organization.</Description>
     <CreatedAtDate>2023-05-23T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-24T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Cabinet Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>14</Id>
@@ -188,13 +188,13 @@
     <Description>Appliance setup includes installing and configuring household appliances, ensuring they function correctly and efficiently.</Description>
     <CreatedAtDate>2023-06-03T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-23T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-19T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Appliance Setup</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>15</Id>
@@ -202,13 +202,13 @@
     <Description>Landscaping design involves planning and creating an outdoor environment, incorporating greenery and aesthetic elements around the building.</Description>
     <CreatedAtDate>2023-06-14T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-23T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Landscaping Design</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>16</Id>
@@ -216,13 +216,13 @@
     <Description>Fence installation encompasses erecting boundaries around the property, enhancing security and privacy.</Description>
     <CreatedAtDate>2023-06-25T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-23T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-17T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Fence Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>17</Id>
@@ -230,10 +230,10 @@
     <Description>Driveway paving focuses on creating a paved surface for vehicles, enhancing accessibility and aesthetics.</Description>
     <CreatedAtDate>2023-07-06T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-23T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-17T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Driveway Paving</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Expert</Copmlexity>
@@ -244,8 +244,8 @@
     <Description>Home security system setup involves installing and configuring security systems to protect the building and its occupants.</Description>
     <CreatedAtDate>2023-07-17T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-24T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-19T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Home Security System Setup</Deliverables>
@@ -258,10 +258,10 @@
     <Description>Smart home integration includes incorporating advanced technologies to enhance automation and connectivity within the building.</Description>
     <CreatedAtDate>2023-07-28T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-20T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-24T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-15T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-18T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Smart Home Integration</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Advanced</Copmlexity>
@@ -272,8 +272,8 @@
     <Description>Final inspection is the last step, involving a thorough examination of the completed building to ensure quality, safety, and adherence to standards.</Description>
     <CreatedAtDate>2023-08-08T00:00:00</CreatedAtDate>
     <StartDate xsi:nil="true" />
-    <ScheduledDate>2024-03-10T00:00:00</ScheduledDate>
-    <DeadlineDate>2024-03-13T00:00:00</DeadlineDate>
+    <ScheduledDate>2023-11-07T00:00:00</ScheduledDate>
+    <DeadlineDate>2023-11-10T00:00:00</DeadlineDate>
     <CompleteDate xsi:nil="true" />
     <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Final Inspection</Deliverables>

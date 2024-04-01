@@ -6,17 +6,46 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="AnimatedButtonStyle" TargetType="Button">
+            <Setter Property="Opacity" Value="0"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="0" Y="50"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0" To="1" Duration="0:0:1"/>
+                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                             From="50" To="0" Duration="0:0:1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <!--A button that leads to the list view window-->
-        <Button Content="Engineer List view" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Margin="0,250,0,0" Click="btnEngineers_Click"/>
-        <!--A button that leads to initializing the database-->
-        <Button Content="Initialization" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Height="67" Width="232" Click="btnInitialization_Click"/>
-        <!--A button that leads to reset the database-->
-        <Button Content="Reset" HorizontalAlignment="Center" Height="60" Margin="0,50,0,0" VerticalAlignment="Top" Width="200" Click="btnReset_Click"/>
-        <Button Content="Task List View" HorizontalAlignment="Left" Height="60" Margin="58,250,0,0" VerticalAlignment="Top" Width="184" Click="btnTask_Click"/>
-        <Button Content="Gantt chart" HorizontalAlignment="Left" Height="58" Margin="58,126,0,0" VerticalAlignment="Top" Width="150" Click="btnGantt_Click"/>
-        <Button Content="Auto Scheduling" HorizontalAlignment="Left" Height="90" Margin="585,110,0,0" VerticalAlignment="Top" Width="110" Click="btnAutoScheduling_Click"
-                  IsEnabled="{Binding Source={StaticResource ConvertSchedulingIsEnabledKey}}"/>
-        <Button Content="Set Project dates" HorizontalAlignment="Left" Height="75" Margin="565,235,0,0" VerticalAlignment="Top" Width="130" Click="btnProjectDates_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <UniformGrid Grid.Row="0" Rows="2" Columns="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!--A button that leads to the list view window-->
+            <Button Content="Engineer List view" Style="{StaticResource AnimatedButtonStyle}" Height="60" Width="200" Click="btnEngineers_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <!--A button that leads to initializing the database-->
+            <Button Content="Initialization" Style="{StaticResource AnimatedButtonStyle}" Height="67" Width="232" Click="btnInitialization_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <!--A button that leads to reset the database-->
+            <Button Content="Reset" Style="{StaticResource AnimatedButtonStyle}" Height="60" Width="200" Click="btnReset_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="Task List View" Style="{StaticResource AnimatedButtonStyle}" Height="60" Width="200" Click="btnTask_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="Gantt chart" Style="{StaticResource AnimatedButtonStyle}" Height="58" Width="200" Click="btnGantt_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="Auto Scheduling" Style="{StaticResource AnimatedButtonStyle}" Height="90" Width="200" Click="btnAutoScheduling_Click"
+                    IsEnabled="{Binding Source={StaticResource ConvertSchedulingIsEnabledKey}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Content="Set Project dates" Style="{StaticResource AnimatedButtonStyle}" Height="75" Width="200" Click="btnProjectDates_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </UniformGrid>
     </Grid>
 </Window>
