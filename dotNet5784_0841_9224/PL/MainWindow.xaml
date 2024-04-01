@@ -6,14 +6,59 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187" Click="Button_Enter"/>
+        <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187" Click="Button_Enter">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="LightBlue"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Padding" Value="10"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="BorderBrush" Value="DarkBlue"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <!-- טריגר תכונה עבור כניסה של העכבר למעלה הכפתור "enter" -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="Blue" Offset="0"/>
+                                        <GradientStop Color="Green" Offset="0.33"/>
+                                        <GradientStop Color="Turquoise" Offset="0.66"/>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <!-- טריגר נתונים כדי להפעיל או לבטל אפשרות הכנסת סיסמה רק כאשר הוזן Id -->
+                        <DataTrigger Binding="{Binding Path=(TextBox.Text), ElementName=IdTextBox}" Value="">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+
+        <!-- השארתי את שאר הקוד שלך כמו שהוא -->
         <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,86,0,0" VerticalAlignment="Top" Width="111"/>
-       <!--Id text box-->
-        <TextBox HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <!--Id text box-->
+        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,148,0,0" VerticalAlignment="Top" Width="111"/>
-       <!--password box-->
+        <!--password box-->
         <PasswordBox HorizontalAlignment="Left" Height="42" Margin="40,137,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>
         <!--Button day-->
         <Button Content="One day" HorizontalAlignment="Left" Height="49" Margin="434,99,0,0" VerticalAlignment="Top" Width="67" Click="Button_AddDay"/>

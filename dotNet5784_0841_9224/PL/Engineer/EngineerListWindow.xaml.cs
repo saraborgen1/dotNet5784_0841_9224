@@ -111,5 +111,11 @@ namespace PL.Engineer
             }
 
         }
+        private void TextBox_Search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            string searchText = textBox.Text.ToLower();
+            EngineerList = new ObservableCollection<BO.Engineer>(_engineers.Where(engineer => engineer.Name.ToLower().Contains(searchText)));
+        }
     }
 }
