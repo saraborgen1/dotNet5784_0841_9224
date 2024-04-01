@@ -9,6 +9,7 @@
     <Grid>
         <!--A button that leads to the list view window-->
         <Button Content="Engineer List view" HorizontalAlignment="Center" VerticalAlignment="Top" Height="60" Width="200" Margin="0,250,0,0" Click="btnEngineers_Click"/>
+       
         <!--A button that leads to initializing the database-->
         <Button Content="Initialization" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Height="67" Width="232" Click="btnInitialization_Click"/>
         <!--A button that leads to reset the database-->

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -145,7 +146,6 @@ namespace PL.Engineer
                 if (f.ShowDialog() == true)
                 {
                     image.Source = new BitmapImage(new Uri(f.FileName));
-
                 }
             }
         }
