@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace PL.Engineer
 {
@@ -134,6 +136,18 @@ namespace PL.Engineer
             s_bl.Engineer.Delete(EngineerProperty.Id);
         }
 
- 
+        private void changeImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Image image)
+            {
+                Microsoft.Win32.OpenFileDialog f = new Microsoft.Win32.OpenFileDialog();
+                f.Filter = "JPEG Files (.jpeg)|.jpeg|PNG Files (.png)|.png|JPG Files (.jpg)|.jpg|GIF Files (.gif)|.gif";
+                if (f.ShowDialog() == true)
+                {
+                    image.Source = new BitmapImage(new Uri(f.FileName));
+
+                }
+            }
+        }
     }
 }

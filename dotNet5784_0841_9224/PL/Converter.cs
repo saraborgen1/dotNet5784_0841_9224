@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PL;
 
@@ -97,7 +98,7 @@ public class CellColorConverter : IMultiValueConverter
                     return new SolidColorBrush(Colors.LightGoldenrodYellow);
                 }
 
-                DateTime currentDate=s_bl.State.CurrentDate;
+                DateTime currentDate = s_bl.State.CurrentDate;
                 DateTime day;
                 if (DateTime.TryParse(columnName, out day))
                 {
@@ -107,13 +108,13 @@ public class CellColorConverter : IMultiValueConverter
                         var task = s_bl.Task.Read(taskId.Value);
                         if (day < task.ScheduledDate || day > task.ForecastDate)
                         {
-                           cell.Foreground = new SolidColorBrush(arrColors[0]);
+                            cell.Foreground = new SolidColorBrush(arrColors[0]);
                             return new SolidColorBrush(arrColors[0]);
                         }
                         else
                         {
                             //המשימה הסתיימה
-                            if (task.CompleteDate!=null)
+                            if (task.CompleteDate != null)
                             {
                                 cell.Foreground = new SolidColorBrush(arrColors[2]);
                                 return new SolidColorBrush(arrColors[2]);
@@ -128,13 +129,13 @@ public class CellColorConverter : IMultiValueConverter
                             if (task.StartDate == null)
                             {
                                 //לא התחילו כי לא הגיע זמן ההתחלה 
-                                if(task.ScheduledDate> currentDate)
+                                if (task.ScheduledDate > currentDate)
                                 {
                                     cell.Foreground = new SolidColorBrush(arrColors[3]);
                                     return new SolidColorBrush(arrColors[3]);
                                 }
                                 //לא התחילו את המשימה ועבר המועד המתוכנן להתחלה 
-                                if(currentDate > task.ScheduledDate)
+                                if (currentDate > task.ScheduledDate)
                                 {
                                     cell.Foreground = new SolidColorBrush(arrColors[4]);
                                     return new SolidColorBrush(arrColors[4]);
@@ -243,5 +244,36 @@ public class DependenciesConverter : IValueConverter
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
+    }
+}
+
+class ImageConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        try
+        {
+            if (!File.Exists((string)value))
+                throw new Exception("");
+
+            BitmapImage b = new BitmapImage(new Uri((string)value, UriKind.RelativeOrAbsolute));
+            Console.WriteLine(b.DpiX);
+            return b;
+        }
+        catch (Exception ex)
+        {
+            return new BitmapImage(new Uri(@"images\empty_image.gif", UriKind.RelativeOrAbsolute));
+        }
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        try
+        {
+            return ((BitmapImage)value).UriSource.AbsolutePath;
+        }
+        catch
+        {
+            return @"images\empty_image.gif";
+        }
     }
 }

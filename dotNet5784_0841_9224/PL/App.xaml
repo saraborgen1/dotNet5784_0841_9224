@@ -17,7 +17,7 @@
         <local:NullToBoolConverter x:Key="NullToBoolConverterKey"/>
         <local:DependenciesConverter x:Key="DependenciesConverterKey"/>
 
-
+        <local:ImageConverter x:Key="ImageConverter"/>
         <!--<local:DateToWidthConverter x:Key="DateToWidthConverterKey"/>-->
         <!--<\local: CurrentDa6 x:Key="-->
     </Application.Resources>
