@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="images\icon\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
 
