@@ -1,5 +1,9 @@
-﻿namespace BlApi;
-public static class Factory
+﻿namespace BlApi
 {
-    public static IBl Get() => new BlImplementation.Bl();
+    public static class Factory
+    {
+        private static readonly Lazy<IBl> lazyBl = new Lazy<IBl>(() => new BlImplementation.Bl(), LazyThreadSafetyMode.ExecutionAndPublication);
+
+        public static IBl Get() => lazyBl.Value;
+    }
 }
