@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
-    <Id>296414391</Id>
-    <Password>WZeC85zbUHRxdmD0z6HDAj51OEqRLf920VA7Qs7TicUf+fC6c9maEpgtAwxyQedkQaMo5eUQQd1rxv1QELnO0g==</Password>
-    <Salt>1163844925</Salt>
-    <Name>Sara Borgen</Name>
-    <Email>sara.borgen@emailgame.com</Email>
-    <Level>Advanced</Level>
-    <Cost>252</Cost>
-    <ImageSource>Empty Image</ImageSource>
-    <Active>true</Active>
-  </Engineer>
-  <Engineer>
     <Id>346509417</Id>
     <Password>X1hn9IXGWo6Mm3tIqCkPJ2AmjgFwk0wuz17dtTIYb5SggUyt2GMemiuK+5eU8jwbxtwoIOjBv5MTUoG/LkaTiw==</Password>
     <Salt>360495921</Salt>
@@ -19,7 +8,6 @@
     <Email>naama.radonsky@emailgame.com</Email>
     <Level>Expert</Level>
     <Cost>234</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -30,7 +18,6 @@
     <Email>ester.dray@emailgame.com</Email>
     <Level>Advanced</Level>
     <Cost>133</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -41,7 +28,6 @@
     <Email>ariela.levin@emailgame.com</Email>
     <Level>Intermediate</Level>
     <Cost>111</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -52,7 +38,6 @@
     <Email>dina.klein@emailgame.com</Email>
     <Level>Expert</Level>
     <Cost>107</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -63,7 +48,6 @@
     <Email>shira.israelof@emailgame.com</Email>
     <Level>Beginner</Level>
     <Cost>248</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -74,7 +58,6 @@
     <Email>dani.levi@emailgame.com</Email>
     <Level>Advanced</Level>
     <Cost>109</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -85,7 +68,6 @@
     <Email>Eliezer@gmail.com</Email>
     <Level>AdvancedBeginner</Level>
     <Cost>300</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -96,7 +78,16 @@
     <Email>shira.ka017@gmail.com</Email>
     <Level>Advanced</Level>
     <Cost>301</Cost>
-    <ImageSource>Empty Image</ImageSource>
+    <Active>true</Active>
+  </Engineer>
+  <Engineer>
+    <Id>296414391</Id>
+    <Password>WZeC85zbUHRxdmD0z6HDAj51OEqRLf920VA7Qs7TicUf+fC6c9maEpgtAwxyQedkQaMo5eUQQd1rxv1QELnO0g==</Password>
+    <Salt>1163844925</Salt>
+    <Name>Sara Borgen</Name>
+    <Email>sara.borgen@emailgame.com</Email>
+    <Level>Advanced</Level>
+    <Cost>252</Cost>
     <Active>true</Active>
   </Engineer>
   <Engineer>
@@ -107,7 +98,6 @@
     <Email>TAMARHAYAT1@gmail.com</Email>
     <Level>Advanced</Level>
     <Cost>301</Cost>
-    <ImageSource>Empty Image</ImageSource>
     <Active>true</Active>
   </Engineer>
 </ArrayOfEngineer>
