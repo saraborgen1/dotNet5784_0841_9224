@@ -64,22 +64,25 @@ namespace PL.Engineer
         /// <param name="e"></param>
         private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
         {
-            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            if (engineer != null)
+            MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to restore this engineer?", "Restoration Engineer", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+            if (mbResult == MessageBoxResult.Yes)
             {
-               
-                try
+                BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+                if (engineer != null)
                 {
-                    s_bl?.Engineer.RestoreEngineer(engineer);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                _engineers.Remove(engineer);
-                EngineerList.Remove(engineer);
-            }
 
+                    try
+                    {
+                        s_bl?.Engineer.RestoreEngineer(engineer);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    _engineers.Remove(engineer);
+                    EngineerList.Remove(engineer);
+                }
+            }
         }
         private void TextBox_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
