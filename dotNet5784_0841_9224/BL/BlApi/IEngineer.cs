@@ -52,4 +52,6 @@ public interface IEngineer
     /// <returns></returns>
     public string GetPassword(int id);
     public bool comparePassword(int id, string password);
+
+    public void RestoreEngineer(BO.Engineer engineer);
 }

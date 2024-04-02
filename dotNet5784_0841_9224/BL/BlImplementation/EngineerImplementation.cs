@@ -224,4 +224,23 @@ internal class EngineerImplementation : BlApi.IEngineer
             return true;
         return false;
     }
+    public void RestoreEngineer(BO.Engineer engineer)
+    {
+
+        var temp = _dal.Engineer.ReadAllDelete().FirstOrDefault(t => t.Id == engineer.Id);
+        if (temp != null)
+        {
+            temp.Active = true;
+            try
+            {
+                _dal.Engineer.Update(temp);
+            }
+            catch(DO.DalDoesNotExistsException ex) 
+            {
+                throw new BO.BlDoesNotExistException(ex);
+            }
+            
+        }
+       
+    }
 }
