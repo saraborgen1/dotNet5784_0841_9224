@@ -117,5 +117,6 @@ namespace PL.Engineer
             string searchText = textBox.Text.ToLower();
             EngineerList = new ObservableCollection<BO.Engineer>(_engineers.Where(engineer => engineer.Name.ToLower().Contains(searchText)));
         }
+
     }
 }
