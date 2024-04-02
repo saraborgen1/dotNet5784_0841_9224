@@ -87,5 +87,9 @@ namespace PL
             new WindowProjectDates().Show();
         }
 
+        private void DeletedEngineerWindow_Click(object sender, RoutedEventArgs e)
+        {
+            new DeletedEngineerWindow().Show();
+        }
     }
 }

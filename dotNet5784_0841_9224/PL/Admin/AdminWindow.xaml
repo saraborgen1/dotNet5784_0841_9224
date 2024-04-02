@@ -47,5 +47,6 @@
                     IsEnabled="{Binding Source={StaticResource ConvertSchedulingIsEnabledKey}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Button Content="Set Project dates" Style="{StaticResource AnimatedButtonStyle}" Height="75" Width="200" Click="btnProjectDates_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </UniformGrid>
+        <Button Content="Button" HorizontalAlignment="Left" Height="92" Margin="52,30,0,0" VerticalAlignment="Top" Width="166" Click="DeletedEngineerWindow_Click"/>
     </Grid>
 </Window>

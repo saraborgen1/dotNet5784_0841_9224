@@ -67,9 +67,17 @@ namespace PL.Engineer
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
             if (engineer != null)
             {
+               
+                try
+                {
+                    s_bl?.Engineer.RestoreEngineer(engineer);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 _engineers.Remove(engineer);
                 EngineerList.Remove(engineer);
-                
             }
 
         }
