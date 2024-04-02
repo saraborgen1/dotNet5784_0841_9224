@@ -11,19 +11,7 @@ public class Engineer
     public BO.Enums.EngineerExperience Level { get; set; }
     public double? Cost { get; set; }
     public BO.TaskInEngineer? Task { get; set; }
-    private string imageSource = (@"Empty Image");
-
-    [Browsable(false)]
-    public string ImageSource
-    {
-        get { return imageSource; }
-        set { imageSource = value; }
-    }
-
 
     public override string ToString() => this.ToStringProperty();
-
-
-
 
 }
