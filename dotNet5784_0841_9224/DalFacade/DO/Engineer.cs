@@ -17,8 +17,7 @@ public record Engineer
     string? Name = null,
     string? Email = null,
     EngineerExperience Level= EngineerExperience.Beginner,
-    double? Cost = null,
-    string ImageSource= (@"Empty Image")
+    double? Cost = null
 )
 {
     public bool Active { get; set; } = true;
