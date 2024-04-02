@@ -35,7 +35,7 @@ namespace PL.Engineer
         /// makes EngineerList  DependencyProperty
         /// </summary>
         public static readonly DependencyProperty EngineerListProperty =
-            DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(DeletedEngineerWindow), new PropertyMetadata(null));
 
         /// <summary>
         /// Level Property
@@ -87,7 +87,6 @@ namespace PL.Engineer
             string searchText = textBox.Text.ToLower();
             EngineerList = new ObservableCollection<BO.Engineer>(_engineers.Where(engineer => engineer.Name.ToLower().Contains(searchText)));
         }
-
     }
 }
 
