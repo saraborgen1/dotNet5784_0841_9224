@@ -57,7 +57,7 @@
         <!-- השארתי את שאר הקוד שלך כמו שהוא -->
         <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,86,0,0" VerticalAlignment="Top" Width="111"/>
         <!--Id text box-->
-        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="IdTextBox" PreviewTextInput="TextBox_PreviewTextInput" HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,148,0,0" VerticalAlignment="Top" Width="111"/>
         <!--password box-->
         <PasswordBox HorizontalAlignment="Left" Height="42" Margin="40,137,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>

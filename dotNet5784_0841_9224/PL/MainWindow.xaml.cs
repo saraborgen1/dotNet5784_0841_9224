@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PL
 {
@@ -128,5 +129,18 @@ namespace PL
         {
             new EngineerWorker(123456789).Show();
         }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            foreach (var c in e.Text)
+            {
+                if (!char.IsDigit(c))
+                {
+                    e.Handled = true; // מונע הקלדה של תווים שאינם ספרות
+                    return;
+                }
+            }
+        }
+
     }
 }
