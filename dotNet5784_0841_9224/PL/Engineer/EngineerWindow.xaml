@@ -39,9 +39,6 @@
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Height="81" Width="306"
            Click="Button_UpdateOrAdd" Grid.ColumnSpan="2"/>
         <!--Image-->
-        <Image HorizontalAlignment="Left" Height="164" Margin="68,40,0,0" VerticalAlignment="Top" Width="153"
-               Source="{Binding ImageSource, Mode=TwoWay, Converter={StaticResource ImageConverter}}"/>
-        <Button Content="Change Image" HorizontalAlignment="Left" Height="18" Margin="60,228,0,0" VerticalAlignment="Top" Width="166" Click="changeImageButton_Click"/>
 
         <!--<Button Content="DeleteEngineer" HorizontalAlignment="Left" Height="67" Margin="55,297,0,0" VerticalAlignment="Top" Width="164" Click="Button_Click"/>-->
     </Grid>

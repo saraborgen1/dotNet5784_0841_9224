@@ -70,14 +70,6 @@ class ConvertIdEngineerIsEnabled : IValueConverter
     }
 }
 
-//class ImageConverter : IValueConverter
-//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-//{ }
-//    try
-//    {
-//    if(!File.Exists((string) Value))
-//    throw new Exception(" ");
-//BitmapImage b = new BitmapImage(new Uri((string)value, Urikind.Relati))
 
 public class CellColorConverter : IMultiValueConverter
 {
@@ -244,37 +236,5 @@ public class DependenciesConverter : IValueConverter
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
-    }
-}
-
-
-class ImageConverter : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        try
-        {
-            if (!File.Exists((string)value))
-                throw new Exception("");
-
-            BitmapImage b = new BitmapImage(new Uri((string)value, UriKind.RelativeOrAbsolute));
-            Console.WriteLine(b.DpiX);
-            return b;
-        }
-        catch (Exception ex)
-        {
-            return new BitmapImage(new Uri(@"images\empty_image.gif", UriKind.RelativeOrAbsolute));
-        }
-    }
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        try
-        {
-            return ((BitmapImage)value).UriSource.AbsolutePath;
-        }
-        catch
-        {
-            return @"images\empty_image.gif";
-        }
     }
 }
