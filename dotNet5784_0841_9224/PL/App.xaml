@@ -5,6 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!--<BitmapImage x:Key="engineerIcon" UriSource="images\icon\EngineerIcon.ico"></BitmapImage>-->
             <local:EngineersCollection x:Key="EngineersCollectionKey"/>
             <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
             <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
