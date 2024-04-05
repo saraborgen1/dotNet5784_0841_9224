@@ -36,7 +36,10 @@ namespace PL
         {
             MessageBoxResult mbResult = MessageBox.Show("Do you want to initialize the data?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (mbResult == MessageBoxResult.Yes)
+            {
+                DalTest.Initialization.Reset();
                 DalTest.Initialization.Do();
+            }
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)

@@ -27,7 +27,7 @@ internal static class DataSource
 
         public static DateTime currentDate = DateTime.Now;
         public static string adminPassword = "12345678";
-        public static int adminUserId = 0;
+        public static int adminUserId = 100000000;
     }
     internal static List<DO.Task> Tasks { get; } = new();
     internal static List<DO.Engineer> Engineers { get; } = new();
