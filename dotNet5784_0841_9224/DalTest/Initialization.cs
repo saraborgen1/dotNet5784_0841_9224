@@ -136,12 +136,7 @@ public static class Initialization
         for (int i = 1; i < 21; i++)
         {
             DateTime start = new DateTime(2023, 1, i);
-            int range = (DateTime.Today - start).Days;
-            DateTime _createdAtDate = start.AddDays(i * 10);
-            DateTime _StartDate = _createdAtDate.AddDays(i * 10);
-            DateTime _ScheduledDate = _createdAtDate.AddDays(i * 10);
-            DateTime _DeadlineDate = _ScheduledDate.AddDays(i + 50);
-            DateTime _CompleteDate = _ScheduledDate.AddDays(2);
+            DateTime _createdAtDate = DateTime.Today;
             TimeSpan _requiredEffortTime = TimeSpan.FromDays( s_rand.Next(2, 5));
             int _numforenum = s_rand.Next(0, 5);
             EngineerExperience _EngineerId = (EngineerExperience)_numforenum;

@@ -19,13 +19,23 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlTheInputIsInvalidException">The Input Is Invalid</exception>
     private void validation(BO.Task item)
     {
-        if (state.StatusProject() == BO.Enums.ProjectStatus.Start)
+        if (state.StatusProject() != BO.Enums.ProjectStatus.Creation)
             throw new BO.BlCannotAddWrongStateException("Cannot create a task at this state");
         if (state.StatusProject() != BO.Enums.ProjectStatus.Creation && item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Alias == null) throw new BO.BlTheInputIsInvalidException("Name");
         if (item.Description == null) throw new BO.BlTheInputIsInvalidException("Description");
         if (item.RequiredEffortTime == null || item.RequiredEffortTime < TimeSpan.Zero) throw new BO.BlTheInputIsInvalidException("RequiredEffortTime");
         if (item.Deliverables == null) throw new BO.BlTheInputIsInvalidException("Deliverables");
+        if (item.StartDate != null)
+            throw new BO.BlCannotUpdateWrongStateException("StartDate", "Creation");
+        if (item.ScheduledDate != null)
+            throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Creation");
+        if (item.CompleteDate !=null)
+            throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Creation");
+        if (item.Engineer.Id != null || item.Engineer.Name != null)
+            throw new BO.BlCannotUpdateWrongStateException("Engineer", "Creation");
+        if (item.ForecastDate != null)
+            throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
     }
 
     /// <summary>
@@ -210,6 +220,8 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Creation");
             if (item.Engineer.Id != null|| item.Engineer.Name!=null)
                 throw new BO.BlCannotUpdateWrongStateException("Engineer", "Creation");
+            if(item.ForecastDate!= boTask.ForecastDate)
+                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Scheduling)
@@ -224,6 +236,8 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Scheduling");
             if (item.Engineer != null)
                 throw new BO.BlCannotUpdateWrongStateException("Engineer", "Scheduling");
+            if (item.ForecastDate != boTask.ForecastDate)
+                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Start)
@@ -235,6 +249,8 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("RequiredEffortTime", "Start");
            if(item.ScheduledDate != boTask.ScheduledDate)
                 throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Start");
+            if (item.ForecastDate != boTask.ForecastDate)
+                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
