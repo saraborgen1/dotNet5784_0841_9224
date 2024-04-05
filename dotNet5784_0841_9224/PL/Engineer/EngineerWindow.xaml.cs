@@ -90,10 +90,23 @@ namespace PL.Engineer
                     MessageBox.Show("A dot must appear in the email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 };
+                foreach (char c in EngineerProperty.Email)
+                {
+                    if (char.IsWhiteSpace(c))
+                    {
+                        MessageBox.Show("Do not put a space in an email address", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
             }
             if (EngineerProperty.Cost == null || EngineerProperty.Cost <= 0)
             {
                 MessageBox.Show("Must enter a positive salary for the employee", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if  (EngineerProperty.Password.Length < 8 || EngineerProperty.Password.Length>13)
+            {
+                MessageBox.Show("Password must be between 8 and 13 characters", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -105,8 +118,8 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(EngineerProperty);
                     _onUpdateOrAdd((EngineerProperty.Id, true));
-                    string? _password = s_bl.Engineer.GetPassword(EngineerProperty.Id);
-                    MessageBox.Show($"Your engineer password is:{_password}", "password", MessageBoxButton.OK, MessageBoxImage.Information);
+                   // string? _password = s_bl.Engineer.GetPassword(EngineerProperty.Id);
+                    MessageBox.Show($"Your engineer password is:{EngineerProperty.Password}", "password", MessageBoxButton.OK, MessageBoxImage.Information);
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                     return;

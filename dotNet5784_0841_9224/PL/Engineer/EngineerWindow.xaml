@@ -22,6 +22,8 @@
         <Label Content="Level" HorizontalAlignment="Left" Margin="322,188,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--Label Cost-->
         <Label Content="Cost" HorizontalAlignment="Left" Margin="322,228,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <!--Label Password-->
+        <Label Content="Password" HorizontalAlignment="Left" Height="26" Margin="322,268,0,0" VerticalAlignment="Top" Width="77"/>
         <!--TextBox Id-->
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,68,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"
                 IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
@@ -35,6 +37,9 @@
                   SelectedValue="{Binding Level, Mode=TwoWay}"/>
         <!--TextBox  Cost-->
         <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,228,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <!--TextBox  Password-->
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,268,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+
         <!--Button Add/Update-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Height="81" Width="306"
            Click="Button_UpdateOrAdd" Grid.ColumnSpan="2"/>

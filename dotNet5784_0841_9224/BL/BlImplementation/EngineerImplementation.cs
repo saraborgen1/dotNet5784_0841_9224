@@ -56,8 +56,15 @@ internal class EngineerImplementation : BlApi.IEngineer
         {
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
+            foreach (char c in item.Email)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    throw new BO.BlTheInputIsInvalidException("Email");
+                }
+            }
         }
-        if(item.Password==null) throw new BO.BlTheInputIsInvalidException("Password");
+        if(item.Password==null|| item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
         item.Salt = s_rand.Next();
         DO.Engineer doEngineer = new DO.Engineer
             (item.Id, hashPassword(item.Password+ item.Salt), item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
@@ -165,8 +172,15 @@ internal class EngineerImplementation : BlApi.IEngineer
         {
             if (!item.Email.Contains("@")) throw new BO.BlTheInputIsInvalidException("Email");
             if (!item.Email.Contains(".")) throw new BO.BlTheInputIsInvalidException("Email");
+            foreach (char c in item.Email)
+            {
+                if (char.IsWhiteSpace(c))
+                {
+                    throw new BO.BlTheInputIsInvalidException("Email");
+                }
+            }
         }
-        if (item.Password == null) throw new BO.BlTheInputIsInvalidException("Password");
+        if (item.Password == null || item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
         if ((doEngeenir.Level > (DO.EngineerExperience)item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
         try
         {
