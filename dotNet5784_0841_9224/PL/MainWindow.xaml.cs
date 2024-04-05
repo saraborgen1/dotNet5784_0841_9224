@@ -61,34 +61,23 @@ namespace PL
 
         private void Button_Enter(object sender, RoutedEventArgs e)
         {
-            if (IdProperty == s_bl.AdminUserId)
-                if (PasswordProperty == s_bl.AdminPassword)
-                    new AdminWindow().Show();
-                else
-                {
-                    MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+            if (IdProperty==s_bl.AdminUserId && PasswordProperty == s_bl.AdminPassword)
+                new AdminWindow().Show();
             else
             {
                 try
                 {
-                    //var engineer = s_bl.Engineer.Read(IdProperty);
-                        if (s_bl.Engineer.comparePassword(IdProperty,PasswordProperty))
-                            new EngineerWorker(IdProperty).Show();
-                        else
-                        {
-                            MessageBox.Show("Wrong password", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                        }
+                    if (s_bl.Engineer.comparePassword(IdProperty, PasswordProperty))
+                        new EngineerWorker(IdProperty).Show();
+                    else
+                        MessageBox.Show("One of the entered data is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    MessageBox.Show("One of the entered data is incorrect", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
 
+            }
         }
 
 
