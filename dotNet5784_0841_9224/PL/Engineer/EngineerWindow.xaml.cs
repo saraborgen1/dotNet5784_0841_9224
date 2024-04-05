@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -63,7 +62,7 @@ namespace PL.Engineer
         /// <param name="e"></param>
         private void Button_UpdateOrAdd(object sender, RoutedEventArgs e)
         {
-            
+
             if (EngineerProperty.Id < 100000000 || EngineerProperty.Id > 1000000000)
             {
                 MessageBox.Show("The Id must contain exactly 9 digits", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -71,7 +70,7 @@ namespace PL.Engineer
             }
             if (EngineerProperty.Name == " ")
             {
-               MessageBox.Show("You must enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("You must enter a name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (EngineerProperty.Email == null)
@@ -106,7 +105,7 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(EngineerProperty);
                     _onUpdateOrAdd((EngineerProperty.Id, true));
-                    string? _password=s_bl.Engineer.GetPassword(EngineerProperty.Id);
+                    string? _password = s_bl.Engineer.GetPassword(EngineerProperty.Id);
                     MessageBox.Show($"Your engineer password is:{_password}", "password", MessageBoxButton.OK, MessageBoxImage.Information);
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -132,9 +131,20 @@ namespace PL.Engineer
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.Engineer.Delete(EngineerProperty.Id);
+            try
+            {
+                s_bl.Engineer.Delete(EngineerProperty.Id);
+                _onUpdateOrAdd((EngineerProperty.Id, false));
+                MessageBox.Show("The engineer was successfully deleted", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         private void changeImageButton_Click(object sender, RoutedEventArgs e)
@@ -149,5 +159,6 @@ namespace PL.Engineer
                 }
             }
         }
+
     }
 }

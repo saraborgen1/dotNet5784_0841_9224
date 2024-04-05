@@ -55,7 +55,7 @@ namespace PL.Engineer
 
         }
 
-    
+
 
         /// <summary>
         /// Opening a single item display window in update mode
@@ -64,24 +64,26 @@ namespace PL.Engineer
         /// <param name="e"></param>
         private void SelectedEngineer(object sender, SelectionChangedEventArgs e)
         {
-            MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to restore this engineer?", "Restoration Engineer", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-            if (mbResult == MessageBoxResult.Yes)
+            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineer != null)
             {
-                BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-                if (engineer != null)
-                {
 
+                MessageBoxResult mbResult = MessageBox.Show("Are you sure you want to restore this engineer?", "Restoration Engineer", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (mbResult == MessageBoxResult.Yes)
+                {
                     try
                     {
                         s_bl?.Engineer.RestoreEngineer(engineer);
+                        _engineers.Remove(engineer);
+                        EngineerList.Remove(engineer);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    _engineers.Remove(engineer);
-                    EngineerList.Remove(engineer);
+
                 }
+
             }
         }
         private void TextBox_Search_TextChanged(object sender, TextChangedEventArgs e)

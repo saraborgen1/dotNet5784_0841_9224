@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <local:EngineersCollection x:Key="EngineersCollectionKey"/>
+            <local:ConvertIdToDeleteVisibility x:Key="ConvertIdToDeleteVisibilityKey"/>
             <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
             <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
             <local:ConvertIdEngineerIsEnabled x:Key="ConvertIdEngineerIsEnabledKey"/>

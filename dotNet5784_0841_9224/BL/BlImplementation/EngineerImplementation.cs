@@ -94,7 +94,7 @@ internal class EngineerImplementation : BlApi.IEngineer
         BO.Engineer engineer = Read(id)!;
 
         var doTask = _dal.Task.ReadAll().Where(p => p.EngineerId == id).ToList();
-        if (doTask == null)
+        if (doTask != null)
         {
             try
             {

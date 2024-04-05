@@ -3,7 +3,7 @@ using DalApi;
 using DO;
 using System;
 
-sealed internal class DalList : IDal
+sealed internal class DalList : IDal 
 {
     public static IDal Instance { get; } = new DalList();
     private DalList() { }

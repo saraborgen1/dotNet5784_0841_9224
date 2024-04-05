@@ -63,20 +63,29 @@ namespace PL.Engineer
         {
             try
             {
-                var engineer = s_bl.Engineer.Read(item.engineerId);
                 if (item.isUpdateOrAdd)
                 {
+                    var engineer = s_bl.Engineer.Read(item.engineerId);
                     EngineerList.Add(engineer!);
                     _engineers.Add(engineer!);
                 }
                 else
                 {
+                    var delEngineer = s_bl.Engineer.ReadAllDelete().FirstOrDefault(t => t.Id == item.engineerId);
                     var index = _engineers.FindIndex(e => e.Id == item.engineerId);
                     if (index is not -1)
                     {
-
-                        EngineerList[index] = engineer!;
-                        _engineers[index] = engineer!;
+                        if (delEngineer == null)
+                        {
+                            var engineer = s_bl.Engineer.Read(item.engineerId);
+                            EngineerList[index] = engineer!;
+                            _engineers[index] = engineer!;
+                        }
+                        else
+                        {
+                            EngineerList.RemoveAt(index);
+                            _engineers.RemoveAt(index);
+                        }
 
                     }
                 }
