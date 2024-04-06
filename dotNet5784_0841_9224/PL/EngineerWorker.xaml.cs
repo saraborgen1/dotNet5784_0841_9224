@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.Task;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,8 @@ namespace PL
                 if(EngineerProperty!.Task!=null) 
                     EngineerWorkerProperty=s_bl.Task.Read(EngineerProperty.Task.Id);
                 TaskList = new ObservableCollection<BO.Task>(s_bl.Engineer.AvailableTasks(EngineerProperty));
+                if (EngineerWorkerProperty.Dependencies != null)
+                    DependenciesProperty = new ObservableCollection<BO.TaskInList>(EngineerWorkerProperty.Dependencies);
             }
             catch (Exception ex)
             {
@@ -28,6 +31,15 @@ namespace PL
             }
             InitializeComponent();
         }
+        public ObservableCollection<BO.TaskInList> DependenciesProperty
+        {
+            get { return (ObservableCollection<BO.TaskInList>)GetValue(DependenciesPropertyProperty); }
+            set { SetValue(DependenciesPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DependenciesProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DependenciesPropertyProperty =
+            DependencyProperty.Register("DependenciesProperty", typeof(ObservableCollection<BO.TaskInList>), typeof(EngineerWorker), new PropertyMetadata(null));
 
         /// <summary>
         /// 

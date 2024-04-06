@@ -12,7 +12,7 @@
             <ColumnDefinition Width="57*"/>
             <ColumnDefinition Width="103*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty}" VerticalAlignment="Top" Height="424" Width="390" Grid.ColumnSpan="2"/>
+        <!-- <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty}" VerticalAlignment="Top" Height="424" Width="390" Grid.ColumnSpan="2"/>-->
 
         <!-- List display -->
         <ListView Margin="272,5,5,5" ItemsSource="{Binding TaskList}" SelectionChanged="SelectedTask" Grid.ColumnSpan="2">
@@ -55,5 +55,34 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Label Content="Id" HorizontalAlignment="Left" Height="35" Margin="0,0,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="{Binding EngineerWorkerProperty.Id}" HorizontalAlignment="Left" Height="35" Margin="138,0,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="Alias" HorizontalAlignment="Left" Height="35" Margin="0,30,0,0" VerticalAlignment="Top" Width="126"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty.Alias, Mode=TwoWay}" VerticalAlignment="Top" Width="126" Height="25" Margin="138,30,0,0"/>
+        <Label Content="Description" HorizontalAlignment="Left" Height="35" Margin="0,60,0,0" VerticalAlignment="Top" Width="126"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty.Description, Mode=TwoWay}" VerticalAlignment="Top" Width="126" Height="25" Margin="138,60,0,0"/>
+        <Label Content="CreatedAtDate" HorizontalAlignment="Left" Height="35" Margin="0,90,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="{Binding EngineerWorkerProperty.CreatedAtDate, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Left" Height="35" Margin="138,90,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="RequiredEffortTime" HorizontalAlignment="Left" Height="35" Margin="0,120,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="{Binding EngineerWorkerProperty.RequiredEffortTime}" HorizontalAlignment="Left" Height="35" Margin="138,120,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="StartDate" HorizontalAlignment="Left" Height="35" Margin="0,150,0,0" VerticalAlignment="Top" Width="126"/>
+        <DatePicker HorizontalAlignment="Left" Margin="138,150,0,0" VerticalAlignment="Top" SelectedDate="{Binding EngineerWorkerProperty.StartDate, Mode=TwoWay}"/>
+        <Label Content="ScheduledDate" HorizontalAlignment="Left" Height="35" Margin="0,180,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="{Binding EngineerWorkerProperty.ScheduledDate, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Left" Height="35" Margin="138,180,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="Dependencies" HorizontalAlignment="Left" Height="35" Margin="0,210,0,0" VerticalAlignment="Top" Width="126"/>
+        <ComboBox  HorizontalAlignment="Left" Height="25" Margin="138,210,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding DependenciesProperty,Mode=TwoWay}"/>
+        <Label Content="ForecastDate" HorizontalAlignment="Left" Height="35" Margin="0,240,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="{Binding EngineerWorkerProperty.ForecastDate, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Left" Height="35" Margin="138,240,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="CompleteDate" HorizontalAlignment="Left" Height="35" Margin="0,270,0,0" VerticalAlignment="Top" Width="126"/>
+        <DatePicker HorizontalAlignment="Left" Margin="138,270,0,0" VerticalAlignment="Top" SelectedDate="{Binding EngineerWorkerProperty.CompleteDate, Mode=TwoWay}"/>
+        <Label Content="Deliverables" HorizontalAlignment="Left" Height="35" Margin="0,300,0,0" VerticalAlignment="Top" Width="126"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty.Deliverables, Mode=TwoWay}" VerticalAlignment="Top" Width="126" Height="25" Margin="138,300,0,0"/>
+        <Label Content="Remarks" HorizontalAlignment="Left" Height="35" Margin="0,330,0,0" VerticalAlignment="Top" Width="126"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty.Remarks, Mode=TwoWay}" VerticalAlignment="Top" Width="126" Height="25" Margin="138,330,0,0"/>
+        <Label Content="Copmlexity" HorizontalAlignment="Left" Height="35" Margin="0,360,0,0" VerticalAlignment="Top" Width="126"/>
+        <Label Content="{Binding EngineerWorkerProperty.Copmlexity}" HorizontalAlignment="Left" Height="35" Margin="138,360,0,0" VerticalAlignment="Top" Width="126"/>
+        <Button Content="Update" HorizontalAlignment="Left" Height="29" Margin="10,400,0,0" VerticalAlignment="Top" Width="191"/>
+
+
     </Grid>
 </Window>
