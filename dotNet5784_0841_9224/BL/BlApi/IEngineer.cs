@@ -54,4 +54,6 @@ public interface IEngineer
     public bool comparePassword(int id, string password);
 
     public void RestoreEngineer(BO.Engineer engineer);
+
+    public List<BO.Task> AvailableTasks(BO.Engineer engineer);
 }

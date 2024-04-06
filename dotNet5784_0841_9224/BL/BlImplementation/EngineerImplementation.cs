@@ -1,6 +1,8 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using BO;
 using DalApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +34,7 @@ internal class EngineerImplementation : BlApi.IEngineer
             Email = doEngineer.Email,
             Level = (BO.Enums.EngineerExperience)doEngineer.Level,
             Cost = doEngineer.Cost,
-            Task = new BO.TaskInEngineer()
-            {
-                Id = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!?.Id ??0,
-                Alias = _dal.Task.Read(p => p.EngineerId == doEngineer.Id)!?.Ailas ??" "
-            }
+            Task = getTaskInEngineer(doEngineer.Id)
         };
     }
 
@@ -99,9 +97,7 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
 
         BO.Engineer engineer = Read(id)!;
-
-        var doTask = _dal.Task.ReadAll().Where(p => p.EngineerId == id).ToList();
-        if (doTask != null)
+        if (getTaskInEngineer(id) != null)
         {
             try
             {
@@ -256,5 +252,47 @@ internal class EngineerImplementation : BlApi.IEngineer
             
         }
        
+    }
+
+
+
+    private TaskInEngineer? getTaskInEngineer(int  id)
+    {
+        var task = _dal.Task.Read(p => (p.EngineerId == id && p.CompleteDate==null));
+        if (task != null)
+            return new BO.TaskInEngineer()
+            {
+                Id = task.Id,
+                Alias = task.Ailas
+            };
+            return null;
+    }
+
+    public List<BO.Task> AvailableTasks(BO.Engineer engineer)
+    {
+        var _task = new TaskImplementation();
+        return _task.ReadAll( s => s.Engineer?.Id == null && s.Copmlexity <= engineer.Level && AreDependentTasksCompleted(s)).ToList();
+    }
+
+    private bool AreDependentTasksCompleted(BO.Task task)
+    {
+        var _task = new TaskImplementation();
+        // אם אין למשימה תלויות, מחזירים TRUE
+        if (task.Dependencies == null || task.Dependencies.Count == 0)
+            return true;
+
+        // לולאה על כל התלויות של המשימה
+        foreach (var dependentTask in task.Dependencies)
+        {
+            // אם המשימה התלויה עדיין לא הסתיימה, מחזירים FALSE
+            if (dependentTask.Status == BO.Enums.Status.Done)
+                return true;
+
+            // בדיקה רקורסיבית של המשימות התלויות של המשימה התלויה
+            AreDependentTasksCompleted(_task.Read(dependentTask.Id));
+        }
+
+        // אם עברנו על כל התלויות וכולן הסתיימו, מחזירים TRUE
+        return false;
     }
 }
