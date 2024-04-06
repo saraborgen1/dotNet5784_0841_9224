@@ -97,5 +97,20 @@ namespace PL
             }
 
         }
+
+        private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                s_bl.Task.Update(EngineerWorkerProperty);
+                MessageBox.Show("The Task was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
     }
 }
