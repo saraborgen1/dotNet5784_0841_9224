@@ -9,10 +9,10 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Architectural Planning</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>2</Id>
@@ -23,10 +23,10 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Structural Framing</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Beginner</Copmlexity>
   </Task>
   <Task>
     <Id>3</Id>
@@ -37,7 +37,7 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Electrical Wiring</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Intermediate</Copmlexity>
@@ -51,7 +51,7 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Plumbing Installation</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Advanced</Copmlexity>
@@ -65,7 +65,7 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>HVAC Systems Setup</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Expert</Copmlexity>
@@ -82,7 +82,7 @@
     <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Drywall Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>7</Id>
@@ -107,10 +107,10 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Roofing Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
   <Task>
     <Id>9</Id>
@@ -124,7 +124,7 @@
     <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Exterior Painting</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
     <Id>10</Id>
@@ -138,7 +138,7 @@
     <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Interior Painting</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Intermediate</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>11</Id>
@@ -152,7 +152,7 @@
     <RequiredEffortTime>P3D</RequiredEffortTime>
     <Deliverables>Window Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Beginner</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>12</Id>
@@ -163,7 +163,7 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Door Installation</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Intermediate</Copmlexity>
@@ -180,7 +180,7 @@
     <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Cabinet Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>14</Id>
@@ -191,7 +191,7 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P3D</RequiredEffortTime>
+    <RequiredEffortTime>P4D</RequiredEffortTime>
     <Deliverables>Appliance Setup</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>AdvancedBeginner</Copmlexity>
@@ -219,10 +219,10 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Fence Installation</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Advanced</Copmlexity>
   </Task>
   <Task>
     <Id>17</Id>
@@ -247,7 +247,7 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Home Security System Setup</Deliverables>
     <EngineerId xsi:nil="true" />
     <Copmlexity>Beginner</Copmlexity>
@@ -275,9 +275,9 @@
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P4D</RequiredEffortTime>
+    <RequiredEffortTime>P2D</RequiredEffortTime>
     <Deliverables>Final Inspection</Deliverables>
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Advanced</Copmlexity>
+    <Copmlexity>Intermediate</Copmlexity>
   </Task>
 </ArrayOfTask>
