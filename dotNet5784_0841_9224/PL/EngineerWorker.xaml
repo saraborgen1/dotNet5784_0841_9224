@@ -19,39 +19,39 @@
             <ListView.View>
                 <GridView>
                     <!-- ID -->
-                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding TaskList.Id}" Width="50" />
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="50" />
                     <!-- Alias -->
-                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding TaskList.Alias}" Width="100" />
+                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}" Width="100" />
                     <!-- Description -->
-                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding TaskList.Description}" Width="150" />
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150" />
                     <!-- Status -->
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding TaskList.Status}" Width="100" />
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100" />
                     <!-- Dependencies -->
                     <GridViewColumn Header="Dependencies">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding TaskList.Dependencies, Converter={StaticResource DependenciesConverterKey}}" />
+                                <TextBlock Text="{Binding Dependencies, Converter={StaticResource DependenciesConverterKey}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <!-- RequiredEffortTime -->
-                    <GridViewColumn Header="Effort Time" DisplayMemberBinding="{Binding TaskList.RequiredEffortTime}" Width="100" />
+                    <GridViewColumn Header="Effort Time" DisplayMemberBinding="{Binding RequiredEffortTime}" Width="100" />
                     <!-- StartDate -->
-                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding TaskList.StartDate}" Width="100" />
+                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}" Width="100" />
                     <!-- ScheduledDate -->
-                    <GridViewColumn Header="Scheduled Date" DisplayMemberBinding="{Binding TaskList.ScheduledDate}" Width="100" />
+                    <GridViewColumn Header="Scheduled Date" DisplayMemberBinding="{Binding ScheduledDate}" Width="100" />
                     <!-- ForecastDate -->
-                    <GridViewColumn Header="Forecast Date" DisplayMemberBinding="{Binding TaskList.ForecastDate}" Width="100" />
+                    <GridViewColumn Header="Forecast Date" DisplayMemberBinding="{Binding ForecastDate}" Width="100" />
                     <!-- CompleteDate -->
-                    <GridViewColumn Header="Complete Date" DisplayMemberBinding="{Binding TaskList.CompleteDate}" Width="100" />
+                    <GridViewColumn Header="Complete Date" DisplayMemberBinding="{Binding CompleteDate}" Width="100" />
                     <!-- Deliverables -->
-                    <GridViewColumn Header="Deliverables" DisplayMemberBinding="{Binding TaskList.Deliverables}" Width="150" />
+                    <GridViewColumn Header="Deliverables" DisplayMemberBinding="{Binding Deliverables}" Width="150" />
                     <!-- Remarks -->
-                    <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding TaskList.TaskListRemarks}" Width="150" />
+                    <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding TaskListRemarks}" Width="150" />
                     <!-- Engineer -->
-                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding TaskList.Engineer}" Width="100" />
+                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding Engineer}" Width="100" />
                     <!-- Complexity -->
-                    <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding TaskList.Complexity}" Width="100" />
+                    <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding Complexity}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>
