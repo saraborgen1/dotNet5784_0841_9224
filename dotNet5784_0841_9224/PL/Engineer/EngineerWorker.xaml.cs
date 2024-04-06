@@ -18,11 +18,15 @@ namespace PL
             try
             {
                  EngineerProperty = s_bl.Engineer.Read(engineerId)!;
-                if(EngineerProperty!.Task!=null) 
-                    EngineerWorkerProperty=s_bl.Task.Read(EngineerProperty.Task.Id);
-                TaskList = new ObservableCollection<BO.Task>(s_bl.Engineer.AvailableTasks(EngineerProperty));
-                if (EngineerWorkerProperty.Dependencies != null)
-                    DependenciesProperty = new ObservableCollection<BO.TaskInList>(EngineerWorkerProperty.Dependencies);
+                if(EngineerProperty!.Task!=null)
+                {
+                    EngineerWorkerProperty = s_bl.Task.Read(EngineerProperty.Task.Id);
+                    if (EngineerWorkerProperty.Dependencies != null)
+                        DependenciesProperty = new ObservableCollection<BO.TaskInList>(EngineerWorkerProperty.Dependencies);
+                    TaskList = new ObservableCollection<BO.Task>(s_bl.Engineer.AvailableTasks(EngineerProperty));
+
+                }
+
             }
             catch (Exception ex)
             {
