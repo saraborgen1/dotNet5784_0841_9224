@@ -30,24 +30,27 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <UniformGrid Grid.Row="0" Rows="2" Columns="3" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <!--A button that leads to the list view window-->
-            <Button Content="Engineer List view" Style="{StaticResource AnimatedButtonStyle}" Height="60" Width="200" Click="btnEngineers_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <!--A button that leads to initializing the database-->
-            <Button Content="Initialization" Style="{StaticResource AnimatedButtonStyle}" Height="67" Width="232" Click="btnInitialization_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <!--A button that leads to reset the database-->
-            <Button Content="Reset" Style="{StaticResource AnimatedButtonStyle}" Height="60" Width="200" Click="btnReset_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Content="Task List View" Style="{StaticResource AnimatedButtonStyle}" Height="60" Width="200" Click="btnTask_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Content="Gantt chart" Style="{StaticResource AnimatedButtonStyle}" Height="58" Width="200" Click="btnGantt_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Content="Auto Scheduling" Style="{StaticResource AnimatedButtonStyle}" Height="90" Width="200" Click="btnAutoScheduling_Click"
-                    IsEnabled="{Binding Source={StaticResource ConvertSchedulingIsEnabledKey}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Content="Set Project dates" Style="{StaticResource AnimatedButtonStyle}" Height="75" Width="200" Click="btnProjectDates_Click" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Content="Deleted Engineers" Style="{StaticResource AnimatedButtonStyle}" HorizontalAlignment="Left" Height="92" Margin="52,30,0,0" VerticalAlignment="Top" Width="166" Click="DeletedEngineerWindow_Click"/>
-        </UniformGrid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Your existing buttons, now filling the entire cell -->
+        <Button Grid.Row="0" Grid.Column="0" Content="Engineer List view" Style="{StaticResource AnimatedButtonStyle}" Click="btnEngineers_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Initialization" Style="{StaticResource AnimatedButtonStyle}" Click="btnInitialization_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="Reset" Style="{StaticResource AnimatedButtonStyle}" Click="btnReset_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="Task List View" Style="{StaticResource AnimatedButtonStyle}" Click="btnTask_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="Gantt chart" Style="{StaticResource AnimatedButtonStyle}" Click="btnGantt_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="Auto Scheduling" Style="{StaticResource AnimatedButtonStyle}" Click="btnAutoScheduling_Click" IsEnabled="{Binding Source={StaticResource ConvertSchedulingIsEnabledKey}}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="Set Project dates" Style="{StaticResource AnimatedButtonStyle}" Click="btnProjectDates_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Deleted Engineers" Style="{StaticResource AnimatedButtonStyle}" Click="DeletedEngineerWindow_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Return" Style="{StaticResource AnimatedButtonStyle}" Click="Return_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
     </Grid>
 </Window>
