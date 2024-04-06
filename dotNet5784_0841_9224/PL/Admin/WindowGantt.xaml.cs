@@ -21,7 +21,6 @@ namespace PL.Admin
 
         private void dataGridSched_Initialized(object sender, EventArgs e)
         {
-            TaskListProperty = s_bl.Task.ReadAll().ToList();
             DataGrid? dataGrid = sender as DataGrid;
 
             DataTable dataTable = new DataTable();

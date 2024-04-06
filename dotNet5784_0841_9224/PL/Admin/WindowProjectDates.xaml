@@ -8,32 +8,49 @@
         Title="WindowProjectDates" Height="450" Width="800"
         Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-
     <Grid>
-        <!-- Start project Label and DatePicker -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Start project" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <DatePicker x:Name="startDatePicker" Grid.Column="1" Margin="10,0,0,0" SelectedDateChanged="SelectStartDate"/>
-            </Grid>
+        <Label Content="Start project" HorizontalAlignment="Left" Height="35" Margin="210,64,0,0" VerticalAlignment="Top" Width="107"/>
+        <Label Content="End project" HorizontalAlignment="Left" Height="35" Margin="210,118,0,0" VerticalAlignment="Top" Width="107"/>
 
-            <!-- End project Label and DatePicker -->
-            <Grid Margin="0,10,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="End project" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                <DatePicker x:Name="endDatePicker" Grid.Column="1" Margin="10,0,0,0" SelectedDateChanged="SelectEndDate"/>
-            </Grid>
-        </StackPanel>
+        <!-- Start project DatePicker -->
+        <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" SelectedDateChanged="SelectStartDate">
+            <DatePicker.Style>
+                <Style TargetType="DatePicker">
+                    <!--<Setter Property="DisplayDateStart" Value="{x:Static System:DateTime.MinValue}" />-->
+                    <Style.Triggers>
+                        <!-- Use a MultiDataTrigger to check if startDatePicker.SelectedDate is null -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <!-- Check if the SelectedDate of startDatePicker is null -->
+                                <Condition Binding="{Binding SelectedDate, ElementName=endDatePicker, Converter={StaticResource NullToBoolConverterKey}}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="DisplayDateEnd" Value="{Binding LimitStartProperty}" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DatePicker.Style>
+        </DatePicker>
 
-        <!-- Button -->
-        <Button Content="Set" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Width="100" Click="Button_SetDates"
-                IsEnabled="{Binding Path=DataContext.self, Converter={StaticResource ConvertSetDatesIsEnabledKey}}"/>
+        <!-- End project DatePicker -->
+        <DatePicker x:Name="endDatePicker"  HorizontalAlignment="Center" Margin="0,120,0,268"  SelectedDateChanged="SelectEndDate" Width="127" >
+            <DatePicker.Style>
+                <Style TargetType="DatePicker">
+                    <!--<Setter Property="DisplayDateStart" Value="{x:Static System:DateTime.MinValue}" />-->
+                    <Style.Triggers>
+                        <!-- Use a MultiDataTrigger to check if startDatePicker.SelectedDate is null -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <!-- Check if the SelectedDate of startDatePicker is null -->
+                                <Condition Binding="{Binding SelectedDate,ElementName=startDatePicker, Converter={StaticResource NullToBoolConverterKey}}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="DisplayDateStart" Value= "{Binding LimitEndProperty}" />
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DatePicker.Style>
+        </DatePicker>
+
+        <Button Content="Set" HorizontalAlignment="Left" Height="51" Margin="232,184,0,0" VerticalAlignment="Top" Width="219" Click="Button_SetDates"
+            IsEnabled="{Binding Path=DataContext.self, Converter={StaticResource ConvertSetDatesIsEnabledKey}}" />
     </Grid>
 </Window>
