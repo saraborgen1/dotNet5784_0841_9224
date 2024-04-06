@@ -17,6 +17,7 @@
             <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />-->
             <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->
             <local:CellColorConverter x:Key="CellColorConverterKey"/>
+            <local:ConvertIdToPasswordVisibility x:Key="ConvertIdToPasswordVisibilityKey"/>
             <local:NullToBoolConverter x:Key="NullToBoolConverterKey"/>
             <local:DependenciesConverter x:Key="DependenciesConverterKey"/>
 

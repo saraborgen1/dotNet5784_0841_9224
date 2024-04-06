@@ -18,13 +18,12 @@
             </Grid.ColumnDefinitions>
             <!--Label Id-->
             <Label Content="Id" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
-            <!--TextBox Id-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Grid.Column="1"
-                IsEnabled="{Binding TaskProperty.Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
+            <!--Label Id info-->
+            <Label HorizontalAlignment="Left" Content="{Binding TaskProperty.Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="32" Grid.Column="1" Margin="0,8,0,0" />
             <!--Label Alias-->
             <Label Content="Alias" HorizontalAlignment="Left" Margin="33,50,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--TextBox Alias-->
-            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Alias, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,50,0,0" Grid.Column="1"/>
+            <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Alias, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,50,0,0" Grid.Column="1" />
             <!--Label Description-->
             <Label Content="Description" HorizontalAlignment="Left" Margin="33,100,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
             <!--TextBox Description-->

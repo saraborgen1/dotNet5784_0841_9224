@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <Id>2</Id>
-    <Ailas>Frame</Ailas>
-    <Description>Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.</Description>
-    <CreatedAtDate>2024-04-06T00:00:00+03:00</CreatedAtDate>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <RequiredEffortTime>P2D</RequiredEffortTime>
-    <Deliverables>Structural Framing</Deliverables>
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
-  </Task>
-  <Task>
     <Id>3</Id>
     <Ailas>Wire</Ailas>
     <Description>Electrical wiring encompasses the installation of electrical systems, ensuring proper connections and functionality throughout the building.</Description>
@@ -279,5 +265,19 @@
     <Deliverables>Architectural Planning</Deliverables>
     <EngineerId>123456789</EngineerId>
     <Copmlexity>Beginner</Copmlexity>
+  </Task>
+  <Task>
+    <Id>2</Id>
+    <Ailas>Frame</Ailas>
+    <Description>Structural framing is the process of constructing the skeletal structure of the building, providing support and shape according to the plan.</Description>
+    <CreatedAtDate>2024-04-06T00:00:00+03:00</CreatedAtDate>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <RequiredEffortTime>P2D</RequiredEffortTime>
+    <Deliverables>Structural Framing</Deliverables>
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>Expert</Copmlexity>
   </Task>
 </ArrayOfTask>
