@@ -218,7 +218,7 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Creation");
             if (item.CompleteDate != boTask.CompleteDate)
                 throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Creation");
-            if (item.Engineer.Id != null|| item.Engineer.Name!=null)
+            if (item.Engineer?.Id != null|| item.Engineer?.Name!=null)
                 throw new BO.BlCannotUpdateWrongStateException("Engineer", "Creation");
             if(item.ForecastDate!= boTask.ForecastDate)
                 throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
@@ -234,10 +234,10 @@ internal class TaskImplementation : ITask
                 throw new BO.BlCannotUpdateWrongStateException("StartDate", "Scheduling");
             if (item.CompleteDate != boTask.CompleteDate)
                 throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Scheduling");
-            if (item.Engineer != null)
+            if (item.Engineer?.Id != null && item.Engineer?.Name!=null)
                 throw new BO.BlCannotUpdateWrongStateException("Engineer", "Scheduling");
             if (item.ForecastDate != boTask.ForecastDate)
-                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
+                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Scheduling");
         }
 
         if (state.StatusProject() == Enums.ProjectStatus.Start)
@@ -250,7 +250,7 @@ internal class TaskImplementation : ITask
            if(item.ScheduledDate != boTask.ScheduledDate)
                 throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Start");
             if (item.ForecastDate != boTask.ForecastDate)
-                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
+                throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Start");
         }
 
         if (item.RequiredEffortTime != boTask.RequiredEffortTime)
@@ -430,8 +430,14 @@ internal class TaskImplementation : ITask
             deletDep = boTask.Dependencies.Except(item.Dependencies).ToList();
         }
         if (state.StatusProject() == Enums.ProjectStatus.Start)
-            if (addDep.Count != 0 || deletDep.Count != 0)
-                throw new BO.BlCannotUpdateWrongStateException("Dependencies", "Start");
+            //  if (addDep.Count != 0 || deletDep.Count != 0)
+            if (!CompareTaskDependencies(addDep, deletDep))
+            {
+                if (state.StatusProject() == Enums.ProjectStatus.Scheduling)
+                    throw new BO.BlCannotUpdateWrongStateException("Dependencies", "Scheduling");
+                if (state.StatusProject() == Enums.ProjectStatus.Start)
+                    throw new BO.BlCannotUpdateWrongStateException("Dependencies", "Start");
+            }
         foreach (var dep in addDep)
         {
            if(!circuleDep(item.Id, Read(dep.Id)))
@@ -471,5 +477,21 @@ internal class TaskImplementation : ITask
             }
         return true;
     }
+
+    private bool CompareTaskDependencies(List<TaskInList> list1, List<TaskInList> list2)
+    {
+        if (list1 == null && list2 == null)
+            return true;
+        if (list1 == null || list2 == null)
+            return false;
+
+        var idsFromList1 = list1.Select(task => task.Id).ToList();
+        var idsFromList2 = list2.Select(task => task.Id).ToList();
+
+        if (idsFromList1.SequenceEqual(idsFromList2))
+            return true;
+        return false;
+    }
 }
+
 
