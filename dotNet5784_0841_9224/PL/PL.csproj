@@ -14,7 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Admin\icon.ico" />
+    <None Remove="Engineer\icon.ico" />
     <None Remove="icon.ico" />
+    <None Remove="Task\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Admin\icon.ico" />
+    <Resource Include="Engineer\icon.ico" />
     <Resource Include="icon.ico" />
+    <Resource Include="Task\icon.ico" />
   </ItemGroup>
 
 </Project>

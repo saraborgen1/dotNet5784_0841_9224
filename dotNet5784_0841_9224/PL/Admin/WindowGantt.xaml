@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="WindowGantt" Height="450" Width="800"
+        Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" >
     <!--Extrnal Grid-->
     <Grid>

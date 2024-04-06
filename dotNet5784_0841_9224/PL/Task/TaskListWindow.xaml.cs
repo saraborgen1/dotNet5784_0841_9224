@@ -28,7 +28,6 @@ namespace PL.Task
             
             _tasks = s_bl?.Task.ReadAll()!.ToList()!;
             TaskList = new ObservableCollection<BO.Task>(_tasks);
-          
             InitializeComponent();
         }
 

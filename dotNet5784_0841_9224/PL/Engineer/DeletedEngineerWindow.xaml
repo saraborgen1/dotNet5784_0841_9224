@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="DeletedEngineerWindow" Height="450" Width="800"
+        Icon="icon.ico"
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--Extrnal  Grid-->
     <Grid Height="624" VerticalAlignment="Bottom">

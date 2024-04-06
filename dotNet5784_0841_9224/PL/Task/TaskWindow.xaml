@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
+        Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=self }}">
     <Grid>
         <Grid>
