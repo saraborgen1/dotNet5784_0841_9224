@@ -176,7 +176,7 @@ internal class EngineerImplementation : BlApi.IEngineer
                 }
             }
         }
-        if (item.Password == null || item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
+        //if (item.Password == null || item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
         if ((doEngeenir.Level > (DO.EngineerExperience)item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
         try
         {

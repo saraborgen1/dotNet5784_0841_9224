@@ -104,7 +104,7 @@ namespace PL.Engineer
                 MessageBox.Show("Must enter a positive salary for the employee", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if  (EngineerProperty.Password.Length < 8 || EngineerProperty.Password.Length>13)
+            if (isCreate == true && (EngineerProperty.Password.Length < 8 || EngineerProperty.Password.Length > 13))
             {
                 MessageBox.Show("Password must be between 8 and 13 characters", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -118,7 +118,7 @@ namespace PL.Engineer
                 {
                     s_bl.Engineer.Create(EngineerProperty);
                     _onUpdateOrAdd((EngineerProperty.Id, true));
-                   // string? _password = s_bl.Engineer.GetPassword(EngineerProperty.Id);
+                    // string? _password = s_bl.Engineer.GetPassword(EngineerProperty.Id);
                     MessageBox.Show($"Your engineer password is:{EngineerProperty.Password}", "password", MessageBoxButton.OK, MessageBoxImage.Information);
                     MessageBox.Show("The engineer was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
@@ -159,19 +159,5 @@ namespace PL.Engineer
                 return;
             }
         }
-
-        private void changeImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (sender is Image image)
-            {
-                Microsoft.Win32.OpenFileDialog f = new Microsoft.Win32.OpenFileDialog();
-                f.Filter = "JPEG Files (.jpeg)|.jpeg|PNG Files (.png)|.png|JPG Files (.jpg)|.jpg|GIF Files (.gif)|.gif";
-                if (f.ShowDialog() == true)
-                {
-                    image.Source = new BitmapImage(new Uri(f.FileName));
-                }
-            }
-        }
-
     }
 }

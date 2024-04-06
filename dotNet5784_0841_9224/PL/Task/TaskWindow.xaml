@@ -71,9 +71,9 @@
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Engineer.Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,250,0,0" Grid.Column="3"/>
             <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TaskProperty.Engineer.Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Height="18" Margin="0,276,0,0" Grid.Column="3"/>
             <!--Label Copmlexity-->
-            <Label Content="Copmlexity" HorizontalAlignment="Left" Margin="33,324,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
+            <Label Content="Copmlexity" HorizontalAlignment="Left" Margin="33,302,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2"/>
             <!--ComboBox Copmlexity-->
-            <ComboBox HorizontalAlignment="Left" Margin="0,328,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"
+            <ComboBox HorizontalAlignment="Left" Margin="0,306,0,0" VerticalAlignment="Top" Width="120" Grid.Column="3"
             ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
              SelectedValue="{Binding TaskProperty.Copmlexity, Mode=TwoWay}"/>
             <!--Label dependency-->
@@ -86,7 +86,9 @@
             <!--ComboBox  Dependencies-->
             <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="137,347,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding DependenciesProperty,Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChangedDeleteDep"/>
             <!--ComboBox  options for Dependencies-->
-            <ComboBox Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="31" Margin="61,388,0,0" VerticalAlignment="Top" Width="122" ItemsSource="{Binding TaskInListProperty, Mode=TwoWay}" SelectionChanged="ComboBoxAllTasks_SelectionChanged"/>
+            <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="137,387,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding TaskInListProperty, Mode=TwoWay}" SelectionChanged="ComboBoxAllTasks_SelectionChanged"/>
+            <Label Grid.Column="1" Content="existing dependencies" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="35" Margin="118,341,0,0" VerticalAlignment="Top" Width="138"/>
+            <Label Grid.Column="1" Content="More dependencies" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="35" Margin="118,387,0,0" VerticalAlignment="Top" Width="138"/>
 
         </Grid>
 
