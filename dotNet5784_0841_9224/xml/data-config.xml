@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
   <NextTaskId>21</NextTaskId>
-  <NextDependencyId>53</NextDependencyId>
-  <StartProject>2024-04-09</StartProject>
-  <EndProject>2024-04-22</EndProject>
-  <CurrentDate>2024-04-05</CurrentDate>
+  <NextDependencyId>52</NextDependencyId>
+  <StartProject></StartProject>
+  <EndProject></EndProject>
+  <CurrentDate>2024-04-06</CurrentDate>
   <AdminPassword>12345678</AdminPassword>
   <AdminUserId>100000000</AdminUserId>
   <StatusProject></StatusProject>

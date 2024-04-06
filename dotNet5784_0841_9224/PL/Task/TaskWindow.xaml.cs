@@ -62,9 +62,7 @@ namespace PL.Task
             if (DependenciesProperty != null)
                 TaskProperty.Dependencies = new List<BO.TaskInList>(DependenciesProperty.ToList());
 
-
             if (isCreate == true)
-
                 try
                 {
 
