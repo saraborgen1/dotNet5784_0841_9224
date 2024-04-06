@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Icon="icon.ico"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187" Click="Button_Enter">
             <Button.Style>

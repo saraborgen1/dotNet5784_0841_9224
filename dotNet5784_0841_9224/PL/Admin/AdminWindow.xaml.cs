@@ -94,5 +94,9 @@ namespace PL
         {
             new DeletedEngineerWindow().Show();
         }
+        private void Return_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
