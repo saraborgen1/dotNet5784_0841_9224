@@ -1,6 +1,7 @@
 ﻿using BO;
 using PL.Task;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,12 +22,12 @@ namespace PL
                 if(EngineerProperty!.Task!=null)
                 {
                     EngineerWorkerProperty = s_bl.Task.Read(EngineerProperty.Task.Id);
+
                     if (EngineerWorkerProperty.Dependencies != null)
                         DependenciesProperty = new ObservableCollection<BO.TaskInList>(EngineerWorkerProperty.Dependencies);
-                    TaskList = new ObservableCollection<BO.Task>(s_bl.Engineer.AvailableTasks(EngineerProperty));
-
                 }
-
+             
+                TaskList = new ObservableCollection<BO.Task>(s_bl.Engineer.AvailableTasks(EngineerProperty));
             }
             catch (Exception ex)
             {
@@ -84,6 +85,16 @@ namespace PL
             DependencyProperty.Register("EngineerProperty", typeof(BO.Engineer), typeof(EngineerWorker), new PropertyMetadata(null));
         private void SelectedTask(object sender, SelectionChangedEventArgs e)
         {
+            if (s_bl.State.StatusProject() != Enums.ProjectStatus.Start)
+            {
+                MessageBox.Show("Engineers cannot be assigned tasks at this stage", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (EngineerProperty.Task != null)
+            {
+                MessageBox.Show("A new mission cannot be taken before the current mission is finished", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
             if (task != null)
             {
@@ -92,12 +103,19 @@ namespace PL
                     var temp = new TaskInEngineer { Id = task.Id, Alias = task.Alias };
                     EngineerProperty.Task = temp;
                     s_bl.Engineer.Update(EngineerProperty);
+                    var tempTask=s_bl.Task.Read(EngineerProperty.Task.Id);
+                    tempTask.StartDate = s_bl.State.CurrentDate;
+                    s_bl.Task.Update(tempTask);
+                    this.Close();
+                    MessageBox.Show("Task taken successfuly ", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+
             }
 
         }
@@ -109,6 +127,24 @@ namespace PL
                 s_bl.Task.Update(EngineerWorkerProperty);
                 MessageBox.Show("The Task was successfully updated", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exeption", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void ButtonDone_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var tempTask = s_bl.Task.Read(EngineerProperty.Task!.Id);
+                tempTask.CompleteDate = s_bl.State.CurrentDate;
+                s_bl.Task.Update(tempTask);
+                this.Close();
+                MessageBox.Show("Task finished successfuly ", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
             catch (Exception ex)
             {
