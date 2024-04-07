@@ -47,6 +47,7 @@
         <!--Button Add/Update-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Height="81" Width="306"
                 Click="Button_UpdateOrAdd" Grid.ColumnSpan="2"/>
+        <!--Button Delete-->
         <Button Content="Delete" HorizontalAlignment="Left" Height="81" Margin="0,240,0,0" VerticalAlignment="Top" Width="125" Click="DeleteButton_Click" Visibility="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToDeleteVisibilityKey}}" />
     </Grid>
 </Window>

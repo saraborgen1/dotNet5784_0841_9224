@@ -14,9 +14,9 @@
             <RowDefinition Height="13*"/>
             <!-- 1/7 מהגובה -->
             <RowDefinition Height="99*"/>
-            <!-- 5/7 מהגובה -->
+            <!-- 5/7 hight -->
             <RowDefinition Height="16*"/>
-            <!-- 1/7 מהגובה -->
+            <!-- 1/7 hight -->
         </Grid.RowDefinitions>
         <Grid Margin="0,0,0,13"/>
         <!--Internal, Upper Grid-->

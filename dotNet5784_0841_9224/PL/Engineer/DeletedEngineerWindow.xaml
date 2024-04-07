@@ -40,6 +40,7 @@
         </ListView>
         <!--Add button-->
         <Label Content="sreach by name" HorizontalAlignment="Left" Margin="62,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="57" Width="124"/>
+        <!--search textBox-->
         <TextBox HorizontalAlignment="Left" Margin="246,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="42" TextChanged="TextBox_Search_TextChanged"/>
 
     </Grid>
