@@ -10,21 +10,12 @@
             <local:ConvertIdToDeleteVisibility x:Key="ConvertIdToDeleteVisibilityKey"/>
             <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
             <local:ConvertIdIsEnabled x:Key="ConvertIdIsEnabledKey"/>
-            <local:ConvertIdEngineerIsEnabled x:Key="ConvertIdEngineerIsEnabledKey"/>
             <local:ConvertSetDatesIsEnabled x:Key="ConvertSetDatesIsEnabledKey"/>
-            <local:ConvertSchedulingIsEnabled x:Key="ConvertSchedulingIsEnabledKey"/>
-            <local:ConvertStringToInt x:Key="ConvertStringToIntKey"/>
-            <!--<local:StatusToColorBrushConverter x:Key="StatusToColorBrushConverterKey" />-->
-            <!--<local:ConvertColor x:Key="ConvertColorKey"/>-->
             <local:CellColorConverter x:Key="CellColorConverterKey"/>
             <local:ConvertIdToPasswordVisibility x:Key="ConvertIdToPasswordVisibilityKey"/>
             <local:ConvertTaskToVisibility x:Key="ConvertTaskToVisibilityKey"/>
             <local:NullToBoolConverter x:Key="NullToBoolConverterKey"/>
             <local:DependenciesConverter x:Key="DependenciesConverterKey"/>
-
-            <!--<local:DateToWidthConverter x:Key="DateToWidthConverterKey"/>-->
-            <!--<\local: CurrentDa6 x:Key="-->
-
             <Style TargetType="Button">
                 <Setter Property="Background" Value="LightBlue"/>
                 <Setter Property="Foreground" Value="Black"/>
