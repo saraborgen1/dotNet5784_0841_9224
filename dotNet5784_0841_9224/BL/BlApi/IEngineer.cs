@@ -46,14 +46,28 @@ public interface IEngineer
     public void DeleteAll();
 
     /// <summary>
-    /// 
+    /// get password
     /// </summary>
     /// <param name="id"></param>
-    /// <returns></returns>
+    /// <returns>password</returns>
     public string GetPassword(int id);
+    /// <summary>
+    /// checks if coded passwords are the same
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="password"></param>
+    /// <returns> bool</returns>
     public bool comparePassword(int id, string password);
 
+    /// <summary>
+    /// brings back from deleted list
+    /// </summary>
+    /// <param name="engineer"></param>
     public void RestoreEngineer(BO.Engineer engineer);
-
+    /// <summary>
+    /// all tasks he can take
+    /// </summary>
+    /// <param name="engineer"></param>
+    /// <returns>task collection</returns>
     public List<BO.Task> AvailableTasks(BO.Engineer engineer);
 }

@@ -42,10 +42,28 @@ public interface ITask
     /// <param name="id">id of entity to update</param>
     /// <param name="date"> new date</param>
     public void UpdateDate(int id, DateTime date);
-
+    /// <summary>
+    /// sets dates for asks
+    /// </summary>
     public void AutoScheduling();
+    /// <summary>
+    /// gets task in list
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public TaskInList GetTaskInList(int id);
+    /// <summary>
+    /// gets all the tasks in list 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public List<TaskInList> GetAllTaskInList(int id);
+    /// <summary>
+    /// checks if there is a circule dep
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="boTask"></param>
+    /// <returns>bool</returns>
     public bool circuleDep(int id, BO.Task boTask);
 
 

@@ -139,7 +139,6 @@ internal class TaskImplementation : ITask
 
 
         var engineer = _dal.Task.Read(p => p.Id == id);
-        /*_dal.Engineer.Read(p => p.Id == (_dal.Task.Read(p => p.Id == id)).EngineerId)*/
 
         BO.EngineerInTask? engineerInTask = null;
         if (engineer != null)
@@ -208,7 +207,6 @@ internal class TaskImplementation : ITask
     {
 
         var boTask = Read(item.Id);
-        // if (doTask == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
 
         if (state.StatusProject() == Enums.ProjectStatus.Creation)
         {
@@ -242,7 +240,6 @@ internal class TaskImplementation : ITask
 
         if (state.StatusProject() == Enums.ProjectStatus.Start)
         {
-            //if (item.Description != boTask.Description ||
             if (item.CreatedAtDate != boTask.CreatedAtDate)
                 throw new BO.BlCannotUpdateWrongStateException("CreatedAtDate", "Start");
             if (item.RequiredEffortTime != boTask.RequiredEffortTime)
@@ -334,7 +331,10 @@ internal class TaskImplementation : ITask
         DO.Task newTask = _dal.Task.Read(p => p.Id == id)! with { ScheduledDate = date, DeadlineDate = (date + boTask.RequiredEffortTime) };
         _dal.Task.Update(newTask);
     }
-
+    /// <summary>
+    /// auto schedualing
+    /// </summary>
+    /// <exception cref="BlCannotDoAutoSchedulingException"></exception>
     public void AutoScheduling()
     {
         if (state.StatusProject() == Enums.ProjectStatus.Creation)
@@ -347,7 +347,11 @@ internal class TaskImplementation : ITask
                 setAutoDate(tempTask);
         }
     }
-
+    /// <summary>
+    /// auto date
+    /// </summary>
+    /// <param name="task"></param>
+    /// <exception cref="BlDoesNotExistException"></exception>
     private void setAutoDate(BO.Task task)
     {
         DateTime? max = state.StartProject;
@@ -368,7 +372,12 @@ internal class TaskImplementation : ITask
             }
         UpdateDate(task.Id, (DateTime)max!);
     }
-
+    /// <summary>
+    /// returns task in list
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BlDoesNotExistException"></exception>
     public TaskInList GetTaskInList(int id)
     {
         var doTask = _dal.Task.Read(p => p.Id == id);
@@ -383,7 +392,12 @@ internal class TaskImplementation : ITask
         };
 
     }
-
+    /// <summary>
+    /// returns all of the TaskInList
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BlDoesNotExistException"></exception>
     public List<TaskInList> GetAllTaskInList(int id)
     {
         var doTask = _dal.Task.Read(p => p.Id == id);
@@ -397,6 +411,11 @@ internal class TaskImplementation : ITask
         return (from item in dependentOn
                 select GetTaskInList(item)).OrderBy(p => p.Id).ToList();
     }
+    /// <summary>
+    /// returns task status
+    /// </summary>
+    /// <param name="task"></param>
+    /// <returns></returns>
 
     private BO.Enums.Status getStatus(DO.Task task)
     {
@@ -408,7 +427,10 @@ internal class TaskImplementation : ITask
             return Status.OnTrack;
         return Status.Scheduled;
     }
-
+    /// <summary>
+    /// usless
+    /// </summary>
+    /// <param name="id"></param>
     private void grouping(int id)
     {
         var gDependenciesId = (from temp in _dal.Dependency.ReadAll(p => p.DependentTask == id)
@@ -420,6 +442,15 @@ internal class TaskImplementation : ITask
                               from item in temp
                               select item.Id).ToList();
     }
+    /// <summary>
+    /// updates the dep
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="boTask"></param>
+    /// <exception cref="BO.BlCannotUpdateWrongStateException"></exception>
+    /// <exception cref="BlCirculDepException"></exception>
+    /// <exception cref="BlDoesNotExistException"></exception>
+    /// <exception cref="BlCannotBeDeletedException"></exception>
     private void updateDependencies(BO.Task item, BO.Task boTask)
     {
         var addDep = item.Dependencies != null ? item.Dependencies : new List<TaskInList>();
@@ -465,6 +496,12 @@ internal class TaskImplementation : ITask
 
 
     }
+    /// <summary>
+    /// checks if there are circle dep
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="boTask"></param>
+    /// <returns></returns>
     public bool circuleDep(int id, BO.Task boTask)
     {
         if (boTask.Dependencies != null)
@@ -477,7 +514,12 @@ internal class TaskImplementation : ITask
             }
         return true;
     }
-
+    /// <summary>
+    /// checks if list of dep contain the same elements
+    /// </summary>
+    /// <param name="list1"></param>
+    /// <param name="list2"></param>
+    /// <returns>if they are the same </returns>
     private bool CompareTaskDependencies(List<TaskInList> list1, List<TaskInList> list2)
     {
         if (list1 == null && list2 == null)

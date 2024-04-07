@@ -15,11 +15,11 @@ public interface IDal
     /// </summary>
     IEngineer Engineer { get; }
     /// <summary>
-    /// An propotie that represents the project start date
+    /// An propoty that represents the project start date
     /// </summary>
     public DateTime? StartProject { set; get; }
     /// <summary>
-    /// An propotie that represents the project end date
+    /// An propoty that represents the project end date
     /// </summary
     public DateTime? EndProject { set; get; }
     /// <summary>
@@ -29,9 +29,15 @@ public interface IDal
     public DO.ProjectStatus StatusProject();
 
     /// <summary>
-    /// propotie of  Current time project
+    /// propoty of  Current time project
     /// </summary>
     public DateTime CurrentDate { set; get; }
+    /// <summary>
+    /// propoty of AdminPassword
+    /// </summary>
     public string AdminPassword { get;}
+    /// <summary>
+    /// propoty of AdminUserId
+    /// </summary>
     public int AdminUserId { get;}
 }
