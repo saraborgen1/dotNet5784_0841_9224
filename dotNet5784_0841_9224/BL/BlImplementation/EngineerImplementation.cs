@@ -9,24 +9,22 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-
-
+/// <summary>
+/// Implementation of the IEngineer interface which handles operations related to engineers.
+/// </summary>
 internal class EngineerImplementation : BlApi.IEngineer
 {
-   
     private DalApi.IDal _dal = DalApi.Factory.Get;
     private const string _entityName = nameof(BO.Engineer);
     private static readonly Random s_rand = new();
+
     /// <summary>
-    /// converts entity of DO to BO
+    /// Converts a DO Engineer entity to a BO Engineer entity.
     /// </summary>
-    /// <param name="doEngineer"> what is being converted</param>
-    /// <returns> entity of  BO type</returns>
     private BO.Engineer BOFromDO(DO.Engineer doEngineer)
     {
         return new BO.Engineer()
         {
-
             Id = doEngineer.Id,
             Password = doEngineer.Password,
             Salt = doEngineer.Salt,
@@ -39,13 +37,11 @@ internal class EngineerImplementation : BlApi.IEngineer
     }
 
     /// <summary>
-    /// Adding a new object to  database
+    /// Adds a new engineer to the database.
     /// </summary>
-    /// <param name="item"></param>
-    /// <exception cref="BO.BlTheInputIsInvalidException">The Input Is Invalid</exception>
-    /// <exception cref="BO.BlAlreadyExistException">Already Exist</exception>
     public void Create(BO.Engineer item)
     {
+        // Input validation
         if (item.Id <= 0) throw new BO.BlTheInputIsInvalidException("Id");
         if (item.Name == null) throw new BO.BlTheInputIsInvalidException("Name");
         if (item.Cost == null || item.Cost <= 0) throw new BO.BlTheInputIsInvalidException("Cost");
@@ -62,10 +58,12 @@ internal class EngineerImplementation : BlApi.IEngineer
                 }
             }
         }
-        if(item.Password==null|| item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
+        if (item.Password == null || item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
+
+        // Generate salt for password hashing
         item.Salt = s_rand.Next();
-        DO.Engineer doEngineer = new DO.Engineer
-            (item.Id, hashPassword(item.Password+ item.Salt), item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
+        // Create DO Engineer object with hashed password and add it to the database
+        DO.Engineer doEngineer = new DO.Engineer(item.Id, hashPassword(item.Password + item.Salt), item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
 
         try
         {
@@ -77,28 +75,14 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
     }
 
-    private static string hashPassword(string passwordWithSalt)
-    {
-        SHA512 shaM = new SHA512Managed();
-        return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(passwordWithSalt)));
-    }
-
     /// <summary>
-    /// Deletion of an existing object with a certain ID, from the list of entity type objects.
+    /// Deletes an engineer with the specified ID from the database.
     /// </summary>
-    /// <param name="id"></param>
-    /// <exception cref="BO.BlCannotBeDeletedException">Cannot Be Deleted</exception>
     public void Delete(int id)
     {
-        //if (id == 0)
-        //{
-        //    _dal.Engineer.DeleteAll();
-        //    return;
-        //}
-
+        // Checks if engineer is in the middle of a mission
         BO.Engineer engineer = Read(id)!;
-        //if (getTaskInEngineer(id) != null)
-        if(engineer.Task==null)
+        if (engineer.Task == null)
         {
             try
             {
@@ -110,39 +94,37 @@ internal class EngineerImplementation : BlApi.IEngineer
                 throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
             }
         }
-        throw new BO.BlCannotBeDeletedException(id, _entityName , "in the middle of a mission");
+        throw new BO.BlCannotBeDeletedException(id, _entityName, "in the middle of a mission");
     }
 
     /// <summary>
-    /// Returns an entity from the list that id matches param
+    /// Retrieves an engineer with the specified ID from the database.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns>an entity from the list that meets the condition</returns>
-    /// <exception cref="BO.BlDoesNotExistException">Does Not Exist</exception>
     public BO.Engineer? Read(int id)
     {
+        // Retrieves engineer from the database
         DO.Engineer? doEngineer = _dal.Engineer.Read(p => p.Id == id);
         if (doEngineer == null)
             throw new BO.BlDoesNotExistException(id, _entityName);
 
+        // Retrieves associated task
         BO.TaskInEngineer taskInEngineer = null!;
-
         DO.Task? temp = _dal.Task.Read(p => p.EngineerId == doEngineer.Id);
         if (temp != null)
             taskInEngineer = new BO.TaskInEngineer() { Id = temp.Id, Alias = temp.Ailas };
 
+        // Converts DO Engineer to BO Engineer and returns
         return BOFromDO(doEngineer);
     }
 
     /// <summary>
-    /// Returns all entitys from the list that meets the condition
+    /// Retrieves all engineers from the database.
     /// </summary>
-    /// <param name="filter">condition</param>
-    /// <returns>Returns all entitys from the list that meets the condition</returns>
     public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
+        // Retrieves all engineers from the database
         var doEngineerList = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-                              select BOFromDO( doEngineer)).ToList();
+                              select BOFromDO(doEngineer)).ToList();
         if (filter != null)
             return (from item in doEngineerList
                     where filter(item)
@@ -153,16 +135,15 @@ internal class EngineerImplementation : BlApi.IEngineer
     }
 
     /// <summary>
-    /// Update of an existing object
+    /// Updates an existing engineer in the database.
     /// </summary>
-    /// <param name="item">An object of type Bo</param>
-    /// <exception cref="BO.BlDoesNotExistException">Does Not Exist</exception>
-    /// <exception cref="BO.BlTheInputIsInvalidException">The Input Is Invalid</exception>
     public void Update(BO.Engineer item)
     {
-
+        // Retrieves engineer from the database
         var doEngeenir = _dal.Engineer.Read(p => p.Id == item.Id);
         if (doEngeenir == null) throw new BO.BlDoesNotExistException(item.Id, _entityName);
+
+        // Input validation
         if (item.Name == null) throw new BO.BlTheInputIsInvalidException("Name");
         if (item.Cost <= 0) throw new BO.BlTheInputIsInvalidException("Cost");
         if (item.Email != null)
@@ -177,13 +158,15 @@ internal class EngineerImplementation : BlApi.IEngineer
                 }
             }
         }
-        //if (item.Password == null || item.Password.Length < 8 || item.Password.Length > 13) throw new BO.BlTheInputIsInvalidException("Password");
         if ((doEngeenir.Level > (DO.EngineerExperience)item.Level)) throw new BO.BlTheInputIsInvalidException("Level");
+
         try
         {
-            DO.Engineer updatedEngeenir = new DO.Engineer(item.Id,item.Password,item.Salt,item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
+            // Update engineer details
+            DO.Engineer updatedEngeenir = new DO.Engineer(item.Id, item.Password, item.Salt, item.Name, item.Email, (DO.EngineerExperience)item.Level, item.Cost);
             _dal.Engineer.Update(updatedEngeenir);
 
+            // Update associated task if provided
             if (item.Task != null)
             {
                 var doTask = _dal.Task.Read((p => p.Id == item.Task.Id));
@@ -201,43 +184,54 @@ internal class EngineerImplementation : BlApi.IEngineer
     }
 
     /// <summary>
-    /// returns all deleted engineer
+    /// Retrieves all deleted engineers from the database.
     /// </summary>
-    /// <returns>all deleted engineer</returns>
     public IEnumerable<BO.Engineer> ReadAllDelete()
     {
+        // Retrieves all deleted engineers from the database
         var templist = _dal.Engineer.ReadAllDelete();
         return from item in templist
                select BOFromDO(item);
     }
 
     /// <summary>
-    /// deletes all objects of the entity type
+    /// Deletes all engineers from the database.
     /// </summary>
     public void DeleteAll()
     {
+        // Deletes all engineers from the database
         _dal.Engineer.DeleteAll();
     }
 
     /// <summary>
-    /// returns password of engineer with that id
+    /// Retrieves the password of the engineer with the specified ID.
     /// </summary>
-    /// <param name="id"></param>
-    /// <returns>password</returns>
     public string GetPassword(int id)
     {
+        // Retrieves and returns the password of the engineer with the specified ID
         return Read(id)!.Password!;
     }
-    public bool comparePassword(int id,string password) 
-    { 
-        var temp=Read(id);
-        if(temp!.Password== hashPassword(password+temp.Salt))
+
+    /// <summary>
+    /// Compares the provided password with the stored hashed password of the engineer with the specified ID.
+    /// </summary>
+    public bool comparePassword(int id, string password)
+    {
+        // Compares the provided password with the stored hashed password of the engineer with the specified ID
+        // Returns true if passwords match, false otherwise
+        var temp = Read(id);
+        if (temp!.Password == hashPassword(password + temp.Salt))
             return true;
         return false;
     }
+
+    /// <summary>
+    /// Restores a deleted engineer in the database.
+    /// </summary>
     public void RestoreEngineer(BO.Engineer engineer)
     {
-
+        // Restores a deleted engineer in the database if it exists
+        // Throws exception if engineer does not exist
         var temp = _dal.Engineer.ReadAllDelete().FirstOrDefault(t => t.Id == engineer.Id);
         if (temp != null)
         {
@@ -246,54 +240,68 @@ internal class EngineerImplementation : BlApi.IEngineer
             {
                 _dal.Engineer.Update(temp);
             }
-            catch(DO.DalDoesNotExistsException ex) 
+            catch (DO.DalDoesNotExistsException ex)
             {
                 throw new BO.BlDoesNotExistException(ex);
             }
-            
         }
-       
     }
 
-
-
-    private TaskInEngineer? getTaskInEngineer(int  id)
+    /// <summary>
+    /// Retrieves the task assigned to the engineer with the specified ID.
+    /// </summary>
+    private TaskInEngineer? getTaskInEngineer(int id)
     {
-        var task = _dal.Task.Read(p => (p.EngineerId == id && p.CompleteDate==null));
+        // Retrieves the task assigned to the engineer with the specified ID from the database
+        // Converts DO Task to BO TaskInEngineer and returns
+        var task = _dal.Task.Read(p => (p.EngineerId == id && p.CompleteDate == null));
         if (task != null)
             return new BO.TaskInEngineer()
             {
                 Id = task.Id,
                 Alias = task.Ailas
             };
-            return null;
+        return null;
     }
 
+    /// <summary>
+    /// Retrieves available tasks that can be assigned to the engineer.
+    /// </summary>
     public List<BO.Task> AvailableTasks(BO.Engineer engineer)
     {
+        // Retrieves available tasks that match engineer's level and dependencies are completed
+        // Converts DO Tasks to BO Tasks and returns
         var _task = new TaskImplementation();
-        return _task.ReadAll( s => s.Engineer?.Id == null && s.Copmlexity <= engineer.Level && AreDependentTasksCompleted(s)).ToList();
+        return _task.ReadAll(s => s.Engineer?.Id == null && s.Copmlexity <= engineer.Level && AreDependentTasksCompleted(s)).ToList();
     }
 
+    /// <summary>
+    /// Checks if all dependent tasks of a given task are completed.
+    /// </summary>
     private bool AreDependentTasksCompleted(BO.Task task)
     {
+        // Checks if all dependent tasks of a given task are completed
+        // Returns true if all dependencies are completed, false otherwise
         var _task = new TaskImplementation();
-        // אם אין למשימה תלויות, מחזירים TRUE
         if (task.Dependencies == null || task.Dependencies.Count == 0)
             return true;
 
-        // לולאה על כל התלויות של המשימה
         foreach (var dependentTask in task.Dependencies)
         {
-            // אם המשימה התלויה עדיין לא הסתיימה, מחזירים FALSE
             if (dependentTask.Status != BO.Enums.Status.Done)
                 return false;
-
-            //// בדיקה רקורסיבית של המשימות התלויות של המשימה התלויה
-            //AreDependentTasksCompleted(_task.Read(dependentTask.Id));
         }
 
-        // אם עברנו על כל התלויות וכולן הסתיימו, מחזירים TRUE
         return true;
+    }
+
+    /// <summary>
+    /// Hashes the provided password with salt using SHA512.
+    /// </summary>
+    private static string hashPassword(string passwordWithSalt)
+    {
+        // Hashes the provided password with salt using SHA512 algorithm
+        SHA512 shaM = new SHA512Managed();
+        return Convert.ToBase64String(shaM.ComputeHash(Encoding.UTF8.GetBytes(passwordWithSalt)));
     }
 }

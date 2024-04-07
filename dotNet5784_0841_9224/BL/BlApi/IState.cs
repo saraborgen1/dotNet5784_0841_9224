@@ -29,15 +29,28 @@ public interface IState
     /// </summary>
     public void AddYear();
 
-
-
     /// <summary>
     /// a function to add Month
     /// </summary>
     public void AddMonth();
+    /// <summary>
+    /// a function to add Day
+    /// </summary>
     public void AddDay();
+    /// <summary>
+    /// a function to add Week
+    /// </summary>
     public void AddWeek();
+    /// <summary>
+    /// Minimum Days from the project
+    /// </summary>
+    /// <returns></returns>
     public TimeSpan MinimumDays();
+    /// <summary>
+    /// set project dasys
+    /// </summary>
+    /// <param name="startDate"></param>
+    /// <param name="endStart"></param>
     public void SetProjectDates(DateTime startDate,DateTime endStart);
 
 }
