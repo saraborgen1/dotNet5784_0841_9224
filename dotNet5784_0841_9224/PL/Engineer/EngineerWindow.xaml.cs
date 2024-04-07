@@ -104,7 +104,7 @@ namespace PL.Engineer
                 MessageBox.Show("Must enter a positive salary for the employee", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (isCreate == true && (EngineerProperty.Password.Length < 8 || EngineerProperty.Password.Length > 13))
+            if (isCreate == true && (EngineerProperty.Password!.Length < 8 || EngineerProperty.Password.Length > 13))
             {
                 MessageBox.Show("Password must be between 8 and 13 characters", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

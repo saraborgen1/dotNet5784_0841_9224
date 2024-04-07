@@ -97,7 +97,8 @@ internal class EngineerImplementation : BlApi.IEngineer
         }
 
         BO.Engineer engineer = Read(id)!;
-        if (getTaskInEngineer(id) != null)
+        //if (getTaskInEngineer(id) != null)
+        if(engineer.Task==null)
         {
             try
             {
@@ -285,14 +286,14 @@ internal class EngineerImplementation : BlApi.IEngineer
         foreach (var dependentTask in task.Dependencies)
         {
             // אם המשימה התלויה עדיין לא הסתיימה, מחזירים FALSE
-            if (dependentTask.Status == BO.Enums.Status.Done)
-                return true;
+            if (dependentTask.Status != BO.Enums.Status.Done)
+                return false;
 
-            // בדיקה רקורסיבית של המשימות התלויות של המשימה התלויה
-            AreDependentTasksCompleted(_task.Read(dependentTask.Id));
+            //// בדיקה רקורסיבית של המשימות התלויות של המשימה התלויה
+            //AreDependentTasksCompleted(_task.Read(dependentTask.Id));
         }
 
         // אם עברנו על כל התלויות וכולן הסתיימו, מחזירים TRUE
-        return false;
+        return true;
     }
 }

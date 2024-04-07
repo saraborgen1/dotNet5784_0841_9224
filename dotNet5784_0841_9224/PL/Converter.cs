@@ -111,7 +111,7 @@ class ConvertIdEngineerIsEnabled : IValueConverter
 
 public class CellColorConverter : IMultiValueConverter
 {
-    Color[] arrColors = { Colors.White, Colors.Red, Colors.Green, Colors.RoyalBlue, Colors.Orange, Colors.LightYellow };
+    Color[] arrColors = { Colors.White, Colors.Red, Colors.Green, Colors.RoyalBlue, Colors.Orange, Colors.LightYellow ,Colors.Purple};
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
     public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
     {
@@ -136,76 +136,76 @@ public class CellColorConverter : IMultiValueConverter
                     if (taskId.HasValue)
                     {
                         var task = s_bl.Task.Read(taskId.Value);
-
-                        //לא התחיל ולא היה אמור להתחיל תצבע לבן //אחרי זמן הסייום בפועל 
-                        if ((task.StartDate == null && day < task.ScheduledDate) || (task.CompleteDate != null && day > task.CompleteDate))
+                        //if the task is done
+                        if(task.Status== Enums.Status.Done) 
                         {
-                            cell.Foreground = new SolidColorBrush(arrColors[0]);
-                            return new SolidColorBrush(arrColors[0]);
-                        }
-                        //לא התחיל את המשימה בזמן או התחיל ועוד לא  סיים בזמן או סיים אחרי הזמן
-                        if ((task.StartDate == null && day > task.ScheduledDate)||(task.StartDate != null && task.CompleteDate == null && day>task.ForecastDate)|| (task.CompleteDate != null && task.CompleteDate>task.ForecastDate))
-                        {
-                            cell.Foreground = new SolidColorBrush(arrColors[1]);
-                            return new SolidColorBrush(arrColors[1]);
-                        }
-
-
-
-
-
-
-
-
-
-
-                        if (day < task.ScheduledDate || day > task.ForecastDate)
-                        {
-                            cell.Foreground = new SolidColorBrush(arrColors[0]);
-                            return new SolidColorBrush(arrColors[0]);
-                        }
-                        else
-                        {
-                            //המשימה הסתיימה
-                            if (task.CompleteDate != null)
+                            if(day>=task.StartDate && day<=task.CompleteDate)//color the time spent on it -> green
                             {
                                 cell.Foreground = new SolidColorBrush(arrColors[2]);
                                 return new SolidColorBrush(arrColors[2]);
                             }
-                            // המסימה לא הושלמה והיא באיחור
-                            if (currentDate > task.ForecastDate)
+                        }
+                        //if the mission was started but not finished
+                        if (task.Status == Enums.Status.OnTrack)
+                        {
+                            if (currentDate > task.ForecastDate)//if the mission is late
                             {
-                                cell.Foreground = new SolidColorBrush(arrColors[1]);
-                                return new SolidColorBrush(arrColors[1]);
-                            }
-                            //עוד לא התחילו את המשימה
-                            if (task.StartDate == null)
-                            {
-                                //לא התחילו כי לא הגיע זמן ההתחלה 
-                                if (task.ScheduledDate > currentDate)
+                                if (day >= task.StartDate && day < currentDate)//red
                                 {
-                                    cell.Foreground = new SolidColorBrush(arrColors[3]);
-                                    return new SolidColorBrush(arrColors[3]);
+                                    cell.Foreground = new SolidColorBrush(arrColors[1]);
+                                    return new SolidColorBrush(arrColors[1]);
                                 }
-                                //לא התחילו את המשימה ועבר המועד המתוכנן להתחלה 
-                                if (currentDate > task.ScheduledDate)
+                            }
+                            //if it was started but is not late , this is the progress
+                            if(day<currentDate && day>= task.StartDate)//purple
+                            {
+                                cell.Foreground = new SolidColorBrush(arrColors[6]);
+                                return new SolidColorBrush(arrColors[6]);
+                            }
+                            //how much time is left
+                            if(day>=currentDate && day<= task.ForecastDate) //blue
+                            {
+                                cell.Foreground = new SolidColorBrush(arrColors[3]);
+                                return new SolidColorBrush(arrColors[3]);
+                            }
+                        }
+                        //if the task hasnt started
+                        if (task.Status == Enums.Status.Scheduled)
+                        {
+                            if (currentDate > task.ScheduledDate)//late to start
+                            {
+                                if (day < currentDate && day >= task.ScheduledDate)//orange -> how late 
                                 {
                                     cell.Foreground = new SolidColorBrush(arrColors[4]);
                                     return new SolidColorBrush(arrColors[4]);
                                 }
+                                if(day>=currentDate && day<= task.ForecastDate)//blue-> how much time left
+                                {
+                                    cell.Foreground = new SolidColorBrush(arrColors[3]);
+                                    return new SolidColorBrush(arrColors[3]);
+                                }
+                            }
+                            //not late, how much time to do 
+                            if(day>=task.ScheduledDate && day<= task.ForecastDate) //blue
+                            {
+                                cell.Foreground = new SolidColorBrush(arrColors[3]);
+                                return new SolidColorBrush(arrColors[3]);
                             }
                         }
+                        cell.Foreground = new SolidColorBrush(arrColors[0]);
+                        return new SolidColorBrush(arrColors[0]);
 
                     }
                 }
             }
             catch (Exception)
             {
-                return new SolidColorBrush(Colors.Black);
+                cell.Foreground = new SolidColorBrush(arrColors[0]);
+                return new SolidColorBrush(arrColors[0]);
             }
 
         }
-        return new SolidColorBrush(Colors.Silver);
+        return new SolidColorBrush(arrColors[0]);
     }
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

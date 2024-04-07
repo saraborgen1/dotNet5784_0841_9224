@@ -21,7 +21,7 @@ public class BlAlreadyExistException : Exception
 public class BlCannotBeDeletedException : Exception
 {
     public BlCannotBeDeletedException(int id, string message, Exception innerException) : base($"{message} with ID={id} cannot be deleted because" + innerException) { }
-    public BlCannotBeDeletedException(int id, string message) : base($"{message} with ID={id} cannot be deleted because") { }
+    public BlCannotBeDeletedException(int id, string message) : base($"{message} with ID={id} cannot be deleted in the middle of a mission") { }
 
     public BlCannotBeDeletedException(Exception innerException)
                 : base(innerException.Message) { }
