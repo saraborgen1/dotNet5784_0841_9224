@@ -82,9 +82,9 @@
                 <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,280,0,0" VerticalAlignment="Top" Width="94"/>
 
 
-                <Button Grid.Column="3" Content="{Binding TaskProperty.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,355,0,0" VerticalAlignment="Top" Height="66" Width="140" Click="Button_UpdateOrAdd"/>
+                <Button Grid.Column="3" Content="{Binding TaskProperty.Id, Mode=TwoWay, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,355,0,0" VerticalAlignment="Top" Height="66" Width="140" Click="Button_UpdateOrAdd" />
                 <!--Button delete task-->
-                <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,355,0,0" VerticalAlignment="Top" Width="140" Click="Delete_Click"/>
+                <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,355,0,0" VerticalAlignment="Top" Width="140" Click="Delete_Click" Visibility="{Binding TaskProperty.Id, Mode=TwoWay, Converter={StaticResource ConvertIdToDeleteVisibilityKey}}"/>
                 <!--ComboBox  Dependencies-->
                 <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="33,320,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding DependenciesProperty,Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChangedDeleteDep"/>
                 <!--ComboBox  options for Dependencies-->
