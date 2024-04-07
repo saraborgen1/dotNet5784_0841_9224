@@ -85,23 +85,6 @@ namespace PL.Task
 
                     }
                 }
-                //var task = s_bl.Task.Read(item.TaskId);
-                //if (item.isUpdateOrAdd)
-                //{
-                //    TaskList.Add(task!);
-                //    _tasks.Add(task!);
-                //}
-                //else
-                //{
-                //    var index = _tasks.FindIndex(e => e.Id == item.TaskId);
-                //    if (index is not -1)
-                //    {
-
-                //        TaskList[index] = task!;
-                //        _tasks[index] = task!;
-
-                //    }
-                //}
 
             }
             catch (Exception ex)
