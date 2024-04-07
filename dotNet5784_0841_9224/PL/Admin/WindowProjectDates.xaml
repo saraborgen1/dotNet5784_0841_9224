@@ -8,25 +8,30 @@
         Title="WindowProjectDates" Height="450" Width="800"
         Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    <!-- Main grid layout -->
     <Grid>
+        <!-- Row definitions -->
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="271*"/>
         </Grid.RowDefinitions>
+        <!-- Column definitions -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
+
+        <!-- Label for Start project -->
         <Label Content="Start project" HorizontalAlignment="Left" Height="58" VerticalAlignment="Center" Width="134" Margin="-2,0,0,0"/>
+        <!-- Label for End project -->
         <Label Content="End project" HorizontalAlignment="Center" Height="58" VerticalAlignment="Top" Width="134" Margin="0,57,0,0" Grid.Column="0" Grid.RowSpan="2"/>
 
         <!-- Start project DatePicker -->
         <DatePicker x:Name="startDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDateChanged="SelectStartDate" Height="58" Width="134" Grid.ColumnSpan="2" Margin="131,0,0,0">
             <DatePicker.Style>
                 <Style TargetType="DatePicker">
-                    <!--<Setter Property="DisplayDateStart" Value="{x:Static System:DateTime.MinValue}" />-->
                     <Style.Triggers>
                         <!-- Use a MultiDataTrigger to check if startDatePicker.SelectedDate is null -->
                         <MultiDataTrigger>
@@ -45,7 +50,6 @@
         <DatePicker x:Name="endDatePicker"  HorizontalAlignment="Left" Margin="131,57,0,2"  SelectedDateChanged="SelectEndDate" Width="134" Height="58" Grid.RowSpan="2" Grid.ColumnSpan="2" >
             <DatePicker.Style>
                 <Style TargetType="DatePicker">
-                    <!--<Setter Property="DisplayDateStart" Value="{x:Static System:DateTime.MinValue}" />-->
                     <Style.Triggers>
                         <!-- Use a MultiDataTrigger to check if startDatePicker.SelectedDate is null -->
                         <MultiDataTrigger>
@@ -60,6 +64,7 @@
             </DatePicker.Style>
         </DatePicker>
 
+        <!-- Button for setting project dates -->
         <Button Content="Set" HorizontalAlignment="Left" Height="45" Margin="30,10,0,0" VerticalAlignment="Top" Width="200" Click="Button_SetDates"
             IsEnabled="{Binding Path=DataContext.self, Converter={StaticResource ConvertSetDatesIsEnabledKey}}" Grid.ColumnSpan="2" Grid.Row="2" />
     </Grid>

@@ -7,20 +7,27 @@
         mc:Ignorable="d"
         Icon="icon.ico"
         Title="AdminWindow" Height="450" Width="800">
+    <!-- Resources section -->
     <Window.Resources>
+        <!-- Style for animated buttons -->
         <Style x:Key="AnimatedButtonStyle" TargetType="Button">
+            <!-- Initial opacity and render transform settings -->
             <Setter Property="Opacity" Value="0"/>
             <Setter Property="RenderTransform">
                 <Setter.Value>
                     <TranslateTransform X="0" Y="50"/>
                 </Setter.Value>
             </Setter>
+            <!-- Triggers for animation -->
             <Style.Triggers>
+                <!-- Trigger for when the button is loaded -->
                 <EventTrigger RoutedEvent="Loaded">
                     <BeginStoryboard>
                         <Storyboard>
+                            <!-- Animation for opacity -->
                             <DoubleAnimation Storyboard.TargetProperty="Opacity"
                                              From="0" To="1" Duration="0:0:1"/>
+                            <!-- Animation for translation -->
                             <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                                              From="50" To="0" Duration="0:0:1"/>
                         </Storyboard>
@@ -29,29 +36,39 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
+    <!-- Main grid layout -->
     <Grid>
+        <!-- Row definitions -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!-- Column definitions -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Your existing buttons, now filling the entire cell -->
+        <!-- Engineer List view Button -->
         <Button Grid.Row="0" Grid.Column="0" Content="Engineer List view" Style="{StaticResource AnimatedButtonStyle}" Click="btnEngineers_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Initialization Button-->
         <Button Grid.Row="0" Grid.Column="1" Content="Initialization" Style="{StaticResource AnimatedButtonStyle}" Click="btnInitialization_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Reset Button-->
         <Button Grid.Row="0" Grid.Column="2" Content="Reset" Style="{StaticResource AnimatedButtonStyle}" Click="btnReset_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Task List View Button-->
         <Button Grid.Row="1" Grid.Column="0" Content="Task List View" Style="{StaticResource AnimatedButtonStyle}" Click="btnTask_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Gantt chart Button-->
         <Button Grid.Row="1" Grid.Column="1" Content="Gantt chart" Style="{StaticResource AnimatedButtonStyle}" Click="btnGantt_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Auto Scheduling Button-->
         <Button Grid.Row="1" Grid.Column="2" Content="Auto Scheduling" Style="{StaticResource AnimatedButtonStyle}" Click="btnAutoScheduling_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Set Project dates Button-->
         <Button Grid.Row="2" Grid.Column="0" Content="Set Project dates" Style="{StaticResource AnimatedButtonStyle}" Click="btnProjectDates_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Deleted Engineers Button-->
         <Button Grid.Row="2" Grid.Column="1" Content="Deleted Engineers" Style="{StaticResource AnimatedButtonStyle}" Click="DeletedEngineerWindow_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <!-- Return Button-->
         <Button Grid.Row="2" Grid.Column="2" Content="Return" Style="{StaticResource AnimatedButtonStyle}" Click="Return_Click" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-
     </Grid>
 </Window>
