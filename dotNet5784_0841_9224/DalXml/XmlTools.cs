@@ -48,7 +48,6 @@ public static class XMLTools
                 propertyInfo.SetValue(newItem,Convert.ChangeType(element.Value, underlyingType ?? propertyType));
             }
         }
-
         return newItem;
     }
 
