@@ -90,11 +90,11 @@ internal class EngineerImplementation : BlApi.IEngineer
     /// <exception cref="BO.BlCannotBeDeletedException">Cannot Be Deleted</exception>
     public void Delete(int id)
     {
-        if (id == 0)
-        {
-            _dal.Engineer.DeleteAll();
-            return;
-        }
+        //if (id == 0)
+        //{
+        //    _dal.Engineer.DeleteAll();
+        //    return;
+        //}
 
         BO.Engineer engineer = Read(id)!;
         //if (getTaskInEngineer(id) != null)
