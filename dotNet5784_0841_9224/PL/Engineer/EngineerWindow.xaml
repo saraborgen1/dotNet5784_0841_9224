@@ -13,43 +13,40 @@
     </Window.Resources>
     <Grid Margin="6,0,-6,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--Label Id-->
-        <Label Content="Id" HorizontalAlignment="Left" Margin="322,68,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <Label Content="Id" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--Label Name-->
-        <Label Content="Name" HorizontalAlignment="Left" Margin="322,108,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--Label Email-->
-        <Label Content="Email" HorizontalAlignment="Left" Margin="322,148,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="0,80,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--Label Level-->
-        <Label Content="Level" HorizontalAlignment="Left" Margin="322,188,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <Label Content="Level" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--Label Cost-->
-        <Label Content="Cost" HorizontalAlignment="Left" Margin="322,228,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
+        <Label Content="Cost" HorizontalAlignment="Left" Margin="0,160,0,0" VerticalAlignment="Top" Height="33" Width="77"/>
         <!--Label Password-->
-        <Label Content="Password" HorizontalAlignment="Left" Height="26" Margin="322,268,0,0" VerticalAlignment="Top" Width="77" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" Height="33" Width="77" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
         <!--TextBox Id-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,68,0,0" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"
-                IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"
+                 IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
         <!--TextBox Name-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,108,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,40,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <!--TextBox Email-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,148,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,80,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <!--TextBox Level-->
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,188,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="120"
                   ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
                   SelectedValue="{Binding Level, Mode=TwoWay}"/>
         <!--TextBox  Cost-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,228,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,160,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
         <!--TextBox  Password-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,268,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
-
-
-
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,200,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
 
         <!--Button Add/Update-->
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="322,308,0,0" VerticalAlignment="Top" Height="81" Width="306"
-           Click="Button_UpdateOrAdd" Grid.ColumnSpan="2"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Height="81" Margin="100,308,0,0" VerticalAlignment="Top" Width="125" Click="DeleteButton_Click" Visibility="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToDeleteVisibilityKey}}" />
+        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Height="81" Width="306"
+                Click="Button_UpdateOrAdd" Grid.ColumnSpan="2"/>
+        <Button Content="Delete" HorizontalAlignment="Left" Height="81" Margin="0,240,0,0" VerticalAlignment="Top" Width="125" Click="DeleteButton_Click" Visibility="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdToDeleteVisibilityKey}}" />
     </Grid>
 </Window>

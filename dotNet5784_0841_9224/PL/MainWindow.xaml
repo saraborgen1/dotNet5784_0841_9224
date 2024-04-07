@@ -9,7 +9,7 @@
         Icon="icon.ico"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <Button Content="enter" HorizontalAlignment="Left" Height="90" Margin="64,276,0,0" VerticalAlignment="Top" Width="187" Click="Button_Enter">
+        <Button Content="enter" HorizontalAlignment="Left" Height="45" Margin="10,280,0,0" VerticalAlignment="Top" Width="146" Click="Button_Enter">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="LightBlue"/>
@@ -55,24 +55,54 @@
         </Button>
 
         <!-- השארתי את שאר הקוד שלך כמו שהוא -->
-        <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,86,0,0" VerticalAlignment="Top" Width="111"/>
+        <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,215,0,0" VerticalAlignment="Top" Width="111"/>
         <!--Id text box-->
-        <TextBox x:Name="IdTextBox" PreviewTextInput="TextBox_PreviewTextInput" HorizontalAlignment="Left" Margin="33,99,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
-        <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,148,0,0" VerticalAlignment="Top" Width="111"/>
+        <TextBox x:Name="IdTextBox" PreviewTextInput="TextBox_PreviewTextInput" HorizontalAlignment="Left" Margin="10,220,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="145"/>
+        <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,245,0,0" VerticalAlignment="Top" Width="111"/>
         <!--password box-->
-        <PasswordBox HorizontalAlignment="Left" Height="42" Margin="40,137,0,0" VerticalAlignment="Top" Width="89" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>
-        <!--Button day-->
-        <Button Content="One day" HorizontalAlignment="Left" Height="49" Margin="434,99,0,0" VerticalAlignment="Top" Width="67" Click="Button_AddDay"/>
-        <!--Button week-->
-        <Button Content="One week" HorizontalAlignment="Left" Height="49" Margin="506,99,0,0" VerticalAlignment="Top" Width="75" Click="Button_AddWeek"/>
-        <Label Content= "{Binding CurrentDateProperty, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Left" Height="57" Margin="434,42,0,0" VerticalAlignment="Top" Width="147"/>
-        <Label Content="ברוכים הבאים לסוף שלכם . אם הגעתם לכאן סימן שמשעמם לכם ומאסתם" HorizontalAlignment="Left" Height="40" Margin="21,22,0,0" VerticalAlignment="Top" Width="408"/>
-        <!--Button year-->
-        <Button Content="One year" HorizontalAlignment="Left" Height="49" Margin="291,99,0,0" VerticalAlignment="Top" Width="68" Click="Button_AddYear"/>
-        <!--temp-->
-        <!--Button month-->
-        <Button Content="One month" HorizontalAlignment="Center" Height="48" Margin="0,100,0,0" VerticalAlignment="Top" Width="64" Click="Button_AddMonth"/>
-        <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="359,217,0,0" VerticalAlignment="Top" Width="125" Click="Button_Click"/>
-        <Button Content="Button1" HorizontalAlignment="Left" Height="88" Margin="325,321,0,0" VerticalAlignment="Top" Width="236" Click="Button_Click_1"/>
+        <PasswordBox HorizontalAlignment="Left"  Margin="10,250,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>
+
+        <Border  BorderThickness="1" Margin="10,10,10,250">
+            <StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <Label Content="{Binding CurrentDateProperty, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Center" FontSize="20" Height="50" VerticalAlignment="Center" Grid.Row="0"/>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Content="One day" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddDay" Grid.Column="0"/>
+                        <Button Content="One week" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddWeek" Grid.Column="1"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Content="One year" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddYear" Grid.Column="0"/>
+                        <Button Content="One month" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddMonth" Grid.Column="1"/>
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+
+
+
+
+
+
+
+
+
+
+        <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="600,260,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click"/>
+        <Button Content="Button1" HorizontalAlignment="Left" Height="88" Margin="544,336,0,0" VerticalAlignment="Top" Width="236" Click="Button_Click_1"/>
+        <Label Content="אם כבר אתם כאן פרק תהילים להצלחת ולרפואת החיילים ולשחרור החטופים: &#xA;א  לַמְנַצֵּחַ, מִזְמוֹר לְדָוִד.&#xA;ב  יַעַנְךָ יְהוָה, בְּיוֹם צָרָה;    יְשַׂגֶּבְךָ, שֵׁם אֱלֹהֵי יַעֲקֹב.&#xA;ג  יִשְׁלַח-עֶזְרְךָ מִקֹּדֶשׁ;    וּמִצִּיּוֹן, יִסְעָדֶךָּ.&#xA;ד  יִזְכֹּר כָּל-מִנְחֹתֶךָ;    וְעוֹלָתְךָ יְדַשְּׁנֶה סֶלָה.&#xA;ה  יִתֶּן-לְךָ כִלְבָבֶךָ;    וְכָל-עֲצָתְךָ יְמַלֵּא.&#xA;ו  נְרַנְּנָה, בִּישׁוּעָתֶךָ--    וּבְשֵׁם-אֱלֹהֵינוּ נִדְגֹּל;&#xA;יְמַלֵּא יְהוָה,    כָּל-מִשְׁאֲלוֹתֶיךָ.&#xA;ז  עַתָּה יָדַעְתִּי--    כִּי הוֹשִׁיעַ יְהוָה, מְשִׁיחוֹ:&#xA;יַעֲנֵהוּ, מִשְּׁמֵי קָדְשׁוֹ--    בִּגְבֻרוֹת, יֵשַׁע יְמִינוֹ.&#xA;ח  אֵלֶּה בָרֶכֶב,    וְאֵלֶּה בַסּוּסִים;&#xA;וַאֲנַחְנוּ,    בְּשֵׁם-יְהוָה אֱלֹהֵינוּ נַזְכִּיר.&#xA;ט  הֵמָּה, כָּרְעוּ וְנָפָלוּ;    וַאֲנַחְנוּ קַּמְנוּ, וַנִּתְעוֹדָד.&#xA;י  יְהוָה הוֹשִׁיעָה:    הַמֶּלֶךְ, יַעֲנֵנוּ בְיוֹם-קָרְאֵנוּ." HorizontalAlignment="Left" Height="245" Margin="289,184,0,0" VerticalAlignment="Top" Width="435" FontWeight="Bold"/>
     </Grid>
 </Window>
