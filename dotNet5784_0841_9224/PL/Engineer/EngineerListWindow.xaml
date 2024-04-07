@@ -42,7 +42,20 @@
         <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" SelectionChanged="SelectedEngineer" Height="470" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <!-- ID -->
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="100" />
+                    <!-- Password -->
+                    <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}" Width="250" />
+                    <!-- Name -->
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150" />
+                    <!-- Email -->
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="200" />
+                    <!-- Level -->
+                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}" Width="100" />
+                    <!-- Cost -->
+                    <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}" Width="50" />
+                    <!-- Task -->
+                    <GridViewColumn Header="Task" DisplayMemberBinding="{Binding Task.Id}" Width="50" />
                 </GridView>
             </ListView.View>
         </ListView>
