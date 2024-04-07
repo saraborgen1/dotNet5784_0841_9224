@@ -2,9 +2,9 @@
 <config>
   <NextTaskId>21</NextTaskId>
   <NextDependencyId>52</NextDependencyId>
-  <StartProject>2024-04-07</StartProject>
-  <EndProject>2024-04-18</EndProject>
-  <CurrentDate>2025-05-18</CurrentDate>
+  <StartProject></StartProject>
+  <EndProject></EndProject>
+  <CurrentDate>2024-04-07</CurrentDate>
   <AdminPassword>12345678</AdminPassword>
   <AdminUserId>100000000</AdminUserId>
   <StatusProject></StatusProject>

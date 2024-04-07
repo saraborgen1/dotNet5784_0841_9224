@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Icon="icon.ico"
-        Title="EngineerWindow" Height="450" Width="800"
+        Title="EngineerWindow" SizeToContent="WidthAndHeight"
         DataContext="{Binding EngineerProperty, RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
@@ -29,20 +29,20 @@
         <!--Label Password-->
         <Label Content="Password" HorizontalAlignment="Left" Margin="0,200,0,0" VerticalAlignment="Top" Height="33" Width="77" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
         <!--TextBox Id-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top"
                  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConvertIdIsEnabledKey}}" />
         <!--TextBox Name-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,40,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,40,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top"/>
         <!--TextBox Email-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,80,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,80,0,0" TextWrapping="Wrap" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top"/>
         <!--TextBox Level-->
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top" Width="120"
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,120,0,0" VerticalAlignment="Top"
                   ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
                   SelectedValue="{Binding Level, Mode=TwoWay}"/>
         <!--TextBox  Cost-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,160,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,160,0,0" TextWrapping="Wrap" Text="{Binding Cost, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top"/>
         <!--TextBox  Password-->
-        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,200,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="120" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,200,0,0" TextWrapping="Wrap" Text="{Binding Password, Mode=TwoWay, NotifyOnValidationError=true}" VerticalAlignment="Top" Visibility="{Binding Id , Mode=OneTime, Converter={StaticResource ConvertIdToPasswordVisibilityKey}}"/>
 
         <!--Button Add/Update-->
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Height="81" Width="306"
