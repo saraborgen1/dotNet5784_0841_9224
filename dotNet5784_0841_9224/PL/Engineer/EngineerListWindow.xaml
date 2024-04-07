@@ -9,29 +9,33 @@
         Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <!--Extrnal  Grid-->
-    <Grid Height="624" VerticalAlignment="Bottom">
+    <Grid Height="640" VerticalAlignment="Bottom">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <!-- 1/7 מהגובה -->
+            <RowDefinition Height="6*"/>
+            <!-- 5/7 מהגובה -->
+            <RowDefinition Height="1*"/>
+            <!-- 1/7 מהגובה -->
         </Grid.RowDefinitions>
-        <Grid/>
+        <Grid Margin="0,0,0,13"/>
         <!--Internal, Upper Grid-->
-        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+        <Grid Height="auto" Grid.Row="0" Width="auto" Margin="0,0,0,13">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--Filter options label-->
-            <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="46,0,0,0" VerticalAlignment="Center"/>
+            <Label Content="Filter by engineer level" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
             <!--Filter ComboBox-->
-            <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
-                Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                      SelectedValue="{Binding Level, Mode=TwoWay}" SelectionChanged="ComboBox_EngineerLevelFilter"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay}" SelectionChanged="ComboBox_EngineerLevelFilter" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" />
+
 
         </Grid>
         <!--List display-->
-        <ListView Margin="5,106,5,0" Grid.Row="1" ItemsSource="{Binding EngineerList}" SelectionChanged="SelectedEngineer" Height="411" VerticalAlignment="Top">
+        <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" SelectionChanged="SelectedEngineer" Height="470" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -39,9 +43,8 @@
             </ListView.View>
         </ListView>
         <!--Add button-->
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_EngineerWindow"/>
-        <Label Content="sreach by name" HorizontalAlignment="Left" Margin="62,27,0,0" Grid.Row="1" VerticalAlignment="Top" Height="57" Width="124"/>
-        <TextBox HorizontalAlignment="Left" Margin="246,27,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="42" TextChanged="TextBox_Search_TextChanged"/>
-
+        <Button Content="Add" Grid.Row="3" HorizontalAlignment="Center" Width="100" Click="Button_EngineerWindow" Margin="0,19,0,20"/>
+        <Label Content="sreach by name" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="471,0,0,0"/>
+        <TextBox HorizontalAlignment="Left" Margin="617,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" Height="52" TextChanged="TextBox_Search_TextChanged" />
     </Grid>
 </Window>
