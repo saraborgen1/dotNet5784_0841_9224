@@ -20,6 +20,8 @@ namespace PL.Task
             {
                 TaskProperty = new BO.Task();
                 isCreate = true;
+                TaskProperty.Dependencies = new List<BO.TaskInList>();
+                TaskInListProperty =(s_bl.Task.ReadAll().Select(task => s_bl.Task.GetTaskInList(task.Id))).ToList();
             }
             else
                 try
