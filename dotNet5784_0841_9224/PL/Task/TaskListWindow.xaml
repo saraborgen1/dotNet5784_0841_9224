@@ -8,7 +8,7 @@
         Title="TaskListWindow" Height="640" Width="800"
         Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    
+
     <!-- External Grid -->
     <Grid>
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- Filter options label -->
-            <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="46,0,0,0" VerticalAlignment="Center"/>
+            <Label Grid.Column="0" Content="Filter by task level" HorizontalAlignment="Left" Margin="46,8,0,8"/>
             <!-- Filter ComboBox -->
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}"
                       Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -64,9 +64,10 @@
                     <!-- Remarks -->
                     <GridViewColumn Header="Remarks" DisplayMemberBinding="{Binding Remarks}" Width="150" />
                     <!-- Engineer -->
-                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding Engineer}" Width="100" />
+                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding Engineer}" Width="150" />
                     <!-- Complexity -->
-                    <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding Copmlexity}" Width="100" />
+                    <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding Copmlexity}" Width="150" />
+
                 </GridView>
             </ListView.View>
         </ListView>
