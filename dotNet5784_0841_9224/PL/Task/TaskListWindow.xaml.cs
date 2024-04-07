@@ -59,23 +59,49 @@ namespace PL.Task
         {
             try
             {
-                var task = s_bl.Task.Read(item.TaskId);
                 if (item.isUpdateOrAdd)
                 {
+                    var task = s_bl.Task.Read(item.TaskId);
                     TaskList.Add(task!);
                     _tasks.Add(task!);
                 }
                 else
                 {
+                    var delEngineer = s_bl.Engineer.ReadAllDelete().FirstOrDefault(t => t.Id == item.TaskId);
                     var index = _tasks.FindIndex(e => e.Id == item.TaskId);
                     if (index is not -1)
                     {
-
-                        TaskList[index] = task!;
-                        _tasks[index] = task!;
+                        if (delEngineer == null)
+                        {
+                            var task = s_bl.Task.Read(item.TaskId);
+                            TaskList[index] = task!;
+                            _tasks[index] = task!;
+                        }
+                        else
+                        {
+                            TaskList.RemoveAt(index);
+                            _tasks.RemoveAt(index);
+                        }
 
                     }
                 }
+                //var task = s_bl.Task.Read(item.TaskId);
+                //if (item.isUpdateOrAdd)
+                //{
+                //    TaskList.Add(task!);
+                //    _tasks.Add(task!);
+                //}
+                //else
+                //{
+                //    var index = _tasks.FindIndex(e => e.Id == item.TaskId);
+                //    if (index is not -1)
+                //    {
+
+                //        TaskList[index] = task!;
+                //        _tasks[index] = task!;
+
+                //    }
+                //}
 
             }
             catch (Exception ex)
