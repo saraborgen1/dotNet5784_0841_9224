@@ -110,7 +110,7 @@ internal class EngineerImplementation : BlApi.IEngineer
                 throw new BO.BlCannotBeDeletedException(id, _entityName, ex);
             }
         }
-        throw new BO.BlCannotBeDeletedException(id, _entityName);
+        throw new BO.BlCannotBeDeletedException(id, _entityName , "in the middle of a mission");
     }
 
     /// <summary>

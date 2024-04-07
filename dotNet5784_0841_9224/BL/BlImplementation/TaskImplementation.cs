@@ -95,8 +95,8 @@ internal class TaskImplementation : ITask
         List<int?> dependenciesId = (from item in _dal.Dependency.ReadAll(p => p.DependentOnTask == id)
                                      where item.DependentTask != null
                                      select item.DependentTask).ToList();
-        if (dependenciesId != null)
-            throw new BO.BlCannotBeDeletedException(id, _entityName);
+        if (dependenciesId != null && dependenciesId.Count!=0)
+            throw new BO.BlCannotBeDeletedException(id, _entityName ,"has tasks dependent");
 
         var temp = (_dal.Dependency.ReadAll(p => p.DependentTask == id)
             .ToList())
