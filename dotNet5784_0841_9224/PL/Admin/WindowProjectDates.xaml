@@ -9,11 +9,21 @@
         Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
-        <Label Content="Start project" HorizontalAlignment="Left" Height="35" Margin="210,64,0,0" VerticalAlignment="Top" Width="107"/>
-        <Label Content="End project" HorizontalAlignment="Left" Height="35" Margin="210,118,0,0" VerticalAlignment="Top" Width="107"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="271*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Start project" HorizontalAlignment="Left" Height="58" VerticalAlignment="Center" Width="134" Margin="-2,0,0,0"/>
+        <Label Content="End project" HorizontalAlignment="Center" Height="58" VerticalAlignment="Top" Width="134" Margin="0,57,0,0" Grid.Column="0" Grid.RowSpan="2"/>
 
         <!-- Start project DatePicker -->
-        <DatePicker x:Name="startDatePicker" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" SelectedDateChanged="SelectStartDate">
+        <DatePicker x:Name="startDatePicker" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedDateChanged="SelectStartDate" Height="58" Width="134" Grid.ColumnSpan="2" Margin="131,0,0,0">
             <DatePicker.Style>
                 <Style TargetType="DatePicker">
                     <!--<Setter Property="DisplayDateStart" Value="{x:Static System:DateTime.MinValue}" />-->
@@ -32,7 +42,7 @@
         </DatePicker>
 
         <!-- End project DatePicker -->
-        <DatePicker x:Name="endDatePicker"  HorizontalAlignment="Center" Margin="0,120,0,268"  SelectedDateChanged="SelectEndDate" Width="127" >
+        <DatePicker x:Name="endDatePicker"  HorizontalAlignment="Left" Margin="131,57,0,2"  SelectedDateChanged="SelectEndDate" Width="134" Height="58" Grid.RowSpan="2" Grid.ColumnSpan="2" >
             <DatePicker.Style>
                 <Style TargetType="DatePicker">
                     <!--<Setter Property="DisplayDateStart" Value="{x:Static System:DateTime.MinValue}" />-->
@@ -50,7 +60,7 @@
             </DatePicker.Style>
         </DatePicker>
 
-        <Button Content="Set" HorizontalAlignment="Left" Height="51" Margin="232,184,0,0" VerticalAlignment="Top" Width="219" Click="Button_SetDates"
-            IsEnabled="{Binding Path=DataContext.self, Converter={StaticResource ConvertSetDatesIsEnabledKey}}" />
+        <Button Content="Set" HorizontalAlignment="Left" Height="45" Margin="30,10,0,0" VerticalAlignment="Top" Width="200" Click="Button_SetDates"
+            IsEnabled="{Binding Path=DataContext.self, Converter={StaticResource ConvertSetDatesIsEnabledKey}}" Grid.ColumnSpan="2" Grid.Row="2" />
     </Grid>
 </Window>

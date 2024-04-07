@@ -82,9 +82,7 @@
         <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding EngineerWorkerProperty.Remarks, Mode=TwoWay}" VerticalAlignment="Top" Width="126" Height="25" Margin="138,330,0,0"/>
         <Label Content="Copmlexity" HorizontalAlignment="Left" Height="35" Margin="0,360,0,0" VerticalAlignment="Top" Width="126"/>
         <Label Content="{Binding EngineerWorkerProperty.Copmlexity}" HorizontalAlignment="Left" Height="35" Margin="138,360,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button Content="Update" HorizontalAlignment="Left" Height="29" Margin="10,400,0,0" VerticalAlignment="Top" Width="191" Click="ButtonUpdate_Click" Visibility="{Binding EngineerProperty.Task,Mode=OneTime,Converter={StaticResource ConvertTaskToVisibilityKey}}"/>
-        <Button Content="Done" HorizontalAlignment="Left" Height="46" Margin="214,378,0,0" VerticalAlignment="Top" Width="49" Click="ButtonDone_Click" Visibility="{Binding EngineerProperty.Task,Mode=OneTime,Converter={StaticResource ConvertTaskToVisibilityKey}}"/>
-
-
+        <Button Content="Update" HorizontalAlignment="Left" Height="43" Margin="6,386,0,0" VerticalAlignment="Top" Width="121" Click="ButtonUpdate_Click" Visibility="{Binding EngineerProperty.Task,Mode=OneTime,Converter={StaticResource ConvertTaskToVisibilityKey}}"/>
+        <Button Content="Done" HorizontalAlignment="Left" Height="43" Margin="136,386,0,0" VerticalAlignment="Top" Width="121" Click="ButtonDone_Click" Visibility="{Binding EngineerProperty.Task,Mode=OneTime,Converter={StaticResource ConvertTaskToVisibilityKey}}"/>
     </Grid>
 </Window>

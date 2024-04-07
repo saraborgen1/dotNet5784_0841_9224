@@ -62,7 +62,7 @@
         <!--password box-->
         <PasswordBox HorizontalAlignment="Left"  Margin="10,250,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>
 
-        <Border  BorderThickness="1" Margin="10,10,10,250">
+        <Border  BorderThickness="1" Margin="10,0,10,264">
             <StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -101,8 +101,24 @@
 
 
 
-        <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="600,260,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="660,260,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click"/>
         <Button Content="Button1" HorizontalAlignment="Left" Height="88" Margin="544,336,0,0" VerticalAlignment="Top" Width="236" Click="Button_Click_1"/>
-        <Label Content="אם כבר אתם כאן פרק תהילים להצלחת ולרפואת החיילים ולשחרור החטופים: &#xA;א  לַמְנַצֵּחַ, מִזְמוֹר לְדָוִד.&#xA;ב  יַעַנְךָ יְהוָה, בְּיוֹם צָרָה;    יְשַׂגֶּבְךָ, שֵׁם אֱלֹהֵי יַעֲקֹב.&#xA;ג  יִשְׁלַח-עֶזְרְךָ מִקֹּדֶשׁ;    וּמִצִּיּוֹן, יִסְעָדֶךָּ.&#xA;ד  יִזְכֹּר כָּל-מִנְחֹתֶךָ;    וְעוֹלָתְךָ יְדַשְּׁנֶה סֶלָה.&#xA;ה  יִתֶּן-לְךָ כִלְבָבֶךָ;    וְכָל-עֲצָתְךָ יְמַלֵּא.&#xA;ו  נְרַנְּנָה, בִּישׁוּעָתֶךָ--    וּבְשֵׁם-אֱלֹהֵינוּ נִדְגֹּל;&#xA;יְמַלֵּא יְהוָה,    כָּל-מִשְׁאֲלוֹתֶיךָ.&#xA;ז  עַתָּה יָדַעְתִּי--    כִּי הוֹשִׁיעַ יְהוָה, מְשִׁיחוֹ:&#xA;יַעֲנֵהוּ, מִשְּׁמֵי קָדְשׁוֹ--    בִּגְבֻרוֹת, יֵשַׁע יְמִינוֹ.&#xA;ח  אֵלֶּה בָרֶכֶב,    וְאֵלֶּה בַסּוּסִים;&#xA;וַאֲנַחְנוּ,    בְּשֵׁם-יְהוָה אֱלֹהֵינוּ נַזְכִּיר.&#xA;ט  הֵמָּה, כָּרְעוּ וְנָפָלוּ;    וַאֲנַחְנוּ קַּמְנוּ, וַנִּתְעוֹדָד.&#xA;י  יְהוָה הוֹשִׁיעָה:    הַמֶּלֶךְ, יַעֲנֵנוּ בְיוֹם-קָרְאֵנוּ." HorizontalAlignment="Left" Height="245" Margin="247,184,0,0" VerticalAlignment="Top" Width="435" FontWeight="Bold"/>
+
+        <StackPanel FlowDirection="RightToLeft" Margin="230,150,150,6">
+            <Label Content="אם כבר אתם כאן פרק תהילים להצלחת ולרפואת החיילים ולשחרור החטופים:" FontSize="10" FontWeight="Bold"/>
+            <Label Content="א לַמְנַצֵּחַ, מִזְמוֹר לְדָוִד." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ב יַעַנְךָ יְהוָה, בְּיוֹם צָרָה; יְשַׂגֶּבְךָ, שֵׁם אֱלֹהֵי יַעֲקֹב." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ג יִשְׁלַח-עֶזְרְךָ מִקֹּדֶשׁ; וּמִצִּיּוֹן, יִסְעָדֶךָּ." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ד יִזְכֹּר כָּל-מִנְחֹתֶךָ; וְעוֹלָתְךָ יְדַשְּׁנֶה סֶלָה." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ה יִתֶּן-לְךָ כִלְבָבֶךָ; וְכָל-עֲצָתְךָ יְמַלֵּא." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ו נְרַנְּנָה, בִּישׁוּעָתֶךָ-- וּבְשֵׁם-אֱלֹהֵינוּ נִדְגֹּל;" FontSize="10" FontWeight="Bold"/>
+            <Label Content="יְמַלֵּא יְהוָה, כָּל-מִשְׁאֲלוֹתֶיךָ." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ז עַתָּה יָדַעְתִּי-- כִּי הוֹשִׁיעַ יְהוָה, מְשִׁיחֹו: יַעֲנֵהוּ, מִשְּׁמֵי קָדְשׁוֹ-- בִּגְבֻרֹת, יֵשַׁע יְמִינֹו." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ח אֵלֶּה בָּרֶכֶב, וְאֵלֶּה בַּסּוּסִים; וַאֲנַחְנוּ, בְּשֵׁם-יְהוָה אֱלֹהֵינוּ נַזְכִּיר." FontSize="10" FontWeight="Bold"/>
+            <Label Content="ט הֵמָּה, כָּרְעוּ וְנָפָלוּ; וַאֲנַחְנוּ קַמְנוּ, וַנִּתְעוֹדָד." FontSize="10" FontWeight="Bold"/>
+            <Label Content="י יְהוָה הוֹשִׁיעָה: הַמֶּלֶךְ, יַעֲנֵנוּ בְּיוֹם-קָרְאֵנוּ." FontSize="10" FontWeight="Bold"/>
+        </StackPanel>
+
+
     </Grid>
 </Window>

@@ -11,11 +11,11 @@
     <!--Extrnal  Grid-->
     <Grid Height="640" VerticalAlignment="Bottom">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="13*"/>
             <!-- 1/7 מהגובה -->
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="99*"/>
             <!-- 5/7 מהגובה -->
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="16*"/>
             <!-- 1/7 מהגובה -->
         </Grid.RowDefinitions>
         <Grid Margin="0,0,0,13"/>
@@ -27,13 +27,17 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--Filter options label-->
-            <Label Content="Filter by engineer level" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="69,0,0,0"/>
-            <!--Filter ComboBox-->
-            <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay}" SelectionChanged="ComboBox_EngineerLevelFilter" Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" />
 
-
+            <!-- Filter options label -->
+            <Label Content="Filter by engineer level" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="69,20,0,0" Grid.Column="0"/>
+            <!-- Filter ComboBox -->
+            <ComboBox ItemsSource="{Binding Source={StaticResource EngineersCollectionKey}}" SelectedValue="{Binding Level, Mode=TwoWay}" SelectionChanged="ComboBox_EngineerLevelFilter" Margin="0,20,0,0" Grid.Column="1"/>
+            <!-- Search label -->
+            <Label Content="Search by name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="105,20,0,0" Grid.Column="2"/>
+            <!-- Search TextBox -->
+            <TextBox Margin="0,24,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="3" TextChanged="TextBox_Search_TextChanged"/>
         </Grid>
+
         <!--List display-->
         <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" SelectionChanged="SelectedEngineer" Height="470" VerticalAlignment="Top">
             <ListView.View>
@@ -43,8 +47,7 @@
             </ListView.View>
         </ListView>
         <!--Add button-->
-        <Button Content="Add" Grid.Row="3" HorizontalAlignment="Center" Width="100" Click="Button_EngineerWindow" Margin="0,19,0,20"/>
-        <Label Content="sreach by name" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="471,0,0,0"/>
-        <TextBox HorizontalAlignment="Left" Margin="617,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" Height="52" TextChanged="TextBox_Search_TextChanged" />
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Width="100" Click="Button_EngineerWindow" Margin="0,19,0,20"/>
+
     </Grid>
 </Window>
