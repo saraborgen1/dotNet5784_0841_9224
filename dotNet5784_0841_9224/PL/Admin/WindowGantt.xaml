@@ -15,9 +15,6 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding TaskListProperty , Mode=OneTime}" Initialized="dataGridSched_Initialized" Grid.Row="0">
-            <DataGrid.Columns>
-                <!-- Define your DataGrid columns here -->
-            </DataGrid.Columns>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Background">

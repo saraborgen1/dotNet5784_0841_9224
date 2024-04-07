@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace PL;
@@ -135,6 +136,29 @@ public class CellColorConverter : IMultiValueConverter
                     if (taskId.HasValue)
                     {
                         var task = s_bl.Task.Read(taskId.Value);
+
+                        //לא התחיל ולא היה אמור להתחיל תצבע לבן //אחרי זמן הסייום בפועל 
+                        if ((task.StartDate == null && day < task.ScheduledDate) || (task.CompleteDate != null && day > task.CompleteDate))
+                        {
+                            cell.Foreground = new SolidColorBrush(arrColors[0]);
+                            return new SolidColorBrush(arrColors[0]);
+                        }
+                        //לא התחיל את המשימה בזמן או התחיל ועוד לא  סיים בזמן או סיים אחרי הזמן
+                        if ((task.StartDate == null && day > task.ScheduledDate)||(task.StartDate != null && task.CompleteDate == null && day>task.ForecastDate)|| (task.CompleteDate != null && task.CompleteDate>task.ForecastDate))
+                        {
+                            cell.Foreground = new SolidColorBrush(arrColors[1]);
+                            return new SolidColorBrush(arrColors[1]);
+                        }
+
+
+
+
+
+
+
+
+
+
                         if (day < task.ScheduledDate || day > task.ForecastDate)
                         {
                             cell.Foreground = new SolidColorBrush(arrColors[0]);
