@@ -67,11 +67,11 @@ namespace PL.Task
                 }
                 else
                 {
-                    var delEngineer = s_bl.Engineer.ReadAllDelete().FirstOrDefault(t => t.Id == item.TaskId);
+                    var delTask = s_bl.Task.ReadAll().FirstOrDefault(t => t.Id == item.TaskId);
                     var index = _tasks.FindIndex(e => e.Id == item.TaskId);
                     if (index is not -1)
                     {
-                        if (delEngineer == null)
+                        if (delTask != null)
                         {
                             var task = s_bl.Task.Read(item.TaskId);
                             TaskList[index] = task!;
