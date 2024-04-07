@@ -99,6 +99,8 @@ namespace PL.Task
             try
             {
                 s_bl.Task.Delete(TaskProperty.Id);
+                MessageBox.Show("The Task was successfully Deleted", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
             }
             catch (Exception ex)
             {
