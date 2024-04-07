@@ -80,34 +80,6 @@ class ConvertIdToPasswordVisibility : IValueConverter
     }
 }
 
-class ConvertSchedulingIsEnabled : IValueConverter
-{
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return s_bl.State.StartProject == null ? false : true;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-class ConvertIdEngineerIsEnabled : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        bool isEnabled = value != null && (bool)value;
-        return isEnabled ? Visibility.Visible : Visibility.Collapsed;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
 
 public class CellColorConverter : IMultiValueConverter
 {
@@ -214,20 +186,6 @@ public class CellColorConverter : IMultiValueConverter
     }
 }
 
-
-class ConvertStringToInt : IValueConverter
-{
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (int)value;
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
 
 class ConvertSetDatesIsEnabled : IValueConverter
 {
