@@ -7,9 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Icon="icon.ico"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <!-- Main grid layout -->
     <Grid>
+        <!-- Button for login -->
         <Button Content="enter" HorizontalAlignment="Left" Height="45" Margin="10,280,0,0" VerticalAlignment="Top" Width="146" Click="Button_Enter">
+            <!-- Button style -->
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="LightBlue"/>
@@ -21,6 +24,7 @@
                     <Setter Property="BorderThickness" Value="2"/>
                     <Setter Property="Template">
                         <Setter.Value>
+                            <!-- Button template -->
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -32,18 +36,20 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
+                    <!-- Button triggers -->
                     <Style.Triggers>
-                        <!-- טריגר תכונה עבור כניסה של העכבר למעלה הכפתור "enter" -->
+                        <!-- Mouse over trigger -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background">
                                 <Setter.Value>
+                                    <!-- Change background color -->
                                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                         <GradientStop Color="Pink" Offset="0.33"/>
                                     </LinearGradientBrush>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <!-- טריגר נתונים כדי להפעיל או לבטל אפשרות הכנסת סיסמה רק כאשר הוזן Id -->
+                        <!-- Data trigger to enable/disable button based on TextBox text -->
                         <DataTrigger Binding="{Binding Path=(TextBox.Text), ElementName=IdTextBox}" Value="">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>
@@ -52,36 +58,43 @@
             </Button.Style>
         </Button>
 
-        <!-- השארתי את שאר הקוד שלך כמו שהוא -->
+        <!-- Labels and text boxes for ID and password -->
         <Label Content="enter id" HorizontalAlignment="Left" Height="62" Margin="158,215,0,0" VerticalAlignment="Top" Width="111"/>
-        <!--Id text box-->
         <TextBox x:Name="IdTextBox" PreviewTextInput="TextBox_PreviewTextInput" HorizontalAlignment="Left" Margin="10,220,0,0" TextWrapping="Wrap" Text="{Binding IdProperty, Mode=OneWayToSource, NotifyOnValidationError=true}" VerticalAlignment="Top" Width="145"/>
         <Label Content="enter password" HorizontalAlignment="Left" Height="35" Margin="158,245,0,0" VerticalAlignment="Top" Width="111"/>
-        <!--password box-->
         <PasswordBox HorizontalAlignment="Left"  Margin="10,250,0,0" VerticalAlignment="Top" Width="145" RenderTransformOrigin="0.5,0.5" PasswordChanged="PasswordBox_PasswordChanged"/>
 
+        <!-- Border and stack panel for date display and buttons -->
         <Border  BorderThickness="1" Margin="10,0,10,264">
             <StackPanel>
                 <Grid>
+                    <!-- Row definitions -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="2*" />
                         <RowDefinition Height="2*" />
                     </Grid.RowDefinitions>
+                    <!-- Label for current date -->
                     <Label Content="{Binding CurrentDateProperty, StringFormat='yyyy/MM/dd'}" HorizontalAlignment="Center" FontSize="20" Height="50" VerticalAlignment="Center" Grid.Row="0"/>
+                    <!-- Grid for buttons -->
                     <Grid Grid.Row="1">
+                        <!-- Column definitions -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        <!-- Buttons for adding time periods -->
                         <Button Content="One day" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddDay" Grid.Column="0"/>
                         <Button Content="One week" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddWeek" Grid.Column="1"/>
                     </Grid>
+                    <!-- Grid for more buttons -->
                     <Grid Grid.Row="2">
+                        <!-- Column definitions -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        <!-- Buttons for adding time periods -->
                         <Button Content="One year" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddYear" Grid.Column="0"/>
                         <Button Content="One month" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Click="Button_AddMonth" Grid.Column="1"/>
                     </Grid>
@@ -89,20 +102,8 @@
             </StackPanel>
         </Border>
 
-
-
-
-
-
-
-
-
-
-
-        <Button Content="Button" HorizontalAlignment="Left" Height="61" Margin="660,260,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click"/>
-        <Button Content="Button1" HorizontalAlignment="Left" Height="88" Margin="544,336,0,0" VerticalAlignment="Top" Width="236" Click="Button_Click_1"/>
-
-        <StackPanel FlowDirection="RightToLeft" Margin="230,150,150,6">
+        <!-- Stack panel for Hebrew text -->
+        <StackPanel FlowDirection="RightToLeft" Margin="380,150,0,6">
             <Label Content="אם כבר אתם כאן פרק תהילים להצלחת ולרפואת החיילים ולשחרור החטופים:" FontSize="10" FontWeight="Bold"/>
             <Label Content="א לַמְנַצֵּחַ, מִזְמוֹר לְדָוִד." FontSize="10" FontWeight="Bold"/>
             <Label Content="ב יַעַנְךָ יְהוָה, בְּיוֹם צָרָה; יְשַׂגֶּבְךָ, שֵׁם אֱלֹהֵי יַעֲקֹב." FontSize="10" FontWeight="Bold"/>
@@ -115,7 +116,5 @@
             <Label Content="ח אֵלֶּה בָּרֶכֶב, וְאֵלֶּה בַּסּוּסִים; וַאֲנַחְנוּ, בְּשֵׁם-יְהוָה אֱלֹהֵינוּ נַזְכִּיר." FontSize="10" FontWeight="Bold"/>
             <Label Content="ט הֵמָּה, כָּרְעוּ וְנָפָלוּ; וַאֲנַחְנוּ קַמְנוּ, וַנִּתְעוֹדָד. י יְהוָה הוֹשִׁיעָה: הַמֶּלֶךְ, יַעֲנֵנוּ בְּיוֹם-קָרְאֵנוּ." FontSize="10" FontWeight="Bold"/>
         </StackPanel>
-
-
     </Grid>
 </Window>

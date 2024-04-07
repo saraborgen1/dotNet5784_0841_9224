@@ -8,15 +8,20 @@
         Title="WindowGantt" Height="450" Width="800"
         Icon="icon.ico"
         DataContext="{Binding RelativeSource={RelativeSource Self}}" >
-    <!--Extrnal Grid-->
+    <!-- External Grid -->
     <Grid>
+        <!-- Row definitions -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <!-- DataGrid for displaying task list -->
         <DataGrid ItemsSource="{Binding TaskListProperty , Mode=OneTime}" Initialized="dataGridSched_Initialized" Grid.Row="0">
+            <!-- Cell style definition -->
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
+                    <!-- Set background color using a multi-binding and a converter -->
                     <Setter Property="Background">
                         <Setter.Value>
                             <!-- Bind to multiple properties using MultiBinding -->
@@ -32,8 +37,9 @@
             </DataGrid.CellStyle>
         </DataGrid>
 
-        <!-- Define Rectangle containers -->
+        <!-- Grid for defining Rectangle containers -->
         <Grid Grid.Row="1">
+            <!-- Column definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -42,23 +48,25 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- First Rectangle -->
+            <!-- Started and didn't end on time Rectangle -->
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Red" Grid.Column="0"/>
 
-            <!-- Second Rectangle -->
+            <!-- Finish the task Rectangle -->
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Green" Grid.Column="1"/>
 
-            <!-- Third Rectangle -->
+            <!-- Scheduled time for the task Rectangle -->
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="RoyalBlue" Grid.Column="2"/>
 
-            <!-- Fourth Rectangle -->
+            <!-- Delayed to start Rectangle -->
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Orange" Grid.Column="3"/>
-            <!-- Fourth Rectangle -->
+
+            <!-- Started and didn't finish Rectangle -->
             <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Purple" Grid.Column="4"/>
         </Grid>
 
-        <!-- Labels -->
+        <!-- Grid for Labels -->
         <Grid Grid.Row="1">
+            <!-- Column definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -67,15 +75,15 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- First Label -->
+            <!-- Started and didn't end on time Label -->
             <Label Content="Started and didn't end on time" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Grid.Column="0"/>
-            <!-- Second Label -->
+            <!-- Finish the task Label -->
             <Label Content="Finish the task" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Grid.Column="1"/>
-            <!-- Third Label -->
+            <!-- Scheduled time for the task Label -->
             <Label Content="Scheduled time for the task" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Grid.Column="2"/>
-            <!-- Fourth Label -->
-            <Label Content="delayed to start" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Grid.Column="3"/>
-            <!-- 5 Label -->
+            <!-- Delayed to start Label -->
+            <Label Content="Delayed to start" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Grid.Column="3"/>
+            <!-- Started and didn't finish Label -->
             <Label Content="Started and didn't finish" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Grid.Column="4"/>
         </Grid>
     </Grid>

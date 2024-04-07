@@ -47,9 +47,6 @@
                 <Label Content="ScheduledDate" HorizontalAlignment="Left" Margin="33,240,0,0" VerticalAlignment="Top" Height="35" Width="126"/>
                 <!--DatePicker ScheduledDate-->
                 <DatePicker HorizontalAlignment="Left" Margin="0,240,0,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{Binding TaskProperty.ScheduledDate, Mode=TwoWay}"/>
-
-                <!-- פה להוסיף את התלויות-->
-
                 <!--Label ForecastDate-->
                 <Label Content="ForecastDate" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="2" Margin="33,0,0,0"/>
                 <!--DatePicker ForecastDate-->
@@ -80,8 +77,6 @@
              SelectedValue="{Binding TaskProperty.Copmlexity, Mode=TwoWay}"/>
                 <!--Label dependency-->
                 <Label Content="Dependencies" HorizontalAlignment="Center" Height="28" Margin="0,280,0,0" VerticalAlignment="Top" Width="94"/>
-
-
                 <Button Grid.Column="3" Content="{Binding TaskProperty.Id, Mode=TwoWay, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Center" Margin="0,355,0,0" VerticalAlignment="Top" Height="66" Width="140" Click="Button_UpdateOrAdd" />
                 <!--Button delete task-->
                 <Button Grid.Column="4" Content="DeleteTask" HorizontalAlignment="Center" Height="66" Margin="0,355,0,0" VerticalAlignment="Top" Width="140" Click="Delete_Click" Visibility="{Binding TaskProperty.Id, Mode=TwoWay, Converter={StaticResource ConvertIdToDeleteVisibilityKey}}"/>
@@ -89,11 +84,14 @@
                 <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="33,320,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding DependenciesProperty,Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChangedDeleteDep"/>
                 <!--ComboBox  options for Dependencies-->
                 <ComboBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="33,360,0,0" VerticalAlignment="Top" Width="125" ItemsSource="{Binding TaskInListProperty, Mode=TwoWay}" SelectionChanged="ComboBoxAllTasks_SelectionChanged"/>
+                <!--Label  existing dependencies-->
                 <Label Content="existing dependencies" HorizontalAlignment="Left" Height="35" Margin="0,320,0,0" VerticalAlignment="Top" Width="138" Grid.Column="1"/>
+                <!--Label  More dependencies-->
                 <Label Grid.Column="1" Content="More dependencies" HorizontalAlignment="Left" Height="35" Margin="0,360,0,0" VerticalAlignment="Top" Width="138"/>
+                <!--Label  Engineer Name-->
                 <Label Content="Engineer Name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="3" Margin="118,196,0,0" Grid.ColumnSpan="2"/>
+                <!--Label  Engineer id-->
                 <Label Content="Engineer id" HorizontalAlignment="Left" Margin="118,156,0,0" VerticalAlignment="Top" Height="35" Width="126" Grid.Column="3" Grid.ColumnSpan="2"/>
-
             </Grid>
         </Grid>
     </Grid>
