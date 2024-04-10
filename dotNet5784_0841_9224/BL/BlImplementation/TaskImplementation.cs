@@ -32,7 +32,7 @@ internal class TaskImplementation : ITask
             throw new BO.BlCannotUpdateWrongStateException("ScheduledDate", "Creation");
         if (item.CompleteDate !=null)
             throw new BO.BlCannotUpdateWrongStateException("CompleteDate", "Creation");
-        if (item.Engineer.Id != null || item.Engineer.Name != null)
+        if (item.Engineer?.Id != null || item.Engineer?.Name != null)
             throw new BO.BlCannotUpdateWrongStateException("Engineer", "Creation");
         if (item.ForecastDate != null)
             throw new BO.BlCannotUpdateWrongStateException("ForecastDate", "Creation");
@@ -55,21 +55,16 @@ internal class TaskImplementation : ITask
         try
         {
             int idTask = _dal.Task.Create(doTask);
+            var boTask = Read(idTask);
+            updateDependencies(item, boTask);
         }
         catch (DO.DalAlreadyExistsException ex)
         {
             throw new BO.BlAlreadyExistException(ex);
         }
-        if (item.Dependencies != null)
+        catch (DO.DalDoesNotExistsException ex)
         {
-            var temp = item.Dependencies.ToList().Select(p =>
-            {
-
-               if(! circuleDep(item.Id, Read(p.Id)))
-                    throw new BlCirculDepException("Cannot create a circular dependency");
-                _dal.Dependency.Create(new DO.Dependency(0, item.Id, p.Id));
-                return p;
-            });
+            throw new BO.BlDoesNotExistException(ex);
         }
 
     }
@@ -471,14 +466,14 @@ internal class TaskImplementation : ITask
             }
         foreach (var dep in addDep)
         {
-           if(!circuleDep(item.Id, Read(dep.Id)))
+           if(!circuleDep(boTask.Id, Read(dep.Id)))
                 throw new BlCirculDepException("Cannot create a circular dependency");
 
-            _dal.Dependency.Create(new DO.Dependency() { Id = 0, DependentOnTask = dep.Id, DependentTask = item.Id });
+            _dal.Dependency.Create(new DO.Dependency() { Id = 0, DependentOnTask = dep.Id, DependentTask = boTask.Id });
         }
         foreach (var dep in deletDep)
         {
-            var temp = _dal.Dependency.Read(p => (p.DependentOnTask == dep.Id && p.DependentTask == item.Id));
+            var temp = _dal.Dependency.Read(p => (p.DependentOnTask == dep.Id && p.DependentTask == boTask.Id));
             if (temp == null)
                 throw new BlDoesNotExistException("There is no dependency with such details");
             try

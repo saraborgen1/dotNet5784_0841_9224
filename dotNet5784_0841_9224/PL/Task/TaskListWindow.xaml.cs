@@ -68,19 +68,20 @@ namespace PL.Task
                 else
                 {
                     var delTask = s_bl.Task.ReadAll().FirstOrDefault(t => t.Id == item.TaskId);
-                    var index = _tasks.FindIndex(e => e.Id == item.TaskId);
-                    if (index is not -1)
+                    var index_tasks = _tasks.FindIndex(e => e.Id == item.TaskId);
+                    var indexTaskList = TaskList.ToList().FindIndex(e => e.Id == item.TaskId);
+                    if (index_tasks != -1 && indexTaskList != -1)
                     {
                         if (delTask != null)
                         {
                             var task = s_bl.Task.Read(item.TaskId);
-                            TaskList[index] = task!;
-                            _tasks[index] = task!;
+                            TaskList[indexTaskList] = task!;
+                            _tasks[index_tasks] = task!;
                         }
                         else
                         {
-                            TaskList.RemoveAt(index);
-                            _tasks.RemoveAt(index);
+                            TaskList.RemoveAt(indexTaskList);
+                            _tasks.RemoveAt(index_tasks);
                         }
 
                     }

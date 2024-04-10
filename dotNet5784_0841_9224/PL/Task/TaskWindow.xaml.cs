@@ -69,7 +69,7 @@ namespace PL.Task
                 {
 
                     s_bl.Task.Create(TaskProperty);
-                    _onUpdateOrAdd((TaskProperty.Id, true));
+                    _onUpdateOrAdd((s_bl.Task.ReadAll().MaxBy(x => x.Id)!.Id, true));
                     MessageBox.Show("The Task was successfully added", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                     return;
@@ -99,6 +99,7 @@ namespace PL.Task
             try
             {
                 s_bl.Task.Delete(TaskProperty.Id);
+                _onUpdateOrAdd((TaskProperty.Id, false));
                 MessageBox.Show("The Task was successfully Deleted", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
