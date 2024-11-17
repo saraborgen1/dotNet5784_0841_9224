@@ -4,4 +4,4 @@ This project focuses on developing a Task Management System designed for managin
 Project Managers: Manage project tasks, assign tasks to engineers, and oversee task completion.
 Engineers: Update personal details and report on task progress.
 
-Project bye Naama Leah Radonsky abd Sara Borgen
+Project bye Naama Leah Radonsky and Sara Borgen
